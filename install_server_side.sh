@@ -13,8 +13,8 @@ sudo adduser telegram_bot_test
 
 #create the virtual env in telegram_bot_master
 sudo apt install python3-venv
-mkdir ~/telegram_bot_master/bot_00
-cd ~/telegram_bot_master/bot_00
+sudo mkdir /home/telegram_bot_master/bot_00
+cd /home/telegram_bot_master/bot_00
 python3 -m venv env #create venv
 source env/bin/activate
 #Install all libs required in this
@@ -24,8 +24,8 @@ env deactivate
 
 #create the virtual env in telegram_bot_test
 sudo apt install python3-venv
-mkdir ~/telegram_bot_test/bot_00
-cd ~/telegram_bot_test/bot_00
+sudo mkdir /home/telegram_bot_test/bot_00
+cd /home/telegram_bot_test/bot_00
 python3 -m venv env
 source env/bin/activate
 #Install all libs required in this
