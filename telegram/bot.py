@@ -47,13 +47,13 @@ class Bot():
 
         url = self.base_url + "getUpdates?"
         
-        if self.offset:
-            url = url + "&offset={}".format(self.offset)
-        if self.limit:
+        if self.offset is not None:
+            url = url + "&offset={}".format(self.offset + 1)
+        if self.limit is not None:
             url = url + "&limit={}".format(self.limit)
-        if self.timeout:
+        if self.timeout is not None:
             url = url + "&timeout={}".format(self.timeout)
-        if self.allowed_updates:
+        if self.allowed_updates is not None:
             url = url + "&allowed_updates={}".format(self.allowed_updates)
 
 

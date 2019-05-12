@@ -1,32 +1,25 @@
+import logging
 import telegram
-import json
-import configparser as cfg
 from time import sleep
 
+import json
+import configparser as cfg
+
+from skills.simply_respond import respond
+
+update_id = None
+bot_id_0 = ""
+bot_id_1 = ""
 
 def read_token_from_config_file(config):
     parser = cfg.ConfigParser()
     parser.read(config)
-    return parser.get("creds", "beta_token")
-
-
-def make_reply(msg):
-    reply = None
-    if msg is None:
-        return reply
-    _msg = str(msg).upper()
-    if _msg == "PT":
-        reply = _msg
-    return reply
-
-
-update_id = None
-
+    bot_id_0 = parser.get("creds", "bot_id_0")
+    bot_id_1 = parser.get("creds", "bot_id_1")
+    return parser.get("creds", "stable_token")
 
 def main():
-    """
-    Run the bot.
-    """
+    """Run the bot."""
     global update_id
     # Telegram Bot Authorization Token
     bot = telegram.Bot(read_token_from_config_file("token.cfg"))
@@ -43,33 +36,13 @@ def main():
                     message = None
                 _chat = item["message"]["chat"]["id"]
                 _user = item["message"]["from"]["id"]
-                reply = make_reply(message)
-                bot.send_message(reply, _chat)
-                bot.send_message(reply, _user)
+                
+                print(message)
 
-
-#     try:
-#         update_id = bot.get_updates()
-#     except IndexError:
-#         update_id = None
-    
-#     while True:
-#         try:
-#             echo(bot)
-#         except:
-#             sleep(1)
-
-
-# def echo(bot):
-#     """Echo the message the user sent."""
-#     global update_id
-#     # Request updates after the last update_id
-#     for update in bot.get_updates(offset=update_id, timeout=10):
-#         update_id = update.update_id + 1
-
-#         if update.message:  # your bot can receive updates without messages
-#             # Reply to the message
-#             update.message.reply_text(update.message.text)
+                if _user != bot_id_0 and _user != bot_id_1:
+                    r = respond(message)
+                    if r is not None:
+                        bot.send_message(r, _user)
 
 
 if __name__ == '__main__':
