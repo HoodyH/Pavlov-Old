@@ -42,7 +42,7 @@ def main():
                 if _user != bot_id_0 and _user != bot_id_1:
                     r = respond(message)
                     if r is not None:
-                        bot.send_message(r, _user)
+                        bot.send_message(r, _chat)
 
 
 if __name__ == '__main__':
