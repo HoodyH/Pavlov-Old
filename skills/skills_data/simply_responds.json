@@ -1,8 +1,8 @@
 {
     "hello" : ["hi","yoo"],
-    "clock" : ["superman"],
+    "clock" : ["superman", "guarda chi si vede", "ma è lui o non è lui"],
     "ubuntu" : ["merda", "diocane, quel negro", "ma stai zitto ohh"],
-    "telsa" : ["Bravo, tu si che mi piaci", "Ooh là, ora si che si ragiona", "Finalmente, si parla di qualcosa di interessante"],
+    "tesla" : ["Bravo, tu si che mi piaci", "Ooh là, ora si che si ragiona", "Finalmente, si parla di qualcosa di interessante"],
     "pt" : ["PT", "PTPT"]
     
 }
