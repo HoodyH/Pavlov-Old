@@ -25,7 +25,7 @@ class Respond(object):
 
                 avoid = self.find_avoiders(self.s_resp_json[key]["avoiders"])
                 if avoid:
-                    vet_out = self.s_resp_json[key]["avoid_output"]
+                    vet_out = self.s_resp_json[key]["avoid_outputs"]
                     self.output = vet_out[random_between(0, len(vet_out))]
                 else:
                     vet_out = self.s_resp_json[key][output_type]
