@@ -19,7 +19,10 @@ def read_token_from_config_file(config):
 
 def do_stuffs(msg):
     if msg.user.id != bot_id_0 and msg.user.id != bot_id_1:
-        r = find_match(msg.text)
+        if msg.chat is not None:
+            r = find_match(msg.text, "telegram", msg.chat.id)
+        else:
+            r = find_match(msg.text, "telegram", None)
         if r is not None:
             msg.send_text(r)
     return

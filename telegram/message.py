@@ -30,7 +30,10 @@ class Message(object):
         self.message_id = message["message_id"]
         self.user = user.extract_data(message["from"])
         self.date = from_timestamp(message["date"])
-        self.chat = chat.extract_data(message["chat"])
+        try:
+            self.chat = chat.extract_data(message["chat"])
+        except: 
+            self.chat = None 
         try:
             self.text = message["text"]
         except:
@@ -40,4 +43,9 @@ class Message(object):
 
 
     def send_text(self, text):
-        return self.bot.send_message(self.chat.id, text)
+        if self.chat is not None:
+            return self.bot.send_message(self.chat.id, text)
+        elif self.user is not None:
+            return self.bot.send_message(self.user.id, text)
+        else:
+            return None

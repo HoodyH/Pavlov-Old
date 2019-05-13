@@ -1,10 +1,21 @@
 
-from skills.modules.simply_respond import respond
+from skills.modules.message_reply import Respond
 
-def find_match(text):
-    for word in str(text).split():
+message_max_lenght = 70
 
-        r = respond(word)
-        if r is not None:
-            return r
-    return
+def find_match(text, scope, guild):
+         
+        string = str(text)
+        
+        if len(string) > message_max_lenght:
+                return
+
+        array = string.split()
+        respond = Respond(array, scope, guild)
+
+        for word in array:
+                respond.find_keywords(word)
+                
+        return respond.get_message()
+
+        

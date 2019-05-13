@@ -1,0 +1,106 @@
+{
+    "Greetings_in": {
+        "output_counter": 0,
+        "scope": "global",
+        "standard_triggers": [
+            "hello",
+            "ciao",
+            "bella"
+        ],
+        "standars_outputs": [
+            "Yooo",
+            "Yeyy",
+            "bruuu"
+        ],
+        "avoiders": [
+            "merde"
+        ],
+        "avoid_outputs": [
+            "non dire queste cose"
+        ],
+        "power_triggers": [
+            "Buongiorno",
+            "buongiornissimo"
+        ],
+        "power_outputs": [
+            "Ma vai via"
+        ]
+    },
+    "PT": {
+        "output_counter": 0,
+        "scope": "global",
+        "standard_triggers": [
+            "pt"
+        ],
+        "standars_outputs": [
+            "PT",
+            "PPT",
+            "PTPT"
+        ],
+        "avoiders": [
+            ""
+        ],
+        "avoid_outputs": [
+            ""
+        ],
+        "power_triggers": [
+            "PPPT",
+            "PTPTPT"
+        ],
+        "power_outputs": [
+            "PPPPPPPPPPTTTTTTTTTT"
+        ]
+    },
+    "Ubuntu": {
+        "output_counter": 0,
+        "scope": "global",
+        "standard_triggers": [
+            "ubuntu",
+            "canonical"
+        ],
+        "standars_outputs": [
+            "Merda",
+            "Diocane quel negro",
+            "Ma stai zitto ooh",
+            "Ma le vuoi prendere"
+        ],
+        "avoiders": [
+            ""
+        ],
+        "avoid_outputs": [
+            ""
+        ],
+        "power_triggers": [
+            "Diocane hai pienamente ragione",
+            "Quel negro del cazzo"
+        ],
+        "author": "None"
+    },
+    "Eolo": {
+        "output_counter": 0,
+        "scope": "global",
+        "standard_triggers": [
+            "eolo",
+            "disconessione"
+        ],
+        "standars_outputs": [
+            "Eolo merda",
+            "Eolo gay capo degli ebrei",
+            "Passate alla fibra stronzi",
+            "Chiedete a Not di entrare nella sua rete"
+        ],
+        "avoiders": [
+            ""
+        ],
+        "avoid_outputs": [
+            ""
+        ],
+        "power_triggers": [
+            "Diocane oggi mi ha fatto proprio incazzare",
+            "E pi\u00f9 le volte che gli telefono che le volte che mi sego",
+            "Ma \u00e8 mai possibile che faccia cosi cagare",
+            "Ma schiantassero diocane"
+        ],
+        "author": "None"
+    }
+}
