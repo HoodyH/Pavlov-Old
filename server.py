@@ -3,7 +3,7 @@ import telegram
 import json
 import configparser as cfg
 
-from skills.simply_respond import respond
+from skills.message_analyzer import find_match
 
 update_id = None
 bot_id_0 = ""
@@ -19,7 +19,7 @@ def read_token_from_config_file(config):
 
 def do_stuffs(msg):
     if msg.user.id != bot_id_0 and msg.user.id != bot_id_1:
-        r = respond(msg.text)
+        r = find_match(msg.text)
         if r is not None:
             msg.send_text(r)
     return
