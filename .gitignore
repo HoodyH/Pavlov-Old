@@ -1,7 +1,3 @@
 
-env/
-telegam/__pycache__/
-.telegam/__pycache__/
-
-
+#*.pyc
 token.*
