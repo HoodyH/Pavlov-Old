@@ -4,7 +4,7 @@ import os
 
 base_dir_stograge = "data"
 
-def loadJson(file_name, dir):
+def loadJson(dir, file_name):
     """
     _scope: "discord" or "telegram"
     _guild: "guild id (discord), or channel id (telegram)"
@@ -12,6 +12,7 @@ def loadJson(file_name, dir):
     if not os.path.exists(dir):
         os.makedirs(dir)
     full_path = "{}/{}.json".format(dir, file_name)
+
     try:
         json_obj = json.loads(open(full_path).read())
     except:

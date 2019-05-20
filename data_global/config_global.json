@@ -1,0 +1,16 @@
+{
+    "prefix": ".",
+    "quiet_prefix": "'",
+    "sudo_prefix": "£",
+    "languages": ["eng", "ita"],
+
+    "modules_status":{
+
+        "message_reply":{
+            "enabled": 1,
+            "status": 1
+        }
+
+    }
+    
+}

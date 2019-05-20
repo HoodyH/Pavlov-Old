@@ -1,0 +1,43 @@
+{
+    "deactivate":{
+        "dm_enabled": 1,
+        "enabled_by_default": 1,
+        "permissions": 0,
+        "eng":{
+            "invocation": ["insulta"],
+            "manual": "Dai un nome"
+        },
+        "it":{
+            "invocation": ["disattiva", "d"],
+            "manual": "disattiva un modulo"
+        }
+    },
+
+    "silent":{
+        "dm_enabled": 1,
+        "enabled_by_default": 1,
+        "permissions": 0,
+        "eng":{
+            "invocation": ["silent"],
+            "manual": "Dai un nome"
+        },
+        "it":{
+            "invocation": ["silenzia", "sm"],
+            "manual": "disattiva un modulo"
+        }
+    },
+
+    "insult":{
+        "dm_enabled": 1,
+        "enabled_by_default": 1,
+        "permissions": 0,
+        "eng":{
+            "invocation": ["insulta"],
+            "manual": "Dai un nome"
+        },
+        "it":{
+            "invocation": ["insulta"],
+            "manual": "Dai un nome"
+        }
+    }
+}

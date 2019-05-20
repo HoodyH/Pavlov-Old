@@ -26,10 +26,17 @@ class Message(object):
     def extract_data(self, raw_data):
         user = User()
         chat = Chat()
-        message = raw_data["message"]
-        self.message_id = message["message_id"]
-        self.user = user.extract_data(message["from"])
-        self.date = from_timestamp(message["date"])
+        try:
+            message = raw_data["message"]
+            self.message_id = message["message_id"]
+            self.user = user.extract_data(message["from"])
+            self.date = from_timestamp(message["date"])
+        except: 
+            message = None
+            self.message_id = None
+            self.user = None
+            self.date = None
+        
         try:
             self.chat = chat.extract_data(message["chat"])
         except: 

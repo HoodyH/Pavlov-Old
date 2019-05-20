@@ -7,12 +7,12 @@
             "ciao",
             "bella"
         ],
-        "standars_outputs": [
+        "standard_outputs": [
             "Yooo",
             "Yeyy",
             "bruuu"
         ],
-        "avoiders": [
+        "avoid_triggers": [
             "merde"
         ],
         "avoid_outputs": [
@@ -30,14 +30,14 @@
         "output_counter": 0,
         "scope": "global",
         "standard_triggers": [
-            "pt"
+            "pt pt"
         ],
-        "standars_outputs": [
+        "standard_outputs": [
             "PT",
             "PPT",
             "PTPT"
         ],
-        "avoiders": [
+        "avoid_triggers": [
             ""
         ],
         "avoid_outputs": [
@@ -58,13 +58,13 @@
             "ubuntu",
             "canonical"
         ],
-        "standars_outputs": [
+        "standard_outputs": [
             "Merda",
             "Diocane quel negro",
             "Ma stai zitto ooh",
             "Ma le vuoi prendere"
         ],
-        "avoiders": [
+        "avoid_triggers": [
             ""
         ],
         "avoid_outputs": [
@@ -87,21 +87,21 @@
             "eolo",
             "disconessione"
         ],
-        "standars_outputs": [
+        "standard_outputs": [
             "Eolo merda",
             "Eolo gay capo degli ebrei",
             "Passate alla fibra stronzi",
             "Chiedete a Not di entrare nella sua rete"
         ],
-        "avoiders": [
+        "avoid_triggers": [
             ""
         ],
         "avoid_outputs": [
             ""
         ],
         "power_triggers": [
-            "Eololadro",
-            "Eolobastardo"
+            "Eolo ladro",
+            "Eolo bastardo"
         ],
         "power_outputs": [
             "Diocane oggi mi ha fatto proprio incazzare",
