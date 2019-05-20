@@ -30,7 +30,7 @@
         "output_counter": 0,
         "scope": "global",
         "standard_triggers": [
-            "pt pt"
+            "pt"
         ],
         "standard_outputs": [
             "PT",
@@ -65,10 +65,14 @@
             "Ma le vuoi prendere"
         ],
         "avoid_triggers": [
-            ""
+            "wow",
+            "funziona",
+            "top"
         ],
         "avoid_outputs": [
-            ""
+            "ma che cazzo dici?",
+            "ma sei stronzo?",
+            "dio caro ma vai a nasconderti"
         ],
         "power_triggers": [
             "ubuntumerda",
@@ -94,10 +98,13 @@
             "Chiedete a Not di entrare nella sua rete"
         ],
         "avoid_triggers": [
-            ""
+            "fantastico",
+            "pro"
         ],
         "avoid_outputs": [
-            ""
+            "ma che cazzo dici?",
+            "ma sei stronzo?",
+            "dio caro ma vai a nasconderti"
         ],
         "power_triggers": [
             "Eolo ladro",
