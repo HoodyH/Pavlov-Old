@@ -14,11 +14,13 @@ def read_token_from_config_file(config):
     parser.read(config)
     bot_id_0 = parser.get("creds", "bot_id_0")
     bot_id_1 = parser.get("creds", "bot_id_1")
-    return parser.get("creds", "beta_token")
+    return parser.get("creds", "stable_token")
 
 
 def do_stuffs(msg):
     #if msg.user.id != bot_id_0 and msg.user.id != bot_id_1:
+        if msg.text is None:
+            return
         if msg.chat is not None:
             c = Analyze("telegram", msg.chat.id, msg.user.id)  
         else:
