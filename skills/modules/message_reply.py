@@ -60,7 +60,7 @@ class Respond(object):
 
     def message_reply(self, word, word_index):
 
-        def control(trigger, vet_outputs):
+        def control(trigger, vet_outputs, key, scope):
             
             trigger_array = trigger.upper().split()
 
@@ -73,10 +73,19 @@ class Respond(object):
                     #if in the array a word dont match then abort
                     return
 
+            sentence = []
+            sentence.append(key)
             if self.find_avoiders():
-                self.output = vet_outputs[random_between(0, len(vet_outputs))]
+                sentence.append(0)
+                sentence.append(self.avoid_outputs[random_between(0, len(self.avoid_outputs))])
             else:
-                self.output.append(vet_outputs[random_between(0, len(vet_outputs))])
+                if scope == "power":
+                    sentence.append(2)
+                else:
+                    sentence.append(1)
+                sentence.append(vet_outputs[random_between(0, len(vet_outputs))])        
+
+            self.output.append(sentence)
             return
 
         #look if there are the custom words
@@ -84,10 +93,10 @@ class Respond(object):
             self._update_category(key)
 
             for trigger in self.standard_triggers: 
-                control(trigger, self.standard_outputs)
+                control(trigger, self.standard_outputs, key, "standard")
 
             for trigger in self.power_triggers:  
-                control(trigger, self.power_outputs)
+                control(trigger, self.power_outputs, key, "power")
 
         return
 
@@ -103,9 +112,31 @@ class Respond(object):
 
     def get_reply(self):
         
-        out = ""
-        for el in set(self.output):
-            out += el + "\n"
-        return out
+        print(self.output)
+        key = None
+        index = 0
+
+        for el in self.output:
+            if key is None:
+                key = el[0]
+
+        out_0 = ""
+        out_1 = ""
+        out_2 = ""
+        for el in self.output:
+            if el[1] == 0:
+                out_0 += str(el[2]) + "\n"
+            if el[1] == 1:
+                out_1 += str(el[2]) + "\n"
+            if el[1] == 2:
+                out_2 += str(el[2]) + "\n"
+
+        if len(out_0) != 0:
+            return out_0
+        if len(out_2) != 0:
+            return out_2
+        if len(out_1) != 0:
+            return out_1
+        return ""
 
 

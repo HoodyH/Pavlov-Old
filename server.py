@@ -14,7 +14,7 @@ def read_token_from_config_file(config):
     parser.read(config)
     bot_id_0 = parser.get("creds", "bot_id_0")
     bot_id_1 = parser.get("creds", "bot_id_1")
-    return parser.get("creds", "stable_token")
+    return parser.get("creds", "beta_token")
 
 
 def do_stuffs(msg):
