@@ -1,8 +1,7 @@
-from skills.utils.file_handler import loadJson
+from skills.utils.file_handler import load
 from skills.utils.select_handler import random_between
+from skills.utils.interpreter import find
 
-#is global cause i dont wanna read the file every private message
-s_resp_global = loadJson("data_global", "situational_reply_global") 
 
 class Respond(object):
     
@@ -11,18 +10,11 @@ class Respond(object):
     """
     it expects an array of words as input.
     """
-    def __init__(self,
-                text_array,
-                scope,
-                guild,
-                **kwargs):
-        self.text_array = text_array
+    def __init__(self, text, scope, guild, **kwargs):
 
-        if guild is not None:
-            path = "data/{}/{}".format(scope, guild)
-            self.s_resp_json = loadJson(path, "situational_reply")
-        else:
-            self.s_resp_json = s_resp_global
+        self.text = text
+
+        self.s_resp_json = load(guild, scope, "situational_reply")
 
         self.output_counter = None
         self.scope = None
@@ -35,7 +27,6 @@ class Respond(object):
         self.author = None
 
         self.output = []
-
 
     def _update_category(self, key):
 
@@ -52,43 +43,50 @@ class Respond(object):
         ]
 
         for var_name in _vars:
-            try:
-                setattr(self, var_name, self.s_resp_json[key][var_name])
-            except:
-                setattr(self, var_name, None)
-
+            setattr(self, var_name, self.s_resp_json[key].get(var_name, ""))
 
     def message_reply(self, word, word_index):
 
-        def control(trigger, vet_outputs, key, scope):
-            
-            trigger_array = trigger.upper().split()
+        def control(trigger, vet_outputs, key, mode):
 
-            for i in range (0, len(trigger_array)):
-                
-                if(word_index+i > len(self.text_array)-1):
-                    #if i'm at the end of the sentence then abort
-                    return
-                if trigger_array[i] != self.text_array[word_index+i].upper():
-                    #if in the array a word dont match then abort
-                    return
+            # ceck if this key has already been used in this mode
+            el_index = -1
+            for el in self.output:
+                if el[0] == key:
+                    el_index += 1
+                    if el[1] == 0:
+                        return
+                    if el[1] == 1 and mode == "standard":
+                        return
+                    if el[1] == 2 and mode == "power":
+                        return
+
+            # Look for the key word
+            if not find(trigger, self.text, word_index):
+                return
+
+            # Delete the item if there is something better
+            if el_index != -1:
+                self.output.pop(el_index)
 
             sentence = []
             sentence.append(key)
             if self.find_avoiders():
                 sentence.append(0)
                 sentence.append(self.avoid_outputs[random_between(0, len(self.avoid_outputs))])
+                sentence.append("")
             else:
-                if scope == "power":
+                if mode == "power":
                     sentence.append(2)
                 else:
                     sentence.append(1)
-                sentence.append(vet_outputs[random_between(0, len(vet_outputs))])        
+                sentence.append(vet_outputs[random_between(0, len(vet_outputs))])
+                sentence.append(self.author)
 
             self.output.append(sentence)
             return
 
-        #look if there are the custom words
+        # look if there are the custom words
         for key in self.s_resp_json.keys():
             self._update_category(key)
 
@@ -97,46 +95,24 @@ class Respond(object):
 
             for trigger in self.power_triggers:  
                 control(trigger, self.power_outputs, key, "power")
-
         return
 
-
     def find_avoiders(self):
-        
-        for word in self.text_array:
-            for avoider in self.avoid_triggers:
-                if avoider.upper() == word.upper():
-                    return True
+
+        for avoider in self.avoid_triggers:
+            if find(avoider, self.text):
+                return True
         return False
 
-
     def get_reply(self):
-        
-        print(self.output)
-        key = None
-        index = 0
+
+        out = ""
 
         for el in self.output:
-            if key is None:
-                key = el[0]
+            out += "{}\n".format(str(el[2]))
+            if el[3] != "":
+                out += "cit. {}\n\n".format(str(el[3]))
 
-        out_0 = ""
-        out_1 = ""
-        out_2 = ""
-        for el in self.output:
-            if el[1] == 0:
-                out_0 += str(el[2]) + "\n"
-            if el[1] == 1:
-                out_1 += str(el[2]) + "\n"
-            if el[1] == 2:
-                out_2 += str(el[2]) + "\n"
-
-        if len(out_0) != 0:
-            return out_0
-        if len(out_2) != 0:
-            return out_2
-        if len(out_1) != 0:
-            return out_1
-        return ""
+        return out
 
 

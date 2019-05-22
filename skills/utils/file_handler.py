@@ -1,17 +1,18 @@
+from skills.settings import *
 import json
 import os
 
+base_dir_storage = "data"
 
-base_dir_stograge = "data"
 
-def loadJson(dir, file_name):
+def load_json(directory, file_name):
     """
     _scope: "discord" or "telegram"
     _guild: "guild id (discord), or channel id (telegram)"
     """
-    if not os.path.exists(dir):
-        os.makedirs(dir)
-    full_path = "{}/{}.json".format(dir, file_name)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    full_path = "{}/{}.json".format(directory, file_name)
 
     try:
         json_obj = json.loads(open(full_path).read())
@@ -25,6 +26,62 @@ def loadJson(dir, file_name):
         file.close()
 
     return json_obj
+
+
+# global files that must be always loaded
+
+config_global = load_json("data_global", "config_global")
+commands_global = load_json("data_global", "commands_global")
+situational_reply_global = load_json("data_global", "situational_reply_global")
+
+
+def load(scope, guild, file_name):
+
+    if guild is not None and USE_GLOBAL_FILE_ONLY is False:
+        path = "data/{}/{}".format(scope, guild)
+        return load_json(path, file_name)
+    elif file_name == "config":
+        return config_global
+    elif file_name == "commands":
+        return commands_global
+    elif file_name == "situational_reply":
+        return situational_reply_global
+
+
+def save(scope, guild, file_name, json_obj):
+
+    if guild is not None:
+        path = "data/{}/{}/{}.json".format(scope, guild, file_name)
+    else:
+        path = "data_global/{}_global.json".format(file_name)
+
+    data = json.dumps(json_obj, indent=4)
+    file = open(path, "w")
+    file.write(data)
+    file.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 example_mat =   [

@@ -1,43 +1,57 @@
 {
-    "deactivate":{
+    "module.deactivate":{
+        "main_module": 1,
         "dm_enabled": 1,
         "enabled_by_default": 1,
         "permissions": 0,
         "eng":{
-            "invocation": ["insulta"],
-            "manual": "Dai un nome"
+            "invocation": ["module.deactivate", "m.d", "deactivate"],
+            "description": "Dai un nome",
+            "usage": "Dai un nome",
+            "man": ""
         },
-        "it":{
-            "invocation": ["disattiva", "d"],
-            "manual": "disattiva un modulo"
+        "ita":{
+            "invocation": ["modulo.disattiva", "m.d", "disattiva"],
+            "description": "Disattiva un modulo",
+            "usage": "mute <name of the module>",
+            "man": ""
         }
     },
 
-    "silent":{
+    "module.status":{
+        "main_module": 1,
         "dm_enabled": 1,
         "enabled_by_default": 1,
         "permissions": 0,
         "eng":{
-            "invocation": ["silent"],
-            "manual": "Dai un nome"
+            "invocation": ["module.state", "m.s", "state"],
+            "description": "Command used to mute an ",
+            "usage": "module.state <name of the module>"
         },
-        "it":{
-            "invocation": ["silenzia", "sm"],
-            "manual": "disattiva un modulo"
+        "ita":{
+            "invocation": ["modulo.stato", "m.s", "stato"],
+            "description": "Silenzia un modulo, una volta silanziato questo comando potà essere utilizzato solo con il silent prefix{}",
+            "usage": "modulo.stato <nome del modulo>",
+            "man": ""
         }
     },
 
     "insult":{
+        "main_module": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,
         "permissions": 0,
         "eng":{
-            "invocation": ["insulta"],
-            "manual": "Dai un nome"
+            "invocation": ["insult", "verbal abuse"],
+            "description": "Dai un nome",
+            "usage": "Dai un nome",
+            "man": ""
         },
-        "it":{
-            "invocation": ["insulta"],
-            "manual": "Dai un nome"
+        "ita":{
+            "invocation": ["insulta", "diocane"],
+            "description": "Dai un nome",
+            "usage": "Dai un nome",
+            "man": ""
         }
     }
 }

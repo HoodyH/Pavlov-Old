@@ -1,4 +1,259 @@
 {
+    "Mattia Fedrigo": {
+        "output_counter": 0,
+        "scope": "global",
+        "standard_triggers": [
+            "mattia fedrigo"
+        ],
+        "standard_outputs": [
+            "Figaaa",
+            "Devo prendere lo shaker"
+        ],
+        "avoid_triggers": [
+            ""
+        ],
+        "avoid_outputs": [
+
+            ""
+        ],
+        "power_triggers": [
+            "perla di mattia",
+            "mattia perla",
+            "perla mattia",
+            "perla di mattia fedrigo",
+            "super mattia",
+            "super mattia fedrigo"
+        ],
+        "power_outputs": [
+            "Ramarro marrone",
+            "Quella tipa è già mia",
+            "Luca ti sfido ad una gara di resistenza."
+        ],
+        "author": "Fedig"
+    },
+    "Alberto Nadin": {
+        "output_counter": 0,
+        "scope": "global",
+        "standard_triggers": [
+            "alberto nadin"
+        ],
+        "standard_outputs": [
+            "vi svelo un segeto, ad alberto piace sua sorella"
+        ],
+        "avoid_triggers": [
+            ""
+        ],
+        "avoid_outputs": [
+
+            ""
+        ],
+        "power_triggers": [
+            "perla di alberto",
+            "alberto perla",
+            "perla alberto",
+            "perla di alberto nadin",
+            "super alberto",
+            "super alberto nadin"
+        ],
+        "power_outputs": [
+            "PorcaTroia",
+            "Compratevi una polo A METANO"
+        ],
+        "author": "Alberto"
+    },
+    "Luca Mauro": {
+        "output_counter": 0,
+        "scope": "global",
+        "standard_triggers": [
+            "luca mauro"
+        ],
+        "standard_outputs": [
+            "Ooooooooh cazzo vuoi?!?",
+            "Oooooh cerchi rogne?!?"
+        ],
+        "avoid_triggers": [
+            ""
+        ],
+        "avoid_outputs": [
+
+            ""
+        ],
+        "power_triggers": [
+            "perla di luca",
+            "luca perla",
+            "perla luca",
+            "perla di luca mauro",
+            "super luca",
+            "super luca mauro"
+        ],
+        "power_outputs": [
+            "Volibear guarisce rapidamente in pochi secondi, se la sua salute raggiunge livelli critici."
+        ],
+        "author": "Luca"
+    },
+    "Loli": {
+        "output_counter": 0,
+        "scope": "global",
+        "standard_triggers": [
+            "loli",
+            "lolita"
+        ],
+        "standard_outputs": [
+            "i can see that you are a man of culture.",
+            "Manda un due sticker che mi sa che ce n'è bisogno qui."
+        ],
+        "avoid_triggers": [
+            "merde",
+            "merda",
+            "basa",
+            "fermatela",
+            "fermala",
+            "finitela",
+            "finiscila"
+        ],
+        "avoid_outputs": [
+            "Non bestemmiare.",
+            "Non osare dire robacce sulle mie loli.",
+            "I'll kill you so hard that you'll die to death."
+        ],
+        "power_triggers": [
+            "super loli",
+            "perla loli"
+        ],
+        "power_outputs": [
+            "Well i guess i can take my loli and go.",
+            "Loli are legal, until they stay behind the monitor, so webcam is allowed.",
+            "Fbi is 15 min late, so we can start for now.",
+            "big and hard :3"
+        ],
+        "author": ""
+    },
+    "Your_Name": {
+        "output_counter": 0,
+        "scope": "global",
+        "standard_triggers": [
+            "your name"
+        ],
+        "standard_outputs": [
+            "Ogni tanto, la mattina, quando mi sveglio, mi capita di ritrovarmi in lacrime.",
+            "Il sogno che so di aver fatto non riesco mai a ricordarlo, però... ",
+            "Però dopo essermi svegliata mi resta la sensazione che qualcosa sia andato perduto per sempre.",
+            "Sono sempre alla ricerca di qualcosa o di qualcuno.",
+            "Questa sensazione si è impossessata di me da quel giorno."
+        ],
+        "avoid_triggers": [
+            "merde",
+            "merda",
+            "froci"
+        ],
+        "avoid_outputs": [
+            "NO."
+        ],
+        "power_triggers": [
+            "perle your name",
+            "notte porcodio"
+        ],
+        "power_outputs": [
+            "Sayaka: Mitsuha, oggi hai i capelli pettinati perfettamente.\nMitsuha: Cosa?\nKatsuhiko: Sì, ha ragione. Dì un po', tua nonna ti ha esorcizzata a dovere?\nMitshua: Esorcizzata?\nKatsuhiko: Ieri sembravi posseduta da una volpe.\nSayaka: Perché devi sempre buttarla sull'occulto, sarà solo colpa dello stress che ha accumulato.",
+            "Volevo dirti una cosa. Ovunque tu possa essere nel mondo, verrò di nuovo a cercarti e io ti troverò! Il tuo nome è Mitshua, sta tranquilla, me lo ricordo. Mitshua, Mitshua, Mitshua: il suo nome è Mitshua! Il tuo nome è... [Taki tenta di scrivere il nome di Mitshua sulla mano, ma non se lo ricorda più] Ma tu, chi sei?",
+            "Hitoha: Buongiorno Mitsuha. Ah, però... tu non sei Mitshua, vero?\nMitshua: Ma nonna, tu... lo sapevi?\nHitoha: No, ma visto come ti sei comportata mi sono ricordata una cosa: mi è tornato in mente che anch'io, quand'ero ragazza, ho fatto dei sogni incredibili [...] anche se ormai ho dimenticato chi era il ragazzo di cui sognavo la vita.\nMitshua: Dimenticato?\nHitoha: Devi fare tesoro di questa esperienza, una volta svegli i sogni svaniscono. Vedi, anch'io e tua madre abbiamo vissuto qualcosa di simile.\nMitshua: Allora può essere che i sogni della famiglia Miyamizu li abbia fatti per prepararmi a oggi. Ascoltami bene, nonna; stasera la cometa precipiterà su Itomori e moriremo tutti."
+        ],
+        "author": ""
+    },
+    "Elon": {
+        "output_counter": 0,
+        "scope": "global",
+        "standard_triggers": [
+            "elon"
+        ],
+        "standard_outputs": [
+            "Ho costruito la mia azienda dal nulla, avevo solo 2 pesoz nel portafoglio.",
+            "La fabbrica in cina spazzerà VW.",
+            "E il momento di passare all'elettrico.",
+            "Mah, non saprei, però penso di essere piuttosto intelligente.",
+            "Quando ero ragazzo dato che non c'era materiale per le seghe ho dato una mano a fondare Porn Hub.",
+            "Che società fonderò oggi."
+        ],
+        "avoid_triggers": [
+            "merde",
+            "merda",
+            "frocio",
+            "mi ha rotto il cazzo",
+            "coglione",
+            "coglioni"
+        ],
+        "avoid_outputs": [
+            "Suvvia possiamo essere amici del green assieme in fondo.",
+            "Compra una mia tesla e poi ne riparliamo.",
+            "Porterè la felicità anche nella tua vita.",
+            "Salveremo il modo assieme, vieni con me che ti insegno a costruire batteria con i denti."
+        ],
+        "power_triggers": [
+            "perla di elon",
+            "perla elon",
+            "super elon"
+        ],
+        "power_outputs": [
+            "Ad alcune persone non piace il cambiamento, ma è necessario abbracciare il cambiamento se l'alternativa è il disastro.",
+            "Quando qualcosa è abbastanza importante, lo fai anche se le probabilità non sono a tuo favore.",
+            "Se qualcosa è abbastanza importante, dovresti provare. Anche se il probabile risultato è un fallimento. ",
+            "Ci devono essere dei motivi per cui ti alzi la mattina e vuoi vivere. Perché vuoi vivere? Qual è il punto? Cosa ti ispira? Cosa ami del futuro? Se il futuro non include l'essere là fuori tra le stelle ed essere tra le specie multi-pianeta, trovo ciò incredibilmente deprimente.",
+            "Sono interessato alle cose che cambiano il mondo o che influenzano il futuro e la meravigliosa, nuova tecnologia in cui ti vedi, e dici cose tipo, 'Wow, com'è successo? Come è possibile?' ",
+            "Quando Henry Ford costruì auto economiche e affidabili, la gente disse: \"Nah, cosa c'è che non va in un cavallo?\" E' stata una scommessa enorme che ha fatto, e ha funzionato. ",
+            "Se ti alzi al mattino e pensi che il futuro sarà migliore, è un giorno luminoso. Altrimenti, non lo è.",
+            "C'è una sciocca nozione che il fallimento non sia un'opzione alla NASA. Il fallimento è un'opzione qui. Se le cose non stanno fallendo, non stai innovando abbastanza. ",
+            "La vita è troppo breve per i rancori a lungo termine.",
+            "Le persone lavorano meglio quando sanno qual è l'obiettivo e perché. È importante che la gente non veda l'ora di venire al lavoro la mattina e si diverta a lavorare. ",
+            "Va bene avere le uova in un paniere finché controlli ciò che accade in quel paniere.",
+            "La pazienza è una virtù e io sto imparando la pazienza. È una lezione dura.",
+            "Quando ero al college, volevo essere coinvolto in cose che avrebbero cambiato il mondo. ",
+            "Le persone dovrebbero perseguire ciò di cui sono appassionati. Ciò li renderà più felici di qualsiasi altra cosa. ",
+            "Ogni prodotto che ha bisogno di un manuale per funzionare è rotto.",
+            "Mi piacerebbe morire su Marte. Ma non nell'impatto."
+        ],
+        "author": "Elon <3"
+    },
+    "Goodnight": {
+        "output_counter": 0,
+        "scope": "global",
+        "standard_triggers": [
+            "buonanotte",
+            "notte",
+            "io stacco"
+
+        ],
+        "standard_outputs": [
+            "Dormi bene mio amore.",
+            "Riposa in pace.",
+            "Vai già a nanna frocio?",
+            "Ma dove vai, coglione.",
+            "Dove scappi, resta sveglio con me.",
+            "Nooo, non lasciarmi, come farò senza di te."
+        ],
+        "avoid_triggers": [
+            "merde",
+            "merda",
+            "froci",
+            "anime",
+            "segarmi",
+            "sega"
+        ],
+        "avoid_outputs": [
+            "Coglione, buonanotte anche a te",
+            "Ohhh yoo bro LMFAO",
+            "Dio caro ma vai a nasconderti",
+            "Ma dio cane ci abbandoni così"
+        ],
+        "power_triggers": [
+            "notte cazzoni",
+            "notte porcodio"
+        ],
+        "power_outputs": [
+            "Diocane i veri non vanno a dormire",
+            "Non ti cresce il cazzo se non resti sveglio con me"
+        ],
+        "author": ""
+    },
     "Greetings_in": {
         "output_counter": 0,
         "scope": "global",
@@ -16,26 +271,30 @@
             "merde"
         ],
         "avoid_outputs": [
-            "non dire queste cose"
+            "Ma non dire queste cose"
         ],
         "power_triggers": [
             "Buongiorno",
             "buongiornissimo"
         ],
         "power_outputs": [
-            "Ma vai via"
-        ]
+            "Ma vai via coglione",
+            "Fatti una sega e poi in caso torna"
+        ],
+        "author": ""
     },
     "PT": {
         "output_counter": 0,
         "scope": "global",
         "standard_triggers": [
-            "pt"
+            "pt",
+            "ma che cazzo",
+            "ma che cazz",
+            "LMFAO",
+            "LMAO"
         ],
         "standard_outputs": [
-            "PT",
-            "PPT",
-            "PTPT"
+            "Pt"
         ],
         "avoid_triggers": [
             ""
@@ -44,12 +303,17 @@
             ""
         ],
         "power_triggers": [
-            "PPPT",
-            "PTPTPT"
+            "ppt",
+            "ptt",
+            "pptt",
+            "ptpt",
+            "porcatroia",
+            "porca troia"
         ],
         "power_outputs": [
             "PPPPPPPPPPTTTTTTTTTT"
-        ]
+        ],
+        "author": "Alberto"
     },
     "Ubuntu": {
         "output_counter": 0,
@@ -75,14 +339,14 @@
             "dio caro ma vai a nasconderti"
         ],
         "power_triggers": [
-            "ubuntumerda",
-            "negro"
+            "ubuntu merda",
+            "negro del cazzo"
         ],
         "power_outputs": [
             "Diocane hai pienamente ragione",
             "Quel negro del cazzo"
         ],
-        "author": "None"
+        "author": "Luca"
     },
     "Eolo": {
         "output_counter": 0,
@@ -116,6 +380,6 @@
             "Ma \u00e8 mai possibile che faccia cosi cagare",
             "Ma schiantassero diocane"
         ],
-        "author": "None"
+        "author": ""
     }
 }
