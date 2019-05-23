@@ -26,21 +26,14 @@
         "cit_author": ""
     },
     "Mattia Fedrigo": {
-        "output_counter": 0,
         "scope": "global",
         "standard_triggers": [
             "mattia fedrigo"
         ],
+        "standard_counter": 0,
         "standard_outputs": [
             "Figaaa",
             "Devo prendere lo shaker"
-        ],
-        "avoid_triggers": [
-            "frocio",
-            "coglione"
-        ],
-        "avoid_outputs": [
-            "Grrr"
         ],
         "power_triggers": [
             "perla di mattia",
@@ -52,13 +45,22 @@
             "super mattia",
             "super mattia fedrigo"
         ],
+        "power_counter": 0,
         "power_outputs": [
             "Ramarro marrone",
             "Bella raga",
             "Quella tipa è già mia",
             "Luca ti sfido ad una gara di resistenza."
         ],
-        "author": "Fedig"
+        "avoid_triggers": [
+            "frocio",
+            "coglione"
+        ],
+        "avoid_counter": 0,
+        "avoid_outputs": [
+            "Grrr"
+        ],
+        "cit_author": "Fedig"
     },
     "Simone Not": {
         "output_counter": 0,
