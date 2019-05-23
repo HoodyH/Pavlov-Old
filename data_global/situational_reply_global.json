@@ -20,7 +20,6 @@
         ],
         "avoid_counter": 0,
         "avoid_outputs": [
-
             ""
         ],
         "cit_author": ""
@@ -55,7 +54,7 @@
         "power_outputs": [
             "Ramarro marrone",
             "Bella raga",
-            "Quella tipa è già mia",
+            "Quella tipa \u00e8 gi\u00e0 mia",
             "Luca ti sfido ad una gara di resistenza."
         ],
         "author": "Fedig"
@@ -131,7 +130,6 @@
             ""
         ],
         "avoid_outputs": [
-
             ""
         ],
         "power_triggers": [
@@ -162,7 +160,6 @@
             ""
         ],
         "avoid_outputs": [
-
             ""
         ],
         "power_triggers": [
@@ -191,7 +188,6 @@
             ""
         ],
         "avoid_outputs": [
-
             ""
         ],
         "power_triggers": [
@@ -214,7 +210,7 @@
         ],
         "standard_outputs": [
             "i can see that you are a man of culture.",
-            "Manda un due sticker che mi sa che ce n'è bisogno qui."
+            "Manda un due sticker che mi sa che ce n'\u00e8 bisogno qui."
         ],
         "avoid_triggers": [
             "merde",
@@ -251,10 +247,10 @@
         ],
         "standard_outputs": [
             "Ogni tanto, la mattina, quando mi sveglio, mi capita di ritrovarmi in lacrime.",
-            "Il sogno che so di aver fatto non riesco mai a ricordarlo, però... ",
-            "Però dopo essermi svegliata mi resta la sensazione che qualcosa sia andato perduto per sempre.",
+            "Il sogno che so di aver fatto non riesco mai a ricordarlo, per\u00f2... ",
+            "Per\u00f2 dopo essermi svegliata mi resta la sensazione che qualcosa sia andato perduto per sempre.",
             "Sono sempre alla ricerca di qualcosa o di qualcuno.",
-            "Questa sensazione si è impossessata di me da quel giorno."
+            "Questa sensazione si \u00e8 impossessata di me da quel giorno."
         ],
         "avoid_triggers": [
             "merde",
@@ -269,9 +265,9 @@
             "notte porcodio"
         ],
         "power_outputs": [
-            "Sayaka: Mitsuha, oggi hai i capelli pettinati perfettamente.\nMitsuha: Cosa?\nKatsuhiko: Sì, ha ragione. Dì un po', tua nonna ti ha esorcizzata a dovere?\nMitshua: Esorcizzata?\nKatsuhiko: Ieri sembravi posseduta da una volpe.\nSayaka: Perché devi sempre buttarla sull'occulto, sarà solo colpa dello stress che ha accumulato.",
-            "Volevo dirti una cosa. Ovunque tu possa essere nel mondo, verrò di nuovo a cercarti e io ti troverò! Il tuo nome è Mitshua, sta tranquilla, me lo ricordo. Mitshua, Mitshua, Mitshua: il suo nome è Mitshua! Il tuo nome è... [Taki tenta di scrivere il nome di Mitshua sulla mano, ma non se lo ricorda più] Ma tu, chi sei?",
-            "Hitoha: Buongiorno Mitsuha. Ah, però... tu non sei Mitshua, vero?\nMitshua: Ma nonna, tu... lo sapevi?\nHitoha: No, ma visto come ti sei comportata mi sono ricordata una cosa: mi è tornato in mente che anch'io, quand'ero ragazza, ho fatto dei sogni incredibili [...] anche se ormai ho dimenticato chi era il ragazzo di cui sognavo la vita.\nMitshua: Dimenticato?\nHitoha: Devi fare tesoro di questa esperienza, una volta svegli i sogni svaniscono. Vedi, anch'io e tua madre abbiamo vissuto qualcosa di simile.\nMitshua: Allora può essere che i sogni della famiglia Miyamizu li abbia fatti per prepararmi a oggi. Ascoltami bene, nonna; stasera la cometa precipiterà su Itomori e moriremo tutti."
+            "Sayaka: Mitsuha, oggi hai i capelli pettinati perfettamente.\nMitsuha: Cosa?\nKatsuhiko: S\u00ec, ha ragione. D\u00ec un po', tua nonna ti ha esorcizzata a dovere?\nMitshua: Esorcizzata?\nKatsuhiko: Ieri sembravi posseduta da una volpe.\nSayaka: Perch\u00e9 devi sempre buttarla sull'occulto, sar\u00e0 solo colpa dello stress che ha accumulato.",
+            "Volevo dirti una cosa. Ovunque tu possa essere nel mondo, verr\u00f2 di nuovo a cercarti e io ti trover\u00f2! Il tuo nome \u00e8 Mitshua, sta tranquilla, me lo ricordo. Mitshua, Mitshua, Mitshua: il suo nome \u00e8 Mitshua! Il tuo nome \u00e8... [Taki tenta di scrivere il nome di Mitshua sulla mano, ma non se lo ricorda pi\u00f9] Ma tu, chi sei?",
+            "Hitoha: Buongiorno Mitsuha. Ah, per\u00f2... tu non sei Mitshua, vero?\nMitshua: Ma nonna, tu... lo sapevi?\nHitoha: No, ma visto come ti sei comportata mi sono ricordata una cosa: mi \u00e8 tornato in mente che anch'io, quand'ero ragazza, ho fatto dei sogni incredibili [...] anche se ormai ho dimenticato chi era il ragazzo di cui sognavo la vita.\nMitshua: Dimenticato?\nHitoha: Devi fare tesoro di questa esperienza, una volta svegli i sogni svaniscono. Vedi, anch'io e tua madre abbiamo vissuto qualcosa di simile.\nMitshua: Allora pu\u00f2 essere che i sogni della famiglia Miyamizu li abbia fatti per prepararmi a oggi. Ascoltami bene, nonna; stasera la cometa precipiter\u00e0 su Itomori e moriremo tutti."
         ],
         "author": ""
     },
@@ -283,11 +279,11 @@
         ],
         "standard_outputs": [
             "Ho costruito la mia azienda dal nulla, avevo solo 2 pesoz nel portafoglio.",
-            "La fabbrica in cina spazzerà VW.",
+            "La fabbrica in cina spazzer\u00e0 VW.",
             "E il momento di passare all'elettrico.",
-            "Mah, non saprei, però penso di essere piuttosto intelligente.",
+            "Mah, non saprei, per\u00f2 penso di essere piuttosto intelligente.",
             "Quando ero ragazzo dato che non c'era materiale per le seghe ho dato una mano a fondare Porn Hub.",
-            "Che società fonderò oggi."
+            "Che societ\u00e0 fonder\u00f2 oggi."
         ],
         "avoid_triggers": [
             "merde",
@@ -300,7 +296,7 @@
         "avoid_outputs": [
             "Suvvia possiamo essere amici del green assieme in fondo.",
             "Compra una mia tesla e poi ne riparliamo.",
-            "Porterè la felicità anche nella tua vita.",
+            "Porter\u00e8 la felicit\u00e0 anche nella tua vita.",
             "Salveremo il modo assieme, vieni con me che ti insegno a costruire batteria con i denti."
         ],
         "power_triggers": [
@@ -309,21 +305,21 @@
             "super elon"
         ],
         "power_outputs": [
-            "Ad alcune persone non piace il cambiamento, ma è necessario abbracciare il cambiamento se l'alternativa è il disastro.",
-            "Quando qualcosa è abbastanza importante, lo fai anche se le probabilità non sono a tuo favore.",
-            "Se qualcosa è abbastanza importante, dovresti provare. Anche se il probabile risultato è un fallimento. ",
-            "Ci devono essere dei motivi per cui ti alzi la mattina e vuoi vivere. Perché vuoi vivere? Qual è il punto? Cosa ti ispira? Cosa ami del futuro? Se il futuro non include l'essere là fuori tra le stelle ed essere tra le specie multi-pianeta, trovo ciò incredibilmente deprimente.",
-            "Sono interessato alle cose che cambiano il mondo o che influenzano il futuro e la meravigliosa, nuova tecnologia in cui ti vedi, e dici cose tipo, 'Wow, com'è successo? Come è possibile?' ",
-            "Quando Henry Ford costruì auto economiche e affidabili, la gente disse: \"Nah, cosa c'è che non va in un cavallo?\" E' stata una scommessa enorme che ha fatto, e ha funzionato. ",
-            "Se ti alzi al mattino e pensi che il futuro sarà migliore, è un giorno luminoso. Altrimenti, non lo è.",
-            "C'è una sciocca nozione che il fallimento non sia un'opzione alla NASA. Il fallimento è un'opzione qui. Se le cose non stanno fallendo, non stai innovando abbastanza. ",
-            "La vita è troppo breve per i rancori a lungo termine.",
-            "Le persone lavorano meglio quando sanno qual è l'obiettivo e perché. È importante che la gente non veda l'ora di venire al lavoro la mattina e si diverta a lavorare. ",
-            "Va bene avere le uova in un paniere finché controlli ciò che accade in quel paniere.",
-            "La pazienza è una virtù e io sto imparando la pazienza. È una lezione dura.",
+            "Ad alcune persone non piace il cambiamento, ma \u00e8 necessario abbracciare il cambiamento se l'alternativa \u00e8 il disastro.",
+            "Quando qualcosa \u00e8 abbastanza importante, lo fai anche se le probabilit\u00e0 non sono a tuo favore.",
+            "Se qualcosa \u00e8 abbastanza importante, dovresti provare. Anche se il probabile risultato \u00e8 un fallimento. ",
+            "Ci devono essere dei motivi per cui ti alzi la mattina e vuoi vivere. Perch\u00e9 vuoi vivere? Qual \u00e8 il punto? Cosa ti ispira? Cosa ami del futuro? Se il futuro non include l'essere l\u00e0 fuori tra le stelle ed essere tra le specie multi-pianeta, trovo ci\u00f2 incredibilmente deprimente.",
+            "Sono interessato alle cose che cambiano il mondo o che influenzano il futuro e la meravigliosa, nuova tecnologia in cui ti vedi, e dici cose tipo, 'Wow, com'\u00e8 successo? Come \u00e8 possibile?' ",
+            "Quando Henry Ford costru\u00ec auto economiche e affidabili, la gente disse: \"Nah, cosa c'\u00e8 che non va in un cavallo?\" E' stata una scommessa enorme che ha fatto, e ha funzionato. ",
+            "Se ti alzi al mattino e pensi che il futuro sar\u00e0 migliore, \u00e8 un giorno luminoso. Altrimenti, non lo \u00e8.",
+            "C'\u00e8 una sciocca nozione che il fallimento non sia un'opzione alla NASA. Il fallimento \u00e8 un'opzione qui. Se le cose non stanno fallendo, non stai innovando abbastanza. ",
+            "La vita \u00e8 troppo breve per i rancori a lungo termine.",
+            "Le persone lavorano meglio quando sanno qual \u00e8 l'obiettivo e perch\u00e9. \u00c8 importante che la gente non veda l'ora di venire al lavoro la mattina e si diverta a lavorare. ",
+            "Va bene avere le uova in un paniere finch\u00e9 controlli ci\u00f2 che accade in quel paniere.",
+            "La pazienza \u00e8 una virt\u00f9 e io sto imparando la pazienza. \u00c8 una lezione dura.",
             "Quando ero al college, volevo essere coinvolto in cose che avrebbero cambiato il mondo. ",
-            "Le persone dovrebbero perseguire ciò di cui sono appassionati. Ciò li renderà più felici di qualsiasi altra cosa. ",
-            "Ogni prodotto che ha bisogno di un manuale per funzionare è rotto.",
+            "Le persone dovrebbero perseguire ci\u00f2 di cui sono appassionati. Ci\u00f2 li render\u00e0 pi\u00f9 felici di qualsiasi altra cosa. ",
+            "Ogni prodotto che ha bisogno di un manuale per funzionare \u00e8 rotto.",
             "Mi piacerebbe morire su Marte. Ma non nell'impatto."
         ],
         "author": "Elon <3"
@@ -335,15 +331,14 @@
             "buonanotte",
             "notte",
             "io stacco"
-
         ],
         "standard_outputs": [
             "Dormi bene mio amore.",
             "Riposa in pace.",
-            "Vai già a nanna frocio?",
+            "Vai gi\u00e0 a nanna frocio?",
             "Ma dove vai, coglione.",
             "Dove scappi, resta sveglio con me.",
-            "Nooo, non lasciarmi, come farò senza di te."
+            "Nooo, non lasciarmi, come far\u00f2 senza di te."
         ],
         "avoid_triggers": [
             "merde",
@@ -357,7 +352,7 @@
             "Coglione, buonanotte anche a te",
             "Ohhh yoo bro LMFAO",
             "Dio caro ma vai a nasconderti",
-            "Ma dio cane ci abbandoni così"
+            "Ma dio cane ci abbandoni cos\u00ec"
         ],
         "power_triggers": [
             "notte cazzoni",
@@ -428,7 +423,11 @@
         "power_outputs": [
             "PPPPPPPPPPTTTTTTTTTT"
         ],
-        "author": "Alberto"
+        "author": "Alberto",
+        "standard_counter": 1,
+        "power_counter": 0,
+        "avoid_counter": 0,
+        "cit_author": 0
     },
     "Ubuntu": {
         "output_counter": 0,

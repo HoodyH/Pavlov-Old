@@ -23,8 +23,10 @@ class Respond(object):
     def __init__(self, text, scope, guild):
 
         self.text = text
+        self.scope = scope
+        self.guild = guild
 
-        self.situational_reply = load(guild, scope, "situational_reply")
+        self.situational_reply = load(self.guild, self.scope, "situational_reply")
 
         self.scope = None
         self.standard_triggers = None
@@ -43,7 +45,7 @@ class Respond(object):
     def _get_reply_data(self, key):
 
         for var_name in self._vars:
-            setattr(self, var_name, self.situational_reply[key].get(var_name, None))
+            setattr(self, var_name, self.situational_reply[key].get(var_name, 0))
         return
 
     def _set_reply_data(self, key):
@@ -84,22 +86,26 @@ class Respond(object):
         if el_index != -1:
             self.output.pop(el_index)
 
-        sentence = []
-        sentence.append(key)
+        sentence = [key]
         if self._find_avoid():
-            sentence.append(0)
-            sentence.append(self.avoid_outputs[random_between(0, len(self.avoid_outputs))])
+            sentence.append(AVOID_REPLY)
+            sentence.append(self.avoid_outputs[self.avoid_counter])
             sentence.append("")
+            self.avoid_counter += 1
         else:
             if mode is POWER_REPLAY:
-                sentence.append(2)
+                sentence.append(POWER_REPLAY)
+                sentence.append(vet_outputs[self.power_counter])
+                sentence.append(self.cit_author)
+                self.power_counter += 1
             else:
-                sentence.append(1)
-            sentence.append(vet_outputs[random_between(0, len(vet_outputs))])
-            sentence.append(self.cit_author)
+                sentence.append(STD_REPLAY)
+                sentence.append(vet_outputs[self.standard_counter])
+                sentence.append("")
+                self.standard_counter += 1
 
         self.output.append(sentence)
-
+        self._set_reply_data(key)
         return
 
     def message_reply(self):
@@ -118,7 +124,7 @@ class Respond(object):
         output = ""
         for el in self.output:
             output += "\n\n{}".format(str(el[2]))
-            if el[3] is not "" and el[1] is POWER_REPLAY:
+            if el[3] is not "":
                 output += "\ncit. {}".format(str(el[3]))
         return output
 
