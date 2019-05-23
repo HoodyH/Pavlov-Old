@@ -10,26 +10,58 @@
             "Devo prendere lo shaker"
         ],
         "avoid_triggers": [
-            ""
+            "frocio"
         ],
         "avoid_outputs": [
-
-            ""
+            "Grrr"
         ],
         "power_triggers": [
             "perla di mattia",
+            "perla di fedrig",
             "mattia perla",
             "perla mattia",
+            "perla fedrig",
             "perla di mattia fedrigo",
             "super mattia",
             "super mattia fedrigo"
         ],
         "power_outputs": [
             "Ramarro marrone",
+            "Salve!",
             "Quella tipa è già mia",
             "Luca ti sfido ad una gara di resistenza."
         ],
         "author": "Fedig"
+    },
+    "Jacopo Clocchiatti": {
+        "output_counter": 0,
+        "scope": "global",
+        "standard_triggers": [
+            "jacopo clocchiatti"
+        ],
+        "standard_outputs": [
+            "Eccolo!",
+            "Andato bene il volo?"
+        ],
+        "avoid_triggers": [
+            ""
+        ],
+        "avoid_outputs": [
+            ""
+        ],
+        "power_triggers": [
+            "perla di clock",
+            "clock perla",
+            "perla clock",
+            "perla clock",
+            "perla di mattia fedrigo",
+            "super man",
+            "super clock"
+        ],
+        "power_outputs": [
+            "with great power comes great responsibility"
+        ],
+        "author": "Clock"
     },
     "Alberto Nadin": {
         "output_counter": 0,
