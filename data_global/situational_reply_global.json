@@ -33,6 +33,34 @@
         ],
         "author": "Fedig"
     },
+    "Simone Not": {
+        "output_counter": 0,
+        "scope": "global",
+        "standard_triggers": [
+            "simone not"
+        ],
+        "standard_outputs": [
+            "Apple merda",
+            "sto risparmiando per la Tesla"
+        ],
+        "avoid_triggers": [
+            ""
+        ],
+        "avoid_outputs": [
+            ""
+        ],
+        "power_triggers": [
+            "perla di not",
+            "not perla",
+            "perla not",
+            "perla di simone not",
+            "super not"
+        ],
+        "power_outputs": [
+            ""
+        ],
+        "author": "Not"
+    },
     "Jacopo Clocchiatti": {
         "output_counter": 0,
         "scope": "global",
