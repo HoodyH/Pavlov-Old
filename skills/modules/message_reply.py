@@ -1,23 +1,29 @@
 from skills.utils.file_handler import load, save
-from skills.utils.select_handler import random_between
+from skills.utils.select_handler import phrase_sequencer
 from skills.utils.interpreter import find
 from skills.settings import *
 
 
 class Respond(object):
 
-    _vars = [
+    _fields = [
         "scope",
+        "cit_author",
+    ]
+
+    _arrays = [
         "standard_triggers",
-        "standard_counter",
         "standard_outputs",
         "power_triggers",
-        "power_counter",
         "power_outputs",
-        "avoid_counter",
         "avoid_triggers",
         "avoid_outputs",
-        "cit_author",
+    ]
+
+    _counters = [
+        "standard_counter",
+        "power_counter",
+        "avoid_counter"
     ]
 
     def __init__(self, text, scope, guild):
@@ -44,15 +50,23 @@ class Respond(object):
 
     def _get_reply_data(self, key):
 
-        for var_name in self._vars:
-            setattr(self, var_name, self.situational_reply[key].get(var_name, 0))
+        for field in self._fields:
+            setattr(self, field, self.situational_reply[key].get(field, ""))
+        for array in self._arrays:
+            setattr(self, array, self.situational_reply[key].get(array, [""]))
+        for counter in self._counters:
+            setattr(self, counter, self.situational_reply[key].get(counter, 0))
         return
 
     def _set_reply_data(self, key):
 
-        field = self.situational_reply[key]
-        for var_name in self._vars:
-            field[var_name] = getattr(self, var_name)
+        row = self.situational_reply[key]
+        for field in self._fields:
+            row[field] = getattr(self, field)
+        for array in self._arrays:
+            row[array] = getattr(self, array)
+        for counter in self._counters:
+            row[counter] = getattr(self, counter)
         save(self.guild, self.scope, "situational_reply", self.situational_reply)
         return
 
@@ -77,33 +91,51 @@ class Respond(object):
                     return
                 if el[1] == POWER_REPLAY and (mode is STD_REPLAY or POWER_REPLAY):
                     return
+                if el[1] == STATIC_REPLAY and (mode is STD_REPLAY or POWER_REPLAY or STATIC_REPLAY):
+                    return
 
-        # Look for the keyword
-        if not find(trigger, self.text, starting_point):
+        trigger = trigger.split(STATIC_SPLIT_KEY)
+        # Look for the trigger
+        if not find(trigger[0], self.text, starting_point):
             return
 
-        # Delete the item if there is something better
+        # Delete the item cause there is something better with this key
         if el_index != -1:
             self.output.pop(el_index)
 
+
         sentence = [key]
-        if self._find_avoid():
+
+        # save the static reply if founded
+        if len(trigger) >= 2:
+            sentence.append(STATIC_REPLAY)
+            sentence.append(trigger[1])
+            if len(trigger) > 2:
+                sentence.append(" ".join(trigger[2].split()))
+            else:
+                sentence.append("")
+
+        # create the avoid reply
+        elif self._find_avoid():
             sentence.append(AVOID_REPLY)
-            sentence.append(self.avoid_outputs[self.avoid_counter])
+            self.avoid_counter, out = phrase_sequencer(vet_outputs, self.avoid_counter)
+            sentence.append(out)
             sentence.append("")
-            self.avoid_counter += 1
+
+        # create the standard or power reply
         else:
             if mode is POWER_REPLAY:
                 sentence.append(POWER_REPLAY)
-                sentence.append(vet_outputs[self.power_counter])
+                self.power_counter, out = phrase_sequencer(vet_outputs, self.power_counter)
+                sentence.append(out)
                 sentence.append(self.cit_author)
-                self.power_counter += 1
             else:
                 sentence.append(STD_REPLAY)
-                sentence.append(vet_outputs[self.standard_counter])
+                self.standard_counter, out = phrase_sequencer(vet_outputs, self.standard_counter)
+                sentence.append(out)
                 sentence.append("")
-                self.standard_counter += 1
 
+        #append to the output
         self.output.append(sentence)
         self._set_reply_data(key)
         return
@@ -127,6 +159,3 @@ class Respond(object):
             if el[3] is not "":
                 output += "\ncit. {}".format(str(el[3]))
         return output
-
-
-

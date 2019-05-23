@@ -7,6 +7,8 @@ USE_GLOBAL_FILE_ONLY = True
 AVOID_REPLY = 0
 STD_REPLAY = 1
 POWER_REPLAY = 2
+STATIC_REPLAY = 3
+STATIC_SPLIT_KEY = "&&&"
 
 
 # global setting for module status
