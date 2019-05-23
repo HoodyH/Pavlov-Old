@@ -1,4 +1,30 @@
 {
+    "Void": {
+        "scope": "global",
+        "standard_triggers": [
+            ""
+        ],
+        "standard_counter": 0,
+        "standard_outputs": [
+            ""
+        ],
+        "power_triggers": [
+            ""
+        ],
+        "power_counter": 0,
+        "power_outputs": [
+            ""
+        ],
+        "avoid_triggers": [
+            ""
+        ],
+        "avoid_counter": 0,
+        "avoid_outputs": [
+
+            ""
+        ],
+        "cit_author": ""
+    },
     "Mattia Fedrigo": {
         "scope": "global",
         "standard_triggers": [
