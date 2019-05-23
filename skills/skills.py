@@ -49,7 +49,7 @@ class Analyze(object):
             return
         elif command == "module.status":
             m = ModuleStatus(self.scope, self.guild, command, arg, params)
-            m.mute()
+            return m.mute()
         elif command == "insult":
             return
 
@@ -144,23 +144,20 @@ class Analyze(object):
 
         self._get_config()
 
+        # find commands
         command, arg, params = self._find_command(text)
         if command is not None:
-            self._run_command(command, arg, params)
-            return
+            return self._run_command(command, arg, params)
 
+        # check for a prefix (sudo or quiet)
         text = self._find_prefix(text)
 
         # don't analyze long messages
         if len(text) > message_max_length:
             return
 
-        text_array = text.split()
         respond = Respond(text, self.scope, self.guild)
-        index = 0
-        for word in text_array:
-            if self._module_status('message_reply'):
-                respond.message_reply(word, index)
-            index += 1
-        return respond.get_reply()
+        if self._module_status('message_reply'):
+            return respond.message_reply()
+
 

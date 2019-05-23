@@ -3,6 +3,12 @@
 USE_GLOBAL_FILE_ONLY = True
 
 
+# situational reply settings
+AVOID_REPLY = 0
+STD_REPLAY = 1
+POWER_REPLAY = 2
+
+
 # global setting for module status
 DISABLED = 0
 QUIET_MODE = 1

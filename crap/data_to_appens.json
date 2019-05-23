@@ -1,6 +1,6 @@
 {
     "Ubuntu": {
-        "output_counter": 0,
+        "standard_counter": 0,
         "scope": "global",
         "standard_triggers": [
             "ubuntu",
@@ -22,10 +22,10 @@
             "Diocane hai pienamente ragione",
             "Quel negro del cazzo"
         ],
-        "author": "None"
+        "cit_author": "None"
     },
     "Eolo": {
-        "output_counter": 0,
+        "standard_counter": 0,
         "scope": "global",
         "standard_triggers": [
             "eolo",
@@ -49,6 +49,6 @@
             "Ma \u00e8 mai possibile che faccia cosi cagare",
             "Ma schiantassero diocane"
         ],
-        "author": "None"
+        "cit_author": "None"
     }
 }

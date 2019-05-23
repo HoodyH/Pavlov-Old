@@ -16,7 +16,8 @@ def load_json(directory, file_name):
 
     try:
         json_obj = json.loads(open(full_path).read())
-    except:
+    except Exception as e:
+        print(e)
         read_path = "data_global/{}_global.json".format(file_name)
         json_obj = json.loads(open(read_path).read())
 
@@ -50,7 +51,7 @@ def load(scope, guild, file_name):
 
 def save(scope, guild, file_name, json_obj):
 
-    if guild is not None:
+    if guild is not None and USE_GLOBAL_FILE_ONLY is False:
         path = "data/{}/{}/{}.json".format(scope, guild, file_name)
     else:
         path = "data_global/{}_global.json".format(file_name)

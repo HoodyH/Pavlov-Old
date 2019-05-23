@@ -9,7 +9,7 @@
     "modules_status": {
         "message_reply": {
             "enabled": 1,
-            "status": 1
+            "status": 2
         },
         "insult": {
             "enabled": 1,
