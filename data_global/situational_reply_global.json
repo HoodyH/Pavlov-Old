@@ -36,7 +36,8 @@
             "Devo prendere lo shaker"
         ],
         "avoid_triggers": [
-            "frocio"
+            "frocio",
+            "coglione"
         ],
         "avoid_outputs": [
             "Grrr"
