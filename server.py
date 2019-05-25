@@ -27,6 +27,7 @@ def do_stuffs(msg):
         c = Analyze("telegram", msg.chat.id, msg.user.id)
     else:
         c = Analyze("telegram", None, msg.user.id)
+
     r = c.analyze_message(msg.text)
     if r is not None:
         msg.send_text(r)

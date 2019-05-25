@@ -99,6 +99,9 @@ class Module(object):
         -run command
         -return response
         """
+        if len(text) is 0:  # there was just the prefix
+            return None
+
         text_array = text.split()
 
         command_found = None

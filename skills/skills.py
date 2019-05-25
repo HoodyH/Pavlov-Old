@@ -24,7 +24,7 @@ class Analyze(object):
 
         # don't analyze long messages
         if len(text) > MEX_MAX_LENGTH:
-            return
+            return None
 
         if self.module.permissions_listener('message_reply', prefix_type):
             respond = Respond(text, self.scope, self.guild)
