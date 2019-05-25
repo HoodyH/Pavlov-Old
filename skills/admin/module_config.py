@@ -1,5 +1,5 @@
-from skills.utils.file_handler import load, save
-from skills.settings import *
+from skills.core.file_handler import load, save
+from skills.core.settings import *
 
 
 class ModuleStatus(object):
@@ -25,7 +25,7 @@ class ModuleStatus(object):
         self.config = load(guild, scope, 'config')
         self.commands = load(guild, scope, 'commands')
 
-    def _get_modules_status(self):
+    def _read_module_status(self):
 
         module = self.config.get('modules_status').get(self.arg)
         if module is None:
@@ -36,7 +36,7 @@ class ModuleStatus(object):
         self.status = module.get('status')
         return
 
-    def _set_modules_status(self):
+    def _set_module_status(self):
 
         field = self.config['modules_status'][self.arg] = {}
         field['enabled'] = self.enabled
@@ -46,12 +46,11 @@ class ModuleStatus(object):
 
     def mute(self):
 
-        self._get_modules_status()
-        print(self.enabled)
+        self._read_module_status()
         out = "no action taken"
         if self._set is not None:
-            if self._set is DISABLED:
-                self.status = DISABLED
+            if self._set is DISABLED_MODE:
+                self.status = DISABLED_MODE
                 out = "module DISABLED"
             if self._set is QUIET_MODE:
                 self.status = QUIET_MODE
@@ -66,6 +65,6 @@ class ModuleStatus(object):
         else:
             self.status = NORMAL_MODE
             out = "NORMAL_MODE on"
-
-        self._set_modules_status()
+        print(out)
+        self._set_module_status()
         return out

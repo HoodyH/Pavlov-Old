@@ -1,4 +1,4 @@
-from skills.utils.formatting import from_timestamp
+from skills.core.utils.formatting import from_timestamp
 
 from telegram.user import User
 from telegram.chat import Chat

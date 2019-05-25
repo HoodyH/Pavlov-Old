@@ -41,4 +41,5 @@ Questo è il format:
      "trigger &&& risposta &&& cit"
 
      Spazzi nei pressi dello spaziatore (&&&) verranno ignorati,
-     stessa cosa se per caso aggiungete più di 2 spaziatori nella stringa.
+     stessa cosa se per caso aggiungete più di 2 spaziatori nella stringa:
+     "trigger &&& risposta &&& cit &&& ignored &&& ignored"

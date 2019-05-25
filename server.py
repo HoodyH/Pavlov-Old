@@ -6,36 +6,40 @@ import configparser as cfg
 from skills.skills import Analyze
 
 update_id = None
-bot_id_0 = ""
-bot_id_1 = ""
+token = ""
+mongo_connection_string = ""
+
 
 def read_token_from_config_file(config):
+    global token
+    global mongo_connection_string
     parser = cfg.ConfigParser()
     parser.read(config)
-    bot_id_0 = parser.get("creds", "bot_id_0")
-    bot_id_1 = parser.get("creds", "bot_id_1")
-    return parser.get("creds", "token")
+    mongo_connection_string = parser.get("creds", "mongo_connection_string")
+    token = parser.get("creds", "token")
+    return
 
 
 def do_stuffs(msg):
-    # if msg.user.id != bot_id_0 and msg.user.id != bot_id_1:
-        if msg.text is None:
-            return
-        if msg.chat is not None:
-            c = Analyze("telegram", msg.chat.id, msg.user.id)  
-        else:
-            c = Analyze("telegram", None, msg.user.id) 
-        r = c.analyze_message(msg.text)
-        if r is not None:
-            msg.send_text(r)
+    if msg.text is None:
         return
+    if msg.chat is not None:
+        c = Analyze("telegram", msg.chat.id, msg.user.id)
+    else:
+        c = Analyze("telegram", None, msg.user.id)
+    r = c.analyze_message(msg.text)
+    if r is not None:
+        msg.send_text(r)
+    return
 
 
 def main():
     """Run the bot."""
     global update_id
-    bot = telegram.Bot(read_token_from_config_file("token.cfg"))
-    msg = telegram.Message(bot) #super obj
+    global token
+    read_token_from_config_file("token.cfg")
+    bot = telegram.Bot(token)
+    msg = telegram.Message(bot)  # super obj
 
     while True:
         incoming_data = bot.get_updates(offset=update_id)

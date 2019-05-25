@@ -1,7 +1,7 @@
-from skills.utils.file_handler import load, save
-from skills.utils.select_handler import phrase_sequencer
-from skills.utils.interpreter import find
-from skills.settings import *
+from skills.core.file_handler import load, save
+from skills.core.select_handler import phrase_sequencer
+from skills.core.text_interpreter import find
+from skills.core.settings import *
 
 
 class Respond(object):

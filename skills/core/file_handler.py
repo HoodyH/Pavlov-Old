@@ -1,4 +1,4 @@
-from skills.settings import *
+from skills.core.settings import *
 import json
 import os
 
