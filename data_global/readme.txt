@@ -43,3 +43,18 @@ Questo è il format:
      Spazzi nei pressi dello spaziatore (&&&) verranno ignorati,
      stessa cosa se per caso aggiungete più di 2 spaziatori nella stringa:
      "trigger &&& risposta &&& cit &&& ignored &&& ignored"
+
+ RANGO Modalità
+    NORMAL_MODE = 0
+    QUIET_MODE = 1
+    SPAM_MODE = 2
+    AGGRESSIVE_MODE = 3
+    DISABLED_MODE = 10
+
+ -- static mode, con questo prima del trigger
+    viene specificato che il comando può essere eseguito solo in quella modalità o una di rango superiore
+    %%%!%%% vincolato alla QUIET_MODE o con il prefisso quite nelle modalità inferiori
+    %%%!!%%% vincolato alla SPAM_MODE
+
+    Tutte le modalità sono eseguibili con il comando sudo in qualsiasi condizione.
+    A patto che l'utente faccia parte del gruppo sudo.

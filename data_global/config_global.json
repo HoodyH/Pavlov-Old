@@ -9,11 +9,19 @@
     "modules_status": {
         "message_reply": {
             "enabled": 1,
-            "status": 1
+            "mode": 0
+        },
+        "bestemmia_reply": {
+            "enabled": 1,
+            "mode": 0
+        },
+        "badass_character_call": {
+            "enabled": 1,
+            "mode": 0
         },
         "insult": {
             "enabled": 1,
-            "status": 1
+            "mode": 1
         }
     }
 }

@@ -1,9 +1,7 @@
 import telegram
-
-import json
 import configparser as cfg
-
 from skills.skills import Analyze
+
 
 update_id = None
 token = ""

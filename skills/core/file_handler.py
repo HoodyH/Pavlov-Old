@@ -34,6 +34,7 @@ def load_json(directory, file_name):
 config_global = load_json("data_global", "config_global")
 commands_global = load_json("data_global", "commands_global")
 situational_reply_global = load_json("data_global", "situational_reply_global")
+#bestemmia_reply_global = load_json("data_global", "bestemmia_reply")
 
 
 def load(scope, guild, file_name):
@@ -47,6 +48,8 @@ def load(scope, guild, file_name):
         return commands_global
     elif file_name == "situational_reply":
         return situational_reply_global
+    #elif file_name == "bestemmia_reply":
+        #return bestemmia_reply_global
 
 
 def save(scope, guild, file_name, json_obj):
@@ -62,7 +65,11 @@ def save(scope, guild, file_name, json_obj):
     file.close()
 
 
-
+# log data to a text file locally
+def log_data(data):
+    log = open("data.log", "a")
+    log.write(str(data)+"\r\n")
+    log.close()
 
 
 

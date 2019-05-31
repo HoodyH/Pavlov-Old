@@ -40,31 +40,63 @@ NEW_MODULE_MODEL = {
 }
 
 NEW_REPLY = {
-
         "name": "",
         "enabled": 1,
         "mode": 1,
-        "scope": "global",
-        "standard_triggers": [
-            ""
-        ],
-        "standard_counter": 0,
-        "standard_outputs": [
-            ""
-        ],
-        "power_triggers": [
-            ""
-        ],
-        "power_counter": 0,
-        "power_outputs": [
-            ""
-        ],
-        "avoid_triggers": [
-            ""
-        ],
-        "avoid_counter": 0,
-        "avoid_outputs": [
-            ""
-        ],
-        "cit_author": ""
-}
+        "cit_author": "",
+        "private": 1,
+        "users_allowed": {
+            "telegram": [
+
+            ],
+            "discord": [
+
+            ]
+        },
+        "eng": {
+            "standard_triggers": [
+                ""
+            ],
+            "standard_counter": 0,
+            "standard_outputs": [
+                ""
+            ],
+            "power_triggers": [
+                ""
+            ],
+            "power_counter": 0,
+            "power_outputs": [
+                ""
+            ],
+            "avoid_triggers": [
+                ""
+            ],
+            "avoid_counter": 0,
+            "avoid_outputs": [
+                ""
+            ]
+        },
+        "ita": {
+            "standard_triggers": [
+                ""
+            ],
+            "standard_counter": 0,
+            "standard_outputs": [
+                ""
+            ],
+            "power_triggers": [
+                ""
+            ],
+            "power_counter": 0,
+            "power_outputs": [
+                ""
+            ],
+            "avoid_triggers": [
+                ""
+            ],
+            "avoid_counter": 0,
+            "avoid_outputs": [
+                ""
+            ]
+        }
+    }

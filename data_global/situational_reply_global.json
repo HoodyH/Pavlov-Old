@@ -1,33 +1,19 @@
 {
-    "Void": {
-        "scope": "global",
-        "standard_triggers": [
-            ""
-        ],
-        "standard_counter": 0,
-        "standard_outputs": [
-            ""
-        ],
-        "power_triggers": [
-            ""
-        ],
-        "power_counter": 0,
-        "power_outputs": [
-            ""
-        ],
-        "avoid_triggers": [
-            ""
-        ],
-        "avoid_counter": 0,
-        "avoid_outputs": [
-            ""
-        ],
-        "cit_author": ""
-    },
     "Mattia Fedrigo": {
+        "name": "",
+        "enabled": 1,
+        "mode": 0,
+        "cit_author": "Matias Fedrigos",
+        "private": 0,
+        "users_allowed": {
+            "telegram": [],
+            "discord": []
+        },
         "standard_counter": 0,
-        "scope": "global",
         "standard_triggers": [
+            "%%%!%%%fed",
+            "%%%!%%%fedrig",
+            "%%%!%%%matias",
             "mattia fedrigo"
         ],
         "standard_outputs": [
@@ -57,16 +43,24 @@
             "Quella tipa \u00e8 gi\u00e0 mia",
             "Luca ti sfido ad una gara di resistenza."
         ],
-        "cit_author": "Fedig",
         "power_counter": 0,
         "avoid_counter": 0
     },
     "Simone Not": {
+        "name": "",
+        "enabled": 1,
+        "mode": 0,
+        "cit_author": "Not",
+        "private": 0,
+        "users_allowed": {
+            "telegram": []
+        },
+        "power_counter": 0,
+        "avoid_counter": 0,
         "standard_counter": 0,
-        "scope": "global",
         "standard_triggers": [
             "simone not",
-            "viva la figa &&& e chi la castiga &&&     simo"
+            "viva la figa &&& e chi la castiga &&& Not"
         ],
         "standard_outputs": [
             "Apple merda",
@@ -87,13 +81,10 @@
         ],
         "power_outputs": [
             "Gi\u00e0 il bot stesso \u00e8 una perla"
-        ],
-        "cit_author": "Not",
-        "power_counter": 0,
-        "avoid_counter": 0
+        ]
     },
     "Jacopo Clocchiatti": {
-        "standard_counter": 1,
+        "standard_counter": 0,
         "scope": "global",
         "standard_triggers": [
             "jacopo clocchiatti"
@@ -113,8 +104,9 @@
             "clock perla",
             "perla clock",
             "perla clock",
-            "perla di mattia fedrigo",
+            "perla di jacopo",
             "super man",
+            "superman",
             "super clock"
         ],
         "power_outputs": [
@@ -122,7 +114,14 @@
         ],
         "cit_author": "Clock",
         "power_counter": 0,
-        "avoid_counter": 0
+        "avoid_counter": 0,
+        "name": "",
+        "enabled": 0,
+        "mode": 0,
+        "private": 0,
+        "users_allowed": {
+            "telegram": []
+        }
     },
     "Alberto Nadin": {
         "standard_counter": 0,
@@ -153,10 +152,17 @@
         ],
         "cit_author": "Alberto",
         "power_counter": 0,
-        "avoid_counter": 0
+        "avoid_counter": 0,
+        "name": "",
+        "enabled": 0,
+        "mode": 0,
+        "private": 0,
+        "users_allowed": {
+            "telegram": []
+        }
     },
     "Luca Mauro": {
-        "standard_counter": 1,
+        "standard_counter": 0,
         "scope": "global",
         "standard_triggers": [
             "luca mauro"
@@ -184,7 +190,14 @@
         ],
         "cit_author": "Luca",
         "power_counter": 0,
-        "avoid_counter": 0
+        "avoid_counter": 0,
+        "name": "",
+        "enabled": 0,
+        "mode": 0,
+        "private": 0,
+        "users_allowed": {
+            "telegram": []
+        }
     },
     "Andrea Maestro": {
         "standard_counter": 0,
@@ -212,10 +225,17 @@
         ],
         "cit_author": "Maestro",
         "power_counter": 0,
-        "avoid_counter": 0
+        "avoid_counter": 0,
+        "name": "",
+        "enabled": 0,
+        "mode": 0,
+        "private": 0,
+        "users_allowed": {
+            "telegram": []
+        }
     },
     "Loli": {
-        "standard_counter": 1,
+        "standard_counter": 0,
         "scope": "global",
         "standard_triggers": [
             "loli",
@@ -252,10 +272,17 @@
         ],
         "cit_author": "",
         "power_counter": 0,
-        "avoid_counter": 0
+        "avoid_counter": 0,
+        "name": "",
+        "enabled": 0,
+        "mode": 0,
+        "private": 0,
+        "users_allowed": {
+            "telegram": []
+        }
     },
     "Your_Name": {
-        "standard_counter": 1,
+        "standard_counter": 2,
         "scope": "global",
         "standard_triggers": [
             "your name"
@@ -286,10 +313,17 @@
         ],
         "cit_author": "",
         "power_counter": 0,
-        "avoid_counter": 0
+        "avoid_counter": 0,
+        "name": "",
+        "enabled": 0,
+        "mode": 0,
+        "private": 0,
+        "users_allowed": {
+            "telegram": []
+        }
     },
     "Elon": {
-        "standard_counter": 1,
+        "standard_counter": 2,
         "scope": "global",
         "standard_triggers": [
             "elon"
@@ -341,10 +375,17 @@
         ],
         "cit_author": "Elon M. <3",
         "power_counter": 4,
-        "avoid_counter": 0
+        "avoid_counter": 0,
+        "name": "",
+        "enabled": 0,
+        "mode": 0,
+        "private": 0,
+        "users_allowed": {
+            "telegram": []
+        }
     },
     "Goodnight": {
-        "standard_counter": 1,
+        "standard_counter": 2,
         "scope": "global",
         "standard_triggers": [
             "buonanotte",
@@ -383,10 +424,17 @@
         ],
         "cit_author": "",
         "power_counter": 0,
-        "avoid_counter": 0
+        "avoid_counter": 0,
+        "name": "",
+        "enabled": 0,
+        "mode": 2,
+        "private": 0,
+        "users_allowed": {
+            "telegram": []
+        }
     },
     "Greetings_in": {
-        "standard_counter": 0,
+        "standard_counter": 1,
         "scope": "global",
         "standard_triggers": [
             "hello",
@@ -414,7 +462,14 @@
         ],
         "power_counter": 0,
         "avoid_counter": 0,
-        "cit_author": ""
+        "cit_author": "",
+        "name": "",
+        "enabled": 0,
+        "mode": 2,
+        "private": 0,
+        "users_allowed": {
+            "telegram": []
+        }
     },
     "PT": {
         "standard_counter": 0,
@@ -448,10 +503,17 @@
         ],
         "power_counter": 0,
         "avoid_counter": 0,
-        "cit_author": ""
+        "cit_author": "",
+        "name": "",
+        "private": 0,
+        "users_allowed": {
+            "telegram": []
+        },
+        "enabled": 0,
+        "mode": 2
     },
     "Ubuntu": {
-        "standard_counter": 1,
+        "standard_counter": 2,
         "scope": "global",
         "standard_triggers": [
             "ubuntu",
@@ -483,10 +545,17 @@
         ],
         "cit_author": "Luca",
         "power_counter": 0,
-        "avoid_counter": 0
+        "avoid_counter": 0,
+        "name": "",
+        "enabled": 0,
+        "mode": 1,
+        "private": 0,
+        "users_allowed": {
+            "telegram": []
+        }
     },
     "Eolo": {
-        "standard_counter": 2,
+        "standard_counter": 3,
         "scope": "global",
         "standard_triggers": [
             "eolo",
@@ -519,6 +588,13 @@
         ],
         "cit_author": "",
         "power_counter": 0,
-        "avoid_counter": 0
+        "avoid_counter": 0,
+        "name": "",
+        "enabled": 0,
+        "mode": 1,
+        "private": 0,
+        "users_allowed": {
+            "telegram": []
+        }
     }
 }

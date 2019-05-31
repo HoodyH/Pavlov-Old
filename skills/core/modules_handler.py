@@ -1,23 +1,24 @@
 from skills.core.file_handler import load
-from skills.core.text_interpreter import find
+from skills.core.interpreter_handler import find
 from skills.core.settings import *
-from skills.core.utils.errors import command_error, command_not_implemented
+from skills.core.text_reply.errors import command_error, command_not_implemented
+from skills.core.internal_log import Log
 
 # commands
-from skills.admin.module_config import ModuleStatus
+from skills.modules.admin.command_module_config import ModuleStatus
 
 
 class Module(object):
 
-    def __init__(self, scope, guild, user_id):
+    def __init__(self, scope, guild_id, user_id):
 
         self.scope = scope
-        self.guild = guild
+        self.guild_id = guild_id
         self.user_id = user_id
         self.db = None
 
-        self.config = load(scope, guild, "config")
-        self.commands = load(scope, guild, "commands")
+        self.config = load(scope, guild_id, "config")
+        self.commands = load(scope, guild_id, "commands")
 
     def _read_configs(self):
 
@@ -43,7 +44,7 @@ class Module(object):
         if command == "module.deactivate":
             return command_not_implemented(language)
         elif command == "module.status":
-            m = ModuleStatus(self.scope, self.guild, command, arg, params)
+            m = ModuleStatus(self.scope, self.guild_id, self.user_id, language, command, arg, params)
             return m.mute()
         elif command == "insult":
             return command_not_implemented(language)
@@ -77,13 +78,16 @@ class Module(object):
         self._read_configs()
 
         if str.startswith(text, self.prefix):
-            text = text[1:]
+            text = text[len(self.prefix):]
+            Log.modules_handler_prefix(self.scope, self.guild_id, self.user_id, self.prefix)
             prefix_type = COMMAND_PREFIX
         elif str.startswith(text, self.quiet_prefix):
-            text = text[1:]
-            prefix_type = QUIET_PREFIX
+            text = text[len(self.quiet_prefix):]
+            Log.modules_handler_prefix(self.scope, self.guild_id, self.user_id, self.quiet_prefix)
+            prefix_type = OVERRIDE_PREFIX
         elif str.startswith(text, self.sudo_prefix):
-            text = text[1:]
+            text = text[len(self.sudo_prefix):]
+            Log.modules_handler_prefix(self.scope, self.guild_id, self.user_id, self.sudo_prefix)
             prefix_type = SUDO_PREFIX
         else:
             prefix_type = NO_PREFIX
@@ -143,16 +147,22 @@ class Module(object):
         check if there are the requisites to run the module (listener)
         """
         enabled = self.modules_status[module_name].get('enabled')
-        status = self.modules_status[module_name].get('status')
+        mode = self.modules_status[module_name].get('mode')
 
         if prefix_type == SUDO_PREFIX:
             return True
         if enabled is DISABLED_MODE:
             return False
-        if status is DISABLED_MODE:
+        if mode is DISABLED_MODE:
             return False
-        if status is QUIET_MODE and prefix_type == QUIET_PREFIX:
+        if mode is QUIET_MODE and prefix_type == OVERRIDE_PREFIX:
             return True
-        if status is NORMAL_MODE:
+        if mode is NORMAL_MODE or SPAM_MODE or AGGRESSIVE_MODE:
             return True
         return False
+    
+    def get_mode(self, module_name):
+        return self.modules_status[module_name].get('mode')
+
+    def get_guild_language(self):
+        return self.languages[0]

@@ -30,3 +30,31 @@ def _find_sequence(sample_array, sentence_array, starting_point):
             # if in the array a word dont match then abort
             return False
     return True
+
+
+def _clean():
+    """
+    clean article and conjunctions0
+    clean gender
+    clean repetitions
+        (letters repetitions,
+        modules repetitions (leave just 2 near) hahahaha will become haha,
+        words repetiotion (in the same trigger)
+
+    different order: (be disabled)
+    in check sequence the trigger array can have the same words of in a different order
+
+    percentage match: (be disabled)
+    some word can be omitted, but you must have 70% of the words
+
+    example:
+    trigger:
+    hello madaffacca how is going
+
+    elaboration:
+    helo madafaca how is going
+
+    input: (must be saved end elaborated once)
+    madafacca how is going
+    """
+    return
