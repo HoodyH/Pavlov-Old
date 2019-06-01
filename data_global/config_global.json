@@ -19,6 +19,10 @@
             "enabled": 1,
             "mode": 1
         },
+        "pickup_line_call": {
+            "enabled": 1,
+            "mode": 1
+        },
         "insult": {
             "enabled": 1,
             "mode": 1

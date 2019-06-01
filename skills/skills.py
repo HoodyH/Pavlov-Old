@@ -4,6 +4,7 @@ from skills.core.settings import *
 from skills.modules.message_reply import Respond
 from skills.modules.bestemmia_reply import Bestemmia
 from skills.modules.badass_character_call import BadAssCharacterCall
+from skills.modules.pickup_line_call import PickupLineCall
 
 
 class Analyze(object):
@@ -52,7 +53,7 @@ class Analyze(object):
             )
             self.output.append(bestemmia.message_reply(self.module.get_guild_language()))
 
-        if self.module.permissions_listener('bestemmia_reply', prefix_type):
+        if self.module.permissions_listener('badass_character_call', prefix_type):
             badass_character_call = BadAssCharacterCall(
                 self.scope,
                 self.guild_id,
@@ -62,6 +63,17 @@ class Analyze(object):
                 prefix_type
             )
             self.output.append(badass_character_call.message_reply(self.module.get_guild_language()))
+
+        if self.module.permissions_listener('pickup_line_call', prefix_type):
+            pickup_line_call = PickupLineCall(
+                self.scope,
+                self.guild_id,
+                self.user_id,
+                text,
+                self.module.get_mode('pickup_line_call'),
+                prefix_type
+            )
+            self.output.append(pickup_line_call.message_reply(self.module.get_guild_language()))
 
         output = ""
         for el in self.output:

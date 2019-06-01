@@ -1,4 +1,38 @@
 {
+    "Savage": {
+        "name": "",
+        "enabled": 1,
+        "mode": 0,
+        "cit_author": "Savage",
+        "private": 0,
+        "users_allowed": {
+            "telegram": [],
+            "discord": []
+        },
+        "standard_counter": 1,
+        "standard_triggers": [
+            "srotola il boa"
+        ],
+        "standard_outputs": [
+            "Bucala come se avessi una tivella al posto del cazzo",
+            "Arala"
+        ],
+        "avoid_triggers": [
+            "frocio",
+            "coglione"
+        ],
+        "avoid_outputs": [
+            "Grrr"
+        ],
+        "power_triggers": [
+            ""
+        ],
+        "power_outputs": [
+            ""
+        ],
+        "power_counter": 0,
+        "avoid_counter": 1
+    },
     "Mattia Fedrigo": {
         "name": "",
         "enabled": 1,
@@ -9,7 +43,7 @@
             "telegram": [],
             "discord": []
         },
-        "standard_counter": 0,
+        "standard_counter": 1,
         "standard_triggers": [
             "%%%!%%%fed",
             "%%%!%%%fedrig",
@@ -429,7 +463,7 @@
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,
-        "mode": 2,
+        "mode": 1,
         "private": 0,
         "users_allowed": {
             "telegram": []
@@ -467,7 +501,7 @@
         "cit_author": "",
         "name": "",
         "enabled": 0,
-        "mode": 2,
+        "mode": 1,
         "private": 0,
         "users_allowed": {
             "telegram": []

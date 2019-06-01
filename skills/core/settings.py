@@ -3,6 +3,8 @@ from API.badass_character.badass_character import BadassCharacter
 badass_character = BadassCharacter()
 from API.bestemmia.bestemmia import Bestemmia
 bestemmia = Bestemmia()
+from API.pickup_line.pickup_line import PickupLine
+pickup_line = PickupLine()
 
 
 ERROR = -1

@@ -1,16 +1,12 @@
 import random
 
-CHUCK_NORRIS = "Chuck Norris"
-JOHN_WICK = "John Wick"
-
-
 supported_languages = [
     "eng",
     "ita"
 ]
 
 
-class BadassCharacter(object):
+class PickupLine(object):
     """
 
     """
@@ -21,12 +17,12 @@ class BadassCharacter(object):
     def _load_data(self):
 
         for language in supported_languages:
-            filename = 'API/badass_character/{}/badass_sentences.txt'.format(language.upper())
+            filename = 'API/pickup_line/{}/pickup_line_sentences.txt'.format(language.upper())
             var_valor = []
             with open(filename) as file:
                 for line in file:
                     var_valor.append(line)
-                var_name = 'badass_sentences_{}'.format(language.upper())
+                var_name = 'pickup_line_sentences_{}'.format(language.upper())
                 setattr(self, var_name, var_valor)
 
     @staticmethod
@@ -37,18 +33,16 @@ class BadassCharacter(object):
 
         return int(random.random() * (n_max - n_min) + n_min)
 
-    def badass_sentence(self, language, character, number=None):
+    def pickup_sentence(self, language, number=None, random=True):
 
-        sentences_vector = getattr(self, 'badass_sentences_{}'.format(language.upper()))
+        sentences_vector = getattr(self, 'pickup_line_sentences_{}'.format(language.upper()))
 
         if number is None:
             sentence_number = self._random_between(0, len(sentences_vector)-1)
         else:
             sentence_number = number - 1
 
-        output = '{} - {}:\n'.format(character.upper(), sentence_number + 1)
-        output += sentences_vector[sentence_number].replace('%%%', character.title())
+        output = 'PICKUP LINE - {}:\n'.format(sentence_number + 1)
+        output += sentences_vector[sentence_number]
 
         return output
-
-

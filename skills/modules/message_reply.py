@@ -143,7 +143,7 @@ class Respond(object):
         # create the avoid reply
         if self._find_avoid():
             sentence.append(AVOID_REPLY)
-            self.avoid_counter, out = phrase_sequencer(vet_outputs, self.avoid_counter)
+            self.avoid_counter, out = phrase_sequencer(self.avoid_outputs, self.avoid_counter)
             sentence.append(out)
             sentence.append("")
 
