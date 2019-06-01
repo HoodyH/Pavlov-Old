@@ -43,4 +43,18 @@ def adjuster():
     log.close()
 
 
-adjuster()
+def remove_name():
+
+    filename = 'badass_sentences.txt'
+    var_valor = []
+    out = open('out.txt', 'a')
+    with open(filename) as file:
+        for line in file:
+            line = line.replace('Chuck ', '%%%')
+            line = line.replace('Norris', '')
+            out.write(line)
+            var_valor.append(line)
+    out.close()
+
+
+remove_name()

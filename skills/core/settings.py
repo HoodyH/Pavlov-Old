@@ -1,6 +1,6 @@
 # API
-from skills.modules.API.badass_character.badass_character import BadassCharacter
-badass_character = BadassCharacter('skills/modules/API')
+from API.badass_character.badass_character import BadassCharacter
+badass_character = BadassCharacter()
 
 
 ERROR = -1

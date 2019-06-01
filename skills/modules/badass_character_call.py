@@ -1,5 +1,6 @@
 from skills.core.settings import *
 from skills.core.interpreter_handler import find
+from API.badass_character.badass_character import JOHN_WICK, CHUCK_NORRIS
 from skills.core.internal_log import Log
 
 
@@ -27,10 +28,10 @@ class BadAssCharacterCall(object):
         for i in range(0, text_len):
             for trigger in john_wick_triggers:
                 if find(trigger, self.text, i):
-                    return badass_character.badass_sentence(language, 'john_wick')
+                    return badass_character.badass_sentence(language, JOHN_WICK )
 
             for trigger in chuck_norris_triggers:
                 if find(trigger, self.text, i):
-                    return badass_character.badass_sentence(language, 'chuck_norris')
+                    return badass_character.badass_sentence(language, CHUCK_NORRIS)
 
         return ""
