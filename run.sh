@@ -1,5 +1,3 @@
 #!/bin/bash
 
-source env/bin/activate
-python3 server.py
-#env deactivate
+while true; do python3 server.py; echo "command was killed, restarting it"; done
