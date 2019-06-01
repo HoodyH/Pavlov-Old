@@ -50,7 +50,7 @@ class Analyze(object):
                 self.module.get_mode('bestemmia_reply'),
                 prefix_type
             )
-            self.output.append(bestemmia.message_reply())
+            self.output.append(bestemmia.message_reply(self.module.get_guild_language()))
 
         if self.module.permissions_listener('bestemmia_reply', prefix_type):
             badass_character_call = BadAssCharacterCall(
@@ -67,5 +67,6 @@ class Analyze(object):
         for el in self.output:
             if el != "":
                 output += "\n{}".format(el)
+
         return output
 

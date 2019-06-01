@@ -7,7 +7,6 @@ JOHN_WICK = "John Wick"
 supported_languages = [
     "eng",
     "ita"
-
 ]
 
 

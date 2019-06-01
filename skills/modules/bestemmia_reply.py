@@ -1,11 +1,24 @@
+from skills.core.settings import *
 from skills.core.interpreter_handler import find
-from skills.core.utils.select_handler import random_between
-from data_global.static_text.bestemmia_data import *
-from data_global.static_text.ITA.common_words import *
+from API.bestemmia.bestemmia import DIO, MADONNA
 from skills.core.internal_log import Log
 
+ITA_STANDARD_CALLS = {
+    "tira"
+    "tira una",
+    "tira un",
+    "spara",
+    "spara un",
+    "spara una"
+}
 
 class Bestemmia(object):
+
+    base_triggers = [
+        ['dio', 'porco'],
+        ['madonna'],
+        ['troia']
+    ]
 
     def __init__(self, scope, guild_id, user_id, text, module_mode, prefix_type):
 
@@ -16,41 +29,28 @@ class Bestemmia(object):
         self.module_mode = module_mode
         self.prefix_mode = prefix_type
 
-        self.output = []
+    def build_triggers(self, language, character_number):
 
-    def _find_trigger(self, trigger, vet_outputs, key, starting_point, ):
+        triggers = []
 
-        if not find(trigger, self.text, starting_point):
-            return
+        # build with standard calls
+        if language == 'ita':
+            triggers = self.base_triggers[character_number]
+            for call in ITA_STANDARD_CALLS:
+                for name in self.base_triggers[character_number]:
+                    triggers.append('{} {}'.format(call, name))
 
-        sentence = [key]
-        out = vet_outputs[random_between(0, len(vet_outputs)-1)]
-        sentence.append('{} {}'.format(key, out))
-        self.output.append(sentence)
+        return triggers
 
-    def message_reply(self):
+    def message_reply(self, language):
 
         text_len = len(self.text.split())
 
-        # build with standard calls
-        madonna_triggers = MADONNA_TRIGGERS
-        for el in STANDARD_CALLS:
-            madonna_triggers.append('{} {}'.format(el, "madonna"))
-        dio_triggers = DIO_TRIGGERS
-        for el in STANDARD_CALLS:
-            dio_triggers.append('{} {}'.format(el, "dio"))
-            dio_triggers.append('{} {}'.format(el, "porco"))
-
         # look for trigger words
         for i in range(0, text_len):
-            for trigger in madonna_triggers:
-                self._find_trigger(trigger, MADONNA_FUNNY, 'Madonna', i)
+            for j in range(0, len(self.base_triggers)):
+                for trigger in self.build_triggers(language, j):
+                    if find(trigger, self.text, i):
+                        return bestemmia.bestemmia(language, self.base_triggers[j][0])
 
-            for trigger in dio_triggers:
-                self._find_trigger(trigger, DIO_FUNNY, 'Dio', i)
-
-        output = ""
-        for el in self.output:
-            print(el)
-            output += "\n{}".format(str(el[1]))
-        return output
+        return ""

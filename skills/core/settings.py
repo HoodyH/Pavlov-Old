@@ -1,6 +1,8 @@
 # API
 from API.badass_character.badass_character import BadassCharacter
 badass_character = BadassCharacter()
+from API.bestemmia.bestemmia import Bestemmia
+bestemmia = Bestemmia()
 
 
 ERROR = -1

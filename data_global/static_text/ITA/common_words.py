@@ -1,5 +1,5 @@
 
-STANDARD_CALLS = {
+ITA_STANDARD_CALLS = {
     "tira"
     "tira una",
     "tira un",
@@ -9,8 +9,6 @@ STANDARD_CALLS = {
 }
 
 ITA_COMMON_CALLS = [
-    'tira un',
-    'spara un',
     'coglione',
     'stronzo',
     'mona',

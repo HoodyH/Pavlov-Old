@@ -3,8 +3,8 @@
     "quiet_prefix": ",",
     "sudo_prefix": "#",
     "languages": [
-        "eng",
-        "ita"
+        "ita",
+        "eng"
     ],
     "modules_status": {
         "message_reply": {
