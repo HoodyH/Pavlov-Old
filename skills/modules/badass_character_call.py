@@ -28,7 +28,7 @@ class BadAssCharacterCall(object):
         for i in range(0, text_len):
             for trigger in john_wick_triggers:
                 if find(trigger, self.text, i):
-                    return badass_character.badass_sentence(language, JOHN_WICK )
+                    return badass_character.badass_sentence(language, JOHN_WICK)
 
             for trigger in chuck_norris_triggers:
                 if find(trigger, self.text, i):

@@ -9,15 +9,15 @@
     "modules_status": {
         "message_reply": {
             "enabled": 1,
-            "mode": 0
+            "mode": 1
         },
         "bestemmia_reply": {
             "enabled": 1,
-            "mode": 0
+            "mode": 1
         },
         "badass_character_call": {
             "enabled": 1,
-            "mode": 0
+            "mode": 1
         },
         "insult": {
             "enabled": 1,
