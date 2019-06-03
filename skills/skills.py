@@ -32,10 +32,6 @@ class Analyze(object):
         if prefix_type is COMMAND_PREFIX:
             return self.module.run_command(text)
 
-        # don't analyze long messages
-        if len(text) > MEX_MAX_LENGTH:
-            return None
-
         user_data_log = UserDataLog(
             self.scope,
             self.guild_id,
@@ -45,6 +41,10 @@ class Analyze(object):
             prefix_type
         )
         user_data_log.log_data()
+
+        # don't analyze long messages
+        if len(text) > MEX_MAX_LENGTH:
+            return None
 
         if self.module.permissions_listener('message_reply', prefix_type):
             respond = Respond(
