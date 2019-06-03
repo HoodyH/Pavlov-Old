@@ -3,7 +3,7 @@
         "name": "",
         "enabled": 1,
         "mode": 0,
-        "cit_author": "Savage",
+        "cit_author": "Wolkswagen",
         "private": 0,
         "users_allowed": {
             "telegram": [],
@@ -18,7 +18,7 @@
         "standard_outputs": [
             "Ha prodotto per anni auto che hanno prodotto migliaia di vittime in tutto il mondo",
             "Ha frodato per anni, promettendo emissioni pulite quando in realtà produceva i peggiori motori di sempre",
-            "Chiamare la solo prima vera auto elettrica ID.3 è un insulto a tutti consumatori",
+            "Chiamare la loro prima vera auto elettrica ID.3 è un insulto a tutti consumatori",
             "Dopo tutto lo scandalo del Diesel Gate non è stato regolamentata nulla auto da parta di VW",
             "Volkswagen ha sostenuto costi legali per 36 miliardi, causa la loro presuzione di essere più furbi del mondo.",
             "Dire che è vergognosa è riduttivo",
@@ -55,7 +55,7 @@
         "name": "",
         "enabled": 1,
         "mode": 0,
-        "cit_author": "Savage",
+        "cit_author": "Tesla",
         "private": 0,
         "users_allowed": {
             "telegram": [],
@@ -109,7 +109,7 @@
         "name": "",
         "enabled": 1,
         "mode": 0,
-        "cit_author": "Savage",
+        "cit_author": "Apple",
         "private": 0,
         "users_allowed": {
             "telegram": [],
@@ -172,16 +172,16 @@
         },
         "standard_counter": 2,
         "standard_triggers": [
+            "salvini song&&&Rap Salvini, watch out: https://www.youtube.com/watch?v=vp6w0wcZ0z8",
+            "salvini song 1&&&Best song of Matteo, watch out: https://www.youtube.com/watch?v=dgYHfWlEDwE",
+            "salvini song 2&&&Salvini Ruspe remix, watch out: https://www.youtube.com/watch?v=2CKeeeBxWd8",
+            "salvini song 3&&&Salvini ministro rap remix, watch out https://www.youtube.com/watch?v=xk-P6A9haic",
             "capitano",
             "salvini",
             "immigrato",
             "immigrati",
             "calndestini",
             "clandestino",
-            "salvini song&&&Rap Salvini, watch out: https://www.youtube.com/watch?v=vp6w0wcZ0z8",
-            "salvini song 1&&&Best song of Matteo, watch out: https://www.youtube.com/watch?v=dgYHfWlEDwE",
-            "salvini song 2&&&Salvini Ruspe remix, watch out: https://www.youtube.com/watch?v=2CKeeeBxWd8",
-            "salvini song 3&&&Salvini ministro rap remix, watch out https://www.youtube.com/watch?v=xk-P6A9haic"
         ],
         "standard_outputs": [
             "Noi non vogliamo i clandestini",
