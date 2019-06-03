@@ -1,4 +1,4 @@
-import random
+from random import random
 
 
 def random_between(min, max):
@@ -6,7 +6,7 @@ def random_between(min, max):
     if min == max:
         return min
 
-    return int(random.random() * (max - min) + min)
+    return int(random() * (max - min) + min)
 
 
 def phrase_sequencer(words_array, current_val):

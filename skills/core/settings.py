@@ -1,3 +1,8 @@
+import configparser as cfg
+parser = cfg.ConfigParser()
+parser.read("token.cfg")
+MONGO_DB_CONNECTION_STRING = parser.get("creds", "mongo_connection_string")
+TOKEN = parser.get("creds", "token")
 # API
 from API.badass_character.badass_character import BadassCharacter
 badass_character = BadassCharacter()
@@ -5,6 +10,9 @@ from API.bestemmia.bestemmia import Bestemmia
 bestemmia = Bestemmia()
 from API.pickup_line.pickup_line import PickupLine
 pickup_line = PickupLine()
+# database
+from skills.core.db.database import DB
+db = DB('mongodb+srv://MainUserBot:AdminDb12@abot-3jqai.mongodb.net/test?retryWrites=true')
 
 
 ERROR = -1

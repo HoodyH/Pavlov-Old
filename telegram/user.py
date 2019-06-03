@@ -17,6 +17,7 @@ class User(object):
 
     def extract_data(self, raw_data):
         self.id = raw_data["id"]
+        self.username = raw_data["username"]
         return self
 
     @property

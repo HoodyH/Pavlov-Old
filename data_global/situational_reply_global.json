@@ -1,4 +1,231 @@
 {
+    "Wolkswagen": {
+        "name": "",
+        "enabled": 1,
+        "mode": 0,
+        "cit_author": "Savage",
+        "private": 0,
+        "users_allowed": {
+            "telegram": [],
+            "discord": []
+        },
+        "standard_counter": 1,
+        "standard_triggers": [
+            "volkswagen",
+            "wv",
+            "vw"
+        ],
+        "standard_outputs": [
+            "Ha prodotto per anni auto che hanno prodotto migliaia di vittime in tutto il mondo",
+            "Ha frodato per anni, promettendo emissioni pulite quando in realtà produceva i peggiori motori di sempre",
+            "Chiamare la solo prima vera auto elettrica ID.3 è un insulto a tutti consumatori",
+            "Dopo tutto lo scandalo del Diesel Gate non è stato regolamentata nulla auto da parta di VW",
+            "Volkswagen ha sostenuto costi legali per 36 miliardi, causa la loro presuzione di essere più furbi del mondo.",
+            "Dire che è vergognosa è riduttivo",
+            "faceva cosi schifo che i tedeschi hanno perso la guerra"
+
+        ],
+        "avoid_triggers": [
+            "bella",
+            "più grande"
+        ],
+        "avoid_outputs": [
+            "Vedrete quando tutte le auto saranno Tesla",
+            "Tesla farà fallire tutte le case automobilistiche storiche, è solo questione di tempo"
+        ],
+        "power_triggers": [
+            "perla di vw",
+            "perla vw",
+            "perla di volkswagen",
+            "perla volkswagen",
+            "perla di wv",
+            "perla wv"
+        ],
+        "power_outputs": [
+            "Das Auto.",
+            "Das Auto, de merda",
+            "Das Auto inquinanti",
+            "Das Auto antifuturo",
+            "Das Auto di hitler"
+        ],
+        "power_counter": 0,
+        "avoid_counter": 1
+    },
+    "Tesla": {
+        "name": "",
+        "enabled": 1,
+        "mode": 0,
+        "cit_author": "Savage",
+        "private": 0,
+        "users_allowed": {
+            "telegram": [],
+            "discord": []
+        },
+        "standard_counter": 1,
+        "standard_triggers": [
+            "tesla"
+        ],
+        "standard_outputs": [
+            "Welcome to the future",
+            "Conquisterà il mondo con le sue fantastiche auto",
+            "Le auto elettriche sono importantissime per il futuro dei trasporti",
+            "Guida autonoma, il miglior software mai creato è stato fatto da Tesla",
+            "Best neural chip ever created, to bring self driving on another level",
+            "Dire che è potente è riduttivo"
+
+        ],
+        "avoid_triggers": [
+            "merda",
+            "merde"
+        ],
+        "avoid_outputs": [
+            "Vedrete quando tutte le auto saranno Tesla",
+            "Tesla farà fallire tutte le case automobilistiche storiche",
+            "Trovami un auto della stessa categoria, con la stessa accelerazione e costi di mantenimento"
+        ],
+        "power_triggers": [
+            "perla di tesla",
+            "perla tesla"
+        ],
+        "power_outputs": [
+            "La scienza non è nient'altro che una perversione se non ha come suo fine ultimo il miglioramento delle condizioni dell'umanità.",
+            "Lo sviluppo progressivo dell'uomo è vitalmente dipendente dall'invenzione.",
+            "Zero emissions. Zero compromises.",
+            "Drive Quickly. Tread Lightly.",
+            "You want it, even if gas costs zero.",
+            "Lead, follow, or get out of the way",
+            "I think there are more politicians in favor of electric cars than against.",
+            "I’m not the biggest proponent of hydrogen… Success is not one of the possible outcomes.",
+            "In order to have clean air in cities, you have to go electric",
+            "We believe the Tesla Semi will deliver a substantial reduction in the cost of cargo transport, while increasing safety...",
+            "We will not stop until every car on the road is electric",
+            "The only reason they [the big car companies] do fuel cell, they don’t really believe it, it’s like a marketing thing.",
+            "We actually bring the car and we kind of hit it with a pit crew, like a Formula One pit crew."
+        ],
+        "power_counter": 0,
+        "avoid_counter": 1
+    },
+    "Apple": {
+        "name": "",
+        "enabled": 1,
+        "mode": 0,
+        "cit_author": "Savage",
+        "private": 0,
+        "users_allowed": {
+            "telegram": [],
+            "discord": []
+        },
+        "standard_counter": 1,
+        "standard_triggers": [
+            "apple"
+        ],
+        "standard_outputs": [
+            "We are great to introduce multi-user feuture on tvOS",
+            "I farted in the Apple store and everyone got pissed at me. Not my fault they don't have Windows",
+            "My iPhone dies quicker than a black guy in a horror movie",
+            "I don't understand why everybody wants the white iPhone. Everyone knows the black one runs faster",
+            "If Apple made a car, would it have Windows?",
+            "We live in a world where losing your iPhone is way more dramatic than losing your virginity",
+            "Why are iPhone chargers not called Apple Juice?",
+            "My iPhone screen is brighter than my future"
+        ],
+        "avoid_triggers": [
+            "poveri",
+            "top",
+            "migliori",
+            "migliore"
+        ],
+        "avoid_outputs": [
+            "Apple produce da sempre i migliori prodotti per i poveri",
+            "Apple puù fare telefoni belli, ma se poi sono pieni di bug"
+        ],
+        "power_triggers": [
+            "perla di apple",
+            "perla apple"
+        ],
+        "power_outputs": [
+            "Apple ha fatto in modo che la gente non sappia più quali sono le sue libertà, e se lo sa, pensa di non meritarsele.",
+            "Alla Apple, quando facciamo un computer, sappiamo che dopo cinque anni è da buttare. Ma se fai bene il tuo lavoro, un film può durare per sempre",
+            "E poi è arrivata la Apple a distruggere questo mondo del cazzo. La cultura giovanile non esiste praticamente più, adesso si basa sui gadget tecnologici. È come se fosse la Apple a influenzare la cultura giovanile, non il contrario.",
+            "La Apple cambia solo il formato dei suoi prodotti e noi li compriamo sempre.",
+            "Non sapevo che la Apple facesse le bare...",
+            "Dedichiamo tanto tempo a poche cose.",
+            "iPhone, è così che cambiano le cose.",
+            "Musica da indossare.",
+            "Suona bene. Fa del bene.",
+            "Mette in tasca una scelta importante.",
+            "Dai il benvenuto all'iMac.",
+            "Bello, non complicato."
+        ],
+        "power_counter": 0,
+        "avoid_counter": 1
+    },
+    "Salvini": {
+        "name": "",
+        "enabled": 1,
+        "mode": 0,
+        "cit_author": "Matteo Salvini",
+        "private": 0,
+        "users_allowed": {
+            "telegram": [],
+            "discord": []
+        },
+        "standard_counter": 2,
+        "standard_triggers": [
+            "capitano",
+            "salvini",
+            "immigrato",
+            "immigrati",
+            "calndestini",
+            "clandestino",
+            "salvini song&&&Rap Salvini, watch out: https://www.youtube.com/watch?v=vp6w0wcZ0z8",
+            "salvini song 1&&&Best song of Matteo, watch out: https://www.youtube.com/watch?v=dgYHfWlEDwE",
+            "salvini song 2&&&Salvini Ruspe remix, watch out: https://www.youtube.com/watch?v=2CKeeeBxWd8",
+            "salvini song 3&&&Salvini ministro rap remix, watch out https://www.youtube.com/watch?v=xk-P6A9haic"
+        ],
+        "standard_outputs": [
+            "Noi non vogliamo i clandestini",
+            "Questo gruppo \u00e8 protetto dal capitano, non temere lui ci protegger\u00e0",
+            "Grazie capitano per liberarci ogni giorno dai clandestini",
+            "Saluto! Il capitano \u00e8 tra noi"
+        ],
+        "avoid_triggers": [
+            "frocio",
+            "coglione"
+        ],
+        "avoid_outputs": [
+            "Grrr"
+        ],
+        "power_triggers": [
+            "perla di salvini",
+            "perla salvini",
+            "perla matteo",
+            "perla di matteo"
+        ],
+        "power_outputs": [
+            "Mi chiedete se sono antifascista? Fascismo e comunismo sono morti. Sono antifascista come sono anticomunista. Se qualcuno pensa davvero che possano tornare fascismo e comunismo va aiutato, va abbracciato.",
+            "E' assurdo affidare una bimba a due gay. Pare davvero ci sia qualcuno che vuole un mondo alla rovescia.",
+            "Uno Stato dove un'azienda non riesce a licenziare un dipendente come Schettino, si merita di fallire.",
+            "Mezzo mondo a impazzire per Pokemon Go... Boh...",
+            "La Grecia che cazzo c'ha? C'ha le isolette, c'ha il formaggio, c'ha il Partenone e poco altro. Noi abbiamo l'industria, la piccola media impresa, l'artigianato, abbiamo i tre quarti delle opere d'arte del mondo.",
+            "Noi siamo qui non perch\u00e9 siamo contro gli stranieri, contro gli immigrati, ma perch\u00e9 siamo contro i clandestini.",
+            "Che palle 'sta sinistra, sempre coi \"poveri Rom e poveri migranti\"",
+            "Per quanto mi riguarda chi compie una violenza sessuale una volta non deve poterla compiere pi\u00f9. Stiamo studiando un progetto di legge sulla castrazione chimica.",
+            "L'euro \u00e8 un crimine contro l'umanit\u00e0. Prima salta l'euro, prima posso riprendere la battaglia per l'indipendenza.",
+            "I respingimenti sono l'unica via per salvare vite, e per evitare una invasione dei nostri territori che non porter\u00e0 nulla di buono.",
+            "Se un datore di lavoro deve evadere le tasse per sopravvivere non \u00e8 un evasore ma \u00e8 un eroe.",
+            "Combattere l'ISIS a partire dalle fonti di denaro che lo armano: petrolio e immigrazione clandestina.",
+            "Vogliamo regole, legalit\u00e0, buonsenso.",
+            "Mentre c\u2019\u00e8 chi ha in testa solo i diritti dei clandestini, io metto al primo posto i terremotati italiani.",
+            "Alle leggi sbagliate non bisogna obbedire ma disobbedire finch\u00e9 non vengono cambiate.",
+            "L'elettore ha sempre ragione.",
+            "Non accetto e non ammetto che si accosti il nome della Lega alla malavita organizzata. Punto.",
+            "Uno Stato dove un'azienda non riesce a licenziare un dipendente come Schettino, si merita di fallire.",
+            "Il Mediterraneo deve tornare un mare senza sangue innocente."
+        ],
+        "power_counter": 0,
+        "avoid_counter": 1
+    },
     "Savage": {
         "name": "",
         "enabled": 1,
@@ -11,10 +238,14 @@
         },
         "standard_counter": 1,
         "standard_triggers": [
-            "srotola il boa"
+            "srotola il boa",
+            "trapanala",
+            "slavrala"
         ],
         "standard_outputs": [
             "Bucala come se avessi una tivella al posto del cazzo",
+            "Inculala cosi a fondo di modo che mentre te la scopi ti fa anche un pompino",
+            "Falla urlare cosi tanto che i vicini chiamano i carabinieri",
             "Arala"
         ],
         "avoid_triggers": [
@@ -425,7 +656,7 @@
         "scope": "global",
         "standard_triggers": [
             "buonanotte",
-            "notte",
+            "%%%!%%%notte",
             "io stacco"
         ],
         "standard_outputs": [

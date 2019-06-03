@@ -1,6 +1,6 @@
 import requests
 import json
-import configparser as cfg
+
 
 class Bot(object):
 
@@ -56,7 +56,6 @@ class Bot(object):
             url = url + "&timeout={}".format(timeout)
         if allowed_updates is not None:
             url = url + "&allowed_updates={}".format(allowed_updates)
-
 
         r = self._request.get(url)
         return json.loads(r.content)

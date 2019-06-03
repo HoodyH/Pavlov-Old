@@ -1,30 +1,18 @@
 import telegram
-import configparser as cfg
 from skills.skills import Analyze
+from skills.core.settings import *
 
 
 update_id = None
-token = ""
-mongo_connection_string = ""
-
-
-def read_token_from_config_file(config):
-    global token
-    global mongo_connection_string
-    parser = cfg.ConfigParser()
-    parser.read(config)
-    mongo_connection_string = parser.get("creds", "mongo_connection_string")
-    token = parser.get("creds", "token")
-    return
 
 
 def do_stuffs(msg):
     if msg.text is None:
         return
     if msg.chat is not None:
-        c = Analyze("telegram", msg.chat.id, msg.user.id)
+        c = Analyze("telegram", msg.chat.id, msg.chat.title, msg.user.id, msg.user.username)
     else:
-        c = Analyze("telegram", None, msg.user.id)
+        c = Analyze("telegram", None, None, msg.user.id, msg.user.username)
 
     r = c.analyze_message(msg.text)
     if r is not None:
@@ -35,9 +23,7 @@ def do_stuffs(msg):
 def main():
     """Run the bot."""
     global update_id
-    global token
-    read_token_from_config_file("token.cfg")
-    bot = telegram.Bot(token)
+    bot = telegram.Bot(TOKEN)
     msg = telegram.Message(bot)  # super obj
 
     while True:

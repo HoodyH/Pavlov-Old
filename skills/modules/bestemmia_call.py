@@ -18,7 +18,7 @@ base_triggers = [
         ['troia'],
         ['puttana'],
         ['gesù', 'gesu'],
-        ['allah', 'halla', 'alla']
+        ['allah', 'halla']
 
     ]
 
