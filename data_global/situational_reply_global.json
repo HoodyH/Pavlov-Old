@@ -1,4 +1,49 @@
 {
+    "Amazon": {
+        "name": "",
+        "enabled": 1,
+        "mode": 0,
+        "cit_author": "Amazon",
+        "private": 0,
+        "users_allowed": {
+            "telegram": [],
+            "discord": []
+        },
+        "standard_counter": 1,
+        "standard_triggers": [
+            "amazon"
+        ],
+        "standard_outputs": [
+            "Dominerà il mondo",
+            "S: \"Sento odore di amazon\"\nA: \"Sarà l'eco Plus che ti brucia in cucina\"\nS: \"No problem, in caso chiamo Laura dell'assistenza e mi da la casa nuova\n",
+            "Hanno aggiunto l'opzione di rinnovo prime a 10 anni, offertona, corri!",
+            "La doll è in offerta corri",
+            "Amazon quest'oggi ti consiglia: \"Super bambola gonfiabile come modulo vocale per gemiti assordanti\"",
+            "Il drone ti sta per atterrare in giardino, preparati"
+
+        ],
+        "avoid_triggers": [
+            "merda",
+            "schifo",
+            "inutile"
+        ],
+        "avoid_outputs": [
+            "Yo Yo Yo bro calm down"
+        ],
+        "power_triggers": [
+            "perla di amazon",
+            "perla amazon"
+        ],
+        "power_outputs": [
+            "Work hard. Have fun. Make history",
+            "We are really excited to get into the air and start serving our costumers",
+            "You just have to follow your passions, if you dont have one come to us",
+            "Our mission is encourage people to be bolt",
+            "One success compensate thousand and thousand of fails"
+        ],
+        "power_counter": 0,
+        "avoid_counter": 1
+    },
     "Wolkswagen": {
         "name": "",
         "enabled": 1,
@@ -181,7 +226,8 @@
             "immigrato",
             "immigrati",
             "calndestini",
-            "clandestino"
+            "clandestino",
+            "ruspa"
         ],
         "standard_outputs": [
             "Noi non vogliamo i clandestini",
