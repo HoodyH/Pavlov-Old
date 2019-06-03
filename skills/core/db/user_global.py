@@ -15,6 +15,8 @@ class UserDataGlobal(object):
         self.deep_logging = True
         self.msg_total = 0
         self.msg_commands = 0
+        self.msg_override = 0
+        self.msg_sudo = 0
         self.msg_img = 0
         self.msg_links = 0
         self.xp = 0
@@ -45,6 +47,8 @@ class UserDataGlobal(object):
             'deep_logging': self.deep_logging,
             'msg_total': self.msg_total,
             'msg_commands': self.msg_commands,
+            'msg_override': self.msg_override,
+            'msg_sudo': self.msg_sudo,
             'msg_img': self.msg_img,
             'msg_links': self.msg_links,
             'xp': self.xp,
@@ -88,26 +92,28 @@ class UserDataGlobal(object):
         if user_data is None:
             return
 
-        self.user_name = user_data.get('user_name')
-        self.deep_logging = user_data.get('deep_logging')
-        self.msg_total = user_data.get('msg_total')
-        self.msg_commands = user_data.get('msg_commands')
-        self.msg_img = user_data.get('msg_img')
-        self.msg_links = user_data.get('msg_links')
-        self.xp = user_data.get('xp')
-        self.level_up_notification = user_data.get('level_up_notification')
-        self.level = user_data.get('level')
-        self.time_spent_sec = user_data.get('time_spent_sec')
-        self.role = user_data.get('role')
-        self.bits = user_data.get('bits')
-        self.swear_words_counter = user_data.get('swear_words_counter')
-        self.swear_words_xp = user_data.get('swear_words_xp')
-        self.swear_words = user_data.get('swear_words')
-        self.toxicity_rank = user_data.get('toxicity_rank')
-        self.soft_warnings = user_data.get('soft_warnings')
-        self.hard_warnings = user_data.get('hard_warnings')
-        self.admin_warnings = user_data.get('admin_warnings')
-        self.gender = user_data.get('gender')
-        self.age = user_data.get('age')
-        self.country = user_data.get('country')
-        self.speak_in_vc = user_data.get('speak_in_vc')
+        self.user_name = user_data.get('user_name', self.user_name)
+        self.deep_logging = user_data.get('deep_logging', self.deep_logging)
+        self.msg_total = user_data.get('msg_total', self.msg_total)
+        self.msg_commands = user_data.get('msg_commands', self.msg_commands)
+        self.msg_override = user_data.get('msg_override', self.msg_override)
+        self.msg_sudo = user_data.get('msg_sudo', self.msg_sudo)
+        self.msg_img = user_data.get('msg_img', self.msg_img)
+        self.msg_links = user_data.get('msg_links', self.msg_links)
+        self.xp = user_data.get('xp', self.xp)
+        self.level_up_notification = user_data.get('level_up_notification', self.level_up_notification)
+        self.level = user_data.get('level', self.level)
+        self.time_spent_sec = user_data.get('time_spent_sec', self.time_spent_sec)
+        self.role = user_data.get('role', self.role)
+        self.bits = user_data.get('bits', self.bits)
+        self.swear_words_counter = user_data.get('swear_words_counter', self.swear_words_counter)
+        self.swear_words_xp = user_data.get('swear_words_xp', self.swear_words_xp)
+        self.swear_words = user_data.get('swear_words', self.swear_words)
+        self.toxicity_rank = user_data.get('toxicity_rank', self.toxicity_rank)
+        self.soft_warnings = user_data.get('soft_warnings', self.soft_warnings)
+        self.hard_warnings = user_data.get('hard_warnings', self.hard_warnings)
+        self.admin_warnings = user_data.get('admin_warnings', self.admin_warnings)
+        self.gender = user_data.get('gender', self.gender)
+        self.age = user_data.get('age', self.age)
+        self.country = user_data.get('country', self.country)
+        self.speak_in_vc = user_data.get('speak_in_vc', self.speak_in_vc)

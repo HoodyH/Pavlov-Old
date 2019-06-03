@@ -14,13 +14,12 @@
             "amazon"
         ],
         "standard_outputs": [
-            "Dominerà il mondo",
-            "S: \"Sento odore di amazon\"\nA: \"Sarà l'eco Plus che ti brucia in cucina\"\nS: \"No problem, in caso chiamo Laura dell'assistenza e mi da la casa nuova\n",
+            "Dominer\u00e0 il mondo",
+            "S: \"Sento odore di amazon\"\nA: \"Sar\u00e0 l'eco Plus che ti brucia in cucina\"\nS: \"No problem, in caso chiamo Laura dell'assistenza e mi da la casa nuova\n",
             "Hanno aggiunto l'opzione di rinnovo prime a 10 anni, offertona, corri!",
-            "La doll è in offerta corri",
+            "La doll \u00e8 in offerta corri",
             "Amazon quest'oggi ti consiglia: \"Super bambola gonfiabile come modulo vocale per gemiti assordanti\"",
             "Il drone ti sta per atterrare in giardino, preparati"
-
         ],
         "avoid_triggers": [
             "merda",
@@ -62,21 +61,20 @@
         ],
         "standard_outputs": [
             "Ha prodotto per anni auto che hanno prodotto migliaia di vittime in tutto il mondo",
-            "Ha frodato per anni, promettendo emissioni pulite quando in realtà produceva i peggiori motori di sempre",
-            "Chiamare la loro prima vera auto elettrica ID.3 è un insulto a tutti consumatori",
-            "Dopo tutto lo scandalo del Diesel Gate non è stato regolamentata nulla auto da parta di VW",
-            "Volkswagen ha sostenuto costi legali per 36 miliardi, causa la loro presuzione di essere più furbi del mondo.",
-            "Dire che è vergognosa è riduttivo",
+            "Ha frodato per anni, promettendo emissioni pulite quando in realt\u00e0 produceva i peggiori motori di sempre",
+            "Chiamare la loro prima vera auto elettrica ID.3 \u00e8 un insulto a tutti consumatori",
+            "Dopo tutto lo scandalo del Diesel Gate non \u00e8 stato sistemato nulla da parte di VW",
+            "Volkswagen ha sostenuto costi legali per 36 miliardi, causa la loro presuzione di essere pi\u00f9 furbi del mondo.",
+            "Dire che \u00e8 vergognosa \u00e8 riduttivo",
             "faceva cosi schifo che i tedeschi hanno perso la guerra"
-
         ],
         "avoid_triggers": [
             "bella",
-            "più grande"
+            "pi\u00f9 grande"
         ],
         "avoid_outputs": [
             "Vedrete quando tutte le auto saranno Tesla",
-            "Tesla farà fallire tutte le case automobilistiche storiche, è solo questione di tempo"
+            "Tesla far\u00e0 fallire tutte le case automobilistiche storiche, \u00e8 solo questione di tempo"
         ],
         "power_triggers": [
             "perla di vw",
@@ -112,12 +110,11 @@
         ],
         "standard_outputs": [
             "Welcome to the future",
-            "Conquisterà il mondo con le sue fantastiche auto",
+            "Conquister\u00e0 il mondo con le sue fantastiche auto",
             "Le auto elettriche sono importantissime per il futuro dei trasporti",
-            "Guida autonoma, il miglior software mai creato è stato fatto da Tesla",
+            "Guida autonoma, il miglior software mai creato \u00e8 stato fatto da Tesla",
             "Best neural chip ever created, to bring self driving on another level",
-            "Dire che è potente è riduttivo"
-
+            "Dire che \u00e8 potente \u00e8 riduttivo"
         ],
         "avoid_triggers": [
             "merda",
@@ -125,7 +122,7 @@
         ],
         "avoid_outputs": [
             "Vedrete quando tutte le auto saranno Tesla",
-            "Tesla farà fallire tutte le case automobilistiche storiche",
+            "Tesla far\u00e0 fallire tutte le case automobilistiche storiche",
             "Trovami un auto della stessa categoria, con la stessa accelerazione e costi di mantenimento"
         ],
         "power_triggers": [
@@ -133,18 +130,18 @@
             "perla tesla"
         ],
         "power_outputs": [
-            "La scienza non è nient'altro che una perversione se non ha come suo fine ultimo il miglioramento delle condizioni dell'umanità.",
-            "Lo sviluppo progressivo dell'uomo è vitalmente dipendente dall'invenzione.",
+            "La scienza non \u00e8 nient'altro che una perversione se non ha come suo fine ultimo il miglioramento delle condizioni dell'umanit\u00e0.",
+            "Lo sviluppo progressivo dell'uomo \u00e8 vitalmente dipendente dall'invenzione.",
             "Zero emissions. Zero compromises.",
             "Drive Quickly. Tread Lightly.",
             "You want it, even if gas costs zero.",
             "Lead, follow, or get out of the way",
             "I think there are more politicians in favor of electric cars than against.",
-            "I’m not the biggest proponent of hydrogen… Success is not one of the possible outcomes.",
+            "I\u2019m not the biggest proponent of hydrogen\u2026 Success is not one of the possible outcomes.",
             "In order to have clean air in cities, you have to go electric",
             "We believe the Tesla Semi will deliver a substantial reduction in the cost of cargo transport, while increasing safety...",
             "We will not stop until every car on the road is electric",
-            "The only reason they [the big car companies] do fuel cell, they don’t really believe it, it’s like a marketing thing.",
+            "The only reason they [the big car companies] do fuel cell, they don\u2019t really believe it, it\u2019s like a marketing thing.",
             "We actually bring the car and we kind of hit it with a pit crew, like a Formula One pit crew."
         ],
         "power_counter": 0,
@@ -182,20 +179,20 @@
         ],
         "avoid_outputs": [
             "Apple produce da sempre i migliori prodotti per i poveri",
-            "Apple puù fare telefoni belli, ma se poi sono pieni di bug"
+            "Apple pu\u00f9 fare telefoni belli, ma se poi sono pieni di bug"
         ],
         "power_triggers": [
             "perla di apple",
             "perla apple"
         ],
         "power_outputs": [
-            "Apple ha fatto in modo che la gente non sappia più quali sono le sue libertà, e se lo sa, pensa di non meritarsele.",
-            "Alla Apple, quando facciamo un computer, sappiamo che dopo cinque anni è da buttare. Ma se fai bene il tuo lavoro, un film può durare per sempre",
-            "E poi è arrivata la Apple a distruggere questo mondo del cazzo. La cultura giovanile non esiste praticamente più, adesso si basa sui gadget tecnologici. È come se fosse la Apple a influenzare la cultura giovanile, non il contrario.",
+            "Apple ha fatto in modo che la gente non sappia pi\u00f9 quali sono le sue libert\u00e0, e se lo sa, pensa di non meritarsele.",
+            "Alla Apple, quando facciamo un computer, sappiamo che dopo cinque anni \u00e8 da buttare. Ma se fai bene il tuo lavoro, un film pu\u00f2 durare per sempre",
+            "E poi \u00e8 arrivata la Apple a distruggere questo mondo del cazzo. La cultura giovanile non esiste praticamente pi\u00f9, adesso si basa sui gadget tecnologici. \u00c8 come se fosse la Apple a influenzare la cultura giovanile, non il contrario.",
             "La Apple cambia solo il formato dei suoi prodotti e noi li compriamo sempre.",
             "Non sapevo che la Apple facesse le bare...",
             "Dedichiamo tanto tempo a poche cose.",
-            "iPhone, è così che cambiano le cose.",
+            "iPhone, \u00e8 cos\u00ec che cambiano le cose.",
             "Musica da indossare.",
             "Suona bene. Fa del bene.",
             "Mette in tasca una scelta importante.",
@@ -698,7 +695,7 @@
         }
     },
     "Goodnight": {
-        "standard_counter": 2,
+        "standard_counter": 3,
         "scope": "global",
         "standard_triggers": [
             "buonanotte",
