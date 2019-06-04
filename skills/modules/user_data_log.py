@@ -1,5 +1,7 @@
 from skills.core.settings import *
 from random import random
+from datetime import datetime
+import math
 
 
 class UserDataLog(object):
@@ -11,20 +13,32 @@ class UserDataLog(object):
         self.user_id = user_id
         self.user_name = user_name
         self.text = text
+        self.text_len = len(text)
         self.prefix_mode = prefix_type
+
+        self.level_increment_value = 500
 
         self.out = None
 
+    def _guild_level_up(self):
+        local_next_level = db.user.level * self.level_increment_value
+        if local_next_level <= db.user.xp:
+            db.user.level += 1
+
+            if db.user.level == db.guild.log.start_notifications_at_level:
+                db.user.level_up_notification = True
+
+            if db.user.level_up_notification:
+                # send message (private or in the group) based on config file
+                self.out = "Complimenti {} hai raggiunto il livello {}".format(self.user_name, db.user.level)
+
+    def _global_level_up(self):
+        local_next_level = db.user_global.level * self.level_increment_value
+        if local_next_level <= db.user_global.xp:
+            db.user_global.level += 1
+
     def log_data(self):
-
-        # global data for all guilds
-        xp_min_add = 10
-        xp_max_add = 25
-        level_increment_value = 200
-        time_per_message = 6
-
         # data only for directs
-        start_notifications_at_level = 3
         bits_min_add = 0
         bits_max_add = 4
 
@@ -35,7 +49,7 @@ class UserDataLog(object):
         db.user_global.msg_total += 1
         db.guild.log.msg_total += 1
 
-        if db.user.deep_logging:
+        if db.user.deep_logging and db.guild.log.deep_logging:
             if self.prefix_mode is COMMAND_PREFIX:
                 db.user.msg_commands += 1
                 db.user_global.msg_commands += 1
@@ -49,39 +63,28 @@ class UserDataLog(object):
                 db.user_global.msg_sudo += 1
                 db.guild.log.msg_sudo += 1
 
-        xp_add = int(random() * (xp_max_add - xp_min_add) + xp_min_add)
-
-        # guild level manage
+        # XP
+        # for a string of 30 char, you will gain 10 xp
+        xp_str_len_sample = 30
+        xp_by_sample = 5
+        xp_max = 30
+        # do the proportion
+        xp_by_string_len = int(math.ceil(self.text_len * xp_by_sample / xp_str_len_sample))
+        xp_add = xp_by_string_len if xp_by_string_len <= xp_max else xp_max
         db.user.xp += xp_add
-        local_next_level = db.user.level * level_increment_value
-        if local_next_level <= db.user.xp:
-            db.user.level += 1
-
-            if db.user.level == db.guild.log.start_notifications_at_level:
-                db.user.level_up_notification = True
-
-            if db.user.level_up_notification:
-                # send message (private or in the group) based on config file
-                self.out = "levelup"
-
-        # global level manage
+        self._guild_level_up()
         db.user_global.xp += xp_add
-        local_next_level = db.user_global.level * level_increment_value
-        if local_next_level <= db.user_global.xp:
-            db.user_global.level += 1
+        self._global_level_up()
 
-            if db.user_global.level == start_notifications_at_level:
-                db.user_global.level_up_notification = True
+        # TIME SPENT
+        # for a string of 30 char, you will stay 9 sec to write it
+        time_str_len_sample = 30
+        time_sample = 9
+        # do the proportion
+        time_to_type = int(self.text_len * time_sample / time_str_len_sample)
 
-            if db.user_global.level_up_notification:
-                # send message (private or in the group) based on config file
-                self.out = "levelup"
-
-
-
-        # time spent
-        db.user.time_spent_sec += time_per_message
-        db.user_global.time_spent_sec += time_per_message
+        db.user.time_spent_sec += time_to_type
+        db.user_global.time_spent_sec += time_to_type
 
         # local guild bits generation
         bits_add = int(random() * (db.guild.log.bits_max_add - db.guild.log.bits_min_add) + db.guild.log.bits_min_add)

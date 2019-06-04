@@ -2,11 +2,12 @@ class Log(object):
 
     def __init__(self):
 
+        self.deep_logging = False
         self.level_up_notification = True
         self.level_up_destination = 0
         self.start_notifications_at_level = 5
         self.bits_min_add = 0
-        self.bits_max_add = 4
+        self.bits_max_add = 1
         self.use_global_bits = True
         self.member_total = 0
         self.msg_total = 0
@@ -17,6 +18,7 @@ class Log(object):
         self.msg_links = 0
 
     def extract_data(self, raw_data):
+        self.deep_logging = raw_data.get('deep_logging', self.deep_logging)
         self.level_up_notification = raw_data.get('level_up_notification', self.level_up_notification)
         self.level_up_destination = raw_data.get('level_up_destination', self.level_up_destination)
         self.start_notifications_at_level = raw_data.get('start_notifications_at_level', self.start_notifications_at_level)
@@ -36,6 +38,7 @@ class Log(object):
     def build_data(self):
 
         data_out = {
+            'deep_logging': self.deep_logging,
             'level_up_notification': self.level_up_notification,
             'level_up_destination': self.level_up_destination,
             'start_notifications_at_level': self.start_notifications_at_level,

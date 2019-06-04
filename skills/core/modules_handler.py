@@ -6,6 +6,7 @@ from skills.core.internal_log import Log
 
 # commands
 from skills.modules.admin.command_module_config import ModuleStatus
+from skills.modules.telegram.mydata import MyData
 
 
 class Module(object):
@@ -48,6 +49,9 @@ class Module(object):
             return m.mute()
         elif command == "insult":
             return command_not_implemented(language)
+        elif command == "mydata":
+            m = MyData(self.scope, self.guild_id, self.user_id, language, command, arg, params)
+            return m.my_data()
 
     @staticmethod
     def _extract_value(input_array, starting_point=0):

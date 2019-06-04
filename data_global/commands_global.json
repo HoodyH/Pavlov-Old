@@ -36,6 +36,25 @@
         }
     },
 
+    "mydata":{
+        "main_module": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 1,
+        "permissions": 0,
+        "eng":{
+            "invocation": ["mydata", "userdata"],
+            "description": "Dai un nome",
+            "usage": "Dai un nome",
+            "man": ""
+        },
+        "ita":{
+            "invocation": ["datiutente", "dati", "miei dati"],
+            "description": "Dai un nome",
+            "usage": "Dai un nome",
+            "man": ""
+        }
+    },
+
     "insult":{
         "main_module": 0,
         "dm_enabled": 1,

@@ -26,6 +26,10 @@
         "user_data_log": {
             "enabled": 1,
             "mode": 1
+        },
+        "mydata": {
+            "enabled": 1,
+            "mode": 1
         }
     }
 }
