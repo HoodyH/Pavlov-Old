@@ -10,7 +10,7 @@ class GuildData(object):
         self.scope = scope
         self.guild_id = guild_id
 
-        self.table = 'guilds_data' # table where the guilds data will be saved
+        self.table = 'guilds_data'  # table where the guilds data will be saved
         self.me = 'me'
 
         # guild data logging
@@ -18,16 +18,13 @@ class GuildData(object):
         self.owner_id = None
         self.owner_name = None
         self.prefix = '.'
-        self.quiet_prefix = '.'
+        self.quiet_prefix = ','
         self.sudo_prefix = '#'
         self.languages = ['eng']
+        self.modules = {}
         # composed data
         self._class_log = Log()
         self.log = self._class_log
-        self.message_reply = {}
-        self.bestemmia_reply = {}
-        self.badass_character_call = {}
-        self.pickup_line_call = {}
 
         self.get_guild_data()
 
@@ -45,11 +42,8 @@ class GuildData(object):
             'quiet_prefix': self.quiet_prefix,
             'sudo_prefix': self.sudo_prefix,
             'languages': self.languages,
+            'modules': self.modules,
             'log': self._class_log.build_data(),
-            'message_reply': self.message_reply,
-            'bestemmia_reply': self.bestemmia_reply,
-            'badass_character_call': self.badass_character_call,
-            'pickup_line_call': self.pickup_line_call
         }
 
         collection = self.client[self.scope][self.table]
@@ -84,8 +78,5 @@ class GuildData(object):
         self.quiet_prefix = user_data.get('quiet_prefix')
         self.sudo_prefix = user_data.get('sudo_prefix')
         self.languages = user_data.get('languages')
+        self.modules = user_data.get('modules')
         self.log = self._class_log.extract_data(user_data.get('log'))
-        self.message_reply = user_data.get('message_reply')
-        self.bestemmia_reply = user_data.get('bestemmia_reply')
-        self.badass_character_call = user_data.get('badass_character_call')
-        self.pickup_line_call = user_data.get('pickup_line_call')
