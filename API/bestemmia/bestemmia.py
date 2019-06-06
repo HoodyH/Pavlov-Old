@@ -3,13 +3,13 @@ import random
 MALE = 1
 FEMALE = 2
 
-supported_default = {
+SUPPORTED_DEFAULT = {
     'eng': {
         'gender': 0,
         'characters': {
             'god': 1,
             'madonna': 2,
-            'gesu': 1,
+            'jesus': 1,
             'allah': 1,
             'whore': 2
         }
@@ -26,14 +26,12 @@ supported_default = {
             'troia': 2,
             'puttana': 2
         }
-
     }
 }
 
 
 class Bestemmia(object):
     """
-
     """
     def __init__(self):
 
@@ -41,7 +39,7 @@ class Bestemmia(object):
 
     def _load_data(self):
 
-        for language in supported_default.keys():
+        for language in SUPPORTED_DEFAULT.keys():
             filename = 'API/bestemmia/{}/bestemmia_sentences_base.txt'.format(language.upper())
             line_counter = 0
             var_valor = []
@@ -68,15 +66,14 @@ class Bestemmia(object):
         # generate sentence number
         sentence_number = self._random_between(0, len(sentences_vector)-1)
 
-
-        # genarate a random response
+        # generate a random response
         if character is None and gender is None:
             return ""
 
         # read the gender from the dictionary
         elif character is not None and gender is None:
 
-            data_language = supported_default.get(language)
+            data_language = SUPPORTED_DEFAULT.get(language)
             # check if this field exist
             if data_language is None:
                 return ""

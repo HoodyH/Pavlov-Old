@@ -5,13 +5,13 @@
         "enabled_by_default": 1,
         "permissions": 0,
         "eng":{
-            "invocation": ["module.deactivate", "m.d", "deactivate"],
+            "invocation_word": ["module.deactivate", "m.d", "deactivate"],
             "description": "Dai un nome",
             "usage": "Dai un nome",
             "man": ""
         },
         "ita":{
-            "invocation": ["modulo.disattiva", "m.d", "disattiva"],
+            "invocation_word": ["modulo.disattiva", "m.d", "disattiva"],
             "description": "Disattiva un modulo",
             "usage": "mute <name of the module>",
             "man": ""
@@ -24,12 +24,12 @@
         "enabled_by_default": 1,
         "permissions": 0,
         "eng":{
-            "invocation": ["module.state", "m.s", "state"],
+            "invocation_word": ["module.state", "m.s", "state"],
             "description": "Command used to mute an ",
             "usage": "module.state <name of the module>"
         },
         "ita":{
-            "invocation": ["modulo.stato", "m.s", "stato"],
+            "invocation_word": ["modulo.stato", "m.s", "stato"],
             "description": "Silenzia un modulo, una volta silanziato questo comando potà essere utilizzato solo con il silent prefix{}",
             "usage": "modulo.stato <nome del modulo>",
             "man": ""
@@ -42,32 +42,13 @@
         "enabled_by_default": 1,
         "permissions": 0,
         "eng":{
-            "invocation": ["mydata", "userdata"],
+            "invocation_word": ["mydata", "userdata"],
             "description": "Dai un nome",
             "usage": "Dai un nome",
             "man": ""
         },
         "ita":{
-            "invocation": ["datiutente", "dati", "miei dati"],
-            "description": "Dai un nome",
-            "usage": "Dai un nome",
-            "man": ""
-        }
-    },
-
-    "insult":{
-        "main_module": 0,
-        "dm_enabled": 1,
-        "enabled_by_default": 1,
-        "permissions": 0,
-        "eng":{
-            "invocation": ["insult", "verbal abuse"],
-            "description": "Dai un nome",
-            "usage": "Dai un nome",
-            "man": ""
-        },
-        "ita":{
-            "invocation": ["insulta", "diocane"],
+            "invocation_word": ["datiutente", "dati", "miei dati"],
             "description": "Dai un nome",
             "usage": "Dai un nome",
             "man": ""

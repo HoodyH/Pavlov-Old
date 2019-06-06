@@ -9,7 +9,7 @@
             "telegram": [],
             "discord": []
         },
-        "standard_counter": 1,
+        "standard_counter": 4,
         "standard_triggers": [
             "amazon"
         ],
@@ -41,7 +41,8 @@
             "One success compensate thousand and thousand of fails"
         ],
         "power_counter": 0,
-        "avoid_counter": 1
+        "avoid_counter": 1,
+        "module_mode": 0
     },
     "Wolkswagen": {
         "name": "",
@@ -104,7 +105,7 @@
             "telegram": [],
             "discord": []
         },
-        "standard_counter": 2,
+        "standard_counter": 3,
         "standard_triggers": [
             "tesla"
         ],
@@ -145,7 +146,8 @@
             "We actually bring the car and we kind of hit it with a pit crew, like a Formula One pit crew."
         ],
         "power_counter": 0,
-        "avoid_counter": 1
+        "avoid_counter": 1,
+        "module_mode": 0
     },
     "Apple": {
         "name": "",
@@ -744,7 +746,7 @@
         }
     },
     "Greetings_in": {
-        "standard_counter": 0,
+        "standard_counter": 1,
         "scope": "global",
         "standard_triggers": [
             "hello",
@@ -778,7 +780,8 @@
         "mode": 1,
         "private": 0,
         "users_allowed": {
-            "telegram": []
+            "telegram": [],
+            "commands_telegram": []
         }
     },
     "PT": {

@@ -4,3 +4,4 @@
 /data/telegram/
 
 token.*
+*.log
