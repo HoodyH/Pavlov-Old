@@ -1,7 +1,6 @@
 from pymongo import MongoClient
 from .guild import GuildData
 from .user import UserData
-from .user_global import UserDataGlobal
 
 
 class DB(object):
@@ -17,7 +16,8 @@ class DB(object):
     def update_data(self, scope, guild_id, user_id):
         self.guild = GuildData(self.client, scope, guild_id)
         self.user = UserData(self.client, scope, guild_id, user_id)
-        self.user_global = UserDataGlobal(self.client, scope, guild_id, user_id)
+        self.user_global = UserData(self.client, scope, 'user_data_global', user_id)
+
         return
 
     def set_data(self):

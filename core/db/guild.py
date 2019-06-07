@@ -79,4 +79,4 @@ class GuildData(object):
         self.sudo_prefix = user_data.get('sudo_prefix')
         self.languages = user_data.get('languages')
         self.modules = user_data.get('modules')
-        self.log = self._class_log.extract_data(user_data.get('log'))
+        self.log = self._class_log.extract_data(user_data.get('log', self.log))

@@ -1,5 +1,6 @@
 from core.src.settings import *
 from random import random
+from datetime import datetime
 import math
 
 
@@ -36,32 +37,7 @@ class UserDataLog(object):
         if local_next_level <= db.user_global.xp:
             db.user_global.level += 1
 
-    def log_data(self):
-        # data only for directs
-        bits_min_add = 0
-        bits_max_add = 4
-
-        db.user.user_name = db.user_global.user_name = self.user_name
-
-        # messages sent
-        db.user.msg_total += 1
-        db.user_global.msg_total += 1
-        db.guild.log.msg_total += 1
-
-        if db.user.deep_logging and db.guild.log.deep_logging:
-            if self.prefix_mode is COMMAND_PREFIX:
-                db.user.msg_commands += 1
-                db.user_global.msg_commands += 1
-                db.guild.log.msg_commands += 1
-            elif self.prefix_mode is OVERRIDE_PREFIX:
-                db.user.msg_override += 1
-                db.user_global.msg_override += 1
-                db.guild.log.msg_override += 1
-            elif self.prefix_mode is SUDO_PREFIX:
-                db.user.msg_sudo += 1
-                db.user_global.msg_sudo += 1
-                db.guild.log.msg_sudo += 1
-
+    def _xp_manage(self):
         # XP
         # for a string of 30 char, you will gain 10 xp
         xp_str_len_sample = 30
@@ -75,7 +51,58 @@ class UserDataLog(object):
         db.user_global.xp += xp_add
         self._global_level_up()
 
-        # TIME SPENT
+        # data only for directs
+        bits_min_add = 0
+        bits_max_add = 4
+        # local guild bits generation
+        bits_add = int(random() * (db.guild.log.bits_max_add - db.guild.log.bits_min_add) + db.guild.log.bits_min_add)
+        db.user.bits += bits_add
+        # global bits generation
+        bits_add = int(random() * (bits_max_add - bits_min_add) + bits_min_add)
+        db.user_global.bits += bits_add
+
+    def log_data(self):
+
+        db.user.user_name = db.user_global.user_name = self.user_name
+
+        """
+        # messages sent
+        db.user.msg. += 1
+        db.user_global.msg.total += 1
+        db.guild.log.msg.total += 1
+
+        #if db.user.deep_logging and db.guild.log.deep_logging:
+        if self.prefix_mode is COMMAND_PREFIX:
+            db.user.msg.commands += 1
+            db.user_global.msg.commands += 1
+            db.guild.log.msg.commands += 1
+        elif self.prefix_mode is OVERRIDE_PREFIX:
+            db.user.msg.override += 1
+            db.user_global.msg.override += 1
+            db.guild.log.msg.override += 1
+        elif self.prefix_mode is SUDO_PREFIX:
+            db.user.msg_sudo += 1
+            db.user_global.msg_sudo += 1
+            db.guild.log.msg_sudo += 1
+        
+        """
+
+        """
+        MESSAGES COUNTING
+        """
+        now = datetime.utcnow()
+        # By day
+        if len(db.user.msg.log_time_by_day) is 0:
+            last_log_time_day = now
+        else:
+            last_log_time_day = db.user.msg.log_time_by_day[0]
+
+        if now.timedelta(days=2) > last_log_time_day:
+            i = 1
+
+        """
+        TIME SPENT
+        """
         # for a string of 30 char, you will stay 9 sec to write it
         time_str_len_sample = 30
         time_sample = 9
@@ -85,13 +112,4 @@ class UserDataLog(object):
         db.user.time_spent_sec += time_to_type
         db.user_global.time_spent_sec += time_to_type
 
-        # local guild bits generation
-        bits_add = int(random() * (db.guild.log.bits_max_add - db.guild.log.bits_min_add) + db.guild.log.bits_min_add)
-        db.user.bits += bits_add
-        # global bits generation
-        bits_add = int(random() * (bits_max_add - bits_min_add) + bits_min_add)
-        db.user_global.bits += bits_add
-
         db.set_data()
-
-        return

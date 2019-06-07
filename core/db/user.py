@@ -1,4 +1,3 @@
-
 class UserData(object):
 
     def __init__(self, client, scope, guild_id, user_id):
@@ -8,21 +7,18 @@ class UserData(object):
         self.guild_id = guild_id
         self.user_id = user_id
 
-        self.table = "bot_directs"
+        directs = "bot_directs"
+        self.table = str(guild_id) if guild_id is not None else directs
 
         # user data logging
         self.user_name = None
+        self.time_zone = 0
         self.deep_logging = True
-        self.msg_total = 0
-        self.msg_commands = 0
-        self.msg_override = 0
-        self.msg_sudo = 0
-        self.msg_img = 0
-        self.msg_links = 0
+        self._class_msg = MessagesCounters()
+        self.msg = self._class_msg
         self.xp = 0
         self.level_up_notification = False
         self.level = 0
-        self.time_spent_sec = 0
         self.role = 0
         self.bits = 10
         self.swear_words_counter = 0
@@ -41,25 +37,17 @@ class UserData(object):
 
     def set_user_data(self):
 
-        if self.guild_id is None:
-            self.guild_id = self.table
-
         user_data = {
             '_id': self.user_id,
             'user_name': self.user_name,
+            'time_zone': self.time_zone,
             'deep_logging': self.deep_logging,
-            'msg_total': self.msg_total,
-            'msg_commands': self.msg_commands,
-            'msg_override': self.msg_override,
-            'msg_sudo': self.msg_sudo,
-            'msg_img': self.msg_img,
-            'msg_links': self.msg_links,
+            'msg': self._class_msg.build_data(),
             'xp': self.xp,
             'level_up_notification': self.level_up_notification,
             'level': self.level,
-            'time_spent_sec': self.time_spent_sec,
             'role': self.role,
-            'bits': self.msg_total,
+            'bits': self.bits,
             'swear_words_counter': self.swear_words_counter,
             'swear_words_xp': self.swear_words_xp,
             'swear_words': self.swear_words,
@@ -73,7 +61,7 @@ class UserData(object):
             'speak_in_vc': self.speak_in_vc
         }
 
-        collection = self.client[self.scope][str(self.guild_id)]
+        collection = self.client[self.scope][self.table]
         query = {'_id': self.user_id}
         cursor = collection.find(query)
         user_data_in_db = None
@@ -87,10 +75,7 @@ class UserData(object):
 
     def get_user_data(self):
 
-        if self.guild_id is None:
-            self.guild_id = self.table
-
-        collection = self.client[self.scope][str(self.guild_id)]
+        collection = self.client[self.scope][self.table]
         cursor = collection.find({'_id': self.user_id})
         user_data = None
         for doc in cursor:
@@ -99,17 +84,12 @@ class UserData(object):
             return
 
         self.user_name = user_data.get('user_name', self.user_name)
+        self.time_zone = user_data.get('time_zone', self.time_zone)
         self.deep_logging = user_data.get('deep_logging', self.deep_logging)
-        self.msg_total = user_data.get('msg_total', self.msg_total)
-        self.msg_commands = user_data.get('msg_commands', self.msg_commands)
-        self.msg_override = user_data.get('msg_override', self.msg_override)
-        self.msg_sudo = user_data.get('msg_sudo', self.msg_sudo)
-        self.msg_img = user_data.get('msg_img', self.msg_img)
-        self.msg_links = user_data.get('msg_links', self.msg_links)
+        self.msg = self._class_msg.extract_data(user_data.get('msg', self._class_msg.build_data()))
         self.xp = user_data.get('xp', self.xp)
         self.level_up_notification = user_data.get('level_up_notification', self.level_up_notification)
         self.level = user_data.get('level', self.level)
-        self.time_spent_sec = user_data.get('time_spent_sec', self.time_spent_sec)
         self.role = user_data.get('role', self.role)
         self.bits = user_data.get('bits', self.bits)
         self.swear_words_counter = user_data.get('swear_words_counter', self.swear_words_counter)
@@ -123,3 +103,71 @@ class UserData(object):
         self.age = user_data.get('age', self.age)
         self.country = user_data.get('country', self.country)
         self.speak_in_vc = user_data.get('speak_in_vc', self.speak_in_vc)
+
+
+class MessagesCounters(object):
+
+    def __init__(self):
+
+        self.log_time_by_hour = []
+        self.by_hour = []
+        self.time_spent_by_hour = []
+
+        self.log_time_by_day = []
+        self.by_day = []
+        self.time_spent_by_day = []
+
+        self.log_time_by_month = []
+        self.by_month = []
+        self.time_spent_by_month = []
+
+        self.commands = 0
+        self.override = 0
+        self.sudo = 0
+        self.img = 0
+        self.links = 0
+
+    def extract_data(self, raw_data):
+        self.log_time_by_hour = raw_data.get('log_time_by_hour', self.log_time_by_hour)
+        self.by_hour = raw_data.get('by_hour', self.by_hour)
+        self.time_spent_by_hour = raw_data.get('time_spent_by_hour', self.time_spent_by_hour)
+
+        self.log_time_by_day = raw_data.get('log_time_by_day', self.log_time_by_day)
+        self.by_day = raw_data.get('by_day', self.by_day)
+        self.time_spent_by_day = raw_data.get('time_spent_by_day', self.time_spent_by_day)
+
+        self.log_time_by_month = raw_data.get('log_time_by_day', self.log_time_by_month)
+        self.by_month = raw_data.get('by_month', self.by_month)
+        self.by_hour = raw_data.get('by_hour', self.by_hour)
+
+        self.commands = raw_data.get('commands', self.commands)
+        self.override = raw_data.get('override', self.override)
+        self.sudo = raw_data.get('sudo', self.sudo)
+        self.img = raw_data.get('img', self.img)
+        self.links = raw_data.get('links', self.links)
+
+        return self
+
+    def build_data(self):
+
+        data_out = {
+            'log_time_by_hour': self.log_time_by_hour,
+            'by_hour': self.by_hour,
+            'time_spent_by_hour': self.time_spent_by_hour,
+
+            'log_time_by_day': self.log_time_by_day,
+            'by_day': self.by_day,
+            'time_spent_by_day': self.time_spent_by_day,
+
+            'log_time_by_month': self.log_time_by_month,
+            'by_month': self.by_month,
+            'time_spent_by_month': self.time_spent_by_month,
+
+            'commands': self.commands,
+            'override': self.override,
+            'sudo': self.sudo,
+            'img': self.img,
+            'links': self.links,
+        }
+
+        return data_out
