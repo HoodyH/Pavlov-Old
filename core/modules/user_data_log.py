@@ -74,7 +74,7 @@ class UserDataLog(object):
             db.user.msg.log_time_by_hour.append(_now)
 
         sub = _now - db_timestamp
-        if sub > timedelta(hours=1):
+        if sub >= timedelta(hours=1):
             db.user.msg.log_time_by_hour.insert(0, _now)
             db.user.msg.by_hour.insert(0, 1)
             db.user.msg.time_spent_by_hour.insert(0, time_spent_to_type)
@@ -100,7 +100,7 @@ class UserDataLog(object):
             db.user.msg.log_time_by_day.append(_now)
 
         sub = _now - db_timestamp
-        if sub > timedelta(days=1):
+        if sub >= timedelta(days=1):
             db.user.msg.log_time_by_day.insert(0, _now)
             db.user.msg.by_day.insert(0, 1)
             db.user.msg.time_spent_by_day.insert(0, time_spent_to_type)
