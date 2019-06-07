@@ -19,21 +19,49 @@ class MyData(object):
 
     def my_data(self):
 
-        if self.language == ITA:
-            dictionary = {
-                "Nome Utente:": db.user.user_name,
-                "Messaggi Totali:": db.user.msg_total,
-                "Tempo Sprecato:": sec_to_time(db.user.time_spent_sec, self.language)
-            }
-        else:
-            dictionary = {
-                "User Name:": db.user.user_name,
-                "Total Messages:": db.user.msg_total,
-                "Time Spent:": sec_to_time(db.user.time_spent_sec, self.language)
-            }
 
-        out = ''
-        for key in dictionary.keys():
-            out += '{} {}\n'.format(key, dictionary.get(key))
+        try:
+            if self.language == ITA:
+                dictionary = {
+                    "Nome Utente:": db.user.user_name,
 
-        return out
+                    '\nRisultati Per ora:': '',
+                    "Messaggi Totali H:": db.user.msg.by_hour[0],
+                    "Tempo Sprecato H:\n": sec_to_time(db.user.msg.time_spent_by_hour[0], self.language),
+
+                    '\nRisultati Per Giorno:': '',
+                    "Messaggi Totali D:": db.user.msg.by_day[0],
+                    "Tempo Sprecato D:\n": sec_to_time(db.user.msg.time_spent_by_day[0], self.language),
+
+                    '\nRisultati Per Mese:': '',
+                    "Messaggi Totali M:": db.user.msg.by_month[0],
+                    "Tempo Sprecato M:\n": sec_to_time(db.user.msg.time_spent_by_month[0], self.language)
+                }
+            else:
+                dictionary = {
+                    "User Name:": db.user.user_name,
+
+                    '\nResults this hour:': '',
+                    "Total Messages H:": db.user.msg.by_hour[0],
+                    "Time Spent H:\n": sec_to_time(db.user.msg.time_spent_by_hour[0], self.language),
+
+                    '\nResults this day:': '',
+                    "Total Messages D:": db.user.msg.by_day[0],
+                    "Time Spent D:\n": sec_to_time(db.user.msg.time_spent_by_day[0], self.language),
+
+                    '\nResults this month:': '',
+                    "Total Messages M:": db.user.msg.by_month[0],
+                    "Time Spent M:\n": sec_to_time(db.user.msg.time_spent_by_month[0], self.language)
+                }
+
+            out = ''
+            for key in dictionary.keys():
+                out += '{} {}\n'.format(key, dictionary.get(key))
+
+            return out
+
+        except Exception as e:
+            print(e)
+            return 'Banana'
+
+

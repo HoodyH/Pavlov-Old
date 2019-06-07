@@ -121,6 +121,7 @@ class Starter(object):
         -run command
         -return response
         """
+        __len = len(self.text)
         if len(self.text) is 0:  # there was just the prefix
             return
 
@@ -172,8 +173,8 @@ class Starter(object):
 
         # run commands if the prefix is a COMMAND_PREFIX
         if self.prefix_type is COMMAND_PREFIX:
-            self._run_command()
-            return None
+            c_out = self._run_command()
+            return c_out
 
             # don't analyze long messages
         if len(self.text) > MEX_MAX_LENGTH:

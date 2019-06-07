@@ -9,7 +9,7 @@
             "telegram": [],
             "discord": []
         },
-        "standard_counter": 5,
+        "standard_counter": 1,
         "standard_triggers": [
             "amazon"
         ],
@@ -105,7 +105,7 @@
             "telegram": [],
             "discord": []
         },
-        "standard_counter": 3,
+        "standard_counter": 4,
         "standard_triggers": [
             "tesla"
         ],
@@ -746,7 +746,7 @@
         }
     },
     "Greetings_in": {
-        "standard_counter": 0,
+        "standard_counter": 2,
         "scope": "global",
         "standard_triggers": [
             "hello",

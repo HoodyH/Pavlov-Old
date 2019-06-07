@@ -44,7 +44,6 @@ class UserDataLog(object):
         db.user.xp += xp_add
         self._guild_level_up()
         db.user_global.xp += xp_add
-        self._global_level_up()
 
         # data only for directs
         bits_min_add = 0
@@ -77,13 +76,13 @@ class UserDataLog(object):
         sub = _now - db_timestamp
         if sub > timedelta(hours=1):
             db.user.msg.log_time_by_hour.insert(0, _now)
-            db.user.msg.by_day.insert(0, 1)
+            db.user.msg.by_hour.insert(0, 1)
             db.user.msg.time_spent_by_hour.insert(0, time_spent_to_type)
         else:
             try:
-                db.user.msg.by_day[0] += msg_counter
+                db.user.msg.by_hour[0] += msg_counter
             except IndexError:
-                db.user.msg.by_day.append(1)
+                db.user.msg.by_hour.append(1)
 
             try:
                 db.user.msg.time_spent_by_hour[0] += time_spent_to_type
@@ -128,13 +127,13 @@ class UserDataLog(object):
 
         if _now.month > db_timestamp.month or (_now.month == 1 and db_timestamp.month == 12):
             db.user.msg.log_time_by_month.insert(0, _now)
-            db.user.msg.by_day.insert(0, 1)
+            db.user.msg.by_month.insert(0, 1)
             db.user.msg.time_spent_by_month.insert(0, time_spent_to_type)
         else:
             try:
-                db.user.msg.by_day[0] += msg_counter
+                db.user.msg.by_month[0] += msg_counter
             except IndexError:
-                db.user.msg.by_day.append(1)
+                db.user.msg.by_month.append(1)
 
             try:
                 db.user.msg.time_spent_by_month[0] += time_spent_to_type

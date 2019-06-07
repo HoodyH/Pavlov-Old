@@ -17,4 +17,21 @@ it will install automatically all the requirements
 ## How to run
 ```$ python3 server.py```
 
+test before relese:
+
+use:
+-commands
+-listeners
+-check db
+-check languages
+
+send 
+-images
+-stikers
+-audio
+-video
+
+run on main bot locally on pc
+
+then update the server
 

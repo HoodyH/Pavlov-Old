@@ -28,7 +28,7 @@ class TelegramBot(object):
                 'is_bot': message.from_user.is_bot,
                 'language_code': message.from_user.language_code
                 },
-            'text': message.text if message.text != '' else None,
+            'text': message.text if message.text is not None else '',
             'message_type': False
         }
 
@@ -42,5 +42,5 @@ class TelegramBot(object):
         for u in updates:
             self.update_id = u.update_id + 1
             r = self.do_stuffs(u.message)
-            if r != "":
+            if r != "" and r is not None:
                 self.bot.send_message(chat_id=u.message.chat.id, text=r)

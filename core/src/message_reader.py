@@ -82,13 +82,14 @@ def _extract_value(input_array, starting_point=0):
 
 
 def extract_command_parameters(text):
-
-    if text is str:
-        text_array = text.split()
-    elif text is list:
+    """
+    text must be a string or a list
+    :return: argument as string, parameters as tuple [parameter, data]
+    """
+    if isinstance(text, list):
         text_array = text
     else:
-        return
+        text_array = text.split()
 
     arg = ""
     params = []
