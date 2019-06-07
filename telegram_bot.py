@@ -12,6 +12,8 @@ class TelegramBot(object):
         print(self.bot.get_me().first_name)
 
     def do_stuffs(self, message):
+        if message is None:
+            return
 
         message_data = {
             'message_id': message.message_id,
