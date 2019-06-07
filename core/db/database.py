@@ -16,14 +16,14 @@ class DB(object):
     def update_data(self, scope, guild_id, user_id):
         self.guild = GuildData(self.client, scope, guild_id)
         self.user = UserData(self.client, scope, guild_id, user_id)
-        self.user_global = UserData(self.client, scope, 'user_data_global', user_id)
+        # self.user_global = UserData(self.client, scope, 'user_data_global', user_id)
 
         return
 
     def set_data(self):
         self.guild.set_guild_data()
         self.user.set_user_data()
-        self.user_global.set_user_data()
+        # self.user_global.set_user_data()
         return
 
 

@@ -9,6 +9,7 @@ class TelegramBot(object):
 
         self.bot = telegram.Bot(token=token)
         self.update_id = None
+        print(self.bot.get_me().first_name)
 
     def do_stuffs(self, message):
 
@@ -36,15 +37,10 @@ class TelegramBot(object):
 
     def run(self):
         """Run the bot."""
-        print(self.bot.get_me().first_name)
 
-        while True:
-            updates = self.bot.get_updates(offset=self.update_id)
-            for u in updates:
-                self.update_id = u.update_id + 1
-                try:
-                    r = self.do_stuffs(u.message)
-                    if r is not None:
-                        self.bot.send_message(chat_id=u.message.chat.id, text=r)
-                except Exception as e:
-                    pass
+        updates = self.bot.get_updates(offset=self.update_id)
+        for u in updates:
+            self.update_id = u.update_id + 1
+            r = self.do_stuffs(u.message)
+            if r != "":
+                self.bot.send_message(chat_id=u.message.chat.id, text=r)

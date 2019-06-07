@@ -9,7 +9,7 @@
             "telegram": [],
             "discord": []
         },
-        "standard_counter": 4,
+        "standard_counter": 5,
         "standard_triggers": [
             "amazon"
         ],
@@ -746,7 +746,7 @@
         }
     },
     "Greetings_in": {
-        "standard_counter": 1,
+        "standard_counter": 0,
         "scope": "global",
         "standard_triggers": [
             "hello",
@@ -772,7 +772,7 @@
             "Ma vai via coglione",
             "Fatti una sega e poi in caso torna"
         ],
-        "power_counter": 0,
+        "power_counter": 1,
         "avoid_counter": 0,
         "cit_author": "",
         "name": "",

@@ -179,7 +179,6 @@ class Starter(object):
         if len(self.text) > MEX_MAX_LENGTH:
             return None
 
-        print(self.text, self.prefix_type, self.module_mode)
         if self._has_permissions('message_reply'):
             respond = Respond(
                 self.scope,

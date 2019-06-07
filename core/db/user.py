@@ -136,9 +136,9 @@ class MessagesCounters(object):
         self.by_day = raw_data.get('by_day', self.by_day)
         self.time_spent_by_day = raw_data.get('time_spent_by_day', self.time_spent_by_day)
 
-        self.log_time_by_month = raw_data.get('log_time_by_day', self.log_time_by_month)
+        self.log_time_by_month = raw_data.get('log_time_by_month', self.log_time_by_month)
         self.by_month = raw_data.get('by_month', self.by_month)
-        self.by_hour = raw_data.get('by_hour', self.by_hour)
+        self.time_spent_by_month = raw_data.get('time_spent_by_month', self.time_spent_by_month)
 
         self.commands = raw_data.get('commands', self.commands)
         self.override = raw_data.get('override', self.override)

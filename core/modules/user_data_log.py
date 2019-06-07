@@ -1,6 +1,6 @@
 from core.src.settings import *
 from random import random
-from datetime import datetime
+from datetime import datetime, timedelta
 import math
 
 
@@ -32,11 +32,6 @@ class UserDataLog(object):
                 # send message (private or in the group) based on config file
                 self.out = "Complimenti {} hai raggiunto il livello {}".format(self.user_name, db.user.level)
 
-    def _global_level_up(self):
-        local_next_level = db.user_global.level * self.level_increment_value
-        if local_next_level <= db.user_global.xp:
-            db.user_global.level += 1
-
     def _xp_manage(self):
         # XP
         # for a string of 30 char, you will gain 10 xp
@@ -63,53 +58,98 @@ class UserDataLog(object):
 
     def log_data(self):
 
-        db.user.user_name = db.user_global.user_name = self.user_name
+        db.user.user_name = self.user_name
 
-        """
-        # messages sent
-        db.user.msg. += 1
-        db.user_global.msg.total += 1
-        db.guild.log.msg.total += 1
-
-        #if db.user.deep_logging and db.guild.log.deep_logging:
-        if self.prefix_mode is COMMAND_PREFIX:
-            db.user.msg.commands += 1
-            db.user_global.msg.commands += 1
-            db.guild.log.msg.commands += 1
-        elif self.prefix_mode is OVERRIDE_PREFIX:
-            db.user.msg.override += 1
-            db.user_global.msg.override += 1
-            db.guild.log.msg.override += 1
-        elif self.prefix_mode is SUDO_PREFIX:
-            db.user.msg_sudo += 1
-            db.user_global.msg_sudo += 1
-            db.guild.log.msg_sudo += 1
-        
-        """
-
-        """
-        MESSAGES COUNTING
-        """
         now = datetime.utcnow()
-        # By day
-        if len(db.user.msg.log_time_by_day) is 0:
-            last_log_time_day = now
+        msg_counter = 1
+        time_spent_to_type = int(self.text_len * SAMPLE_TIME_FOR_STRING / SAMPLE_STRING_LEN)
+
+        """
+        TIME SPENT BY HOUR
+        """
+        _now = now.replace(minute=0, second=0, microsecond=0)
+        try:
+            db_timestamp = db.user.msg.log_time_by_hour[0]
+        except IndexError:
+            db_timestamp = _now
+            db.user.msg.log_time_by_hour.append(_now)
+
+        sub = _now - db_timestamp
+        if sub > timedelta(hours=1):
+            db.user.msg.log_time_by_hour.insert(0, _now)
+            db.user.msg.by_day.insert(0, 1)
+            db.user.msg.time_spent_by_hour.insert(0, time_spent_to_type)
         else:
-            last_log_time_day = db.user.msg.log_time_by_day[0]
+            try:
+                db.user.msg.by_day[0] += msg_counter
+            except IndexError:
+                db.user.msg.by_day.append(1)
 
-        if now.timedelta(days=2) > last_log_time_day:
-            i = 1
+            try:
+                db.user.msg.time_spent_by_hour[0] += time_spent_to_type
+            except IndexError:
+                db.user.msg.time_spent_by_hour.append(time_spent_to_type)
 
         """
-        TIME SPENT
+        TIME SPENT BY DAY
         """
-        # for a string of 30 char, you will stay 9 sec to write it
-        time_str_len_sample = 30
-        time_sample = 9
-        # do the proportion
-        time_to_type = int(self.text_len * time_sample / time_str_len_sample)
+        _now = now.replace(hour=0, minute=0, second=0, microsecond=0)
+        try:
+            db_timestamp = db.user.msg.log_time_by_day[0]
+        except IndexError:
+            db_timestamp = _now
+            db.user.msg.log_time_by_day.append(_now)
 
-        db.user.time_spent_sec += time_to_type
-        db.user_global.time_spent_sec += time_to_type
+        sub = _now - db_timestamp
+        if sub > timedelta(days=1):
+            db.user.msg.log_time_by_day.insert(0, _now)
+            db.user.msg.by_day.insert(0, 1)
+            db.user.msg.time_spent_by_day.insert(0, time_spent_to_type)
+        else:
+            try:
+                db.user.msg.by_day[0] += msg_counter
+            except IndexError:
+                db.user.msg.by_day.append(1)
+
+            try:
+                db.user.msg.time_spent_by_day[0] += time_spent_to_type
+            except IndexError:
+                db.user.msg.time_spent_by_day.append(time_spent_to_type)
+
+        """
+        TIME SPENT BY MONTH
+        """
+        _now = now.replace(hour=0, minute=0, second=0, microsecond=0)
+        try:
+            db_timestamp = db.user.msg.log_time_by_month[0]
+        except IndexError:
+            db_timestamp = _now
+            db.user.msg.log_time_by_month.append(_now)
+
+        if _now.month > db_timestamp.month or (_now.month == 1 and db_timestamp.month == 12):
+            db.user.msg.log_time_by_month.insert(0, _now)
+            db.user.msg.by_day.insert(0, 1)
+            db.user.msg.time_spent_by_month.insert(0, time_spent_to_type)
+        else:
+            try:
+                db.user.msg.by_day[0] += msg_counter
+            except IndexError:
+                db.user.msg.by_day.append(1)
+
+            try:
+                db.user.msg.time_spent_by_month[0] += time_spent_to_type
+            except IndexError:
+                db.user.msg.time_spent_by_month.append(time_spent_to_type)
+
+        if db.user.deep_logging and db.guild.log.deep_logging:
+            if self.prefix_mode is COMMAND_PREFIX:
+                db.user.msg.commands += 1
+                db.guild.log.msg.commands += 1
+            elif self.prefix_mode is OVERRIDE_PREFIX:
+                db.user.msg.override += 1
+                db.guild.log.msg.override += 1
+            elif self.prefix_mode is SUDO_PREFIX:
+                db.user.msg.sudo += 1
+                db.guild.log.msg_sudo += 1
 
         db.set_data()
