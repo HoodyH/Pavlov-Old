@@ -351,7 +351,9 @@
             "Ramarro marrone",
             "Bella raga",
             "Quella tipa \u00e8 gi\u00e0 mia",
-            "Luca ti sfido ad una gara di resistenza."
+            "Luca ti sfido ad una gara di resistenza.",
+            "Salve",
+            "Appena finiti gli esami mi trovo la tipa"
         ],
         "power_counter": 0,
         "avoid_counter": 0
@@ -743,6 +745,48 @@
         "private": 0,
         "users_allowed": {
             "telegram": []
+        }
+    },
+    "Greetings_out": {
+        "standard_counter": 2,
+        "scope": "global",
+        "standard_triggers": [
+            "me ne vado",
+            "quitto"
+        ],
+        "standard_outputs": [
+            "Sega e torni?",
+            "Capisco, cosi staresti andando a fare qualcosa, finalmente!",
+            "Wow, che uomo impegnato, ti rivedremo mai?",
+            "Ohhh ti prego, insegnai come si fa a diventare un essere produttivo come te"
+        ],
+        "avoid_triggers": [
+            "merde"
+        ],
+        "avoid_outputs": [
+            "Ma quello sei tu"
+        ],
+        "power_triggers": [
+            "addio"
+        ],
+        "power_outputs": [
+            "Bravo, vai via coglione",
+            "evvattene va",
+            "Vai a fare qualcosa di utile come al solito, no?",
+            "Mmmmmh vabbè, simuli di avere un impegno? Ottimo esercizio, magari in futuro ti servirà questa skill",
+            "a dio cane",
+            "Vai ad impiegare il tuo tempo in modo utile, in sti giorni non hai contribuito affatto a rendere il mondo migliore, ti ho instritto in cava, cominci domani"
+        ],
+        "power_counter": 1,
+        "avoid_counter": 0,
+        "cit_author": "",
+        "name": "",
+        "enabled": 0,
+        "mode": 1,
+        "private": 0,
+        "users_allowed": {
+            "telegram": [],
+            "commands_telegram": []
         }
     },
     "Greetings_in": {

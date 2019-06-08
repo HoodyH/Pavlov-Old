@@ -94,6 +94,11 @@ def extract_command_parameters(text):
     arg = ""
     params = []
     text_array.pop(0)  # remove the command trigger
+
+    if len(text_array) is 1:
+        arg = _extract_value(text_array)
+        return arg, params
+
     for i in range(0, len(text_array) - 1):
         if str.startswith(text_array[i], '-'):
             param_key = text_array[i][1:]
@@ -103,4 +108,5 @@ def extract_command_parameters(text):
             params.append(param)
         elif i is 0:
             arg = _extract_value(text_array)
+
     return arg, params

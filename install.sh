@@ -6,8 +6,8 @@ sudo apt install python3
 sudo apt install python3-pip
 
 #create the virtual env
-sudo apt install python3-venv
-python3 -m venv env
+#sudo apt install python3-venv
+#python3 -m venv env
 
 #Install all libs required
 echo Check requrements

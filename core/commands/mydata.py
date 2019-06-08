@@ -1,5 +1,7 @@
 from core.src.settings import *
 from core.src.text_reply.formatting import sec_to_time
+from core.src.utils.img_draw import draw_user_msg_stats
+from datetime import datetime, timedelta
 
 
 class MyData(object):
@@ -7,17 +9,101 @@ class MyData(object):
     this command will mute the given module.
     """
 
-    def __init__(self, scope, guild_id, user_id, language, command, arg, params):
+    def __init__(self, scope, bot, guild_id, user_id, language, command, arg, params):
 
-        self.language = language
         self.scope = scope
+        self.bot = bot
         self.guild_id = guild_id
         self.user_id = user_id
+        self.language = language
 
         self.command_name = command
         self.arg = arg
 
+    @staticmethod
+    def _build_data(time_array, msg_array, time_spent_array, max_len, scope):
+
+        timezone = 2
+        data = []
+
+        if scope == 'hour':
+            now = datetime.utcnow().replace(minute=0, second=0, microsecond=0)
+        elif scope == 'day':
+            now = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+        else:
+            now = datetime.utcnow()
+
+        t = iter(time_array)
+        el = next(t, None)
+        for offset in range(0, max_len):
+
+            def timedelta_scope():
+                if scope == 'hour':
+                    return timedelta(hours=offset)
+                elif scope == 'day':
+                    return timedelta(days=offset)
+                else:
+                    return timedelta(days=offset)
+
+            def time_format_scope():
+                if scope == 'hour':
+                    return (n + timedelta(hours=timezone)).hour
+                elif scope == 'day':
+                    return (n + timedelta(hours=timezone)).day
+                else:
+                    return (n + timedelta(hours=timezone)).month
+
+            n = (now - timedelta_scope())
+            if el != n or el is None:
+                time_format = time_format_scope()
+                message_counter = 0
+                time_spent_counter = 0
+                data.append([time_format, message_counter, time_spent_counter])
+            else:
+                time_format = time_format_scope()
+                i = time_array.index(el)
+                message_counter = msg_array[i]
+                time_spent_counter = time_spent_array[i]
+                data.append([time_format, message_counter, time_spent_counter])
+                el = next(t, None)
+
+        return data
+
+    def my_data_pro(self):
+
+        data = {}
+        data['HOURLY'] = self._build_data(
+            db.user.msg.log_time_by_hour,
+            db.user.msg.by_hour,
+            db.user.msg.time_spent_by_hour,
+            24,
+            'hour'
+        )
+        if len(db.user.msg.log_time_by_day) > 1:
+            data['DAILY'] = self._build_data(
+                db.user.msg.log_time_by_day,
+                db.user.msg.by_day,
+                db.user.msg.time_spent_by_day,
+                7,
+                'day'
+            )
+        if len(db.user.msg.log_time_by_month) > 2:
+            data['MONTHLY'] = self._build_data(
+                db.user.msg.log_time_by_month,
+                db.user.msg.by_month,
+                db.user.msg.time_spent_by_month,
+                12,
+                'month'
+            )
+
+        img_bytes = draw_user_msg_stats(data, db.user.user_name)
+        self.bot.send_photo(chat_id=self.guild_id if self.guild_id is not None else self.user_id, photo=img_bytes)
+
     def my_data(self):
+
+        if self.arg.upper() == 'PRO':
+            self.my_data_pro()
+            return
 
         if self.language == ITA:
             dictionary = {

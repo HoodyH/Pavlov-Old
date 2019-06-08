@@ -154,7 +154,7 @@ class Starter(object):
             m = ModuleStatus(self.scope, self.guild_id, self.user.id, language_found, command_found, arg, params)
             return m.mute()
         elif command_found == "mydata":
-            m = MyData(self.scope, self.guild_id, self.user.id, language_found, command_found, arg, params)
+            m = MyData(self.scope, self.bot, self.guild_id, self.user.id, language_found, command_found, arg, params)
             return m.my_data()
 
     def analyze_message(self):
