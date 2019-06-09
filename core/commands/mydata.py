@@ -1,6 +1,6 @@
 from core.src.settings import *
 from core.src.text_reply.formatting import sec_to_time
-from core.src.utils.img_draw import draw_user_msg_stats
+from core.src.utils.img_draw import DrawStats
 from datetime import datetime, timedelta
 
 
@@ -24,7 +24,7 @@ class MyData(object):
     def _build_data(time_array, msg_array, time_spent_array, max_len, scope):
 
         timezone = 2
-        data = []
+        data = [[], [], []]
 
         if scope == 'hour':
             now = datetime.utcnow().replace(minute=0, second=0, microsecond=0)
@@ -55,18 +55,15 @@ class MyData(object):
 
             n = (now - timedelta_scope())
             if el != n or el is None:
-                time_format = time_format_scope()
-                message_counter = 0
-                time_spent_counter = 0
-                data.append([time_format, message_counter, time_spent_counter])
+                data[0].append(time_format_scope())
+                data[1].append(0)
+                data[2].append(0)
             else:
-                time_format = time_format_scope()
+                data[0].append(time_format_scope())
                 i = time_array.index(el)
-                message_counter = msg_array[i]
-                time_spent_counter = time_spent_array[i]
-                data.append([time_format, message_counter, time_spent_counter])
+                data[1].append(msg_array[i])
+                data[2].append(time_spent_array[i])
                 el = next(t, None)
-
         return data
 
     def my_data_pro(self):
@@ -96,7 +93,9 @@ class MyData(object):
                 'month'
             )
 
-        img_bytes = draw_user_msg_stats(data, db.user.user_name)
+        ds = DrawStats(data, db.user.user_name)
+        ds.draw_msg_stats()
+        img_bytes = ds.get_image()
         self.bot.send_photo(chat_id=self.guild_id if self.guild_id is not None else self.user_id, photo=img_bytes)
 
     def my_data(self):
