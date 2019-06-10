@@ -9,8 +9,7 @@ TELEGRAM_TOKEN = parser.get("creds", "token")
 
 def main():
     telegram_bot = TelegramBot(TELEGRAM_TOKEN)
-    while True:
-        telegram_bot.run()
+    telegram_bot.run()
 
 
 if __name__ == '__main__':

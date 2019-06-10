@@ -3,3 +3,5 @@ requests
 dnspython
 pymongo
 Pillow
+SpeechRecognition
+pydub

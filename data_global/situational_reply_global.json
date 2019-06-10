@@ -355,7 +355,7 @@
             "Salve",
             "Appena finiti gli esami mi trovo la tipa"
         ],
-        "power_counter": 0,
+        "power_counter": 1,
         "avoid_counter": 0
     },
     "Simone Not": {
@@ -538,7 +538,7 @@
             "Tu sei il classico tipo che per sentirsi soddisfatto della propria vita deve criticare quella degli altri. Avanti, colpiscimi!"
         ],
         "cit_author": "Maestro",
-        "power_counter": 0,
+        "power_counter": 1,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,
@@ -773,7 +773,7 @@
             "Bravo, vai via coglione",
             "evvattene va",
             "Vai a fare qualcosa di utile come al solito, no?",
-            "Mmmmmh vabbè, simuli di avere un impegno? Ottimo esercizio, magari in futuro ti servirà questa skill",
+            "Mmmmmh vabb\u00e8, simuli di avere un impegno? Ottimo esercizio, magari in futuro ti servir\u00e0 questa skill",
             "a dio cane",
             "Vai ad impiegare il tuo tempo in modo utile, in sti giorni non hai contribuito affatto a rendere il mondo migliore, ti ho instritto in cava, cominci domani"
         ],
@@ -790,7 +790,7 @@
         }
     },
     "Greetings_in": {
-        "standard_counter": 2,
+        "standard_counter": 1,
         "scope": "global",
         "standard_triggers": [
             "hello",

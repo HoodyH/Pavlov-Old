@@ -2,11 +2,14 @@
 
 #install the base requirements at system level
 sudo apt update
-sudo apt install python3
-sudo apt install python3-pip
+sudo apt -y install python3
+sudo apt -y install python3-pip
+
+sudo apt -y install flac
+sudo apt -y install ffmpeg
 
 #create the virtual env
-#sudo apt install python3-venv
+#sudo apt -y install python3-venv
 #python3 -m venv env
 
 #Install all libs required

@@ -32,27 +32,27 @@ COLOR_TEXT = LIGHT_GRAY
     +-----------------------------------------+         |
     |             SPAN_BORDER                 | span    |
     +-----------------------------------------+                
-    |             SPAN_GRAPH_TITLE            | span                |
-    |                                         | span                |
-    +--+-----------------------------------+--+                     |
-    |  |          GRAPH_BORDER             |  | span    |           |
-    |--+-----------------------------------+--|         |           |
-    |  |                                   |  | span    |           |
-    |  |          GRAPH                    |  | span    |           |
-    |  |                                   |  | span    |SPAN_GRAPH |SPAN_GRAPH_SECTION
-    |  |                                   |  | span    |           |
-    |--+-----------------------------------+--|         |           |
-    |  |          GRAPH_BORDER             |  | span    |           |
-    +--+-----------------------------------+--+                     |
-    |                                         | span                |
-    |             SPAN_GRAPH_TEXT             | span                |
-    |                                         | span                |
-    |                                         | span                |
+    |             SPAN_GRAPH_TITLE            | span                
+    |                                         | span                
+    +-----------------------------------------+                     
+    |             SPAN_GRAPH_SUBTITLE         | span    |           
+    +--+-----------------------------------+--+         |              
+    |  |          GRAPH_BORDER             |  | span    |           
+    |--+-----------------------------------+--|         |           
+    |  |                                   |  | span    |           
+    |  |          GRAPH                    |  | span    |SPAN_GRAPH 
+    |  |                                   |  | span    |           
+    |  |                                   |  | span    |           
+    |--+-----------------------------------+--|         |           
+    |  |          GRAPH_BORDER             |  | span    |           
+    +--+-----------------------------------+--+                                         
+    |                                         | span                
+    |             SPAN_GRAPH_TEXT             | span                
+    |                                         | span        
+    |                                         | span                
     +-----------------------------------------+
     |             SPAN_BORDER                 | span  
-    +-----------------------------------------+                    
-
-
+    +-----------------------------------------+                      
 """
 # span border
 SPAN_BORDER = 1
@@ -65,14 +65,15 @@ SPAN_TITLE_SECTION_PIXELS = 250
 # span graph section
 SPAN_GRAPH_TITLE = 2
 
+SPAN_GRAPH_SUBTITLE = 1
 GRAPH_BORDER = 1
 GRAPH = 4
-SPAN_GRAPH = GRAPH_BORDER + GRAPH + GRAPH_BORDER
+SPAN_GRAPH = SPAN_GRAPH_SUBTITLE + GRAPH_BORDER + GRAPH + GRAPH_BORDER
 
 SPAN_GRAPH_TEXT = 4
 # end span graph section
-SPAN_GRAPH_SECTION = SPAN_GRAPH_TITLE + SPAN_GRAPH + SPAN_GRAPH_TEXT
-SPAN_GRAPH_SECTION_PIXELS = 450
+SPAN_GRAPH_PIXELS = 300
+SPAN_GRAPH_SECTION_PIXELS = 150 + SPAN_GRAPH_PIXELS
 
 """
       B     T  TS T  T                                 
@@ -100,7 +101,7 @@ TOWER_2_DIM = 0.25
 SPACE_DIM = 0.25
 
 
-class DrawStats(object):
+class DrawImage(object):
 
     def __init__(self, data, username):
 
@@ -131,14 +132,14 @@ class DrawStats(object):
         self.draw = ImageDraw.Draw(self.image)
 
         self.span_x = 0
-        self.span_y = self.height / (SPAN_TITLE_SECTION + SPAN_GRAPH_SECTION * n_sections + SPAN_BORDER)
+        graph_section = SPAN_GRAPH_TITLE + SPAN_GRAPH * 2 + SPAN_GRAPH_TEXT
+        self.span_y = self.height / (SPAN_TITLE_SECTION + graph_section * n_sections + SPAN_BORDER)
 
-        dir_title = 'core/src/utils/fonts/helveticaneue-light.ttf'
-        self.font_title = ImageFont.truetype(dir_title, int(self.span_y * SPAN_TOP_TITLE))
-        dir_graph_title = 'core/src/utils/fonts/helveticaneue-light.ttf'
-        self.font_graph_title = ImageFont.truetype(dir_graph_title, int(self.span_y * SPAN_GRAPH_TITLE))
-        dir_graph_text = 'core/src/utils/fonts/helveticaneue-light.ttf'
-        self.font_graph_text = ImageFont.truetype(dir_graph_text, int(self.span_y * GRAPH_BORDER / 2))
+        dir_helvetica = 'core/src/utils/fonts/helveticaneue-light.ttf'
+        self.font_title = ImageFont.truetype(dir_helvetica, int(self.span_y * SPAN_TOP_TITLE))
+        self.font_graph_title = ImageFont.truetype(dir_helvetica, int(self.span_y * SPAN_GRAPH_TITLE))
+        self.font_graph_subtitle = ImageFont.truetype(dir_helvetica, int(self.span_y * SPAN_GRAPH_SUBTITLE))
+        self.font_graph_text = ImageFont.truetype(dir_helvetica, int(self.span_y * GRAPH_BORDER / 2))
 
     def __remap_values(self, data, max_value):
         value_array = []
@@ -193,26 +194,29 @@ class DrawStats(object):
 
             x += self.span_x * tower_dim + self.span_x * space
 
-    def _draw_graph_section(self, towers_data_array, section, section_name):
-
+    def __draw_graph_multi_tower(self, towers_data_array, section, sub_section):
         n_towers = len(towers_data_array[0])
         if n_towers is 0:
             return
 
-        y = self.span_y * (SPAN_TITLE_SECTION + (SPAN_GRAPH_SECTION * section - SPAN_GRAPH_TEXT - SPAN_GRAPH))
+        graph_section = (SPAN_GRAPH_TITLE + SPAN_GRAPH * sub_section + SPAN_GRAPH_TEXT) * section
+        rm = SPAN_GRAPH_TEXT + SPAN_GRAPH - SPAN_GRAPH_SUBTITLE
+        y = self.span_y * (SPAN_TITLE_SECTION + graph_section - rm)
         self.__draw_text_in_center(
             self.width / 2,
-            y - SPAN_GRAPH_TITLE * self.span_y / 2,
-            section_name,
-            font=self.font_graph_title,
+            y - SPAN_GRAPH_SUBTITLE * self.span_y / 2,
+            "name_here",
+            font=self.font_graph_subtitle,
             fill=COLOR_GRAPH_TITLE)
+
+        graph_section = (SPAN_GRAPH_TITLE + SPAN_GRAPH * sub_section + SPAN_GRAPH_TEXT) * section
+        y = self.span_y * (SPAN_TITLE_SECTION + graph_section - SPAN_GRAPH_TEXT - GRAPH_BORDER)
 
         border_subdivision = BORDER_DIM * 2
         tower_subdivision = n_towers * TOWER_1_DIM + n_towers * TOWER_2_DIM
         space_subdivision = (n_towers * SPACE_DIM - SPACE_DIM) if n_towers > 1 else 0
         self.span_x = self.width / (border_subdivision + tower_subdivision + space_subdivision)
         x = self.span_x * BORDER_DIM
-        y = self.span_y * (SPAN_TITLE_SECTION + (SPAN_GRAPH_SECTION * section - SPAN_GRAPH_TEXT - GRAPH_BORDER))
 
         max_1 = max(towers_data_array[1])
         max_2 = max(towers_data_array[2])
@@ -241,6 +245,61 @@ class DrawStats(object):
         self.__draw_towers_value_on_top(
             x, y, TOWER_2_DIM, space, value, towers_data_array[2], self.font_graph_text
         )
+
+    def __draw_graph(self, towers_name_array, towers_data_array, section, sub_section):
+
+        n_towers = len(towers_data_array)
+        if n_towers is 0:
+            return
+
+        graph_section = (SPAN_GRAPH_TITLE + SPAN_GRAPH * sub_section + SPAN_GRAPH_TEXT) * section
+        rm = SPAN_GRAPH_TEXT + SPAN_GRAPH - SPAN_GRAPH_SUBTITLE
+        y = self.span_y * (SPAN_TITLE_SECTION + graph_section - rm)
+        self.__draw_text_in_center(
+            self.width / 2,
+            y - SPAN_GRAPH_SUBTITLE * self.span_y / 2,
+            "name_here",
+            font=self.font_graph_subtitle,
+            fill=COLOR_GRAPH_TITLE)
+
+        graph_section = (SPAN_GRAPH_TITLE + SPAN_GRAPH * sub_section + SPAN_GRAPH_TEXT) * section
+        y = self.span_y * (SPAN_TITLE_SECTION + graph_section - SPAN_GRAPH_TEXT - GRAPH_BORDER)
+
+        border_subdivision = BORDER_DIM * 2
+        tower_subdivision = n_towers * TOWER_1_DIM
+        space_subdivision = (n_towers * SPACE_DIM - SPACE_DIM) if n_towers > 1 else 0
+        self.span_x = self.width / (border_subdivision + tower_subdivision + space_subdivision)
+        x = self.span_x * BORDER_DIM
+
+        max_value = max(towers_data_array)
+
+        self.__draw_towers_names(
+            x, y, TOWER_1_DIM, SPACE_DIM, towers_name_array, self.font_graph_text
+        )
+        value = self.__remap_values(towers_data_array, max_value)
+        self.__draw_towers(
+            x, y, TOWER_1_DIM, SPACE_DIM, self.color_tower_1, value
+        )
+        self.__draw_towers_value_on_top(
+            x, y, TOWER_1_DIM, SPACE_DIM, value, towers_data_array, self.font_graph_text
+        )
+
+    def _draw_graph_section(self, towers_data_array, section, section_name):
+
+        n_subsections = len(towers_data_array)-1
+
+        graph_section = (SPAN_GRAPH_TITLE + SPAN_GRAPH * n_subsections + SPAN_GRAPH_TEXT) * section
+        rm = SPAN_GRAPH_TEXT + SPAN_GRAPH
+        y = self.span_y * (SPAN_TITLE_SECTION + graph_section - rm)
+        self.__draw_text_in_center(
+            self.width / 2,
+            y - SPAN_GRAPH_TITLE * self.span_y / 2,
+            section_name,
+            font=self.font_graph_title,
+            fill=COLOR_GRAPH_TITLE)
+
+        for i in range(n_subsections):
+            self.__draw_graph(towers_data_array[0], towers_data_array[i+1], section, i+1)
 
     def draw_msg_stats(self):
 

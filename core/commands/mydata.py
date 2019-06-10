@@ -1,6 +1,6 @@
 from core.src.settings import *
 from core.src.text_reply.formatting import sec_to_time
-from core.src.utils.img_draw import DrawStats
+from core.src.utils.img_draw import DrawImage
 from datetime import datetime, timedelta
 
 
@@ -93,7 +93,7 @@ class MyData(object):
                 'month'
             )
 
-        ds = DrawStats(data, db.user.user_name)
+        ds = DrawImage(data, db.user.user_name)
         ds.draw_msg_stats()
         img_bytes = ds.get_image()
         self.bot.send_photo(chat_id=self.guild_id if self.guild_id is not None else self.user_id, photo=img_bytes)
