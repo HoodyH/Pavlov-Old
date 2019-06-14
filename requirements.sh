@@ -5,7 +5,7 @@ python3 -m venv env
 source env/bin/activate
 
 #Install all libs required
-echo Check requrements
-pip3 install -r requirements
+echo Check requirements.txt
+pip3 install -r requirements.txt
 
 deactivate
