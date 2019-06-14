@@ -9,7 +9,7 @@
             "telegram": [],
             "discord": []
         },
-        "standard_counter": 2,
+        "standard_counter": 3,
         "standard_triggers": [
             "amazon"
         ],
@@ -777,7 +777,7 @@
             "a dio cane",
             "Vai ad impiegare il tuo tempo in modo utile, in sti giorni non hai contribuito affatto a rendere il mondo migliore, ti ho instritto in cava, cominci domani"
         ],
-        "power_counter": 1,
+        "power_counter": 2,
         "avoid_counter": 0,
         "cit_author": "",
         "name": "",
@@ -790,7 +790,7 @@
         }
     },
     "Greetings_in": {
-        "standard_counter": 1,
+        "standard_counter": 0,
         "scope": "global",
         "standard_triggers": [
             "hello",

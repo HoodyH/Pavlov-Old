@@ -57,14 +57,14 @@ SAMPLE_STRING_LEN = 30
 # Time spent to type
 TIME_SAMPLE_VALUE = 11
 # XP gain by message
-XP_SAMPLE_VALUE = 5
+XP_SAMPLE_VALUE = 20
 XP_MAX_VALUE = 30
 
 # BITS gain by message
 BITS_SAMPLE_VALUE = 5
-BITS_MAX_VALUE = 3
+BITS_MAX_VALUE = 2
 # XP for next level
-XP_NEXT_LEVEL = 500
+XP_NEXT_LEVEL = 450
 # User MESSAGE destination
 MSG_DISABLED = 0
 MSG_DIRECT = 1
