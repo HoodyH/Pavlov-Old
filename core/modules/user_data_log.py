@@ -1,154 +1,61 @@
 from core.src.settings import *
-from random import random
-from datetime import datetime, timedelta
+from core.src.static_modules import db
+from core.src.utils.message_sender import MessageSender
+from datetime import datetime
 import math
 
 
 class UserDataLog(object):
 
-    def __init__(self, scope, guild_id, user_id, user_name, text, prefix_type):
+    def __init__(self, scope, bot, guild_id, user_id, language, user_name, text, prefix_type):
 
         self.scope = scope
+        self.bot = bot
         self.guild_id = guild_id
         self.user_id = user_id
+        self.language = language
         self.user_name = user_name
         self.text = text
         self.text_len = len(text)
         self.prefix_mode = prefix_type
 
-        self.level_increment_value = 500
-
         self.out = None
 
-    def _guild_level_up(self):
-        local_next_level = db.user.level * self.level_increment_value
-        if local_next_level <= db.user.xp:
-            db.user.level += 1
+    def __send_level_up_message(self, level, destination):
 
-            if db.user.level == db.guild.log.start_notifications_at_level:
-                db.user.level_up_notification = True
+        if self.language == ITA:
+            message = 'Grande {}\nHai raggiunto il livello {}'.format(self.user_name, level)
+        else:
+            message = 'Cool {}\nYou\'ve gain to level {}'.format(self.user_name, level)
 
-            if db.user.level_up_notification:
-                # send message (private or in the group) based on config file
-                self.out = "Complimenti {} hai raggiunto il livello {}".format(self.user_name, db.user.level)
-
-    def _xp_manage(self):
-        # XP
-        # for a string of 30 char, you will gain 10 xp
-        xp_str_len_sample = 30
-        xp_by_sample = 5
-        xp_max = 30
-        # do the proportion
-        xp_by_string_len = int(math.ceil(self.text_len * xp_by_sample / xp_str_len_sample))
-        xp_add = xp_by_string_len if xp_by_string_len <= xp_max else xp_max
-        db.user.xp += xp_add
-        self._guild_level_up()
-        db.user_global.xp += xp_add
-
-        # data only for directs
-        bits_min_add = 0
-        bits_max_add = 4
-        # local guild bits generation
-        bits_add = int(random() * (db.guild.log.bits_max_add - db.guild.log.bits_min_add) + db.guild.log.bits_min_add)
-        db.user.bits += bits_add
-        # global bits generation
-        bits_add = int(random() * (bits_max_add - bits_min_add) + bits_min_add)
-        db.user_global.bits += bits_add
+        ms = MessageSender(self.scope, self.bot, self.guild_id, self.user_id, self.guild_id)
+        ms.send_message(message, destination)
 
     def log_data(self):
 
-        db.user.user_name = self.user_name
+        db.user_name = self.user_name
 
         now = datetime.utcnow()
-        msg_counter = 1
-        time_spent_to_type = int(self.text_len * SAMPLE_TIME_FOR_STRING / SAMPLE_STRING_LEN)
 
-        """
-        TIME SPENT BY HOUR
-        """
-        _now = now.replace(minute=0, second=0, microsecond=0)
-        try:
-            db_timestamp = db.user.msg.log_time_by_hour[0]
-        except IndexError:
-            db_timestamp = _now
-            db.user.msg.log_time_by_hour.append(_now)
+        time_spent_to_type = math.ceil(self.text_len * TIME_SAMPLE_VALUE / SAMPLE_STRING_LEN)
+        db.update_msg(now, time_spent_to_type)
 
-        sub = _now - db_timestamp
-        if sub >= timedelta(hours=1):
-            db.user.msg.log_time_by_hour.insert(0, _now)
-            db.user.msg.by_hour.insert(0, 1)
-            db.user.msg.time_spent_by_hour.insert(0, time_spent_to_type)
-        else:
-            try:
-                db.user.msg.by_hour[0] += msg_counter
-            except IndexError:
-                db.user.msg.by_hour.append(1)
+        xp_by_string_len = int(math.ceil(self.text_len * XP_SAMPLE_VALUE / SAMPLE_STRING_LEN))
+        xp_add = xp_by_string_len if xp_by_string_len <= XP_MAX_VALUE else XP_MAX_VALUE
+        db.update_xp(xp_add)
 
-            try:
-                db.user.msg.time_spent_by_hour[0] += time_spent_to_type
-            except IndexError:
-                db.user.msg.time_spent_by_hour.append(time_spent_to_type)
+        if db.is_user_level_up():
+            destination = db.user_level_up_destination()
+            if destination != MSG_DISABLED:
+                self.__send_level_up_message(db.level, destination)
 
-        """
-        TIME SPENT BY DAY
-        """
-        _now = now.replace(hour=0, minute=0, second=0, microsecond=0)
-        try:
-            db_timestamp = db.user.msg.log_time_by_day[0]
-        except IndexError:
-            db_timestamp = _now
-            db.user.msg.log_time_by_day.append(_now)
+        if db.is_user_global_level_up():
+            destination = db.user_global_level_up_destination()
+            if destination != MSG_DISABLED:
+                self.__send_level_up_message(db.global_level, destination)
 
-        sub = _now - db_timestamp
-        if sub >= timedelta(days=1):
-            db.user.msg.log_time_by_day.insert(0, _now)
-            db.user.msg.by_day.insert(0, 1)
-            db.user.msg.time_spent_by_day.insert(0, time_spent_to_type)
-        else:
-            try:
-                db.user.msg.by_day[0] += msg_counter
-            except IndexError:
-                db.user.msg.by_day.append(1)
-
-            try:
-                db.user.msg.time_spent_by_day[0] += time_spent_to_type
-            except IndexError:
-                db.user.msg.time_spent_by_day.append(time_spent_to_type)
-
-        """
-        TIME SPENT BY MONTH
-        """
-        _now = now.replace(hour=0, minute=0, second=0, microsecond=0)
-        try:
-            db_timestamp = db.user.msg.log_time_by_month[0]
-        except IndexError:
-            db_timestamp = _now
-            db.user.msg.log_time_by_month.append(_now)
-
-        if _now.month > db_timestamp.month or (_now.month == 1 and db_timestamp.month == 12):
-            db.user.msg.log_time_by_month.insert(0, _now)
-            db.user.msg.by_month.insert(0, 1)
-            db.user.msg.time_spent_by_month.insert(0, time_spent_to_type)
-        else:
-            try:
-                db.user.msg.by_month[0] += msg_counter
-            except IndexError:
-                db.user.msg.by_month.append(1)
-
-            try:
-                db.user.msg.time_spent_by_month[0] += time_spent_to_type
-            except IndexError:
-                db.user.msg.time_spent_by_month.append(time_spent_to_type)
-
-        if db.user.deep_logging and db.guild.log.deep_logging:
-            if self.prefix_mode is COMMAND_PREFIX:
-                db.user.msg.commands += 1
-                db.guild.log.msg.commands += 1
-            elif self.prefix_mode is OVERRIDE_PREFIX:
-                db.user.msg.override += 1
-                db.guild.log.msg.override += 1
-            elif self.prefix_mode is SUDO_PREFIX:
-                db.user.msg.sudo += 1
-                db.guild.log.msg_sudo += 1
+        bits_by_string_len = int(math.ceil(self.text_len * BITS_SAMPLE_VALUE / SAMPLE_STRING_LEN))
+        bits_add = bits_by_string_len if bits_by_string_len <= BITS_MAX_VALUE else BITS_MAX_VALUE
+        db.update_bits(bits_add)
 
         db.set_data()

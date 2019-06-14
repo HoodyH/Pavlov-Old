@@ -1,18 +1,9 @@
-# API
-from API.badass_character.badass_character import BadassCharacter
-badass_character = BadassCharacter()
-from API.bestemmia.bestemmia import Bestemmia
-bestemmia = Bestemmia()
-from API.pickup_line.pickup_line import PickupLine
-pickup_line = PickupLine()
-# database
-from core.db.database import DB
-db = DB('mongodb+srv://MainUserBot:AdminDb12@abot-3jqai.mongodb.net/test?retryWrites=true')
 
 
 ERROR = -1
+
 # debug
-USE_GLOBAL_FILE_ONLY = True
+USE_GLOBAL_FILE_ONLY = True  # deprecated
 
 
 TELEGRAM = 'telegram'
@@ -62,6 +53,20 @@ WRONG_STATIC_MODE_STRING = 1
 
 
 # USER_DATA_LOG CONFIG
-# Time spent to type
 SAMPLE_STRING_LEN = 30
-SAMPLE_TIME_FOR_STRING = 9
+# Time spent to type
+TIME_SAMPLE_VALUE = 11
+# XP gain by message
+XP_SAMPLE_VALUE = 5
+XP_MAX_VALUE = 30
+
+# BITS gain by message
+BITS_SAMPLE_VALUE = 5
+BITS_MAX_VALUE = 3
+# XP for next level
+XP_NEXT_LEVEL = 500
+# User MESSAGE destination
+MSG_DISABLED = 0
+MSG_DIRECT = 1
+MSG_ON_SAME_CHAT = 2
+MSG_ON_STATIC_CHAT = 3

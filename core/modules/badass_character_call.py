@@ -1,4 +1,4 @@
-from core.src.settings import *
+from core.src.static_modules import badass_character
 from core.src.message_reader import find
 from API.badass_character.badass_character import JOHN_WICK, CHUCK_NORRIS
 

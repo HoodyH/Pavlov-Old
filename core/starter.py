@@ -1,4 +1,5 @@
 from core.src.settings import *
+from core.src.static_modules import db
 from core.src.file_handler import load_commands
 from core.src.message_reader import find, extract_command_parameters
 from core.src.text_reply.errors import command_error, command_not_implemented
@@ -163,8 +164,10 @@ class Starter(object):
 
         user_data_log = UserDataLog(
             self.scope,
+            self.bot,
             self.guild_id,
             self.user.id,
+            db.guild.languages[0],
             self.user.username,
             self.text,
             self.prefix_type

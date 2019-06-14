@@ -1,3 +1,6 @@
+from core.db.modules.class_message import MessagesField
+
+
 class GuildData(object):
 
     def __init__(self, client, scope, guild_id):
@@ -18,9 +21,20 @@ class GuildData(object):
         self.sudo_prefix = '#'
         self.languages = ['eng']
         self.modules = {}
+
+        self.pro_guild = 0
+        self.deep_logging = False
+        self.level_up_notification = True
+        self.level_up_destination = 2
+        self.start_notifications_at_level = 5
+        self.bits_min_add = 0
+        self.bits_max_add = 1
+        self.use_global_bits = True
+        self.member_total = 0
+
         # composed data
-        self._class_user_data_log = UserDataLog()
-        self.log = self._class_user_data_log
+        self._class_msg = MessagesField()
+        self.msg = self._class_msg
 
         self.get_guild_data()
 
@@ -39,7 +53,18 @@ class GuildData(object):
             'sudo_prefix': self.sudo_prefix,
             'languages': self.languages,
             'modules': self.modules,
-            'log': self._class_user_data_log.build_data(),
+
+            'pro_guild': self.pro_guild,
+            'deep_logging': self.deep_logging,
+            'level_up_notification': self.level_up_notification,
+            'level_up_destination': self.level_up_destination,
+            'start_notifications_at_level': self.start_notifications_at_level,
+            'bits_min_add': self.bits_min_add,
+            'bits_max_add': self.bits_max_add,
+            'use_global_bits': self.use_global_bits,
+            'member_total': self.member_total,
+
+            'msg': self._class_msg.build_data(),
         }
 
         collection = self.client[self.scope][self.table]
@@ -75,63 +100,180 @@ class GuildData(object):
         self.sudo_prefix = user_data.get('sudo_prefix')
         self.languages = user_data.get('languages')
         self.modules = user_data.get('modules')
-        self.log = self._class_user_data_log.extract_data(user_data.get('log', self._class_user_data_log.build_data()))
+
+        self.pro_guild = user_data.get('pro_guild', self.pro_guild)
+        self.deep_logging = user_data.get('deep_logging', self.deep_logging)
+        self.level_up_notification = user_data.get('level_up_notification', self.level_up_notification)
+        self.level_up_destination = user_data.get('level_up_destination', self.level_up_destination)
+        self.start_notifications_at_level = user_data.get('start_notifications_at_level', self.start_notifications_at_level)
+        self.bits_min_add = user_data.get('bits_min_add', self.bits_min_add)
+        self.bits_max_add = user_data.get('bits_max_add', self.bits_max_add)
+        self.use_global_bits = user_data.get('use_global_bits', self.use_global_bits)
+        self.member_total = user_data.get('member_total', self.member_total)
+
+        self.msg = self._class_msg.extract_data(user_data.get('msg', self._class_msg.build_data()))
+
+    # guild_name
+    @property
+    def guild_name(self):
+        return self.__guild_name
+
+    @guild_name.setter
+    def guild_name(self, value):
+        self.__guild_name = value
+
+    # owner_id
+    @property
+    def owner_id(self):
+        return self.__owner_id
+
+    @owner_id.setter
+    def owner_id(self, value):
+        self.__owner_id = value
+
+    # owner_name
+    @property
+    def owner_name(self):
+        return self.__owner_name
+
+    @owner_name.setter
+    def owner_name(self, value):
+        self.__owner_name = value
+
+    # prefix
+    @property
+    def prefix(self):
+        return self.__prefix
+
+    @prefix.setter
+    def prefix(self, value):
+        self.__prefix = value
+
+    # quiet_prefix
+    @property
+    def quiet_prefix(self):
+        return self.__quiet_prefix
+
+    @quiet_prefix.setter
+    def quiet_prefix(self, value):
+        self.__quiet_prefix = value
+
+    # sudo_prefix
+    @property
+    def sudo_prefix(self):
+        return self.__sudo_prefix
+
+    @sudo_prefix.setter
+    def sudo_prefix(self, value):
+        self.__sudo_prefix = value
+
+    # languages
+    @property
+    def languages(self):
+        return self.__languages
+
+    @languages.setter
+    def languages(self, value):
+        self.__languages = value
+
+    # modules
+    @property
+    def modules(self):
+        return self.__modules
+
+    @modules.setter
+    def modules(self, value):
+        self.__modules = value
+
+    # pro_guild
+    @property
+    def pro_guild(self):
+        return self.__pro_guild
+
+    @pro_guild.setter
+    def pro_guild(self, value):
+        self.__pro_guild = value
+
+    # deep_logging
+    @property
+    def deep_logging(self):
+        return self.__deep_logging
+
+    @deep_logging.setter
+    def deep_logging(self, value):
+        self.__deep_logging = value
+
+    # level_up_notification
+    @property
+    def level_up_notification(self):
+        return self.__level_up_notification
+
+    @level_up_notification.setter
+    def level_up_notification(self, value):
+        self.__level_up_notification = value
+
+    # level_up_destination
+    @property
+    def level_up_destination(self):
+        return self.__level_up_destination
+
+    @level_up_destination.setter
+    def level_up_destination(self, value):
+        self.__level_up_destination = value
+
+    # start_notifications_at_level
+    @property
+    def start_notifications_at_level(self):
+        return self.__start_notifications_at_level
+
+    @start_notifications_at_level.setter
+    def start_notifications_at_level(self, value):
+        self.__start_notifications_at_level = value
+
+    # bits_min_add
+    @property
+    def bits_min_add(self):
+        return self.__bits_min_add
+
+    @bits_min_add.setter
+    def bits_min_add(self, value):
+        self.__bits_min_add = value
+
+    # bits_max_add
+    @property
+    def bits_max_add(self):
+        return self.__bits_max_add
+
+    @bits_max_add.setter
+    def bits_max_add(self, value):
+        self.__bits_max_add = value
+
+    # use_global_bits
+    @property
+    def use_global_bits(self):
+        return self.__use_global_bits
+
+    @use_global_bits.setter
+    def use_global_bits(self, value):
+        self.__use_global_bits = value
+
+    # member_total
+    @property
+    def member_total(self):
+        return self.__member_total
+
+    @member_total.setter
+    def member_total(self, value):
+        self.__member_total = value
+
+    # msg
+    @property
+    def msg(self):
+        return self.__msg
+
+    @msg.setter
+    def msg(self, value):
+        self.__msg = value
 
 
-class UserDataLog(object):
 
-    def __init__(self):
-
-        self.deep_logging = False
-        self.level_up_notification = True
-        self.level_up_destination = 0
-        self.start_notifications_at_level = 5
-        self.bits_min_add = 0
-        self.bits_max_add = 1
-        self.use_global_bits = True
-        self.member_total = 0
-        self.msg_total = 0
-        self.msg_commands = 0
-        self.msg_override = 0
-        self.msg_sudo = 0
-        self.msg_img = 0
-        self.msg_links = 0
-
-    def extract_data(self, raw_data):
-        self.deep_logging = raw_data.get('deep_logging', self.deep_logging)
-        self.level_up_notification = raw_data.get('level_up_notification', self.level_up_notification)
-        self.level_up_destination = raw_data.get('level_up_destination', self.level_up_destination)
-        self.start_notifications_at_level = raw_data.get('start_notifications_at_level', self.start_notifications_at_level)
-        self.bits_min_add = raw_data.get('bits_min_add', self.bits_min_add)
-        self.bits_max_add = raw_data.get('bits_max_add', self.bits_max_add)
-        self.use_global_bits = raw_data.get('use_global_bits', self.use_global_bits)
-        self.member_total = raw_data.get('member_total', self.member_total)
-        self.msg_total = raw_data.get('msg_total', self.msg_total)
-        self.msg_commands = raw_data.get('msg_commands', self.msg_commands)
-        self.msg_override = raw_data.get('msg_override', self.msg_override)
-        self.msg_sudo = raw_data.get('msg_sudo', self.msg_sudo)
-        self.msg_img = raw_data.get('msg_img', self.msg_img)
-        self.msg_links = raw_data.get('msg_links', self.msg_links)
-
-        return self
-
-    def build_data(self):
-
-        data_out = {
-            'deep_logging': self.deep_logging,
-            'level_up_notification': self.level_up_notification,
-            'level_up_destination': self.level_up_destination,
-            'start_notifications_at_level': self.start_notifications_at_level,
-            'bits_min_add': self.bits_min_add,
-            'bits_max_add': self.bits_max_add,
-            'use_global_bits': self.use_global_bits,
-            'member_total': self.member_total,
-            'msg_total': self.msg_total,
-            'msg_commands': self.msg_commands,
-            'msg_override': self.msg_override,
-            'msg_sudo': self.msg_sudo,
-            'msg_img': self.msg_img,
-            'msg_links': self.msg_links,
-        }
-
-        return data_out

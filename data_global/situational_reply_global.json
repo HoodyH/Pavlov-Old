@@ -9,7 +9,7 @@
             "telegram": [],
             "discord": []
         },
-        "standard_counter": 1,
+        "standard_counter": 2,
         "standard_triggers": [
             "amazon"
         ],
@@ -355,7 +355,7 @@
             "Salve",
             "Appena finiti gli esami mi trovo la tipa"
         ],
-        "power_counter": 1,
+        "power_counter": 2,
         "avoid_counter": 0
     },
     "Simone Not": {
@@ -463,7 +463,7 @@
             "Compratevi una polo A METANO"
         ],
         "cit_author": "Alberto",
-        "power_counter": 0,
+        "power_counter": 1,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,
@@ -538,7 +538,7 @@
             "Tu sei il classico tipo che per sentirsi soddisfatto della propria vita deve criticare quella degli altri. Avanti, colpiscimi!"
         ],
         "cit_author": "Maestro",
-        "power_counter": 1,
+        "power_counter": 2,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,

@@ -1,0 +1,10 @@
+python-telegram-bot==11.1.0
+nltk
+requests
+dnspython
+pymongo
+Pillow
+SpeechRecognition
+pydub
+aiohttp == 3.5.4
+setuptools == 40.6.3

@@ -1,3 +1,8 @@
+from core.db.modules.class_message import MessagesField
+from core.db.modules.class_xp import XpField
+from core.db.modules.class_bill import BillField
+
+
 class UserData(object):
 
     def __init__(self, client, scope, guild_id, user_id):
@@ -14,13 +19,7 @@ class UserData(object):
         self.user_name = None
         self.time_zone = 0
         self.deep_logging = True
-        self._class_msg = MessagesCounters()
-        self.msg = self._class_msg
-        self.xp = 0
-        self.level_up_notification = False
-        self.level = 0
-        self.role = 0
-        self.bits = 10
+
         self.swear_words_counter = 0
         self.swear_words_xp = 0
         self.swear_words = {}
@@ -33,6 +32,15 @@ class UserData(object):
         self.country = None
         self.speak_in_vc = None
 
+        self.__msg_field = MessagesField()
+        self.msg = self.__msg_field
+
+        self.__xp_field = XpField()
+        self.xp = self.__xp_field
+
+        self.__bill_field = BillField()
+        self.bill = self.__bill_field
+
         self.get_user_data()
 
     def set_user_data(self):
@@ -42,12 +50,7 @@ class UserData(object):
             'user_name': self.user_name,
             'time_zone': self.time_zone,
             'deep_logging': self.deep_logging,
-            'msg': self._class_msg.build_data(),
-            'xp': self.xp,
-            'level_up_notification': self.level_up_notification,
-            'level': self.level,
-            'role': self.role,
-            'bits': self.bits,
+
             'swear_words_counter': self.swear_words_counter,
             'swear_words_xp': self.swear_words_xp,
             'swear_words': self.swear_words,
@@ -55,10 +58,15 @@ class UserData(object):
             'soft_warnings': self.soft_warnings,
             'hard_warnings': self.hard_warnings,
             'admin_warnings': self.admin_warnings,
+
             'gender': self.gender,
             'age': self.age,
             'country': self.country,
-            'speak_in_vc': self.speak_in_vc
+            'speak_in_vc': self.speak_in_vc,
+
+            'msg': self.__msg_field.build_data(),
+            'xp': self.__xp_field.build_data(),
+            'bill': self.__bill_field.build_data(),
         }
 
         collection = self.client[self.scope][self.table]
@@ -86,12 +94,7 @@ class UserData(object):
         self.user_name = user_data.get('user_name', self.user_name)
         self.time_zone = user_data.get('time_zone', self.time_zone)
         self.deep_logging = user_data.get('deep_logging', self.deep_logging)
-        self.msg = self._class_msg.extract_data(user_data.get('msg', self._class_msg.build_data()))
-        self.xp = user_data.get('xp', self.xp)
-        self.level_up_notification = user_data.get('level_up_notification', self.level_up_notification)
-        self.level = user_data.get('level', self.level)
-        self.role = user_data.get('role', self.role)
-        self.bits = user_data.get('bits', self.bits)
+
         self.swear_words_counter = user_data.get('swear_words_counter', self.swear_words_counter)
         self.swear_words_xp = user_data.get('swear_words_xp', self.swear_words_xp)
         self.swear_words = user_data.get('swear_words', self.swear_words)
@@ -99,75 +102,166 @@ class UserData(object):
         self.soft_warnings = user_data.get('soft_warnings', self.soft_warnings)
         self.hard_warnings = user_data.get('hard_warnings', self.hard_warnings)
         self.admin_warnings = user_data.get('admin_warnings', self.admin_warnings)
+
         self.gender = user_data.get('gender', self.gender)
         self.age = user_data.get('age', self.age)
         self.country = user_data.get('country', self.country)
         self.speak_in_vc = user_data.get('speak_in_vc', self.speak_in_vc)
 
+        self.msg = self.__msg_field.extract_data(user_data.get('msg', self.__msg_field.build_data()))
+        data = self.__xp_field.build_data()
+        self.xp = self.__xp_field.extract_data(user_data.get('xp', data))
+        self.bill = self.__bill_field.extract_data(user_data.get('bill', self.__bill_field.build_data()))
 
-class MessagesCounters(object):
+    # user_name
+    @property
+    def user_name(self):
+        return self.__user_name
 
-    def __init__(self):
+    @user_name.setter
+    def user_name(self, value):
+        self.__user_name = value
 
-        self.log_time_by_hour = []
-        self.by_hour = []
-        self.time_spent_by_hour = []
+    # time_zone
+    @property
+    def time_zone(self):
+        return self.__time_zone
 
-        self.log_time_by_day = []
-        self.by_day = []
-        self.time_spent_by_day = []
+    @time_zone.setter
+    def time_zone(self, value):
+        self.__time_zone = value
 
-        self.log_time_by_month = []
-        self.by_month = []
-        self.time_spent_by_month = []
+    # deep_logging
+    @property
+    def deep_logging(self):
+        return self.__deep_logging
 
-        self.commands = 0
-        self.override = 0
-        self.sudo = 0
-        self.img = 0
-        self.links = 0
+    @deep_logging.setter
+    def deep_logging(self, value):
+        self.__deep_logging = value
 
-    def extract_data(self, raw_data):
-        self.log_time_by_hour = raw_data.get('log_time_by_hour', self.log_time_by_hour)
-        self.by_hour = raw_data.get('by_hour', self.by_hour)
-        self.time_spent_by_hour = raw_data.get('time_spent_by_hour', self.time_spent_by_hour)
+    # swear_words_counter
+    @property
+    def swear_words_counter(self):
+        return self.__swear_words_counter
 
-        self.log_time_by_day = raw_data.get('log_time_by_day', self.log_time_by_day)
-        self.by_day = raw_data.get('by_day', self.by_day)
-        self.time_spent_by_day = raw_data.get('time_spent_by_day', self.time_spent_by_day)
+    @swear_words_counter.setter
+    def swear_words_counter(self, value):
+        self.__swear_words_counter = value
 
-        self.log_time_by_month = raw_data.get('log_time_by_month', self.log_time_by_month)
-        self.by_month = raw_data.get('by_month', self.by_month)
-        self.time_spent_by_month = raw_data.get('time_spent_by_month', self.time_spent_by_month)
+    # swear_words_xp
+    @property
+    def swear_words_xp(self):
+        return self.__swear_words_xp
 
-        self.commands = raw_data.get('commands', self.commands)
-        self.override = raw_data.get('override', self.override)
-        self.sudo = raw_data.get('sudo', self.sudo)
-        self.img = raw_data.get('img', self.img)
-        self.links = raw_data.get('links', self.links)
+    @swear_words_xp.setter
+    def swear_words_xp(self, value):
+        self.__swear_words_xp = value
 
-        return self
+    # swear_words
+    @property
+    def swear_words(self):
+        return self.__swear_words
 
-    def build_data(self):
+    @swear_words.setter
+    def swear_words(self, value):
+        self.__swear_words = value
 
-        data_out = {
-            'log_time_by_hour': self.log_time_by_hour,
-            'by_hour': self.by_hour,
-            'time_spent_by_hour': self.time_spent_by_hour,
+    # toxicity_rank
+    @property
+    def toxicity_rank(self):
+        return self.__toxicity_rank
 
-            'log_time_by_day': self.log_time_by_day,
-            'by_day': self.by_day,
-            'time_spent_by_day': self.time_spent_by_day,
+    @toxicity_rank.setter
+    def toxicity_rank(self, value):
+        self.__toxicity_rank = value
 
-            'log_time_by_month': self.log_time_by_month,
-            'by_month': self.by_month,
-            'time_spent_by_month': self.time_spent_by_month,
+    # soft_warnings
+    @property
+    def soft_warnings(self):
+        return self.__soft_warnings
 
-            'commands': self.commands,
-            'override': self.override,
-            'sudo': self.sudo,
-            'img': self.img,
-            'links': self.links,
-        }
+    @soft_warnings.setter
+    def soft_warnings(self, value):
+        self.__soft_warnings = value
 
-        return data_out
+    # hard_warnings
+    @property
+    def hard_warnings(self):
+        return self.__hard_warnings
+
+    @hard_warnings.setter
+    def hard_warnings(self, value):
+        self.__hard_warnings = value
+
+    # admin_warnings
+    @property
+    def admin_warnings(self):
+        return self.__admin_warnings
+
+    @admin_warnings.setter
+    def admin_warnings(self, value):
+        self.__admin_warnings = value
+
+    # gender
+    @property
+    def gender(self):
+        return self.__gender
+
+    @gender.setter
+    def gender(self, value):
+        self.__gender = value
+
+    # age
+    @property
+    def age(self):
+        return self.__age
+
+    @age.setter
+    def age(self, value):
+        self.__age = value
+
+    # country
+    @property
+    def country(self):
+        return self.__country
+
+    @country.setter
+    def country(self, value):
+        self.__country = value
+
+    # speak_in_vc
+    @property
+    def speak_in_vc(self):
+        return self.__speak_in_vc
+
+    @speak_in_vc.setter
+    def speak_in_vc(self, value):
+        self.__speak_in_vc = value
+
+    # msg
+    @property
+    def msg(self):
+        return self.__msg
+
+    @msg.setter
+    def msg(self, value):
+        self.__msg = value
+
+    # xp
+    @property
+    def xp(self):
+        return self.__xp
+
+    @xp.setter
+    def xp(self, value):
+        self.__xp = value
+
+    # bill
+    @property
+    def bill(self):
+        return self.__bill
+
+    @bill.setter
+    def bill(self, value):
+        self.__bill = value
