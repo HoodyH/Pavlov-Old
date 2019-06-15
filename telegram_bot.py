@@ -36,11 +36,16 @@ class TelegramBot(object):
 
         bot = telegram.Bot(token=token)
         print(bot.get_me().first_name)
+
         self.stop_bot = False
+        self.speech_to_text = False
 
     def voice_handler(self, bot, update):
 
         if self.stop_bot:
+            return
+
+        if self.speech_to_text:
             return
 
         message = update.message
@@ -53,8 +58,7 @@ class TelegramBot(object):
         ogg_audio.export(filename, format="wav")
         text = speech_to_text(filename)
 
-        print(text)
-        t = 'SPEACH TO TEXT:\n{}'.format(text)
+        t = 'SPEECH TO TEXT:\n{}'.format(text)
         message.reply_text(text=t, quote=True)
         self.analyze_message(bot, message, text)
 
@@ -62,7 +66,15 @@ class TelegramBot(object):
         message = update.message
         text = update.message.text
 
-        if text == 'stopbot':
+        if text.lower() == 'converti audio':
+            if self.speech_to_text:
+                self.speech_to_text = False
+                bot.send_message(chat_id=message.chat.id, text='Speech to text on')
+            else:
+                self.speech_to_text = True
+                bot.send_message(chat_id=message.chat.id, text='Speech to text off')
+
+        if text.lower() == ('stopbot' or 'stop bot'):
             if self.stop_bot:
                 self.stop_bot = False
                 bot.send_message(chat_id=message.chat.id, text='Bot started')

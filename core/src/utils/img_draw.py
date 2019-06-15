@@ -22,6 +22,13 @@ COLOR_TOP_TITLE = LIGHT_GRAY2
 COLOR_GRAPH_TITLE = LIGHT_GRAY
 COLOR_TEXT = LIGHT_GRAY
 
+
+class DrawLevel(object):
+
+    def __init__(self):
+        return
+
+
 """
     +-----------------------------------------+
     |             SPAN_BORDER                 | span    |
@@ -194,14 +201,16 @@ class DrawImage(object):
 
             x += self.span_x * tower_dim + self.span_x * space
 
-    def __draw_graph_multi_tower(self, towers_data_array, section, sub_section):
-        n_towers = len(towers_data_array[0])
+    def __draw_graph_multi_tower(self, towers_name_array, towers_data_array, section, sub_section):
+
+        n_towers = len(towers_data_array)
         if n_towers is 0:
             return
 
-        graph_section = (SPAN_GRAPH_TITLE + SPAN_GRAPH * sub_section + SPAN_GRAPH_TEXT) * section
-        rm = SPAN_GRAPH_TEXT + SPAN_GRAPH - SPAN_GRAPH_SUBTITLE
-        y = self.span_y * (SPAN_TITLE_SECTION + graph_section - rm)
+        graph_subsection = (SPAN_GRAPH_TITLE + SPAN_GRAPH * sub_section + SPAN_GRAPH_TEXT) * section
+
+        rm = SPAN_GRAPH_TEXT + SPAN_GRAPH + SPAN_GRAPH_SUBTITLE
+        y = self.span_y * (SPAN_TITLE_SECTION + graph_subsection - rm)
         self.__draw_text_in_center(
             self.width / 2,
             y - SPAN_GRAPH_SUBTITLE * self.span_y / 2,
@@ -209,11 +218,10 @@ class DrawImage(object):
             font=self.font_graph_subtitle,
             fill=COLOR_GRAPH_TITLE)
 
-        graph_section = (SPAN_GRAPH_TITLE + SPAN_GRAPH * sub_section + SPAN_GRAPH_TEXT) * section
-        y = self.span_y * (SPAN_TITLE_SECTION + graph_section - SPAN_GRAPH_TEXT - GRAPH_BORDER)
+        y = self.span_y * (SPAN_TITLE_SECTION + graph_subsection - SPAN_GRAPH_TEXT - GRAPH_BORDER)
 
         border_subdivision = BORDER_DIM * 2
-        tower_subdivision = n_towers * TOWER_1_DIM + n_towers * TOWER_2_DIM
+        tower_subdivision = n_towers * TOWER_1_DIM
         space_subdivision = (n_towers * SPACE_DIM - SPACE_DIM) if n_towers > 1 else 0
         self.span_x = self.width / (border_subdivision + tower_subdivision + space_subdivision)
         x = self.span_x * BORDER_DIM
@@ -252,9 +260,10 @@ class DrawImage(object):
         if n_towers is 0:
             return
 
-        graph_section = (SPAN_GRAPH_TITLE + SPAN_GRAPH * sub_section + SPAN_GRAPH_TEXT) * section
-        rm = SPAN_GRAPH_TEXT + SPAN_GRAPH - SPAN_GRAPH_SUBTITLE
-        y = self.span_y * (SPAN_TITLE_SECTION + graph_section - rm)
+        graph_subsection = (SPAN_GRAPH_TITLE + SPAN_GRAPH * sub_section + SPAN_GRAPH_TEXT) * section
+
+        rm = SPAN_GRAPH_TEXT + SPAN_GRAPH + SPAN_GRAPH_SUBTITLE
+        y = self.span_y * (SPAN_TITLE_SECTION + graph_subsection - rm)
         self.__draw_text_in_center(
             self.width / 2,
             y - SPAN_GRAPH_SUBTITLE * self.span_y / 2,
@@ -262,8 +271,7 @@ class DrawImage(object):
             font=self.font_graph_subtitle,
             fill=COLOR_GRAPH_TITLE)
 
-        graph_section = (SPAN_GRAPH_TITLE + SPAN_GRAPH * sub_section + SPAN_GRAPH_TEXT) * section
-        y = self.span_y * (SPAN_TITLE_SECTION + graph_section - SPAN_GRAPH_TEXT - GRAPH_BORDER)
+        y = self.span_y * (SPAN_TITLE_SECTION + graph_subsection - SPAN_GRAPH_TEXT - GRAPH_BORDER)
 
         border_subdivision = BORDER_DIM * 2
         tower_subdivision = n_towers * TOWER_1_DIM
@@ -284,12 +292,12 @@ class DrawImage(object):
             x, y, TOWER_1_DIM, SPACE_DIM, value, towers_data_array, self.font_graph_text
         )
 
-    def _draw_graph_section(self, towers_data_array, section, section_name):
+    def __draw_graph_section(self, towers_data_array, section, section_name):
 
-        n_subsections = len(towers_data_array)-1
+        n_subsections = 1
 
         graph_section = (SPAN_GRAPH_TITLE + SPAN_GRAPH * n_subsections + SPAN_GRAPH_TEXT) * section
-        rm = SPAN_GRAPH_TEXT + SPAN_GRAPH
+        rm = SPAN_GRAPH_TEXT + SPAN_GRAPH * n_subsections
         y = self.span_y * (SPAN_TITLE_SECTION + graph_section - rm)
         self.__draw_text_in_center(
             self.width / 2,
@@ -298,8 +306,7 @@ class DrawImage(object):
             font=self.font_graph_title,
             fill=COLOR_GRAPH_TITLE)
 
-        for i in range(n_subsections):
-            self.__draw_graph(towers_data_array[0], towers_data_array[i+1], section, i+1)
+        self.__draw_graph_multi_tower(towers_data_array, towers_data_array, section, 1)
 
     def draw_msg_stats(self):
 
@@ -313,7 +320,7 @@ class DrawImage(object):
 
         section_counter = 1
         for key in self.data.keys():
-            self._draw_graph_section(self.data.get(key), section_counter, key)
+            self.__draw_graph_section(self.data.get(key), section_counter, key)
             section_counter += 1
 
     def get_image(self):

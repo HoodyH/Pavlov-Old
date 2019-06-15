@@ -18,10 +18,19 @@ class MessageSender(object):
         elif self.scope == TELEGRAM:
 
             if destination == MSG_ON_STATIC_CHAT:
-                self.bot.send_message(chat_id=self.channel_id, text=message)
+                try:
+                    self.bot.send_message(chat_id=self.channel_id, text=message)
+                except Exception as e:
+                    print(e)
             elif destination == MSG_ON_SAME_CHAT:
-                self.bot.send_message(chat_id=self.channel_id, text=message)
+                try:
+                    self.bot.send_message(chat_id=self.channel_id, text=message)
+                except Exception as e:
+                    print(e)
             else:
-                self.bot.send_message(chat_id=self.user_id, text=message)
+                try:
+                    self.bot.send_message(chat_id=self.user_id, text=message)
+                except Exception as e:
+                    print(e)
         else:
             return
