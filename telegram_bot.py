@@ -36,8 +36,13 @@ class TelegramBot(object):
 
         bot = telegram.Bot(token=token)
         print(bot.get_me().first_name)
+        self.stop_bot = False
 
     def voice_handler(self, bot, update):
+
+        if self.stop_bot:
+            return
+
         message = update.message
         audio_bytes = BytesIO()
         file = bot.getFile(message.voice.file_id)
@@ -56,6 +61,18 @@ class TelegramBot(object):
     def text_handler(self, bot, update):
         message = update.message
         text = update.message.text
+
+        if text == 'stopbot':
+            if self.stop_bot:
+                self.stop_bot = False
+                bot.send_message(chat_id=message.chat.id, text='Bot started')
+            else:
+                self.stop_bot = True
+                bot.send_message(chat_id=message.chat.id, text='Bot stopped')
+
+        if self.stop_bot:
+            return
+
         self.analyze_message(bot, message, text)
 
     @staticmethod
@@ -83,8 +100,8 @@ class TelegramBot(object):
         c = Starter(TELEGRAM, bot, message, message_data)
         r = c.analyze_message()
         if r != "" and r is not None:
-            bot.send_chat_action(chat_id=message.chat.id, action=telegram.ChatAction.TYPING)
-            sleep(len(r) / 16)
+            # bot.send_chat_action(chat_id=message.chat.id, action=telegram.ChatAction.TYPING)
+            # sleep(len(r) / 16)
             bot.send_message(chat_id=message.chat.id, text=r)
 
     def run(self):

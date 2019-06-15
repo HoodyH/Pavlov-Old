@@ -1,4 +1,22 @@
 {
+    "man":{
+        "main_module": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 1,
+        "permissions": 0,
+        "eng":{
+            "invocation_word": ["man", "manual"],
+            "description": "Dai un nome",
+            "usage": "Dai un nome",
+            "man": ""
+        },
+        "ita":{
+            "invocation_word": ["man", "manuale"],
+            "description": "Dai un nome",
+            "usage": "Dai un nome",
+            "man": ""
+        }
+    },
     "module.deactivate":{
         "main_module": 1,
         "dm_enabled": 1,
@@ -35,7 +53,6 @@
             "man": ""
         }
     },
-
     "mydata":{
         "main_module": 0,
         "dm_enabled": 1,

@@ -9,7 +9,7 @@
             "telegram": [],
             "discord": []
         },
-        "standard_counter": 3,
+        "standard_counter": 4,
         "standard_triggers": [
             "amazon"
         ],

@@ -141,19 +141,19 @@ class DB(object):
                         time_spent_by_scope.pop()
                 except IndexError:
                     db_timestamp = time
-                    log_time_by_scope.append(time_log)
+                    log_time_by_scope.append(time)
 
                 if scope == 'hour':
-                    sub = time_log - db_timestamp
+                    sub = time - db_timestamp
                     condition = sub >= timedelta(hours=1)
                 elif scope == 'day':
-                    sub = time_log - db_timestamp
+                    sub = time - db_timestamp
                     condition = sub >= timedelta(days=1)
                 else:
                     condition = time.month > db_timestamp.month or (time.month == 1 and db_timestamp.month == 12)
 
                 if condition:
-                    log_time_by_scope.insert(0,  time_log)
+                    log_time_by_scope.insert(0, time)
                     by_scope.insert(0, 1)
                     time_spent_by_scope.insert(0, time_spent_to_type)
                 else:

@@ -1,4 +1,5 @@
 from core.src.settings import *
+from core.src.static_modules import db
 from core.src.text_reply.formatting import sec_to_time
 from core.src.utils.img_draw import DrawImage
 from datetime import datetime, timedelta
@@ -68,14 +69,15 @@ class MyData(object):
 
     def my_data_pro(self):
 
-        data = {}
-        data['HOURLY'] = self._build_data(
-            db.user.msg.log_time_by_hour,
-            db.user.msg.by_hour,
-            db.user.msg.time_spent_by_hour,
-            24,
-            'hour'
-        )
+        data = {
+            'HOURLY': self._build_data(
+                db.user.msg.log_time_by_hour,
+                db.user.msg.by_hour,
+                db.user.msg.time_spent_by_hour,
+                24,
+                'hour'
+                )
+        }
         if len(db.user.msg.log_time_by_day) > 1:
             data['DAILY'] = self._build_data(
                 db.user.msg.log_time_by_day,
@@ -84,7 +86,7 @@ class MyData(object):
                 7,
                 'day'
             )
-        if len(db.user.msg.log_time_by_month) > 2:
+        if len(db.user.msg.log_time_by_month) > 1:
             data['MONTHLY'] = self._build_data(
                 db.user.msg.log_time_by_month,
                 db.user.msg.by_month,
