@@ -64,7 +64,7 @@ class DB(object):
             level_up_notification = xp.level_up_notification
 
             xp_value += xp_add
-            xp_to_next_level = XP_NEXT_LEVEL*level*1.2
+            xp_to_next_level = (level*(level+1)/4)*XP_NEXT_LEVEL
             if xp_to_next_level <= xp_value:
                 level += 1
                 setattr(self, obj+'_level_up', True)
