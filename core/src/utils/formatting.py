@@ -38,39 +38,3 @@ def remap_range(value, actual_min, actual_max, new_min, new_max):
     new_span = new_max - new_min
     value_scaled = float(value - actual_min) / float(actual_span)
     return int(new_min + (value_scaled * new_span))
-
-
-"""
-    +-----------------------------------------+
-    |             SPAN_BORDER                 | span    |
-    +-----------------------------------------+         |
-    |                                         | span    |
-    |             SPAN_TOP_TITLE              | span    |SPAN_TITLE_SECTION
-    |                                         | span    |
-    +-----------------------------------------+         |
-    |             SPAN_BORDER                 | span    |
-    +-----------------------------------------+                
-    |             SPAN_GRAPH_TITLE            | span                
-    |                                         | span                
-    +-----------------------------------------+                     
-    |             SPAN_GRAPH_SUBTITLE         | span    |           
-    +--+-----------------------------------+--+         |              
-    |  |          GRAPH_BORDER             |  | span    |           
-    |--+-----------------------------------+--|         |           
-    |  |                                   |  | span    |           
-    |  |          GRAPH                    |  | span    |SPAN_GRAPH 
-    |  |                                   |  | span    |           
-    |  |                                   |  | span    |           
-    |--+-----------------------------------+--|         |           
-    |  |          GRAPH_BORDER             |  | span    |           
-    +--+-----------------------------------+--+                                         
-    |                                         | span                
-    |             SPAN_GRAPH_TEXT             | span                
-    |                                         | span        
-    |                                         | span                
-    +-----------------------------------------+
-    |             SPAN_BORDER                 | span  
-    +-----------------------------------------+                    
-
-
-"""

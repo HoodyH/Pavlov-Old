@@ -7,14 +7,14 @@ import math
 
 class UserDataLog(object):
 
-    def __init__(self, scope, bot, guild_id, user_id, language, user_name, text, prefix_type):
+    def __init__(self, scope, bot, guild_id, user_id, language, username, text, prefix_type):
 
         self.scope = scope
         self.bot = bot
         self.guild_id = guild_id
         self.user_id = user_id
         self.language = language
-        self.user_name = user_name
+        self.username = username
         self.text = text
         self.text_len = len(text)
         self.prefix_mode = prefix_type
@@ -24,16 +24,16 @@ class UserDataLog(object):
     def __send_level_up_message(self, level, destination):
 
         if self.language == ITA:
-            message = 'Grande {}\nHai raggiunto il livello {}'.format(self.user_name, level)
+            message = 'Grande {}\nHai raggiunto il livello {}'.format(self.username, level)
         else:
-            message = 'Cool {}\nYou\'ve gain to level {}'.format(self.user_name, level)
+            message = 'Cool {}\nYou\'ve gain to level {}'.format(self.username, level)
 
         ms = MessageSender(self.scope, self.bot, self.guild_id, self.user_id, self.guild_id)
         ms.send_message(message, destination)
 
     def log_data(self):
 
-        db.user_name = self.user_name
+        db.user_name = self.username
 
         now = datetime.utcnow()
 

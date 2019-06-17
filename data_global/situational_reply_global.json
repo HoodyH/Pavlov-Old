@@ -1,4 +1,39 @@
 {
+    "Motivation": {
+        "name": "",
+        "enabled": 1,
+        "mode": 0,
+        "cit_author": "Do it harder!",
+        "private": 0,
+        "users_allowed": {
+            "telegram": [],
+            "discord": []
+        },
+        "standard_counter": 5,
+        "standard_triggers": [
+            "incoraggiamento"
+        ],
+        "standard_outputs": [
+            "Non diventare un adulto noioso che dice di vivere come meglio può!",
+            "Impegnati e potrai fare qualunque cosa, siamo creature che pur non avendo le ali sono andate sulla luna"
+        ],
+        "avoid_triggers": [
+            "cazzo"
+        ],
+        "avoid_outputs": [
+            "Yo Yo Yo bro calm down"
+        ],
+        "power_triggers": [
+            "perla motivatrice",
+            "perla motivazione"
+        ],
+        "power_outputs": [
+            "Ti rode il fatto di essere il più debole?!\nNon abbandonare questa sensazione, essa è la prova che non ti sei ancora arreso"
+        ],
+        "power_counter": 0,
+        "avoid_counter": 1,
+        "module_mode": 0
+    },
     "Amazon": {
         "name": "",
         "enabled": 1,
