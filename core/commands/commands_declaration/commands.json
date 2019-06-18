@@ -59,13 +59,13 @@
         "enabled_by_default": 1,
         "permissions": 0,
         "eng":{
-            "invocation_word": ["mydata", "userdata"],
+            "invocation_word": ["data", "mydata", "userdata"],
             "description": "Dai un nome",
             "usage": "Dai un nome",
             "man": ""
         },
         "ita":{
-            "invocation_word": ["datiutente", "dati", "miei dati"],
+            "invocation_word": ["dati", "miei dati"],
             "description": "Dai un nome",
             "usage": "Dai un nome",
             "man": ""

@@ -1,4 +1,68 @@
 {
+    "Gym": {
+        "name": "",
+        "enabled": 1,
+        "mode": 0,
+        "cit_author": "Saitama",
+        "private": 0,
+        "users_allowed": {
+            "telegram": [],
+            "discord": []
+        },
+        "standard_counter": 5,
+        "standard_triggers": [
+            "palestra",
+            "dojo"
+        ],
+        "standard_outputs": [
+            "Fissare degli obiettivi è il primo passo per trasformare l’invisibile in visibile.",
+            "I perdenti si lamentano i campioni si allenano.",
+            "La palestra dovrebbe essere considerata come un omaggio che facciamo al cuore.",
+            "Il dolore che sentite oggi è la forza che sentirete domani.",
+            "Fare sport è una fatica senza fatica.",
+            "Se non si è disposti a sacrificare l’usuale ci si dovrà accontentare dell’ordinario.",
+            "Gli ostacoli sono quelle cose spaventose che vedete quando togliete gli occhi dalla meta.",
+            "Le sfide sono ciò che rende la vita interessante… Superarle è ciò che le dà significato.",
+            "Ricorda che le sensazioni date da una bella corsa sono molto meglio di quelle date dallo stare lì seduti a pensare di voler andare a correre.",
+            "Il vero fallimento è rinunciare.",
+            "La montagna più alta rimane sempre dentro di noi.",
+            "Più duro lavori, più diventa difficile arrendersi.",
+            "Qualcosa non funziona in una società in cui si va in auto in palestra per poi correre sul tapis roulant.",
+            "Ho odiato ogni minuto di allenamento, ma mi dicevo “Non rinunciare. Soffri ora, e vivrai il resto della tua vita come un campione!",
+            "Non aspettare il momento giusto per fare le cose, l’unico momento giusto è adesso.",
+            "Come raggiungere un traguardo? Senza fretta ma senza sosta.",
+            "Il dizionario è l’unico posto dove successo viene prima di sudore.",
+            "Non aspettare. Il tempo non sarà mai giusto.",
+            "Niente è davvero difficile se lo si divide in tanti piccoli pezzettini",
+            "Non fermarti nel dolore, continua il cammino verso la cima.",
+            "Vince solo chi è convinto di poterlo fare",
+            "Un obiettivo senza un piano resta solo un desiderio."
+        ],
+        "avoid_triggers": [
+            "cazzo"
+        ],
+        "avoid_outputs": [
+            "Yo Yo Yo bro push harder"
+        ],
+        "power_triggers": [
+            "saitama"
+        ],
+        "power_outputs": [
+            "Who decides limits? And based on what? You said you worked hard? Well, maybe you need to work a little harder. Is that really the limit of your strength? Could the you of tomorrow beat you today? Instead of giving in, move forward.",
+            "If the heroes run and hide, who will stay and fight?",
+            "I'll leave tomorrow's problems to tomorrow's me",
+            "100 Push ups. 100 sit ups. And 100 squats. Then a 10 kilometer run. Do it every single day!",
+            "If you really want to be strong... Stop caring about what your surrounding thinks of you!",
+            "You said you worked hard? Well, maybe you need to work a little longer.",
+            "Human beings are strong because we can change ourselves.",
+            "You have to keep doing it. No matter how difficult it gets. It took me a full 3 years to get this strong.",
+            "You gotta train like hell until the point where your hair falls out. That’s the only way to become truly strong."
+
+        ],
+        "power_counter": 0,
+        "avoid_counter": 1,
+        "module_mode": 0
+    },
     "Motivation": {
         "name": "",
         "enabled": 1,

@@ -27,19 +27,25 @@ class MyData(object):
 
         if time_scope == 'hourly':
             if language == ITA:
-                out = 'Questo grafico rappresenta i {} che hai inviato in queste ore\nPer un totali {} tempo sprecato.'
+                out = 'Questo grafico rappresenta i {} che hai inviato in queste ore\n' \
+                      'Per un totali {} di tempo sprecato.'
             else:
-                out = 'This graph show the {} msg that\'s you\'ve sent in these hours\nFor a total of {} time wasted.'
+                out = 'This graph show the {} msg that\'s you\'ve sent in these hours\n' \
+                      'For a total of {} of time wasted.'
         elif time_scope == 'daily':
             if language == ITA:
-                out = 'Qui invece, puoi vedere i {} che hai inviato in questi giorni\nPer un totali {} tempo sprecato.'
+                out = 'Qui invece, puoi vedere i {} che hai inviato in questi giorni\n' \
+                      'Per un totali {} di tempo sprecato.'
             else:
-                out = 'Here you can see the {} msg that\'s you\'ve sent in these days\n for a total of {} time wasted.'
+                out = 'Here you can see the {} msg that\'s you\'ve sent in these days\n' \
+                      'For a total of {} of time wasted.'
         else:
             if language == ITA:
-                out = 'In fine abbiamo i {} che hai inviato in questi mesi\nComplimenti, hai sprecato {} in tutto.'
+                out = 'In fine abbiamo i {} che hai inviato in questi mesi\n' \
+                      'Complimenti, hai sprecato {} in tutto.'
             else:
-                out = 'At the end we can see the {} msg sent in these months\nCongrats, {} wasted in total.'
+                out = 'At the end we can see the {} msg sent in these months\n' \
+                      'Congrats, {} of wasted in total.'
         return out.format(n_messages, sec_to_time(n_sec, language))
 
     def __build_data(self, time_array, msg_array, time_spent_array, timezone, max_len, time_scope):
@@ -146,7 +152,7 @@ class MyData(object):
                 db.user.msg.by_month,
                 db.user.msg.time_spent_by_month,
                 timezone,
-                12,
+                3,
                 'monthly'
             )
 

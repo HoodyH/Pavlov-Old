@@ -5,7 +5,6 @@ import sys
 from threading import Thread
 from core.starter import Starter
 from core.src.settings import TELEGRAM
-from time import sleep
 
 from io import BytesIO
 import speech_recognition as sr
@@ -39,6 +38,13 @@ class TelegramBot(object):
 
         self.stop_bot = False
         self.speech_to_text = False
+
+        """
+        COMMANDS
+        data - get stats eng
+        dati - ottieni statistiche ita
+        """
+        self.telegram_command_list = ['/data', '/dati']
 
     def voice_handler(self, bot, update):
 
@@ -87,6 +93,19 @@ class TelegramBot(object):
 
         self.analyze_message(bot, message, text)
 
+    def command_converter(self, bot, update):
+        message = update.message
+        text = update.message.text
+
+        if str.startswith(text, '/'):
+            temp = list(text)
+            temp[0] = '.'
+            text = ''.join(temp)
+            p = text.find('@')
+            if p is not -1:
+                text = text[:p]
+            self.analyze_message(bot, message, text)
+
     @staticmethod
     def analyze_message(bot, message, text):
 
@@ -120,19 +139,12 @@ class TelegramBot(object):
         updater = Updater(self.token)
         dp = updater.dispatcher
 
+        for telegram_command in self.telegram_command_list:
+            telegram_command = telegram_command[1:]
+            dp.add_handler(CommandHandler(telegram_command, self.command_converter))
+
         dp.add_handler(MessageHandler(Filters.voice, self.voice_handler))
         dp.add_handler(MessageHandler(Filters.text, self.text_handler))
-
-        def stop_and_restart():
-            """Gracefully stop the Updater and replace the current process with a new one"""
-            updater.stop()
-            os.execl(sys.executable, sys.executable, *sys.argv)
-
-        def restart(update, context):
-            update.message.reply_text('Bot is restarting...')
-            Thread(target=stop_and_restart).start()
-
-        dp.add_handler(CommandHandler('r', restart, filters=Filters.user(username='@AbbestiaDC')))
 
         updater.start_polling()
         updater.idle()
