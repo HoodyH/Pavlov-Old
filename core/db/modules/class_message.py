@@ -19,6 +19,10 @@ class MessagesField(object):
         self.sudo = 0
         self.img = 0
         self.links = 0
+        self.documents = 0
+        self.vocals = 0
+        self.video_note = 0
+        self.stickers = 0
 
     def extract_data(self, raw_data):
         self.log_time_by_hour = raw_data.get('log_time_by_hour', self.log_time_by_hour)
@@ -38,6 +42,10 @@ class MessagesField(object):
         self.sudo = raw_data.get('sudo', self.sudo)
         self.img = raw_data.get('img', self.img)
         self.links = raw_data.get('links', self.links)
+        self.documents = raw_data.get('documents', self.documents)
+        self.vocals = raw_data.get('vocals', self.vocals)
+        self.video_note = raw_data.get('video_note', self.video_note)
+        self.stickers = raw_data.get('stickers', self.stickers)
 
         return self
 
@@ -61,6 +69,10 @@ class MessagesField(object):
             'sudo': self.sudo,
             'img': self.img,
             'links': self.links,
+            'documents': self.documents,
+            'vocals': self.vocals,
+            'video_note': self.video_note,
+            'stickers': self.stickers,
         }
 
         return data_out
@@ -190,3 +202,39 @@ class MessagesField(object):
     @links.setter
     def links(self, value):
         self.__links = value
+
+    # documents
+    @property
+    def documents(self):
+        return self.__documents
+
+    @documents.setter
+    def documents(self, value):
+        self.__documents = value
+
+    # vocals
+    @property
+    def vocals(self):
+        return self.__vocals
+
+    @vocals.setter
+    def vocals(self, value):
+        self.__vocals = value
+
+    # video_note
+    @property
+    def video_note(self):
+        return self.__video_note
+
+    @video_note.setter
+    def video_note(self, value):
+        self.__video_note = value
+
+    # stickers
+    @property
+    def stickers(self):
+        return self.__stickers
+
+    @stickers.setter
+    def stickers(self, value):
+        self.__stickers = value

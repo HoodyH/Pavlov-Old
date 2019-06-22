@@ -1,39 +1,34 @@
 from core.src.settings import *
 from core.src.static_modules import db
-from core.src.utils.message_sender import MessageSender
+from core.bot_abstraction import BotStd
 from datetime import datetime
 import math
 
 
 class UserDataLog(object):
 
-    def __init__(self, scope, bot, guild_id, user_id, language, username, text, prefix_type):
+    def __init__(self, bot, language, text, message_type, prefix_type):
 
-        self.scope = scope
         self.bot = bot
-        self.guild_id = guild_id
-        self.user_id = user_id
         self.language = language
-        self.username = username
         self.text = text
         self.text_len = len(text)
-        self.prefix_mode = prefix_type
-
-        self.out = None
+        self.message_type = message_type
+        self.prefix_type = prefix_type
 
     def __send_level_up_message(self, level, destination):
 
         if self.language == ITA:
-            message = 'Grande {}\nHai raggiunto il livello {}'.format(self.username, level)
+            message = 'Grande {}\nHai raggiunto il livello {}'.format(self.bot.user.username, level)
         else:
-            message = 'Cool {}\nYou\'ve gain to level {}'.format(self.username, level)
+            message = 'Cool {}\nYou\'ve gain to level {}'.format(self.bot.user.username, level)
 
-        ms = MessageSender(self.scope, self.bot, self.guild_id, self.user_id, self.guild_id)
+        ms = BotStd()
         ms.send_message(message, destination)
 
     def log_data(self):
 
-        db.user_name = self.username
+        db.user_name = self.bot.user.username
 
         now = datetime.utcnow()
 
@@ -57,5 +52,7 @@ class UserDataLog(object):
         bits_by_string_len = int(math.ceil(self.text_len * BITS_SAMPLE_VALUE / SAMPLE_STRING_LEN))
         bits_add = bits_by_string_len if bits_by_string_len <= BITS_MAX_VALUE else BITS_MAX_VALUE
         db.update_bits(bits_add)
+
+        db.update_messages_by_type(self.message_type, self.prefix_type)
 
         db.set_data()

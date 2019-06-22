@@ -2,7 +2,7 @@ from core.src.static_modules import pickup_line
 from core.src.message_reader import find
 
 
-class PickupLineCall(object):
+class PickupLineReply(object):
 
     @staticmethod
     def message_reply(language, text):

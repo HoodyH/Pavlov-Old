@@ -30,16 +30,14 @@ class Respond(object):
         "avoid_counter"
     ]
 
-    def __init__(self, scope, guild_id, user_id, text, module_mode, prefix_type):
+    def __init__(self, bot, text, module_mode, prefix_type):
 
-        self.scope = scope
-        self.guild_id = guild_id
-        self.user_id = user_id
+        self.bot = bot
         self.text = text
         self.module_mode = module_mode
         self.prefix_mode = prefix_type
 
-        self.situational_reply = load(self.guild_id, self.scope, "situational_reply")
+        self.situational_reply = load(self.bot.guildid, self.bot.scope, "situational_reply")
 
         self.name = None
         self.enabled = None
@@ -67,7 +65,7 @@ class Respond(object):
             setattr(self, array, self.situational_reply[key].get(array, [""]))
         for integer in self._integers:
             setattr(self, integer, self.situational_reply[key].get(integer, 0))
-        self.users_allowed = self.situational_reply[key].get(self.scope, {self.scope: []}).get(self.scope, [])
+        self.users_allowed = self.situational_reply[key].get(self.bot.scope, {self.bot.scope: []}).get(self.bot.scope, [])
         return
 
     def _set_reply_data(self, key):
@@ -80,11 +78,11 @@ class Respond(object):
         for integer in self._integers:
             reply[integer] = getattr(self, integer)
         try:
-            reply["users_allowed"][self.scope] = self.users_allowed
+            reply["users_allowed"][self.bot.scope] = self.users_allowed
         except Exception as e:
             Log.top_level_error(e, "message reply")
-            reply["users_allowed"] = self.situational_reply[key].get(self.scope, {self.scope: self.users_allowed})
-        save(self.guild_id, self.scope, "situational_reply", self.situational_reply)
+            reply["users_allowed"] = self.situational_reply[key].get(self.bot.scope, {self.bot.scope: self.users_allowed})
+        save(self.bot.guild_id, self.bot.scope, "situational_reply", self.situational_reply)
         return
 
     def _find_avoid(self):
@@ -185,7 +183,7 @@ class Respond(object):
             return False
 
         # check if the user is allowed to call this key
-        elif self.private is True and self.users_allowed.index(self.user_id) is None:
+        elif self.private is True and self.users_allowed.index(self.bot.user.id) is None:
             return False
 
         # module is enabled

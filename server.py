@@ -1,4 +1,5 @@
 from telegram_bot import TelegramBot
+from core.starter import Starter
 import configparser as cfg
 
 parser = cfg.ConfigParser()
@@ -8,7 +9,9 @@ TELEGRAM_TOKEN = parser.get("creds", "token")
 
 
 def main():
-    telegram_bot = TelegramBot(TELEGRAM_TOKEN)
+
+    starter = Starter()
+    telegram_bot = TelegramBot(TELEGRAM_TOKEN, starter)
     telegram_bot.run()
 
 

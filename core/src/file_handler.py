@@ -103,7 +103,7 @@ def _private_create_reply_file():
         num += 1
         field = json_obj[num] = {}
         field["output_counter"] = el[0]
-        field["scope"] = el[1]
+        field["_scope"] = el[1]
         field["standard_triggers"] = el[2]
         field["standars_outputs"] = el[3]
         field["avoiders"] = el[4]

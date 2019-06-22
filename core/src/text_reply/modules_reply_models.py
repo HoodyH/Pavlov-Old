@@ -6,7 +6,7 @@ def no_action_taken(language):
     if language is ITA:
         return "Nulla è stato cambiato"
     else:  # auto fall back on english
-        return "Nothing has bBNen changed"
+        return "Nothing has been changed"
 
 
 # MODULE CONFIG

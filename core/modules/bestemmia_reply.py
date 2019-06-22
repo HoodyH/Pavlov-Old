@@ -22,7 +22,7 @@ BASE_TRIGGERS_ENG = [
     ]
 
 
-class BestemmiaCall(object):
+class BestemmiaReply(object):
 
     def __init__(self):
         self.subject = None
