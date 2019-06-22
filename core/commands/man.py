@@ -1,23 +1,21 @@
 from core.src.file_handler import load, save
 from core.src.settings import *
 from core.src.internal_log import Log
-from core.src.text_reply.modules_reply_models import no_action_taken, mode
+from core.src.text_reply.modules_reply_models import no_action_taken, mode_updated
 from core.src.text_reply.errors import parse_error
 
 
-class ModuleStatus(object):
+class Man(object):
     """
     this command will mute the given module.
     """
 
-    def __init__(self, scope, guild_id, user_id, language, command, arg, params, *args, **kwargs):
+    def __init__(self, bot, language, command, arg, params, *args, **kwargs):
 
+        self.bot = bot
         self.language = language
-        self.scope = scope
-        self.guild_id = guild_id
-        self.user_id = user_id
 
-        self.command_name = command
+        self.command = command
         self.arg = arg
 
         # parameter handed
@@ -59,36 +57,5 @@ class ModuleStatus(object):
 
         save(self.guild_id, self.scope, "config", self.config)
 
-    def mute(self):
-
-        self._read_module_status()
-
-        old_status = self.mode
-
-        if self._set is ERROR:
-            return parse_error(self.language, self._set_string, "0, 1, 2, 3")
-        out = no_action_taken(self.language)
-        if self._set is not None:
-            if self._set is DISABLED_MODE:
-                self.mode = DISABLED_MODE
-                out = mode(self.language, "DISABLED")
-            if self._set is QUIET_MODE:
-                self.mode = QUIET_MODE
-                out = mode(self.language, "QUIET")
-            if self._set is NORMAL_MODE:
-                self.mode = NORMAL_MODE
-                out = mode(self.language, "NORMAL")
-            if self._set is SPAM_MODE:
-                self.mode = SPAM_MODE
-                out = mode(self.language, "SPAM")
-        elif self.mode is NORMAL_MODE:
-            self.mode = QUIET_MODE
-            out = mode(self.language, "QUIET")
-        else:
-            self.mode = NORMAL_MODE
-            out = mode(self.language, "NORMAL")
-
-        Log.module_status_changed(self.scope, self.guild_id, self.user_id, self.arg, old_status, self.mode)
-        self._set_module_status()
-
-        return out
+    def man(self):
+        return

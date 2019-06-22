@@ -1,6 +1,8 @@
-
-
+# base
+ENABLED = 1
+DISABLED = 0
 ERROR = -1
+
 
 # debug
 USE_GLOBAL_FILE_ONLY = True  # deprecated
@@ -64,11 +66,11 @@ OVERRIDE_PREFIX = 1
 SUDO_PREFIX = 2
 
 # global setting for auto reply commands
-DISABLED_MODE = -1
-QUIET_MODE = 0
-NORMAL_MODE = 1
-SPAM_MODE = 2
-AGGRESSIVE_MODE = 3
+DISABLED_MODE = 0
+QUIET_MODE = 1
+NORMAL_MODE = 2
+SPAM_MODE = 3
+AGGRESSIVE_MODE = 4
 
 # module type, to define the _scope of the module
 TYPE_LISTENER = 0

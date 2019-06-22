@@ -10,7 +10,7 @@ class MyData(object):
     """
     """
 
-    def __init__(self, bot, language, command, arg, params):
+    def __init__(self, bot, language, command, arg, params, *args, **kwargs):
 
         self.bot = bot
         self.language = language

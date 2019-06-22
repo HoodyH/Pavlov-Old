@@ -1,7 +1,13 @@
-from core.src.file_handler import load, save
-from core.src.settings import *
+from core.src.settings import (
+    DISABLED_MODE, QUIET_MODE, NORMAL_MODE, SPAM_MODE, AGGRESSIVE_MODE, ERROR,
+    MSG_ON_SAME_CHAT,
+    ENABLED, DISABLED
+)
+from core.src.static_modules import db
 from core.src.internal_log import Log
-from core.src.text_reply.modules_reply_models import no_action_taken, mode
+from core.src.text_reply.modules_reply_models import (
+    no_action_taken, mode_updated, activation_status_update, not_a_module
+)
 from core.src.text_reply.errors import parse_error
 
 
@@ -10,85 +16,125 @@ class ModuleStatus(object):
     this command will mute the given module.
     """
 
-    def __init__(self, scope, guild_id, user_id, language, command, arg, params):
+    def __init__(self, bot, language, command, arg, params, *args, **kwargs):
 
+        self.bot = bot
         self.language = language
-        self.scope = scope
-        self.guild_id = guild_id
-        self.user_id = user_id
 
-        self.command_name = command
+        self.command = command
         self.arg = arg
 
         # parameter handed
         self._set = None
-        self._l = None
+        self._en = None
 
-        _vars = ['set', 'l']
+        _vars = ['set', 'en']
         for param in params:
             name = '_{}'.format(param[0])
             setattr(self, name, param[1])
 
-        self._set_string = self._set
-        try:
-            self._set = int(self._set)
-        except Exception as e:
-            Log.top_level_error(e, "module config")
-            self._set = ERROR
-
-        # configuration file
-        self.config = load(guild_id, scope, 'config')
-        self.commands = load(guild_id, scope, 'commands')
-
-    def _read_module_status(self):
-
-        module = self.config.get('modules_status').get(self.arg)
-        if module is None:
-            self.enabled = 0
-            self.mode = 0
-            return
-        self.enabled = module.get('enabled')
-        self.mode = module.get('module_mode')
-        return
-
-    def _set_module_status(self):
-
-        field = self.config['modules_status'][self.arg] = {}
-        field['enabled'] = self.enabled
-        field['module_mode'] = self.mode
-
-        save(self.guild_id, self.scope, "config", self.config)
-
     def mute(self):
 
-        self._read_module_status()
-
-        old_status = self.mode
+        module = db.guild.modules.get(self.arg)
+        if module is None:
+            out = not_a_module(self.language, self.arg)
+            self.bot.send_message(out, MSG_ON_SAME_CHAT)
+            return
+        enabled = module.get('enabled')
+        mode = module.get('module_mode')
 
         if self._set is ERROR:
-            return parse_error(self.language, self._set_string, "0, 1, 2, 3")
-        out = no_action_taken(self.language)
-        if self._set is not None:
-            if self._set is DISABLED_MODE:
-                self.mode = DISABLED_MODE
-                out = mode(self.language, "DISABLED")
-            if self._set is QUIET_MODE:
-                self.mode = QUIET_MODE
-                out = mode(self.language, "QUIET")
-            if self._set is NORMAL_MODE:
-                self.mode = NORMAL_MODE
-                out = mode(self.language, "NORMAL")
-            if self._set is SPAM_MODE:
-                self.mode = SPAM_MODE
-                out = mode(self.language, "SPAM")
-        elif self.mode is NORMAL_MODE:
-            self.mode = QUIET_MODE
-            out = mode(self.language, "QUIET")
+            out = parse_error(self.language, self._set, "set 0, 1, 2, 3, 4")
+            self.bot.send_message(out, MSG_ON_SAME_CHAT)
+            return
+
+        if self._en is ERROR:
+            out = parse_error(self.language, self._en, "en 0, 1")
+            self.bot.send_message(out, MSG_ON_SAME_CHAT)
+            return
+
+        def disabled_mode():
+            global mode
+            mode = DISABLED_MODE
+            return mode_updated(self.language, "DISABLED_MODE")
+
+        def quiet_mode():
+            global mode
+            mode = QUIET_MODE
+            return mode_updated(self.language, "QUIET_MODE")
+
+        def normal_mode():
+            global mode
+            mode = NORMAL_MODE
+            return mode_updated(self.language, "NORMAL_MODE")
+
+        def spam_mode():
+            global mode
+            mode = SPAM_MODE
+            return mode_updated(self.language, "SPAM_MODE")
+
+        def aggressive_mode():
+            global mode
+            mode = AGGRESSIVE_MODE
+            return mode_updated(self.language, "AGGRESSIVE_MODE")
+
+        set_options = {
+            DISABLED_MODE: disabled_mode,
+            QUIET_MODE: quiet_mode,
+            NORMAL_MODE: normal_mode,
+            SPAM_MODE: spam_mode,
+            AGGRESSIVE_MODE: aggressive_mode,
+        }
+
+        def enable():
+            global enabled
+            enabled = ENABLED
+            return activation_status_update(self.language, self.arg, ENABLED)
+
+        def disable():
+            global enabled
+            enabled = DISABLED
+            return activation_status_update(self.language, self.arg, DISABLED)
+
+        en_options = {
+            ENABLED: disable,
+            DISABLED: enable,
+        }
+
+        if (self._set or self._en) is not None:
+
+            if self._set is not None:
+                old_mode = mode
+                out = set_options[int(self._set)]()
+                self.bot.send_message(out, MSG_ON_SAME_CHAT)
+                Log.module_status_changed(
+                    self.bot.scope,
+                    self.bot.guild.id,
+                    self.bot.user.id,
+                    self.arg + "_mode",
+                    old_mode,
+                    mode
+                )
+            if self._en is not None:
+                old_en = enabled
+                out = en_options[int(self._en)]()
+                self.bot.send_message(out, MSG_ON_SAME_CHAT)
+                Log.module_status_changed(
+                    self.bot.scope,
+                    self.bot.guild.id,
+                    self.bot.user.id,
+                    self.arg + "_en",
+                    old_en,
+                    mode
+                )
+
+            field = {
+                'enabled': enabled,
+                'module_mode': mode
+            }
+            db.guild.modules[self.arg] = field
+            db.set_data()
+
         else:
-            self.mode = NORMAL_MODE
-            out = mode(self.language, "NORMAL")
-
-        Log.module_status_changed(self.scope, self.guild_id, self.user_id, self.arg, old_status, self.mode)
-        self._set_module_status()
-
-        return out
+            out = no_action_taken(self.language)
+            self.bot.send_message(out, MSG_ON_SAME_CHAT)

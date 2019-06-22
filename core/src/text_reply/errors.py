@@ -1,4 +1,7 @@
-from core.src.settings import *
+from core.src.settings import (
+    ITA,
+    STATIC_SPLIT_MODE, STATIC_OVERRIDE_MODE
+)
 
 
 def command_error(language):
@@ -31,14 +34,14 @@ def message_reply_error(language, error_type, trigger=None):
             return 'Sintassi errata nel trigger: {}\nSTATIC_OVERRIDE_MODE: {}{}{}\nSTATIC_SPAM_MODE: {}{}{}'.format(
                 trigger,
                 STATIC_SPLIT_MODE, STATIC_OVERRIDE_MODE, STATIC_SPLIT_MODE,
-                STATIC_SPLIT_MODE, STATIC_SPAM_MODE, STATIC_SPLIT_MODE
+                STATIC_SPLIT_MODE, STATIC_OVERRIDE_MODE, STATIC_SPLIT_MODE
             )
     else:  # auto fall back on english
         if error_type is WRONG_STATIC_MODE_STRING:
             return 'Wrong syntax in trigger {}\nSTATIC_OVERRIDE_MODE: {}{}{}\nSTATIC_SPAM_MODE: {}{}{}'.format(
                 trigger,
                 STATIC_SPLIT_MODE, STATIC_OVERRIDE_MODE, STATIC_SPLIT_MODE,
-                STATIC_SPLIT_MODE, STATIC_SPAM_MODE, STATIC_SPLIT_MODE
+                STATIC_SPLIT_MODE, STATIC_OVERRIDE_MODE, STATIC_SPLIT_MODE
             )
 
 

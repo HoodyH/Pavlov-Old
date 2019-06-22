@@ -1,5 +1,5 @@
 from core.src.settings import *
-from core.src.utils.formatting import remap_range
+from core.src.utils.internal_formatting import remap_range
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 from math import ceil
