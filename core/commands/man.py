@@ -1,13 +1,14 @@
-from core.src.file_handler import load, save
-from core.src.settings import *
-from core.src.internal_log import Log
-from core.src.text_reply.modules_reply_models import no_action_taken, mode_updated
-from core.src.text_reply.errors import parse_error
+from core.src.settings import (
+    MSG_ON_SAME_CHAT
+)
+from core.src.command_reader import CommandReader
+from core.src.static_modules import db
+from core.src.text_reply.modules_reply_models import man_title, man_description, man_usage
+from core.src.text_reply.errors import arg_not_found_error
 
 
 class Man(object):
     """
-    this command will mute the given module.
     """
 
     def __init__(self, bot, language, command, arg, params, *args, **kwargs):
@@ -18,44 +19,39 @@ class Man(object):
         self.command = command
         self.arg = arg
 
-        # parameter handed
-        self._set = None
-        self._l = None
+        self.c_reader = CommandReader()
 
-        _vars = ['set', 'l']
-        for param in params:
-            name = '_{}'.format(param[0])
-            setattr(self, name, param[1])
+    def _build_man(self, language, command_name):
 
-        self._set_string = self._set
         try:
-            self._set = int(self._set)
+            self.c_reader.read_command(language, command_name)
+            out = man_title(language, command_name, self.c_reader.invocation_word) + '\n'
+            out += man_description(language, self.c_reader.description) + '\n'
+            out += man_usage(language, self.c_reader.usage)
+            return out
         except Exception as e:
-            Log.top_level_error(e, "module config")
-            self._set = ERROR
-
-        # configuration file
-        self.config = load(guild_id, scope, 'config')
-        self.commands = load(guild_id, scope, 'commands')
-
-    def _read_module_status(self):
-
-        module = self.config.get('modules_status').get(self.arg)
-        if module is None:
-            self.enabled = 0
-            self.mode = 0
-            return
-        self.enabled = module.get('enabled')
-        self.mode = module.get('module_mode')
-        return
-
-    def _set_module_status(self):
-
-        field = self.config['modules_status'][self.arg] = {}
-        field['enabled'] = self.enabled
-        field['module_mode'] = self.mode
-
-        save(self.guild_id, self.scope, "config", self.config)
+            print(e)
+            return e
 
     def man(self):
-        return
+
+        out = ''
+
+        if self.arg == 'all' or self.arg == '':
+            for key in self.c_reader.commands_keys:
+                out += self._build_man(self.language, key) + '\n\n'
+        else:
+            try:
+                command_found, language_found = self.c_reader.find_command(db.guild.languages, self.arg)
+            except Exception as e:
+                print(e)
+                return
+
+            if command_found is None:
+                out = arg_not_found_error(language_found)  # use guild main language
+                self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
+                return
+
+            out = self._build_man(language_found, command_found)
+
+        self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)

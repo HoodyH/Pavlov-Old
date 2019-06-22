@@ -99,7 +99,7 @@ def extract_command_parameters(text):
         arg = _extract_value(text_array)
         return arg, params
 
-    for i in range(0, len(text_array) - 1):
+    for i in range(0, len(text_array)):
         if str.startswith(text_array[i], '-'):
             param_key = text_array[i][1:]
             param = [param_key]

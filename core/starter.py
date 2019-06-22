@@ -2,7 +2,8 @@ from core.src.settings import *
 from core.bot_abstraction import BotStd
 from core.src.static_modules import db
 from core.src.file_handler import load_commands
-from core.src.message_reader import find, extract_command_parameters
+from core.src.message_reader import extract_command_parameters
+from core.src.command_reader import CommandReader
 from core.src.text_reply.errors import command_error, command_not_implemented
 from core.src.internal_log import Log
 # listeners
@@ -12,7 +13,9 @@ from core.modules.bestemmia_reply import BestemmiaReply
 from core.modules.badass_character_reply import BadAssCharacterReply
 from core.modules.pickup_line_reply import PickupLineReply
 # commands
-from core.commands.command_module_config import ModuleStatus
+from core.commands.help import Help
+from core.commands.man import Man
+from core.commands.module_status import ModuleStatus
 from core.commands.my_data import MyData
 # audio converter
 from core.src.speech_to_text import speech_to_text
@@ -91,13 +94,6 @@ class Starter(object):
             return True
         return False
 
-    def _read_command(self, key, language):
-
-        self.dm_enabled = self.commands[key].get('dm_enabled')
-        self.permissions = self.commands[key].get('permissions')
-        self.invocation_word = self.commands[key][language].get('invocation_word')
-        self.manual = self.commands[key][language].get('manual')
-
     def _run_command(self):
         """
         -read language/languages of the guild.
@@ -112,18 +108,12 @@ class Starter(object):
 
         text_array = self.in_text.split()
 
-        command_found = None
-        language_found = None
-
-        # read language/languages of the guild.
-        for language in db.guild.languages:
-            for command in self.commands.keys():
-                self._read_command(command, language)
-                for trigger in self.invocation_word:
-                    # check if there's a command trigger
-                    if find(trigger, text_array[0]):
-                        command_found = command
-                        language_found = language
+        c_reader = CommandReader()
+        try:
+            command_found, language_found = c_reader.find_command(db.guild.languages, text_array[0])
+        except Exception as e:
+            print(e)
+            return
 
         # send an error
         if command_found is None:
@@ -134,19 +124,36 @@ class Starter(object):
         # extract arguments and parameters
         arg, params = extract_command_parameters(text_array)
 
-        # run command and return response
-        if command_found == "module.deactivate":
+        # run command
+        def not_implemented():
             out = command_not_implemented(language_found)
             self.bot.send_message(out, MSG_ON_SAME_CHAT)
-            return
-        elif command_found == "module.status":
+
+        def bot_help():
+            c = Help(self.bot, language_found, command_found, arg, params)
+            c.help()
+
+        def man():
+            c = Man(self.bot, language_found, command_found, arg, params)
+            c.man()
+
+        def module_status():
             c = ModuleStatus(self.bot, language_found, command_found, arg, params)
             c.mute()
-            return
-        elif command_found == "mydata":
+
+        def my_data():
             c = MyData(self.bot, language_found, command_found, arg, params)
             c.my_data()
-            return
+
+        commands = {
+            'not_implemented': not_implemented,
+            'help': bot_help,
+            'man': man,
+            'module_status': module_status,
+            'my_data': my_data,
+        }
+
+        commands.get(command_found)()
 
     def _natural_response(self):
 
@@ -180,14 +187,15 @@ class Starter(object):
         if output != "":
             self.bot.send_message(output, MSG_ON_SAME_CHAT, write_en=True)
 
-    def _update_statistics(self, message_type):
+    def _update_statistics(self, message_type, time_spent_extra=0):
 
         user_data_log = UserDataLog(
             self.bot,
             db.guild.languages[0],
             self.in_text,
             message_type,
-            self.prefix_type
+            self.prefix_type,
+            time_spent_extra=time_spent_extra
         )
         user_data_log.log_data()
 
@@ -200,7 +208,7 @@ class Starter(object):
         self._update_statistics(COMMAND)
         self._run_command()
 
-    def analyze_vocal_message(self, raw_file):
+    def analyze_vocal_message(self, raw_file, vocal_duration):
 
         raw_file.seek(0)
         ogg_audio = AudioSegment.from_ogg(raw_file)
@@ -209,11 +217,11 @@ class Starter(object):
 
         self.in_text = speech_to_text(filename, ITA)
 
-        if self._has_permissions('vocal_to_text'):
+        if self._has_permissions('speech_to_text'):
             t = 'SPEECH TO TEXT:\n{}'.format(self.in_text)
             self.bot.send_message(t, MSG_ON_SAME_CHAT, write_en=True)
 
-        self._update_statistics(VOICE)
+        self._update_statistics(VOICE, time_spent_extra=vocal_duration)
         self._natural_response()
 
     def analyze_text_message(self, text):

@@ -100,13 +100,23 @@ class ModuleStatus(object):
             ENABLED: disable,
             DISABLED: enable,
         }
+        i = 1
 
         if (self._set or self._en) is not None:
 
-            if self._set is not None:
+            if self._set == '':
                 old_mode = mode
-                out = set_options[int(self._set)]()
-                self.bot.send_message(out, MSG_ON_SAME_CHAT)
+                if mode is QUIET_MODE:
+                    mode = NORMAL_MODE
+                    out = set_options[NORMAL_MODE]()
+                elif mode is QUIET_MODE:
+                    mode = NORMAL_MODE
+                    out = set_options[QUIET_MODE]()
+                else:
+                    mode = NORMAL_MODE
+                    out = set_options[NORMAL_MODE]()
+
+                self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
                 Log.module_status_changed(
                     self.bot.scope,
                     self.bot.guild.id,
@@ -115,17 +125,50 @@ class ModuleStatus(object):
                     old_mode,
                     mode
                 )
-            if self._en is not None:
+
+            elif self._set is not None:
+                old_mode = mode
+                out = set_options[int(self._set)]()
+                self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
+                Log.module_status_changed(
+                    self.bot.scope,
+                    self.bot.guild.id,
+                    self.bot.user.id,
+                    self.arg + "_mode",
+                    old_mode,
+                    mode
+                )
+
+            if self._en == '':
                 old_en = enabled
-                out = en_options[int(self._en)]()
-                self.bot.send_message(out, MSG_ON_SAME_CHAT)
+                if enabled is DISABLED:
+                    enabled = ENABLED
+                    out = en_options[ENABLED]()
+                else:
+                    enabled = DISABLED
+                    out = en_options[DISABLED]()
+
+                self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
                 Log.module_status_changed(
                     self.bot.scope,
                     self.bot.guild.id,
                     self.bot.user.id,
                     self.arg + "_en",
                     old_en,
-                    mode
+                    enabled
+                )
+
+            elif self._en is not None:
+                old_en = enabled
+                out = en_options[int(self._en)]()
+                self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
+                Log.module_status_changed(
+                    self.bot.scope,
+                    self.bot.guild.id,
+                    self.bot.user.id,
+                    self.arg + "_en",
+                    old_en,
+                    enabled
                 )
 
             field = {
@@ -137,4 +180,4 @@ class ModuleStatus(object):
 
         else:
             out = no_action_taken(self.language)
-            self.bot.send_message(out, MSG_ON_SAME_CHAT)
+            self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)

@@ -128,6 +128,7 @@ class BotStd(object):
                      destination,
                      write_en=False,
                      write_time_sec=None,
+                     parse_mode_en=False,
                      parse_mode=None,
                      disable_web_page_preview=None,
                      disable_notification=False,
@@ -150,10 +151,12 @@ class BotStd(object):
                         self._bot.send_chat_action(chat_id=location, action=telegram.ChatAction.TYPING)
                         sleep(0.5)
 
+                # [inline mention of a user](tg://user?id=338674622)
+
                 self._bot.send_message(
                     chat_id=location,
-                    text=message,
-                    parse_mode=parse_mode,
+                    text=message.replace('**', '*'),
+                    parse_mode=telegram.ParseMode.MARKDOWN if parse_mode_en is True else None,
                     disable_web_page_preview=disable_web_page_preview,
                     disable_notification=disable_notification,
                     reply_to_message_id=reply_to_message_id,

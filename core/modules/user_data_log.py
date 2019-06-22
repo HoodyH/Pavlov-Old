@@ -7,14 +7,23 @@ import math
 
 class UserDataLog(object):
 
-    def __init__(self, bot, language, text, message_type, prefix_type):
-
+    def __init__(
+            self,
+            bot,
+            language,
+            text,
+            message_type,
+            prefix_type,
+            time_spent_extra=0
+    ):
         self.bot = bot
         self.language = language
         self.text = text
         self.text_len = len(text)
         self.message_type = message_type
         self.prefix_type = prefix_type
+
+        self.time_spent_extra = time_spent_extra
 
     def __send_level_up_message(self, level, destination):
 
@@ -32,7 +41,7 @@ class UserDataLog(object):
 
         now = datetime.utcnow()
 
-        time_spent_to_type = math.ceil(self.text_len * TIME_SAMPLE_VALUE / SAMPLE_STRING_LEN)
+        time_spent_to_type = math.ceil(self.text_len * TIME_SAMPLE_VALUE / SAMPLE_STRING_LEN) + self.time_spent_extra
         db.update_msg(now, time_spent_to_type)
 
         xp_by_string_len = int(math.ceil(self.text_len * XP_SAMPLE_VALUE / SAMPLE_STRING_LEN))

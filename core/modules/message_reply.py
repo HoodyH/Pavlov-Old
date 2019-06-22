@@ -1,4 +1,4 @@
-from core.src.file_handler import load, save
+from core.src.file_handler import load, save, situational_reply_global
 from core.src.utils.select_handler import phrase_sequencer
 from core.src.message_reader import find
 from core.src.settings import *
@@ -37,7 +37,7 @@ class Respond(object):
         self.module_mode = module_mode
         self.prefix_mode = prefix_type
 
-        self.situational_reply = load(self.bot.guildid, self.bot.scope, "situational_reply")
+        self.situational_reply = load(self.bot.guild.id, self.bot.scope, "situational_reply")
 
         self.name = None
         self.enabled = None

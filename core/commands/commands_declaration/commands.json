@@ -1,44 +1,51 @@
 {
-    "man":{
+    "help":{
         "main_module": 0,
         "dm_enabled": 1,
+        "enabled_by_default": 1,
+        "permissions": 0,
+        "eng":{
+            "invocation_word": ["help", "h"],
+            "description": "Dai un nome",
+            "usage": "Dai un nome",
+            "handled_args": [],
+            "handled_params": [],
+            "man": ""
+        },
+        "ita":{
+            "invocation_word": ["help", "h", "aiuto"],
+            "description": "Dai un nome",
+            "usage": "Dai un nome",
+            "handled_args": [],
+            "handled_params": [],
+            "man": ""
+        }
+    },
+    "man":{
+        "main_module": 0,
+        "dm_enabled": 0,
         "enabled_by_default": 1,
         "permissions": 0,
         "eng":{
             "invocation_word": ["man", "manual"],
             "description": "Dai un nome",
             "usage": "Dai un nome",
+            "handled_args": ["all"],
+            "handled_params": [],
             "man": ""
         },
         "ita":{
             "invocation_word": ["man", "manuale"],
             "description": "Dai un nome",
             "usage": "Dai un nome",
+            "handled_args": ["tutto"],
+            "handled_params": [],
             "man": ""
         }
     },
-    "module.deactivate":{
+    "module_status":{
         "main_module": 1,
-        "dm_enabled": 1,
-        "enabled_by_default": 1,
-        "permissions": 0,
-        "eng":{
-            "invocation_word": ["module.deactivate", "m.d", "deactivate"],
-            "description": "Dai un nome",
-            "usage": "Dai un nome",
-            "man": ""
-        },
-        "ita":{
-            "invocation_word": ["modulo.disattiva", "m.d", "disattiva"],
-            "description": "Disattiva un modulo",
-            "usage": "mute <name of the module>",
-            "man": ""
-        }
-    },
-
-    "module.status":{
-        "main_module": 1,
-        "dm_enabled": 1,
+        "dm_enabled": 0,
         "enabled_by_default": 1,
         "permissions": 0,
         "eng":{
@@ -48,18 +55,18 @@
         },
         "ita":{
             "invocation_word": ["modulo.stato", "m.s", "stato"],
-            "description": "Silenzia un modulo, una volta silanziato questo comando potà essere utilizzato solo con il silent prefix{}",
+            "description": "Cambia lo stato di un modulo, sia modalità che attivazione",
             "usage": "modulo.stato <nome del modulo>",
             "man": ""
         }
     },
-    "mydata":{
+    "my_data":{
         "main_module": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,
         "permissions": 0,
         "eng":{
-            "invocation_word": ["data", "mydata", "userdata"],
+            "invocation_word": ["data", "my.data", "user.data"],
             "description": "Dai un nome",
             "usage": "Dai un nome",
             "man": ""

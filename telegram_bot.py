@@ -19,22 +19,24 @@ class TelegramBot(object):
 
         """
         COMMANDS
+        help - help message
+        man - command manual of all active commands
         data - get stats eng
         dati - ottieni statistiche ita
-        speech_to_text - convert audio
+        speech_to_text - convert audio to text
         """
-        self.telegram_command_list = ['/data', '/dati', '/speech_to_text']
+        self.telegram_command_list = ['help', '/man', '/data', '/dati', '/speech_to_text']
 
     def voice_handler(self, bot, update):
-
         message = update.message
 
+        duration = message.voice.duration
         audio_bytes = BytesIO()
-        file = bot.getFile(bot.message.voice.file_id)
+        file = bot.getFile(message.voice.file_id)
         raw_file = file.download(out=audio_bytes)
 
         self.starter.update(TELEGRAM, bot, message)
-        self.starter.analyze_vocal_message(raw_file)
+        self.starter.analyze_vocal_message(raw_file, duration)
 
     def text_handler(self, bot, update):
         message = update.message
@@ -55,14 +57,23 @@ class TelegramBot(object):
         self.starter.analyze_text_message(text)
 
     def command_converter(self, bot, update):
+
         message = update.message
         text = update.message.text
+
+        shortcuts = {
+            'speech_to_text': 'state speech_to_text -en'
+        }
 
         if str.startswith(text, '/'):
             text = text[1:]
             p = text.find('@')
             if p is not -1:
                 text = text[:p]
+
+            for key in shortcuts.keys():
+                if key == text:
+                    text = shortcuts.get(key)
 
             self.starter.update(TELEGRAM, bot, message)
             self.starter.analyze_command_message(text)

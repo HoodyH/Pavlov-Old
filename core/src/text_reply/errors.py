@@ -45,5 +45,12 @@ def message_reply_error(language, error_type, trigger=None):
             )
 
 
+def arg_not_found_error(language):
+    if language is ITA:
+        return 'L\'argomento di questo comando è errato o inesistente.'
+    else:  # auto fall back on english
+        return 'The argument of this command is wrong or not existent.'
+
+
 
 

@@ -1,0 +1,21 @@
+{
+    "speech_to_text":{
+        "dependency": "module_status",
+        "eng":{
+            "invocation_word": ["speech to text", "speech_to_text"],
+            "description": "Dai un nome",
+            "usage": "Dai un nome",
+            "handled_args": [],
+            "handled_params": [],
+            "man": ""
+        },
+        "ita":{
+            "invocation_word": ["concerti testo", "aiuto"],
+            "description": "Dai un nome",
+            "usage": "Dai un nome",
+            "handled_args": [],
+            "handled_params": [],
+            "man": ""
+        }
+    }
+}
