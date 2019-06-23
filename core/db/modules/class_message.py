@@ -37,7 +37,7 @@ class MessagesField(object):
         self.by_month = raw_data.get('by_month', self.by_month)
         self.time_spent_by_month = raw_data.get('time_spent_by_month', self.time_spent_by_month)
 
-        self.commands = raw_data.get('commands', self.commands)
+        self.commands = raw_data.get('_commands', self.commands)
         self.override = raw_data.get('override', self.override)
         self.sudo = raw_data.get('sudo', self.sudo)
         self.img = raw_data.get('img', self.img)
@@ -64,7 +64,7 @@ class MessagesField(object):
             'by_month': self.by_month,
             'time_spent_by_month': self.time_spent_by_month,
 
-            'commands': self.commands,
+            '_commands': self.commands,
             'override': self.override,
             'sudo': self.sudo,
             'img': self.img,
@@ -158,7 +158,7 @@ class MessagesField(object):
     def time_spent_by_month(self, value):
         self.__time_spent_by_month = value
 
-    # commands
+    # _commands
     @property
     def commands(self):
         return self.__commands

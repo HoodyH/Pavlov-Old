@@ -97,10 +97,9 @@ class ModuleStatus(object):
             return activation_status_update(self.language, self.arg, DISABLED)
 
         en_options = {
-            ENABLED: disable,
-            DISABLED: enable,
+            DISABLED: disable,
+            ENABLED: enable,
         }
-        i = 1
 
         if (self._set or self._en) is not None:
 

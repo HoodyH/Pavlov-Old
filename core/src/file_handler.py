@@ -43,10 +43,15 @@ def load(scope, guild, file_name):
 
 
 commands = load_json("core/commands/commands_declaration", "commands")
+commands_shortcut = load_json("core/commands/commands_declaration", "commands_shortcut")
 
 
 def load_commands():
     return commands
+
+
+def load_commands_shortcut():
+    return commands_shortcut
 
 
 def save(scope, guild, file_name, json_obj):
@@ -69,30 +74,11 @@ def log_data(data):
     log.close()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-example_mat =   [
+example_mat = [
         [0, "global", ["hello","ciao","bella"], ["Yooo", "Yeyy", "bruuu"], ["merda"], ["non dire queste cose"], ["Buongiorno", "buongiornissimo"], ["Ma vai via"], "None"],
         [0, "global", ["pt"], ["PT", "PPT", "PTPT"], [""], [""], ["PPPT", "PTPTPT"], ["PPPPPPPPPPTTTTTTTTTT"], "None"]
     ]
+
 
 def _private_create_reply_file():
     

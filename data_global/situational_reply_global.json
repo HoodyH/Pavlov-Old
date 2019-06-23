@@ -107,7 +107,7 @@
             "telegram": [],
             "discord": []
         },
-        "standard_counter": 5,
+        "standard_counter": 0,
         "standard_triggers": [
             "amazon"
         ],
@@ -635,7 +635,7 @@
             "A true master is an eternal student",
             "Mi alleno per sorreggiere il peso dei problemi che le persone a cui voglio bene non possono portare.",
             "Tu sei il classico tipo che per sentirsi soddisfatto della propria vita deve criticare quella degli altri. Avanti, colpiscimi!",
-            "non sarò un modello per le persone, ma per un bot sì"
+            "non sar\u00f2 un modello per le persone, ma per un bot s\u00ec"
         ],
         "cit_author": "Maestro",
         "power_counter": 2,
@@ -894,8 +894,7 @@
         "scope": "global",
         "standard_triggers": [
             "hello",
-            "ciao",
-            "bella"
+            "ciao"
         ],
         "standard_outputs": [
             "Yooo",
@@ -932,7 +931,7 @@
         "standard_counter": 0,
         "scope": "global",
         "standard_triggers": [
-            "pt",
+            "%%%!%%%pt",
             "ma che cazzo",
             "ma che cazz",
             "LMFAO",
@@ -952,11 +951,10 @@
             "ptt",
             "pptt",
             "ptpt",
-            "porcatroia",
-            "porca troia"
+            "porcatroia"
         ],
         "power_outputs": [
-            "PPPPPPPPPPTTTTTTTTTT"
+            "PPPPTTTT"
         ],
         "power_counter": 0,
         "avoid_counter": 0,
@@ -967,7 +965,7 @@
             "telegram": []
         },
         "enabled": 0,
-        "mode": 2
+        "mode": 1
     },
     "Ubuntu": {
         "standard_counter": 2,

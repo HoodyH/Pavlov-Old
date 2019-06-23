@@ -64,6 +64,8 @@ class BotStd(object):
         self._chat = None
         self._user = None
 
+        self.output_permission = True
+
     def update_bot_data(self, scope, bot, message):
 
         self._scope = scope
@@ -78,6 +80,9 @@ class BotStd(object):
             self._chat = None
             self._user = None
 
+    def update_output_permission(self, pause_status):
+        self.output_permission = pause_status
+
     def send_image(self,
                    img_bytes,
                    destination,
@@ -89,6 +94,9 @@ class BotStd(object):
                    parse_mode=None,
                    **kwargs
                    ):
+
+        if self.output_permission is False:
+            return
 
         def __telegram_send(location):
             try:
@@ -137,6 +145,9 @@ class BotStd(object):
                      timeout=None,
                      **kwargs
                      ):
+
+        if self.output_permission is False:
+            return
 
         def __telegram_send(location):
 

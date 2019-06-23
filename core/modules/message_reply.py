@@ -1,4 +1,4 @@
-from core.src.file_handler import load, save, situational_reply_global
+from core.src.file_handler import load, save
 from core.src.utils.select_handler import phrase_sequencer
 from core.src.message_reader import find
 from core.src.settings import *
@@ -82,7 +82,7 @@ class Respond(object):
         except Exception as e:
             Log.top_level_error(e, "message reply")
             reply["users_allowed"] = self.situational_reply[key].get(self.bot.scope, {self.bot.scope: self.users_allowed})
-        save(self.bot.guild_id, self.bot.scope, "situational_reply", self.situational_reply)
+        save(self.bot.guild.id, self.bot.scope, "situational_reply", self.situational_reply)
         return
 
     def _find_avoid(self):

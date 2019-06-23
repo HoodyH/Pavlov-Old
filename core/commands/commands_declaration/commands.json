@@ -1,81 +1,168 @@
 {
     "help":{
-        "main_module": 0,
+        "main_command": 0,
+        "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,
         "permissions": 0,
-        "eng":{
-            "invocation_word": ["help", "h"],
-            "description": "Dai un nome",
-            "usage": "Dai un nome",
-            "handled_args": [],
-            "handled_params": [],
-            "man": ""
+        "invocation_words": ["help", "h"],
+        "description": {
+            "eng": "Show what you need to know to use the bot, standard command and known by everyone",
+            "ita": "Mostra solo ciò che ti serve per sapere utilizzare il bot, comando standard e da tutti conosciuto"
         },
-        "ita":{
-            "invocation_word": ["help", "h", "aiuto"],
-            "description": "Dai un nome",
-            "usage": "Dai un nome",
-            "handled_args": [],
-            "handled_params": [],
-            "man": ""
-        }
+        "handled_args": {
+            "": {
+                "eng": "Show base informations",
+                "ita": "Mostra tutti i moduli attivi con cui puoi interagire"
+            },
+            "me": {
+                "eng": "Show base informations for personal use",
+                "ita": "Mostra informazione base per l'uso personale"
+            },
+            "server": {
+                "eng": "Show base informations for guild use",
+                "ita": "Mostra informazione base sul utilizzo nella gilda"
+            }
+        },
+        "handled_params": {}
     },
     "man":{
-        "main_module": 0,
-        "dm_enabled": 0,
+        "main_command": 1,
+        "pro_command": 0,
+        "dm_enabled": 1,
         "enabled_by_default": 1,
         "permissions": 0,
-        "eng":{
-            "invocation_word": ["man", "manual"],
-            "description": "Dai un nome",
-            "usage": "Dai un nome",
-            "handled_args": ["all"],
-            "handled_params": [],
-            "man": ""
+        "invocation_words": ["man"],
+        "description": {
+            "eng": "Get detailed informations from a command",
+            "ita": "Accedi alle informazioni dettagliate di un comando"
         },
-        "ita":{
-            "invocation_word": ["man", "manuale"],
-            "description": "Dai un nome",
-            "usage": "Dai un nome",
-            "handled_args": ["tutto"],
-            "handled_params": [],
-            "man": ""
+        "handled_args": {
+            "": {
+                "eng": "Show tutti i moduli attivi con cui puoi interagire",
+                "ita": "Mostra tutti i moduli attivi con cui puoi interagire"
+            },
+            "all": {
+                "eng": "Mostra tutti i moduli, attivi e disattivi",
+                "ita": "Mostra tutti i moduli, attivi e disattivi"
+            },
+            "command_name": {
+                "eng": "Mostra i dettagli del modulo passato",
+                "ita": "Mostra i dettagli del modulo passato"
+            }
+        },
+        "handled_params": {
+            "-d": {
+                "eng": "Mostra solo la descrizione",
+                "ita": "Mostra solo la descrizione"
+            },
+            "-u": {
+                "eng": "Mostra un esempio di utilizzo",
+                "ita": "Mostra un esempio di utilizzo"
+            },
+            "-m": {
+                "eng": "Mostra il manuale",
+                "ita": "Mostra il manuale"
+            }
         }
     },
     "module_status":{
-        "main_module": 1,
-        "dm_enabled": 0,
-        "enabled_by_default": 1,
-        "permissions": 0,
-        "eng":{
-            "invocation_word": ["module.state", "m.s", "state"],
-            "description": "Command used to mute an ",
-            "usage": "module.state <name of the module>"
-        },
-        "ita":{
-            "invocation_word": ["modulo.stato", "m.s", "stato"],
-            "description": "Cambia lo stato di un modulo, sia modalità che attivazione",
-            "usage": "modulo.stato <nome del modulo>",
-            "man": ""
-        }
-    },
-    "my_data":{
-        "main_module": 0,
+        "main_command": 1,
+        "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,
-        "permissions": 0,
-        "eng":{
-            "invocation_word": ["data", "my.data", "user.data"],
-            "description": "Dai un nome",
-            "usage": "Dai un nome",
-            "man": ""
+        "permissions": 100,
+        "invocation_words": ["module.status", "m.s", "status"],
+        "description": {
+            "eng": "Cambia lo stato di un modulo, sia la modalità che l'abilitazione",
+            "ita": "Cambia lo stato di un modulo, sia la modalità che l'abilitazione"
         },
-        "ita":{
-            "invocation_word": ["dati", "miei dati"],
-            "description": "Dai un nome",
-            "usage": "Dai un nome",
-            "man": ""
+        "handled_args": {
+            "": {
+                "eng": "Not permitted",
+                "ita": "Non permesso"
+            },
+            "module_name": {
+                "eng": "Richiede in input un modulo per poter performare azioni su di lui con i parametri",
+                "ita": "Richiede in input un modulo per poter performare azioni su di lui con i parametri"
+            }
+        },
+        "handled_params": {
+            "-en": {
+                "eng": "Utilizzato vuoto cambia lo attivazione in modalità toggle, affiancato a 0(disattiva), 1(attiva)",
+                "ita": "Utilizzato vuoto cambia lo attivazione in modalità toggle, affiancato a 0(disattiva), 1(attiva)"
+            },
+            "-set": {
+                "eng": "Utilizzato vuoto cambia lo stato in modalità toggle, affiancato a 0(sospensione), 1(modalità sileziosa), 2(modalità normale), 3(modalità spam) 4(modalità agressiva)",
+                "ita": "Utilizzato vuoto cambia lo stato in modalità toggle, affiancato a 0(sospensione), 1(modalità sileziosa), 2(modalità normale), 3(modalità spam) 4(modalità agressiva)"
+            }
+        }
+    },
+    "pause_bot":{
+        "main_command": 1,
+        "pro_command": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 1,
+        "permissions": 100,
+        "invocation_words": ["pause_bot"],
+        "description": {
+            "eng": "Put the bot in pause",
+            "ita": "Mette in pausa il bot"
+        },
+        "handled_args": {
+            "": {
+                "eng": "Toggle the pause based on actual status",
+                "ita": "Funziona da interruttore basato sullo stato precedente"
+            },
+            "0": {
+                "eng": "Put the bot in pause",
+                "ita": "Mette il bot in pause"
+            },
+            "1": {
+                "eng": "Resume the bot",
+                "ita": "Riprende il normale funzionamento"
+            }
+        },
+        "handled_params": {}
+    },
+    "data":{
+        "main_command": 0,
+        "pro_command": 1,
+        "dm_enabled": 1,
+        "enabled_by_default": 0,
+        "permissions": 0,
+        "invocation_words": ["data"],
+        "description": {
+            "eng": "Show data catched by the bot in a nice graph",
+            "ita": "Mosta i dati  raccolti dal bot sottoforma di grafico"
+        },
+        "handled_args": {
+            "": {
+                "eng": "Show own user data",
+                "ita": "Mostra i propri dati utente"
+            },
+            "global": {
+                "eng": "Show own global user data",
+                "ita": "Mostra i propri dati utente globali"
+            },
+            "guild": {
+                "eng": "Show guild user data",
+                "ita": "Mostra i dati utente della gilda"
+            },
+            "@username": {
+                "eng": "Show user data of the tagged user",
+                "ita": "Mostra i dati utente dell'utente taggato"
+            }
+        },
+        "handled_params": {
+            "-m": {
+                "eng": "Details of the month",
+                "ita": "Dettagli del mese"
+            },
+            "-w": {
+                "eng": "Details of the week",
+                "ita": "Dettagli della settimana"
+            }
         }
     }
 }

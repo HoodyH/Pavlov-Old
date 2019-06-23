@@ -4,6 +4,7 @@ from core.src.settings import (
 )
 
 
+########################################################################
 # HELP
 def help_response(language, prefix):
     if language == ITA:
@@ -42,6 +43,23 @@ def man_usage(language, usage):
         return '**Esempio di utilizzo:**\n{}'.format(usage)
     else:
         return '**Example of use:**\n{}'.format(usage)
+
+
+########################################################################
+# BOT PAUSE
+def pause_response(language, status):
+    if status is ENABLED:
+        if language == ITA:
+            return 'Il bot in pausa'
+        else:
+            return 'Bot has been paused'
+    elif status is DISABLED:
+        if language is ITA:
+            return 'Sono sveglio!'
+        else:
+            return 'I am awake!'
+    else:
+        return "Error"
 
 
 ########################################################################

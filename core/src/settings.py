@@ -65,7 +65,7 @@ COMMAND_PREFIX = 0
 OVERRIDE_PREFIX = 1
 SUDO_PREFIX = 2
 
-# global setting for auto reply commands
+# global setting for auto reply _commands
 DISABLED_MODE = 0
 QUIET_MODE = 1
 NORMAL_MODE = 2

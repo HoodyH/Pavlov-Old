@@ -21,13 +21,14 @@ class Man(object):
 
         self.c_reader = CommandReader()
 
-    def _build_man(self, language, command_name):
+    @staticmethod
+    def _build_man(language, entity, command_name):
 
         try:
-            self.c_reader.read_command(language, command_name)
-            out = man_title(language, command_name, self.c_reader.invocation_word) + '\n'
-            out += man_description(language, self.c_reader.description) + '\n'
-            out += man_usage(language, self.c_reader.usage)
+            entity.read_command(language, command_name)
+            out = man_title(language, command_name, entity.invocation_words) + '\n'
+            out += man_description(language, entity.description)
+            # out += man_usage(language, entity.usage)
             return out
         except Exception as e:
             print(e)
@@ -38,11 +39,11 @@ class Man(object):
         out = ''
 
         if self.arg == 'all' or self.arg == '':
-            for key in self.c_reader.commands_keys:
-                out += self._build_man(self.language, key) + '\n\n'
+            for key in self.c_reader.commands.commands_keys:
+                out += self._build_man(self.language, self.c_reader.commands, key) + '\n\n'
         else:
             try:
-                command_found, language_found = self.c_reader.find_command(db.guild.languages, self.arg)
+                language_found, command_found = self.c_reader.get_command(db.guild.languages, self.arg)
             except Exception as e:
                 print(e)
                 return

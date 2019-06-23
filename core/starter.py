@@ -4,7 +4,7 @@ from core.src.static_modules import db
 from core.src.file_handler import load_commands
 from core.src.message_reader import extract_command_parameters
 from core.src.command_reader import CommandReader
-from core.src.text_reply.errors import command_error, command_not_implemented
+from core.src.text_reply.errors import command_error, command_not_implemented, guild_not_pro
 from core.src.internal_log import Log
 # listeners
 from core.modules.user_data_log import UserDataLog
@@ -12,9 +12,10 @@ from core.modules.message_reply import Respond
 from core.modules.bestemmia_reply import BestemmiaReply
 from core.modules.badass_character_reply import BadAssCharacterReply
 from core.modules.pickup_line_reply import PickupLineReply
-# commands
+# _commands
 from core.commands.help import Help
 from core.commands.man import Man
+from core.commands.pause_bot import PauseBot
 from core.commands.module_status import ModuleStatus
 from core.commands.my_data import MyData
 # audio converter
@@ -42,9 +43,17 @@ class Starter(object):
         # update db data
         db.update_data(self.bot.scope, self.bot.guild.id, self.bot.user.id)
 
+        self.bot.update_output_permission(db.guild.bot_paused)
+
         self.prefix_type = NO_PREFIX
         self.module_enabled = 1
         self.module_mode = 1
+
+    @staticmethod
+    def is_bot_disabled():
+        if db.guild.bot_disabled is True:
+            return True
+        return False
 
     def _catch_prefix(self):
         """
@@ -110,7 +119,7 @@ class Starter(object):
 
         c_reader = CommandReader()
         try:
-            command_found, language_found = c_reader.find_command(db.guild.languages, text_array[0])
+            language_found, command_found, text_array = c_reader.get_command(db.guild.languages, text_array)
         except Exception as e:
             print(e)
             return
@@ -118,6 +127,12 @@ class Starter(object):
         # send an error
         if command_found is None:
             out = command_error(db.guild.languages[0])  # use guild main language
+            self.bot.send_message(out, MSG_ON_SAME_CHAT)
+            return
+
+        # control if the guild pro version can use this command
+        if c_reader.commands.pro_command > db.guild.pro_guild:
+            out = guild_not_pro(language_found)
             self.bot.send_message(out, MSG_ON_SAME_CHAT)
             return
 
@@ -137,6 +152,10 @@ class Starter(object):
             c = Man(self.bot, language_found, command_found, arg, params)
             c.man()
 
+        def pause_bot():
+            c = PauseBot(self.bot, language_found, command_found, arg, params)
+            c.pause_bot()
+
         def module_status():
             c = ModuleStatus(self.bot, language_found, command_found, arg, params)
             c.mute()
@@ -149,6 +168,7 @@ class Starter(object):
             'not_implemented': not_implemented,
             'help': bot_help,
             'man': man,
+            'pause_bot': pause_bot,
             'module_status': module_status,
             'my_data': my_data,
         }
@@ -200,7 +220,7 @@ class Starter(object):
         user_data_log.log_data()
 
     def analyze_image_message(self):
-        self._update_statistics(IMAGE)
+        self._update_statistics(IMAGE, time_spent_extra=5)
 
     def analyze_command_message(self, text):
         self.in_text = text
@@ -228,7 +248,7 @@ class Starter(object):
 
         self.in_text = text
         self._catch_prefix()
-        self._update_statistics(TEXT)
+        self._update_statistics(TEXT, time_spent_extra=5)
         if self.prefix_type is COMMAND_PREFIX:
             self._run_command()
         self._natural_response()
