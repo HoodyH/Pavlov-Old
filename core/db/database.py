@@ -1,4 +1,7 @@
-from core.src.settings import XP_NEXT_LEVEL, MSG_DISABLED, MSG_DIRECT
+from core.src.settings import (
+    XP_NEXT_LEVEL, MSG_DISABLED, MSG_DIRECT,
+    COMMAND, IMAGE, DOCUMENT, VOICE, VIDEO_NOTE, STICKER,
+    SUDO_PREFIX, COMMAND_PREFIX, OVERRIDE_PREFIX)
 from pymongo import MongoClient
 from .guild import GuildData
 from .user import UserData
@@ -178,3 +181,43 @@ class DB(object):
                     msg.log_time_by_month = log_time_by_scope
                     msg.by_month = by_scope
                     msg.time_spent_by_month = time_spent_by_scope
+
+    def update_messages_by_type(self, message_type, command_type):
+        if message_type is COMMAND:
+            if command_type is OVERRIDE_PREFIX:
+                self.guild.msg.override += 1
+                self.user.msg.override += 1
+                self.user_global.msg.override += 1
+            elif command_type is SUDO_PREFIX:
+                self.guild.msg.sudo += 1
+                self.user.msg.sudo += 1
+                self.user_global.msg.sudo += 1
+            else:
+                self.guild.msg.commands += 1
+                self.user.msg.commands += 1
+                self.user_global.msg.commands += 1
+        elif message_type is IMAGE:
+            self.guild.msg.img += 1
+            self.user.msg.img += 1
+            self.user_global.msg.img += 1
+        elif message_type is DOCUMENT:
+            self.guild.msg.documents += 1
+            self.user.msg.documents += 1
+            self.user_global.msg.documents += 1
+        elif message_type is VOICE:
+            self.guild.msg.vocals += 1
+            self.user.msg.vocals += 1
+            self.user_global.msg.vocals += 1
+        elif message_type is VIDEO_NOTE:
+            self.guild.msg.video_note += 1
+            self.user.msg.video_note += 1
+            self.user_global.msg.video_note += 1
+        elif message_type is STICKER:
+            self.guild.msg.stickers += 1
+            self.user.msg.stickers += 1
+            self.user_global.msg.stickers += 1
+        else:
+            return
+
+
+

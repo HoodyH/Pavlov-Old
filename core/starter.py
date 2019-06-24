@@ -1,81 +1,77 @@
 from core.src.settings import *
+from core.bot_abstraction import BotStd
 from core.src.static_modules import db
 from core.src.file_handler import load_commands
-from core.src.message_reader import find, extract_command_parameters
-from core.src.text_reply.errors import command_error, command_not_implemented
+from core.src.message_reader import extract_command_parameters
+from core.src.command_reader import CommandReader
+from core.src.text_reply.errors import command_error, command_not_implemented, guild_not_pro
 from core.src.internal_log import Log
 # listeners
 from core.modules.user_data_log import UserDataLog
 from core.modules.message_reply import Respond
-from core.modules.bestemmia_call import BestemmiaCall
-from core.modules.badass_character_call import BadAssCharacterCall
-from core.modules.pickup_line_call import PickupLineCall
-# commands
-from core.commands.command_module_config import ModuleStatus
-from core.commands.mydata import MyData
-
-
-class User(object):
-    def __init__(self, user_data):
-        self.id = user_data.get('id')
-        self.username = user_data.get('username')
-        self.is_bot = user_data.get('is_bot')
-        self.language_code = user_data.get('language_code')
-
-
-class Chat(object):
-    def __init__(self, chat_data):
-        self.id = chat_data.get('id')
-        self.title = chat_data.get('title')
+from core.modules.bestemmia_reply import BestemmiaReply
+from core.modules.badass_character_reply import BadAssCharacterReply
+from core.modules.pickup_line_reply import PickupLineReply
+# _commands
+from core.commands.help import Help
+from core.commands.man import Man
+from core.commands.pause_bot import PauseBot
+from core.commands.module_status import ModuleStatus
+from core.commands.my_data import MyData
+# audio converter
+from core.src.speech_to_text import speech_to_text
+from pydub import AudioSegment
 
 
 class Starter(object):
 
     commands = load_commands()
 
-    def __init__(self, scope, bot, message, message_data):
-        """
-        :param scope: string 'telegram' or 'discord'
-        :param message_data: must be a dictionary with a predefined type of data set.
-        """
-        self.scope = scope
-        self.bot = bot
-        self.message = message
-        self.guild_id = message_data.get('guild_id')
-        self.guild_name = message_data.get('guild_name')
-        self.date = message_data.get('date')
-        self.message_id = message_data.get('message_id')
-        self.chat = Chat(message_data.get('chat'))
-        self.user = User(message_data.get('user'))
-        self.text = message_data.get('text')
-        self.message_type = message_data.get('message_type')
+    def __init__(self):
 
-        # update db data
-        db.update_data(self.scope, self.guild_id, self.user.id)
+        self.bot = BotStd()
 
         self.prefix_type = NO_PREFIX
         self.module_enabled = 1
         self.module_mode = 1
 
-        self.output = []
+        self.in_text = ""
+
+    def update(self, scope, real_bot, real_bot_message):
+
+        self.bot.update_bot_data(scope, real_bot, real_bot_message)
+        # update db data
+        db.update_data(self.bot.scope, self.bot.guild.id, self.bot.user.id)
+
+        self.bot.update_output_permission(db.guild.bot_paused)
+
+        self.prefix_type = NO_PREFIX
+        self.module_enabled = 1
+        self.module_mode = 1
+
+    @staticmethod
+    def is_bot_disabled():
+        if db.guild.bot_disabled is True:
+            return True
+        return False
 
     def _catch_prefix(self):
         """
         fin and cut away the prefix
         """
-        if str.startswith(self.text, db.guild.prefix):
-            self.text = self.text[len(db.guild.prefix):]
-            Log.modules_handler_prefix(self.scope, self.guild_id, self.user.id, db.guild.prefix)
+        if str.startswith(self.in_text, db.guild.prefix):
+            self.in_text = self.in_text[len(db.guild.prefix):]
+            Log.modules_handler_prefix(self.bot.scope, self.bot.guild.id, self.bot.user.id, db.guild.prefix)
             self.prefix_type = COMMAND_PREFIX
 
-        elif str.startswith(self.text, db.guild.quiet_prefix):
-            self.text = self.text[len(db.guild.quiet_prefix):]
-            Log.modules_handler_prefix(self.scope, self.guild_id, self.user.id, db.guild.quiet_prefix)
+        elif str.startswith(self.in_text, db.guild.quiet_prefix):
+            self.in_text = self.in_text[len(db.guild.quiet_prefix):]
+            Log.modules_handler_prefix(self.bot.scope, self.bot.guild.id, self.bot.user.id, db.guild.quiet_prefix)
             self.prefix_type = OVERRIDE_PREFIX
 
-        elif str.startswith(self.text, db.guild.sudo_prefix):
-            self.text = self.text[len(db.guild.sudo_prefix):]
-            Log.modules_handler_prefix(self.scope, self.guild_id, self.user.id, db.guild.sudo_prefix)
+        elif str.startswith(self.in_text, db.guild.sudo_prefix):
+            self.in_text = self.in_text[len(db.guild.sudo_prefix):]
+            Log.modules_handler_prefix(self.bot.scope, self.bot.guild.id, self.bot.user.id, db.guild.sudo_prefix)
             self.prefix_type = SUDO_PREFIX
 
         else:
@@ -107,13 +103,6 @@ class Starter(object):
             return True
         return False
 
-    def _read_command(self, key, language):
-
-        self.dm_enabled = self.commands[key].get('dm_enabled')
-        self.permissions = self.commands[key].get('permissions')
-        self.invocation_word = self.commands[key][language].get('invocation_word')
-        self.manual = self.commands[key][language].get('manual')
-
     def _run_command(self):
         """
         -read language/languages of the guild.
@@ -122,99 +111,142 @@ class Starter(object):
         -run command
         -return response
         """
-        __len = len(self.text)
-        if len(self.text) is 0:  # there was just the prefix
+        __len = len(self.in_text)
+        if len(self.in_text) is 0:  # there was just the prefix
             return
 
-        text_array = self.text.split()
+        text_array = self.in_text.split()
 
-        command_found = None
-        language_found = None
+        c_reader = CommandReader()
+        try:
+            language_found, command_found, text_array = c_reader.get_command(db.guild.languages, text_array)
+        except Exception as e:
+            print(e)
+            return
 
-        # read language/languages of the guild.
-        for language in db.guild.languages:
-            for command in self.commands.keys():
-                self._read_command(command, language)
-                for trigger in self.invocation_word:
-                    # check if there's a command trigger
-                    if find(trigger, text_array[0]):
-                        command_found = command
-                        language_found = language
+        if language_found is None:
+            language_found = db.guild.languages[0]
 
         # send an error
         if command_found is None:
-            return command_error(db.guild.languages[0])  # use guild main language
+            out = command_error(db.guild.languages[0])  # use guild main language
+            self.bot.send_message(out, MSG_ON_SAME_CHAT)
+            return
+
+        # control if the guild pro version can use this command
+        if c_reader.commands.pro_command > db.guild.pro_guild:
+            out = guild_not_pro(language_found)
+            self.bot.send_message(out, MSG_ON_SAME_CHAT)
+            return
 
         # extract arguments and parameters
         arg, params = extract_command_parameters(text_array)
 
-        # run command and return response
-        if command_found == "module.deactivate":
-            return command_not_implemented(language_found)
-        elif command_found == "module.status":
-            m = ModuleStatus(self.scope, self.guild_id, self.user.id, language_found, command_found, arg, params)
-            return m.mute()
-        elif command_found == "mydata":
-            m = MyData(self.scope, self.bot, self.guild_id, self.user.id, self.user.username, language_found, command_found, arg, params)
-            return m.my_data()
+        # run command
+        def bot_help():
+            c = Help(self.bot, language_found, command_found, arg, params)
+            c.help()
 
-    def analyze_message(self):
+        def man():
+            c = Man(self.bot, language_found, command_found, arg, params)
+            c.man()
 
-        self._catch_prefix()
+        def pause_bot():
+            c = PauseBot(self.bot, language_found, command_found, arg, params)
+            c.pause_bot()
 
-        user_data_log = UserDataLog(
-            self.scope,
-            self.bot,
-            self.guild_id,
-            self.user.id,
-            db.guild.languages[0],
-            self.user.username,
-            self.text,
-            self.prefix_type
-        )
-        user_data_log.log_data()
+        def module_status():
+            c = ModuleStatus(self.bot, language_found, command_found, arg, params)
+            c.mute()
 
-        # run commands if the prefix is a COMMAND_PREFIX
-        if self.prefix_type is COMMAND_PREFIX:
-            c_out = self._run_command()
-            return c_out
+        def my_data():
+            c = MyData(self.bot, language_found, command_found, arg, params)
+            c.my_data()
 
-            # don't analyze long messages
-        if len(self.text) > MEX_MAX_LENGTH:
+        commands = {
+            'help': bot_help,
+            'man': man,
+            'pause_bot': pause_bot,
+            'module_status': module_status,
+            'data': my_data,
+        }
+
+        commands.get(command_found)()
+
+    def _natural_response(self):
+
+        # don't analyze long messages
+        if len(self.in_text) > MEX_MAX_LENGTH:
             return None
+
+        output = ""
 
         if self._has_permissions('message_reply'):
             respond = Respond(
-                self.scope,
-                self.guild_id,
-                self.user.id,
-                self.text,
+                self.bot,
+                self.in_text,
                 self.module_mode,
                 self.prefix_type
             )
-            self.output.append(respond.message_reply())
+            output += respond.message_reply()
 
-        if self._has_permissions('bestemmia_call'):
-            bestemmia = BestemmiaCall()
-            self.output.append(
-                bestemmia.message_reply(db.guild.languages[0], self.text)
-            )
+        if self._has_permissions('bestemmia_reply'):
+            bestemmia_reply = BestemmiaReply()
+            output += bestemmia_reply.message_reply(db.guild.languages[0], self.in_text)
 
-        if self._has_permissions('badass_character_call'):
-            badass_character_call = BadAssCharacterCall()
-            self.output.append(
-                badass_character_call.message_reply(db.guild.languages[0], self.text)
-            )
+        if self._has_permissions('badass_character_reply'):
+            badass_character_reply = BadAssCharacterReply()
+            output += badass_character_reply.message_reply(db.guild.languages[0], self.in_text)
 
-        if self._has_permissions('pickup_line_call'):
-            pickup_line_call = PickupLineCall()
-            self.output.append(
-                pickup_line_call.message_reply(db.guild.languages[0], self.text)
-            )
+        if self._has_permissions('pickup_line_reply'):
+            pickup_line_reply = PickupLineReply()
+            output += pickup_line_reply.message_reply(db.guild.languages[0], self.in_text)
 
-        output = ""
-        for el in self.output:
-            if el != "":
-                output += "\n{}".format(el)
+        if output != "":
+            self.bot.send_message(output, MSG_ON_SAME_CHAT, write_en=True)
 
-        return output
+    def _update_statistics(self, message_type, time_spent_extra=0):
+
+        user_data_log = UserDataLog(
+            self.bot,
+            db.guild.languages[0],
+            self.in_text,
+            message_type,
+            self.prefix_type,
+            time_spent_extra=time_spent_extra
+        )
+        user_data_log.log_data()
+
+    def analyze_image_message(self):
+        self._update_statistics(IMAGE, time_spent_extra=5)
+
+    def analyze_command_message(self, text):
+        self.in_text = text
+        self.prefix_type = COMMAND_PREFIX
+        self._update_statistics(COMMAND)
+        self._run_command()
+
+    def analyze_vocal_message(self, raw_file, vocal_duration):
+
+        raw_file.seek(0)
+        ogg_audio = AudioSegment.from_ogg(raw_file)
+        filename = "audio.wav"
+        ogg_audio.export(filename, format="wav")
+
+        self.in_text = speech_to_text(filename, ITA)
+
+        if self._has_permissions('speech_to_text'):
+            t = 'SPEECH TO TEXT:\n{}'.format(self.in_text)
+            self.bot.send_message(t, MSG_ON_SAME_CHAT, write_en=True)
+
+        self._update_statistics(VOICE, time_spent_extra=vocal_duration*2)
+        self._natural_response()
+
+    def analyze_text_message(self, text):
+
+        self.in_text = text
+        self._catch_prefix()
+        self._update_statistics(TEXT, time_spent_extra=5)
+        if self.prefix_type is COMMAND_PREFIX:
+            self._run_command()
+        self._natural_response()

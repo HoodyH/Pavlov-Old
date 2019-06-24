@@ -1,6 +1,8 @@
-
-
+# base
+ENABLED = 1
+DISABLED = 0
 ERROR = -1
+
 
 # debug
 USE_GLOBAL_FILE_ONLY = True  # deprecated
@@ -12,6 +14,34 @@ DISCORD = 'discord'
 # Languages Handled for messages
 ITA = 'ita'
 ENG = 'eng'
+
+
+# Messages type
+REPLY = 0
+AUDIO = 1
+DOCUMENT = 2
+ANIMATION = 3
+IMAGE = 4
+STICKER = 5
+VIDEO = 6
+VOICE = 7
+VIDEO_NOTE = 8
+CONTACT = 9
+LOCATION = 10
+VENUE = 11
+TEXT = 12
+COMMAND = 13
+
+
+# Chat actions
+NEW_GUILD_MEMBER = 0
+LEFT_GUILD_MEMBER = 1
+NEW_GUILD_TITLE = 2
+NEW_GUILD_PHOTO = 3
+DELETE_GUILD_PHOTO = 4
+NEW_CHAT_CREATED = 5
+PINNED_MESSAGE = 6
+CONNECTED_WEBSITE = 7
 
 
 # message max length for analyze
@@ -35,14 +65,14 @@ COMMAND_PREFIX = 0
 OVERRIDE_PREFIX = 1
 SUDO_PREFIX = 2
 
-# global setting for auto reply commands
-DISABLED_MODE = -1
-QUIET_MODE = 0
-NORMAL_MODE = 1
-SPAM_MODE = 2
-AGGRESSIVE_MODE = 3
+# global setting for auto reply _commands
+DISABLED_MODE = 0
+QUIET_MODE = 1
+NORMAL_MODE = 2
+SPAM_MODE = 3
+AGGRESSIVE_MODE = 4
 
-# module type, to define the scope of the module
+# module type, to define the _scope of the module
 TYPE_LISTENER = 0
 TYPE_COMMAND = 1
 

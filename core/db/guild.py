@@ -16,6 +16,8 @@ class GuildData(object):
         self.guild_name = None
         self.owner_id = None
         self.owner_name = None
+        self.bot_paused = False
+        self.bot_disabled = False
         self.prefix = '.'
         self.quiet_prefix = ','
         self.sudo_prefix = '#'
@@ -48,6 +50,8 @@ class GuildData(object):
             'guild_name': self.guild_name,
             'owner_id': self.owner_id,
             'owner_name': self.owner_name,
+            'bot_paused': self.bot_paused,
+            'bot_disabled': self.bot_disabled,
             'prefix': self.prefix,
             'quiet_prefix': self.quiet_prefix,
             'sudo_prefix': self.sudo_prefix,
@@ -92,14 +96,16 @@ class GuildData(object):
         if user_data is None:
             return
 
-        self.guild_name = user_data.get('guild_name')
-        self.owner_id = user_data.get('owner_id')
-        self.owner_name = user_data.get('owner_name')
-        self.prefix = user_data.get('prefix')
-        self.quiet_prefix = user_data.get('quiet_prefix')
-        self.sudo_prefix = user_data.get('sudo_prefix')
-        self.languages = user_data.get('languages')
-        self.modules = user_data.get('modules')
+        self.guild_name = user_data.get('guild_name', self.guild_name)
+        self.owner_id = user_data.get('owner_id', self.owner_id)
+        self.owner_name = user_data.get('owner_name', self.owner_name)
+        self.bot_paused = user_data.get('bot_paused', self.bot_paused)
+        self.bot_disabled = user_data.get('bot_disabled', self.bot_disabled)
+        self.prefix = user_data.get('prefix', self.prefix)
+        self.quiet_prefix = user_data.get('quiet_prefix', self.quiet_prefix)
+        self.sudo_prefix = user_data.get('sudo_prefix', self.sudo_prefix)
+        self.languages = user_data.get('languages', self.languages)
+        self.modules = user_data.get('modules', self.modules)
 
         self.pro_guild = user_data.get('pro_guild', self.pro_guild)
         self.deep_logging = user_data.get('deep_logging', self.deep_logging)
@@ -139,6 +145,24 @@ class GuildData(object):
     @owner_name.setter
     def owner_name(self, value):
         self.__owner_name = value
+
+    # bot_paused
+    @property
+    def bot_paused(self):
+        return self.__bot_paused
+
+    @bot_paused.setter
+    def bot_paused(self, value):
+        self.__bot_paused = value
+
+    # bot_disabled
+    @property
+    def bot_disabled(self):
+        return self.__bot_disabled
+
+    @bot_disabled.setter
+    def bot_disabled(self, value):
+        self.__bot_disabled = value
 
     # prefix
     @property

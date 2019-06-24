@@ -1,0 +1,14 @@
+{
+    "speech_to_text":{
+        "dependency": "module_status",
+        "sub_call": "speech_to_text -en",
+        "description": {
+            "eng": "Activate or Deactivate in toggle mode the speech to text conversion",
+            "ita": "Attiva o Disattiva in modo toggle la conversione degli audio in testo"
+        },
+        "invocation_words":{
+            "eng": ["stt", "vocal"],
+            "ita": ["stt", "vocale", "audio"]
+        }
+    }
+}

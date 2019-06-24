@@ -1,5 +1,5 @@
 from core.src.settings import *
-from core.src.utils.formatting import remap_range
+from core.src.utils.internal_formatting import remap_range
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 from math import ceil
@@ -30,7 +30,7 @@ class DrawSupport(object):
         draw_obj.text([(x - w / 2), (y - h / 2)], text, fill=fill, font=font, anchor=anchor)
 
     @staticmethod
-    def draw_multiline_text(draw_obj, x, y, text, fill=None, font=None, anchor=None, align=None):
+    def draw_multiline_text_in_center(draw_obj, x, y, text, fill=None, font=None, anchor=None, align=None):
         """
         :param draw_obj: object where draw
         :param x: value of x entry point
@@ -276,8 +276,8 @@ class DrawGraph(object):
         for el in data:
             entry_x = x + x_resolution * TOWER_DIM / 2
             entry_y = self.y_cursor + SPAN_GRAPH_BORDER / 2 * self.y_resolution
-            draw_support.draw_text_in_center(
-                self.draw, entry_x, entry_y, str(el), fill=self.text_color, font=self.font_text
+            draw_support.draw_multiline_text_in_center(
+                self.draw, entry_x, entry_y, str(el), fill=self.text_color, font=self.font_text, align='center'
             )
 
             x += x_resolution * TOWER_DIM + x_resolution * SPACE_DIM
@@ -423,7 +423,7 @@ class DrawGraph(object):
 
         if description is not False:
             self.y_cursor += SPAN_DESCRIPTION / 2 * self.y_resolution
-            draw_support.draw_multiline_text(
+            draw_support.draw_multiline_text_in_center(
                 self.draw,
                 self.width / 2,
                 self.y_cursor,

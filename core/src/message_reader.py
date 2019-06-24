@@ -41,10 +41,10 @@ def _clean():
         modules repetitions (leave just 2 near) hahahaha will become haha,
         words repetiotion (in the same trigger)
 
-    different order: (be disabled)
+    different order: (be output_permission)
     in check sequence the trigger array can have the same words of in a different order
 
-    percentage match: (be disabled)
+    percentage match: (be output_permission)
     some word can be omitted, but you must have 70% of the words
 
     example:
@@ -99,7 +99,7 @@ def extract_command_parameters(text):
         arg = _extract_value(text_array)
         return arg, params
 
-    for i in range(0, len(text_array) - 1):
+    for i in range(0, len(text_array)):
         if str.startswith(text_array[i], '-'):
             param_key = text_array[i][1:]
             param = [param_key]

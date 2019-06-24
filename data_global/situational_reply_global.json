@@ -15,27 +15,27 @@
             "dojo"
         ],
         "standard_outputs": [
-            "Fissare degli obiettivi è il primo passo per trasformare l’invisibile in visibile.",
+            "Fissare degli obiettivi \u00e8 il primo passo per trasformare l\u2019invisibile in visibile.",
             "I perdenti si lamentano i campioni si allenano.",
             "La palestra dovrebbe essere considerata come un omaggio che facciamo al cuore.",
-            "Il dolore che sentite oggi è la forza che sentirete domani.",
-            "Fare sport è una fatica senza fatica.",
-            "Se non si è disposti a sacrificare l’usuale ci si dovrà accontentare dell’ordinario.",
+            "Il dolore che sentite oggi \u00e8 la forza che sentirete domani.",
+            "Fare sport \u00e8 una fatica senza fatica.",
+            "Se non si \u00e8 disposti a sacrificare l\u2019usuale ci si dovr\u00e0 accontentare dell\u2019ordinario.",
             "Gli ostacoli sono quelle cose spaventose che vedete quando togliete gli occhi dalla meta.",
-            "Le sfide sono ciò che rende la vita interessante… Superarle è ciò che le dà significato.",
-            "Ricorda che le sensazioni date da una bella corsa sono molto meglio di quelle date dallo stare lì seduti a pensare di voler andare a correre.",
-            "Il vero fallimento è rinunciare.",
-            "La montagna più alta rimane sempre dentro di noi.",
-            "Più duro lavori, più diventa difficile arrendersi.",
-            "Qualcosa non funziona in una società in cui si va in auto in palestra per poi correre sul tapis roulant.",
-            "Ho odiato ogni minuto di allenamento, ma mi dicevo “Non rinunciare. Soffri ora, e vivrai il resto della tua vita come un campione!",
-            "Non aspettare il momento giusto per fare le cose, l’unico momento giusto è adesso.",
+            "Le sfide sono ci\u00f2 che rende la vita interessante\u2026 Superarle \u00e8 ci\u00f2 che le d\u00e0 significato.",
+            "Ricorda che le sensazioni date da una bella corsa sono molto meglio di quelle date dallo stare l\u00ec seduti a pensare di voler andare a correre.",
+            "Il vero fallimento \u00e8 rinunciare.",
+            "La montagna pi\u00f9 alta rimane sempre dentro di noi.",
+            "Pi\u00f9 duro lavori, pi\u00f9 diventa difficile arrendersi.",
+            "Qualcosa non funziona in una societ\u00e0 in cui si va in auto in palestra per poi correre sul tapis roulant.",
+            "Ho odiato ogni minuto di allenamento, ma mi dicevo \u201cNon rinunciare. Soffri ora, e vivrai il resto della tua vita come un campione!",
+            "Non aspettare il momento giusto per fare le cose, l\u2019unico momento giusto \u00e8 adesso.",
             "Come raggiungere un traguardo? Senza fretta ma senza sosta.",
-            "Il dizionario è l’unico posto dove successo viene prima di sudore.",
-            "Non aspettare. Il tempo non sarà mai giusto.",
-            "Niente è davvero difficile se lo si divide in tanti piccoli pezzettini",
+            "Il dizionario \u00e8 l\u2019unico posto dove successo viene prima di sudore.",
+            "Non aspettare. Il tempo non sar\u00e0 mai giusto.",
+            "Niente \u00e8 davvero difficile se lo si divide in tanti piccoli pezzettini",
             "Non fermarti nel dolore, continua il cammino verso la cima.",
-            "Vince solo chi è convinto di poterlo fare",
+            "Vince solo chi \u00e8 convinto di poterlo fare",
             "Un obiettivo senza un piano resta solo un desiderio."
         ],
         "avoid_triggers": [
@@ -56,8 +56,7 @@
             "You said you worked hard? Well, maybe you need to work a little longer.",
             "Human beings are strong because we can change ourselves.",
             "You have to keep doing it. No matter how difficult it gets. It took me a full 3 years to get this strong.",
-            "You gotta train like hell until the point where your hair falls out. That’s the only way to become truly strong."
-
+            "You gotta train like hell until the point where your hair falls out. That\u2019s the only way to become truly strong."
         ],
         "power_counter": 0,
         "avoid_counter": 1,
@@ -78,7 +77,7 @@
             "incoraggiamento"
         ],
         "standard_outputs": [
-            "Non diventare un adulto noioso che dice di vivere come meglio può!",
+            "Non diventare un adulto noioso che dice di vivere come meglio pu\u00f2!",
             "Impegnati e potrai fare qualunque cosa, siamo creature che pur non avendo le ali sono andate sulla luna"
         ],
         "avoid_triggers": [
@@ -92,7 +91,7 @@
             "perla motivazione"
         ],
         "power_outputs": [
-            "Ti rode il fatto di essere il più debole?!\nNon abbandonare questa sensazione, essa è la prova che non ti sei ancora arreso"
+            "Ti rode il fatto di essere il pi\u00f9 debole?!\nNon abbandonare questa sensazione, essa \u00e8 la prova che non ti sei ancora arreso"
         ],
         "power_counter": 0,
         "avoid_counter": 1,
@@ -108,7 +107,7 @@
             "telegram": [],
             "discord": []
         },
-        "standard_counter": 5,
+        "standard_counter": 0,
         "standard_triggers": [
             "amazon"
         ],
@@ -521,10 +520,11 @@
             "super clock"
         ],
         "power_outputs": [
-            "with great power comes great responsibility"
+            "with great power comes great responsibility",
+            "Luca: \"Tanto pengio fondamenti?\"\nClock: \"Abbastanza, ci sono esercizi che sono relativamente semplici ed altri che dovresti chiedere direttamente a turing di risolverteli ma non ho tavole oujia sottomano\""
         ],
         "cit_author": "Clock",
-        "power_counter": 0,
+        "power_counter": 1,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,
@@ -573,7 +573,7 @@
         }
     },
     "Luca Mauro": {
-        "standard_counter": 0,
+        "standard_counter": 1,
         "scope": "global",
         "standard_triggers": [
             "luca mauro"
@@ -634,10 +634,11 @@
         "power_outputs": [
             "A true master is an eternal student",
             "Mi alleno per sorreggiere il peso dei problemi che le persone a cui voglio bene non possono portare.",
-            "Tu sei il classico tipo che per sentirsi soddisfatto della propria vita deve criticare quella degli altri. Avanti, colpiscimi!"
+            "Tu sei il classico tipo che per sentirsi soddisfatto della propria vita deve criticare quella degli altri. Avanti, colpiscimi!",
+            "non sar\u00f2 un modello per le persone, ma per un bot s\u00ec"
         ],
         "cit_author": "Maestro",
-        "power_counter": 2,
+        "power_counter": 0,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,
@@ -695,7 +696,7 @@
         }
     },
     "Your_Name": {
-        "standard_counter": 2,
+        "standard_counter": 3,
         "scope": "global",
         "standard_triggers": [
             "your name"
@@ -893,8 +894,7 @@
         "scope": "global",
         "standard_triggers": [
             "hello",
-            "ciao",
-            "bella"
+            "ciao"
         ],
         "standard_outputs": [
             "Yooo",
@@ -931,7 +931,7 @@
         "standard_counter": 0,
         "scope": "global",
         "standard_triggers": [
-            "pt",
+            "%%%!%%%pt",
             "ma che cazzo",
             "ma che cazz",
             "LMFAO",
@@ -951,11 +951,10 @@
             "ptt",
             "pptt",
             "ptpt",
-            "porcatroia",
-            "porca troia"
+            "porcatroia"
         ],
         "power_outputs": [
-            "PPPPPPPPPPTTTTTTTTTT"
+            "PPPPTTTT"
         ],
         "power_counter": 0,
         "avoid_counter": 0,
@@ -966,7 +965,7 @@
             "telegram": []
         },
         "enabled": 0,
-        "mode": 2
+        "mode": 1
     },
     "Ubuntu": {
         "standard_counter": 2,

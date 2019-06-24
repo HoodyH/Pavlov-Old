@@ -1,6 +1,6 @@
 from core.src.settings import *
 from core.src.file_handler import log_data
-from core.src.utils.formatting import time_now, mode_to_name
+from core.src.utils.internal_formatting import time_now, mode_to_name
 
 
 class Log(object):

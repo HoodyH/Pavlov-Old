@@ -33,7 +33,7 @@ def add_reply():
     scope = sys.stdin.read()
     if scope == "":
         scope = "global"
-    field["scope"] = scope
+    field["_scope"] = scope
     print()
     
     print("Standard triggers [comma separated, no spaces between commas]")
