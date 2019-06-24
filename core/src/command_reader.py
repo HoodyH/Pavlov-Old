@@ -10,6 +10,7 @@ COMMANDS_SHORTCUT = load_commands_shortcut()
 
 class BaseCommandReader(object):
     def __init__(self):
+        self._key = None
         self._invocation_words = None
         self._description = None
 
@@ -29,12 +30,17 @@ class BaseCommandReader(object):
             for command in commands_keys:
                 read_command_function(language, command)
                 if command == command_word:
-                    return None, command
+                    return language, command
                 for trigger in self._invocation_words:
                     # check if there's a command trigger
                     if find(trigger, command_word):
+                        self._key = command
                         return language, command
         return None, None
+
+    @property
+    def key(self):
+        return self._key
 
     @property
     def invocation_words(self):
@@ -150,12 +156,17 @@ class CommandReader(object):
         self._commands_shortcut = CommandShortcutReader()
         self._commands = CommandMainReader()
 
-    def get_command(self, language_list, text_array):
+    def get_command(self, language_list, text):
         """
         :param language_list:
-        :param text_array:
+        :param text:
         :return:
         """
+
+        if isinstance(text, list):
+            text_array = text
+        else:
+            text_array = text.split()
 
         language_found, command_found = self._commands_shortcut.find_command(
             language_list,
@@ -170,8 +181,7 @@ class CommandReader(object):
                 self._commands.read_command,
                 self._commands.commands_keys
             )
-            if language_found is None:
-                language_found = language_list[0]
+            language_found = None
         else:
             command_found = self._commands_shortcut.dependency
             self._commands.read_command(language_found, command_found)

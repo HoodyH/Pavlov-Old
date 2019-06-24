@@ -1,5 +1,5 @@
 from core.src.settings import (
-    ITA,
+    ITA, ENG,
     ENABLED, DISABLED
 )
 
@@ -8,41 +8,103 @@ from core.src.settings import (
 # HELP
 def help_response(language, prefix):
     if language == ITA:
-        out = 'Per vedere i comandi attivi in questa Gilda usa "{}man commands"'
+        out = 'Per vedere i comandi attivi in questa Gilda usa "{}man all"'
     else:
-        out = 'To see the active commands in this Guild use "{}man commands"'
+        out = 'To see the active commands in this Guild use "{}man all"'
     return out.format(prefix)
 
 
 ########################################################################
 # MAN
-def man_title(language, command_name, invocation_word):
+def man_invocation(language, invocation_word):
 
     invocations = ', '.join(invocation_word)
-    if language == ITA:
-        out = '**Comando: {}**\nQuesto comando può essere invocato tramite queste parole chiave: **{}**'
-        return out.format(command_name, invocations)
-    else:
-        out = '**Command: {}**\nThis command can be called using this keywords: **{}**'
-        return out.format(command_name, invocations)
+
+    def ita(): return '**Invocazioni Alternative:**\n**{}**'.format(invocations)
+
+    def eng(): return '**Alternative Invocations:**\n**{}**'.format(invocations)
+
+    languages = {
+        ITA: ita,
+        ENG: eng
+    }
+
+    try:
+        return languages[language]()
+    except Exception as e:
+        print(e)
+        return languages[ENG]()
 
 
 # MAN
-def man_description(language, description):
+def man_handled_args(language):
 
-    if language == ITA:
-        return '**Descrizione:**\n{}'.format(description)
-    else:
-        return '**Description:**\n{}'.format(description)
+    def ita():
+        return 'Argomenti Gestiti:'
+
+    def eng():
+        return 'Handled Arguments:'
+
+    languages = {
+        ITA: ita,
+        ENG: eng
+    }
+
+    try:
+        return languages[language]()
+    except Exception as e:
+        print(e)
+        return languages[ENG]()
 
 
 # MAN
-def man_usage(language, usage):
+def man_handled_params(language):
+    def ita():
+        return 'Parametri Gestiti:'
 
-    if language == ITA:
-        return '**Esempio di utilizzo:**\n{}'.format(usage)
-    else:
-        return '**Example of use:**\n{}'.format(usage)
+    def eng():
+        return 'Handled Parameters:'
+
+    languages = {
+        ITA: ita,
+        ENG: eng
+    }
+
+    try:
+        return languages[language]()
+    except Exception as e:
+        print(e)
+        return languages[ENG]()
+
+
+def man_command_mask(language, prefix, main_command, sub_call):
+
+    main_command = main_command.replace('_', '.')
+
+    def ita():
+        out = '**Comando abbreviato**\nOttenuto dal comando {}{}\nIn sostituzione a **{}{} {}**'.format(
+            prefix, main_command,
+            prefix, main_command, sub_call
+        )
+        return out
+
+    def eng():
+        out = '**Shortcut command**\nObtained from command {}{}\nIn substitution of **{}{} {}**'.format(
+            prefix, main_command,
+            prefix, main_command, sub_call
+        )
+        return out
+
+    languages = {
+        ITA: ita,
+        ENG: eng
+    }
+
+    try:
+        return languages[language]()
+    except Exception as e:
+        print(e)
+        return languages[ENG]()
 
 
 ########################################################################

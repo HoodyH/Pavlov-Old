@@ -1,6 +1,8 @@
 from core.src.settings import *
 from core.src.static_modules import db
-from core.src.text_reply.formatting import sec_to_time_string, my_data_description, my_data_subtitle
+from core.src.text_reply.formatting import (
+    sec_to_time_string, my_data_description, my_data_subtitle, weekdays_string
+)
 from core.src.utils.img_draw import DrawGraph
 from datetime import datetime, timedelta, date
 from calendar import monthrange
@@ -32,7 +34,7 @@ class MyData(object):
                     return True
                 return False
 
-            def colon_names(time_z): return 'h{}'.format(time_z.hour)
+            def colon_names(time_z): return '{}h'.format(time_z.hour)
 
         elif time_scope == 'daily':
             now = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
@@ -44,7 +46,11 @@ class MyData(object):
                     return True
                 return False
 
-            def colon_names(time_z): return '{}/{}'.format(time_z.day, time_z.month)
+            def colon_names(time_z): return '{}\n{}/{}'.format(
+                weekdays_string(time_z.weekday(), 0, self.language),
+                time_z.day,
+                time_z.month
+            )
 
         else:
             now = datetime.utcnow()
@@ -111,37 +117,90 @@ class MyData(object):
 
     def my_data_pro(self):
 
-        timezone = 2
+        hourly_n_show = 18
+        daily_n_show = 7
+        monthly_n_show = 6
+
+        if self.arg == "":
+            title = self.bot.user.username
+            timezone = 2
+
+            log_time_by_hour = db.user.msg.log_time_by_hour
+            by_hour = db.user.msg.by_hour
+            time_spent_by_hour = db.user.msg.time_spent_by_hour
+
+            log_time_by_day = db.user.msg.log_time_by_day
+            by_day = db.user.msg.by_day
+            time_spent_by_day = db.user.msg.time_spent_by_day
+
+            log_time_by_month = db.user.msg.log_time_by_month
+            by_month = db.user.msg.by_month
+            time_spent_by_month = db.user.msg.time_spent_by_month
+
+        elif self.arg.lower() == "guild":
+            title = self.bot.guild.guild_name
+            timezone = 2
+
+            log_time_by_hour = db.guild.msg.log_time_by_hour
+            by_hour = db.guild.msg.by_hour
+            time_spent_by_hour = db.guild.msg.time_spent_by_hour
+
+            log_time_by_day = db.guild.msg.log_time_by_day
+            by_day = db.guild.msg.by_day
+            time_spent_by_day = db.guild.msg.time_spent_by_day
+
+            log_time_by_month = db.guild.msg.log_time_by_month
+            by_month = db.guild.msg.by_month
+            time_spent_by_month = db.guild.msg.time_spent_by_month
+
+        elif self.arg.lower() == "global":
+            title = self.bot.user.username + "\nGlobal Data"
+            timezone = 2
+
+            log_time_by_hour = db.user_global.msg.log_time_by_hour
+            by_hour = db.user_global.msg.by_hour
+            time_spent_by_hour = db.user_global.msg.time_spent_by_hour
+
+            log_time_by_day = db.user_global.msg.log_time_by_day
+            by_day = db.user_global.msg.by_day
+            time_spent_by_day = db.user_global.msg.time_spent_by_day
+
+            log_time_by_month = db.user_global.msg.log_time_by_month
+            by_month = db.user_global.msg.by_month
+            time_spent_by_month = db.user_global.msg.time_spent_by_month
+
+        else:
+            return
 
         dictionary_graph = {
-            'top_title': self.bot.user.username,
+            'top_title': title,
             'section_1': self.__build_data(
-                db.user.msg.log_time_by_hour,
-                db.user.msg.by_hour,
-                db.user.msg.time_spent_by_hour,
+                log_time_by_hour,
+                by_hour,
+                time_spent_by_hour,
                 timezone,
-                18,
+                hourly_n_show,
                 'hourly'
                 )
         }
 
-        if len(db.user.msg.log_time_by_day) > 2:
+        if len(log_time_by_day) > 2:
             dictionary_graph['section_2'] = self.__build_data(
-                db.user.msg.log_time_by_day,
-                db.user.msg.by_day,
-                db.user.msg.time_spent_by_day,
+                log_time_by_day,
+                by_day,
+                time_spent_by_day,
                 timezone,
-                7,
+                daily_n_show,
                 'daily'
             )
 
-        if len(db.user.msg.log_time_by_month) > 0:
+        if len(log_time_by_month) > 0:
             dictionary_graph['section_3'] = self.__build_data(
-                db.user.msg.log_time_by_month,
-                db.user.msg.by_month,
-                db.user.msg.time_spent_by_month,
+                log_time_by_month,
+                by_month,
+                time_spent_by_month,
                 timezone,
-                5,
+                monthly_n_show,
                 'monthly'
             )
 

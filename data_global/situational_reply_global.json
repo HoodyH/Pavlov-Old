@@ -524,7 +524,7 @@
             "Luca: \"Tanto pengio fondamenti?\"\nClock: \"Abbastanza, ci sono esercizi che sono relativamente semplici ed altri che dovresti chiedere direttamente a turing di risolverteli ma non ho tavole oujia sottomano\""
         ],
         "cit_author": "Clock",
-        "power_counter": 0,
+        "power_counter": 1,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,
@@ -573,7 +573,7 @@
         }
     },
     "Luca Mauro": {
-        "standard_counter": 0,
+        "standard_counter": 1,
         "scope": "global",
         "standard_triggers": [
             "luca mauro"
@@ -638,7 +638,7 @@
             "non sar\u00f2 un modello per le persone, ma per un bot s\u00ec"
         ],
         "cit_author": "Maestro",
-        "power_counter": 2,
+        "power_counter": 0,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,
@@ -696,7 +696,7 @@
         }
     },
     "Your_Name": {
-        "standard_counter": 2,
+        "standard_counter": 3,
         "scope": "global",
         "standard_triggers": [
             "your name"

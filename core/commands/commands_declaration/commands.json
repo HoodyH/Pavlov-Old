@@ -5,7 +5,7 @@
         "dm_enabled": 1,
         "enabled_by_default": 1,
         "permissions": 0,
-        "invocation_words": ["help", "h"],
+        "invocation_words": ["h"],
         "description": {
             "eng": "Show what you need to know to use the bot, standard command and known by everyone",
             "ita": "Mostra solo ciò che ti serve per sapere utilizzare il bot, comando standard e da tutti conosciuto"
@@ -19,7 +19,7 @@
                 "eng": "Show base informations for personal use",
                 "ita": "Mostra informazione base per l'uso personale"
             },
-            "server": {
+            "guild": {
                 "eng": "Show base informations for guild use",
                 "ita": "Mostra informazione base sul utilizzo nella gilda"
             }
@@ -32,7 +32,7 @@
         "dm_enabled": 1,
         "enabled_by_default": 1,
         "permissions": 0,
-        "invocation_words": ["man"],
+        "invocation_words": [],
         "description": {
             "eng": "Get detailed informations from a command",
             "ita": "Accedi alle informazioni dettagliate di un comando"
@@ -104,7 +104,7 @@
         "dm_enabled": 1,
         "enabled_by_default": 1,
         "permissions": 100,
-        "invocation_words": ["pause_bot"],
+        "invocation_words": ["pause.bot"],
         "description": {
             "eng": "Put the bot in pause",
             "ita": "Mette in pausa il bot"
@@ -131,7 +131,7 @@
         "dm_enabled": 1,
         "enabled_by_default": 0,
         "permissions": 0,
-        "invocation_words": ["data"],
+        "invocation_words": [],
         "description": {
             "eng": "Show data catched by the bot in a nice graph",
             "ita": "Mosta i dati  raccolti dal bot sottoforma di grafico"

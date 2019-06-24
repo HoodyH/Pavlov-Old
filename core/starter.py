@@ -124,6 +124,9 @@ class Starter(object):
             print(e)
             return
 
+        if language_found is None:
+            language_found = db.guild.languages[0]
+
         # send an error
         if command_found is None:
             out = command_error(db.guild.languages[0])  # use guild main language
@@ -140,10 +143,6 @@ class Starter(object):
         arg, params = extract_command_parameters(text_array)
 
         # run command
-        def not_implemented():
-            out = command_not_implemented(language_found)
-            self.bot.send_message(out, MSG_ON_SAME_CHAT)
-
         def bot_help():
             c = Help(self.bot, language_found, command_found, arg, params)
             c.help()
@@ -165,12 +164,11 @@ class Starter(object):
             c.my_data()
 
         commands = {
-            'not_implemented': not_implemented,
             'help': bot_help,
             'man': man,
             'pause_bot': pause_bot,
             'module_status': module_status,
-            'my_data': my_data,
+            'data': my_data,
         }
 
         commands.get(command_found)()
@@ -241,7 +239,7 @@ class Starter(object):
             t = 'SPEECH TO TEXT:\n{}'.format(self.in_text)
             self.bot.send_message(t, MSG_ON_SAME_CHAT, write_en=True)
 
-        self._update_statistics(VOICE, time_spent_extra=vocal_duration)
+        self._update_statistics(VOICE, time_spent_extra=vocal_duration*2)
         self._natural_response()
 
     def analyze_text_message(self, text):

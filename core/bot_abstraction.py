@@ -81,7 +81,10 @@ class BotStd(object):
             self._user = None
 
     def update_output_permission(self, pause_status):
-        self.output_permission = pause_status
+        if pause_status is False:
+            self.output_permission = True
+        else:
+            self.output_permission = False
 
     def send_image(self,
                    img_bytes,
