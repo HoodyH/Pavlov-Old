@@ -1,17 +1,20 @@
 from core.src.settings import (
-    ITA, ENG,
     ENABLED, DISABLED
 )
+from core.src.text_reply.languages_handler import chose_language
 
 
 ########################################################################
 # HELP
 def help_response(language, prefix):
-    if language == ITA:
-        out = 'Per vedere i comandi attivi in questa Gilda usa "{}man all"'
-    else:
-        out = 'To see the active commands in this Guild use "{}man all"'
-    return out.format(prefix)
+
+    def eng(): return 'To see the active commands in this Guild use "{}man all"'.format(prefix)
+    def ita(): return 'Per vedere i comandi attivi in questa Gilda usa "{}man all"'.format(prefix)
+
+    return chose_language(
+        language,
+        eng, ita=ita
+    )
 
 
 ########################################################################
@@ -20,73 +23,42 @@ def man_invocation(language, invocation_word):
 
     invocations = ', '.join(invocation_word)
 
+    def eng(): return '**Alternative Invocations:**\n**{}**'.format(invocations)
     def ita(): return '**Invocazioni Alternative:**\n**{}**'.format(invocations)
 
-    def eng(): return '**Alternative Invocations:**\n**{}**'.format(invocations)
-
-    languages = {
-        ITA: ita,
-        ENG: eng
-    }
-
-    try:
-        return languages[language]()
-    except Exception as e:
-        print(e)
-        return languages[ENG]()
+    return chose_language(
+        language,
+        eng, ita=ita
+    )
 
 
 # MAN
 def man_handled_args(language):
 
-    def ita():
-        return 'Argomenti Gestiti:'
+    def eng(): return 'Handled Arguments:'
+    def ita(): return 'Argomenti Gestiti:'
 
-    def eng():
-        return 'Handled Arguments:'
-
-    languages = {
-        ITA: ita,
-        ENG: eng
-    }
-
-    try:
-        return languages[language]()
-    except Exception as e:
-        print(e)
-        return languages[ENG]()
+    return chose_language(
+        language,
+        eng, ita=ita
+    )
 
 
 # MAN
 def man_handled_params(language):
-    def ita():
-        return 'Parametri Gestiti:'
 
-    def eng():
-        return 'Handled Parameters:'
+    def eng(): return 'Handled Parameters:'
+    def ita(): return 'Parametri Gestiti:'
 
-    languages = {
-        ITA: ita,
-        ENG: eng
-    }
-
-    try:
-        return languages[language]()
-    except Exception as e:
-        print(e)
-        return languages[ENG]()
+    return chose_language(
+        language,
+        eng, ita=ita
+    )
 
 
 def man_command_mask(language, prefix, main_command, sub_call):
 
     main_command = main_command.replace('_', '.')
-
-    def ita():
-        out = '**Comando abbreviato**\nOttenuto dal comando {}{}\nIn sostituzione a **{}{} {}**'.format(
-            prefix, main_command,
-            prefix, main_command, sub_call
-        )
-        return out
 
     def eng():
         out = '**Shortcut command**\nObtained from command {}{}\nIn substitution of **{}{} {}**'.format(
@@ -95,58 +67,76 @@ def man_command_mask(language, prefix, main_command, sub_call):
         )
         return out
 
-    languages = {
-        ITA: ita,
-        ENG: eng
-    }
+    def ita():
+        out = '**Comando abbreviato**\nOttenuto dal comando {}{}\nIn sostituzione a **{}{} {}**'.format(
+            prefix, main_command,
+            prefix, main_command, sub_call
+        )
+        return out
 
-    try:
-        return languages[language]()
-    except Exception as e:
-        print(e)
-        return languages[ENG]()
+    return chose_language(
+        language,
+        eng, ita=ita
+    )
 
 
 ########################################################################
 # BOT PAUSE
 def pause_response(language, status):
-    if status is ENABLED:
-        if language == ITA:
-            return 'Il bot in pausa'
+
+    def eng():
+        if status is ENABLED:
+            return 'I am awake!'
         else:
             return 'Bot has been paused'
-    elif status is DISABLED:
-        if language is ITA:
+
+    def ita():
+        if status is ENABLED:
             return 'Sono sveglio!'
         else:
-            return 'I am awake!'
-    else:
-        return "Error"
+            return 'Il bot in pausa'
+
+    return chose_language(
+        language,
+        eng, ita=ita
+    )
 
 
 ########################################################################
 # MODULE STATUS
 def not_a_module(language, module):
-    if language == ITA:
-        return "{} non è un modulo, il comando non ha effetto".format(module)
-    else:  # auto fall back on english
-        return "{} is not a module, command has no effect".format(module)
+
+    def eng(): return '{} is not a module, command has no effect'.format(module)
+    def ita(): return '{} non è un modulo, il comando non ha effetto'.format(module)
+
+    return chose_language(
+        language,
+        eng, ita=ita
+    )
 
 
 # MODULE STATUS
 def no_action_taken(language):
-    if language == ITA:
-        return "Nulla è stato cambiato"
-    else:  # auto fall back on english
-        return "Nothing has been changed"
+
+    def eng(): return 'Nothing has been changed'
+    def ita(): return 'Nulla è stato cambiato'
+
+    return chose_language(
+        language,
+        eng, ita=ita
+    )
 
 
 # MODULE STATUS
 def mode_updated(language, status_name):
-    if language == ITA:
-        return "La modalità {} è **attiva**.".format(status_name.upper())
-    else:  # auto fall back on english
-        return "{} mode is **active**.".format(status_name.upper())
+
+    def eng(): return '{} mode is **active**.'.format(status_name.upper())
+    def ita(): return 'La modalità {} è **attiva**.'.format(status_name.upper())
+
+    return chose_language(
+        language,
+        eng, ita=ita
+    )
 
 
 # MODULE STATUS
@@ -154,15 +144,23 @@ def activation_status_update(language, module_name, status):
 
     m_name = module_name.replace('_', ' ').upper()
 
-    if status is ENABLED:
-        if language is ITA:
-            return "il modulo {} è stato **Attivato**.".format(m_name)
-        else:  # auto fall back on english
-            return "{} module has been **Activated**.".format(m_name)
-    elif status is DISABLED:
-        if language is ITA:
-            return "il modulo {} è stato **Disattivato**.".format(m_name)
-        else:  # auto fall back on english
-            return "{} module has been **Deactivated**.".format(m_name)
-    else:
-        return "Error"
+    def eng():
+        if status is ENABLED:
+            return '{} module has been **Activated**.'.format(m_name)
+        elif status is DISABLED:
+            return '{} module has been **Deactivated**.'.format(m_name)
+        else:
+            return 'Error'
+
+    def ita():
+        if status is ENABLED:
+            return 'il modulo {} è stato **Attivato**.'.format(m_name)
+        elif status is DISABLED:
+            return 'il modulo {} è stato **Disattivato**.'.format(m_name)
+        else:
+            return 'Error'
+
+    return chose_language(
+        language,
+        eng, ita=ita
+    )

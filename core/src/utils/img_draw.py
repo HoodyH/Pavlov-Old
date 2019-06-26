@@ -122,6 +122,7 @@ example = {
         },
         'description': "multi line text here, to describe the graph"
     },
+    'footer': "this is the end of all"
 }
 
 """
@@ -134,27 +135,29 @@ example = {
     +-----------------------------------------+         |
     |             SPAN_BORDER                 | span    |
     +-----------------------------------------+                
-    |             SPAN_SECTION_TITLE          | span                
-    |                                         | span                
-    +-----------------------------------------+                     
-    |             SPAN_SUBTITLE               | span               
-    +--+-----------------------------------+--+                      
-    |  |          SPAN_GRAPH_BORDER        |  | span    |           
-    |--+-----------------------------------+--|         |           
-    |  |                                   |  | span    |           
-    |  |          SPAN_GRAPH               |  | span    |SPAN_GRAPH_SECTION
-    |  |                                   |  | span    |           
-    |  |                                   |  | span    |           
-    |--+-----------------------------------+--|         |           
-    |  |          SPAN_GRAPH_BORDER        |  | span    |           
-    +--+-----------------------------------+--+                                         
-    |                                         | span                
-    |             SPAN_DESCRIPTION            | span                
-    |                                         | span        
-    |                                         | span                
-    +-----------------------------------------+
-    |             SPAN_BORDER                 | span  
-    +-----------------------------------------+                      
+    |             SPAN_SECTION_TITLE          | span                            |
+    |                                         | span                            |
+    +-----------------------------------------+                                 |
+    |             SPAN_SUBTITLE               | span                            |
+    +--+-----------------------------------+--+                                 |
+    |  |          SPAN_GRAPH_BORDER        |  | span    |                       |
+    |--+-----------------------------------+--|         |                       |
+    |  |                                   |  | span    |                       |
+    |  |          SPAN_GRAPH               |  | span    |SPAN_GRAPH_SECTION     |
+    |  |                                   |  | span    |                       |
+    |  |                                   |  | span    |                       |
+    |--+-----------------------------------+--|         |                       |
+    |  |          SPAN_GRAPH_BORDER        |  | span    |                       |
+    +--+-----------------------------------+--+                                 |              
+    |                                         | span                            |
+    |             SPAN_DESCRIPTION            | span                            |
+    |                                         | span                            |
+    |                                         | span                            |
+    +-----------------------------------------+                                 |
+    |             SPAN_BORDER                 | span                            |
+    +-----------------------------------------+            
+    |             SPAN_BORDER                 | span     at the end of all                        
+    +-----------------------------------------+           
 """
 SPAN_BORDER = 1
 SPAN_TOP_TITLE = 2.5
@@ -162,7 +165,7 @@ SPAN_SECTION_TITLE = 2
 SPAN_SUBTITLE = 1
 SPAN_GRAPH_BORDER = 1
 SPAN_GRAPH = 4
-SPAN_DESCRIPTION = 4
+SPAN_DESCRIPTION = 1  # It will automatically reserve one span per line
 
 SPAN_TOP_TITLE_SECTION = SPAN_BORDER + SPAN_TOP_TITLE + SPAN_BORDER
 SPAN_GRAPH_SECTION = SPAN_GRAPH_BORDER + SPAN_GRAPH + SPAN_GRAPH_BORDER
@@ -203,8 +206,8 @@ class DrawGraph(object):
 
         self.data = data
 
-        self.y_resolution = 50
-        self.width = 1900
+        self.y_resolution = 45
+        self.width = 1800
         self.height = 0
 
         self.top_title = self.data.get('top_title', False)
@@ -235,9 +238,13 @@ class DrawGraph(object):
                         self.height += SPAN_GRAPH_SECTION * self.y_resolution
 
                 # add space for SPAN_GRAPH_TEXT
-                if ds.get('description', False) is not False:
-                    self.height += SPAN_DESCRIPTION * self.y_resolution
+                description = ds.get('description', False)
+                if description is not False:
+                    description_lines = description.count('\n') + 1
+                    self.height += SPAN_DESCRIPTION * description_lines * self.y_resolution
+                    ds['description_lines'] = description_lines
 
+                self.height += SPAN_BORDER * self.y_resolution
                 ds['n_subsections'] = n_subsections
                 self.data_sections.append(ds)
 
@@ -329,9 +336,11 @@ class DrawGraph(object):
     def __draw_graph(self, graph_data):
 
         subtitle = graph_data.get('subtitle', False)
-        subtitle_color = graph_data.get('subtitle_color', self.title_color)
 
         if subtitle is not False:
+
+            subtitle_color = graph_data.get('subtitle_color', self.title_color)
+
             self.y_cursor += SPAN_SUBTITLE / 2 * self.y_resolution
             draw_support.draw_text_in_center(
                 self.draw,
@@ -401,9 +410,11 @@ class DrawGraph(object):
     def __draw_section(self, section_data):
 
         graph_title = section_data.get('section_title', False)
-        graph_title_color = section_data.get('section_title_color', self.title_color)
 
         if graph_title is not False:
+
+            graph_title_color = section_data.get('section_title_color', self.title_color)
+
             self.y_cursor += SPAN_SECTION_TITLE / 2 * self.y_resolution
             draw_support.draw_text_in_center(
                 self.draw,
@@ -419,10 +430,13 @@ class DrawGraph(object):
             self.__draw_graph(section_data.get('graph_{}'.format(i + 1)))
 
         description = section_data.get('description', False)
-        description_color = section_data.get('description_color', self.text_color)
 
         if description is not False:
-            self.y_cursor += SPAN_DESCRIPTION / 2 * self.y_resolution
+
+            description_color = section_data.get('description_color', self.text_color)
+            description_lines = section_data.get('description_lines', 1)
+
+            self.y_cursor += description_lines / 2 * self.y_resolution
             draw_support.draw_multiline_text_in_center(
                 self.draw,
                 self.width / 2,
@@ -431,7 +445,10 @@ class DrawGraph(object):
                 font=self.font_description,
                 fill=description_color,
                 align='center')
-            self.y_cursor += SPAN_DESCRIPTION / 2 * self.y_resolution
+            self.y_cursor += description_lines / 2 * self.y_resolution
+
+            # add border at the end of this section
+            self.y_cursor += SPAN_BORDER * self.y_resolution
 
     def draw_graph(self):
 

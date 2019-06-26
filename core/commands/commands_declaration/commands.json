@@ -39,29 +39,29 @@
         },
         "handled_args": {
             "": {
-                "eng": "Show tutti i moduli attivi con cui puoi interagire",
+                "eng": "Show all the active module that you can use",
                 "ita": "Mostra tutti i moduli attivi con cui puoi interagire"
             },
             "all": {
-                "eng": "Mostra tutti i moduli, attivi e disattivi",
+                "eng": "Show all the activated and deactivated modules",
                 "ita": "Mostra tutti i moduli, attivi e disattivi"
             },
             "command_name": {
-                "eng": "Mostra i dettagli del modulo passato",
+                "eng": "Show detaild about the given module",
                 "ita": "Mostra i dettagli del modulo passato"
             }
         },
         "handled_params": {
             "-d": {
-                "eng": "Mostra solo la descrizione",
+                "eng": "Show just the description",
                 "ita": "Mostra solo la descrizione"
             },
             "-u": {
-                "eng": "Mostra un esempio di utilizzo",
+                "eng": "Show an example of use",
                 "ita": "Mostra un esempio di utilizzo"
             },
             "-m": {
-                "eng": "Mostra il manuale",
+                "eng": "Show the manual",
                 "ita": "Mostra il manuale"
             }
         }
@@ -74,7 +74,7 @@
         "permissions": 100,
         "invocation_words": ["module.status", "m.s", "status"],
         "description": {
-            "eng": "Cambia lo stato di un modulo, sia la modalità che l'abilitazione",
+            "eng": "Change the status of a module, mode and en",
             "ita": "Cambia lo stato di un modulo, sia la modalità che l'abilitazione"
         },
         "handled_args": {
@@ -83,17 +83,17 @@
                 "ita": "Non permesso"
             },
             "module_name": {
-                "eng": "Richiede in input un modulo per poter performare azioni su di lui con i parametri",
+                "eng": "Require a name of a module, to perform actions on it with the parameters",
                 "ita": "Richiede in input un modulo per poter performare azioni su di lui con i parametri"
             }
         },
         "handled_params": {
             "-en": {
-                "eng": "Utilizzato vuoto cambia lo attivazione in modalità toggle, affiancato a 0(disattiva), 1(attiva)",
+                "eng": "Using it void it will change che abilitation by toggle, instead with a 0(deactivate), 1(activate)",
                 "ita": "Utilizzato vuoto cambia lo attivazione in modalità toggle, affiancato a 0(disattiva), 1(attiva)"
             },
-            "-set": {
-                "eng": "Utilizzato vuoto cambia lo stato in modalità toggle, affiancato a 0(sospensione), 1(modalità sileziosa), 2(modalità normale), 3(modalità spam) 4(modalità agressiva)",
+            "-mode": {
+                "eng": "Using it void it will change che mode by toggle between normal and silent, instead with a 1(silent mode), 2(normal mode), 3(spam mode) 4(aggressive mode)",
                 "ita": "Utilizzato vuoto cambia lo stato in modalità toggle, affiancato a 0(sospensione), 1(modalità sileziosa), 2(modalità normale), 3(modalità spam) 4(modalità agressiva)"
             }
         }

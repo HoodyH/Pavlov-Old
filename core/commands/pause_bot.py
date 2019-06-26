@@ -19,11 +19,11 @@ class PauseBot(object):
 
         def enable():
             db.guild.bot_paused = True
-            self.bot.update_output_permission(True)
             return pause_response(self.language, ENABLED)
 
         def disable():
             db.guild.bot_paused = False
+            self.bot.update_output_permission(False)
             return pause_response(self.language, DISABLED)
 
         en_options = {

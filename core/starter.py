@@ -17,7 +17,7 @@ from core.commands.help import Help
 from core.commands.man import Man
 from core.commands.pause_bot import PauseBot
 from core.commands.module_status import ModuleStatus
-from core.commands.my_data import MyData
+from core.commands.data import Data
 # audio converter
 from core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
@@ -159,8 +159,8 @@ class Starter(object):
             c = ModuleStatus(self.bot, language_found, command_found, arg, params)
             c.mute()
 
-        def my_data():
-            c = MyData(self.bot, language_found, command_found, arg, params)
+        def data():
+            c = Data(self.bot, language_found, command_found, arg, params)
             c.my_data()
 
         commands = {
@@ -168,7 +168,7 @@ class Starter(object):
             'man': man,
             'pause_bot': pause_bot,
             'module_status': module_status,
-            'data': my_data,
+            'data': data,
         }
 
         commands.get(command_found)()

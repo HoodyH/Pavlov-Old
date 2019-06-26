@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, date
 from calendar import monthrange
 
 
-class MyData(object):
+class Data(object):
     """
     """
 
@@ -117,7 +117,7 @@ class MyData(object):
 
     def my_data_pro(self):
 
-        hourly_n_show = 18
+        hourly_n_show = 16
         daily_n_show = 7
         monthly_n_show = 6
 
