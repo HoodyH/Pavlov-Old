@@ -1,10 +1,17 @@
-from core.src.text_reply.languages_handler import chose_language
+from core.src.languages_handler import chose_language
 
 
-def sec_to_time_string(sec, language, short=False):
-    sec = int(sec)
-    m, s = divmod(sec, 60)
-    h, m = divmod(m, 60)
+def time_to_string(language, time, short=False, time_input='s'):
+
+    t = int(time)
+    if time_input == 'h':
+        h = t
+    elif time_input == 'm':
+        h, m = divmod(t, 60)
+    else:
+        m, s = divmod(t, 60)
+        h, m = divmod(m, 60)
+
     d, h = divmod(h, 24)
 
     def eng():
@@ -230,7 +237,7 @@ def my_data_description(language, time_scope, n_messages, n_sec):
         else:
             out = ""
 
-        return out.format(n_messages, sec_to_time_string(n_sec, language))
+        return out.format(n_messages, time_to_string(language, n_sec))
 
     def ita():
         if time_scope == "hourly":
@@ -247,7 +254,7 @@ def my_data_description(language, time_scope, n_messages, n_sec):
         else:
             out = ""
 
-        return out.format(n_messages, sec_to_time_string(n_sec, language))
+        return out.format(n_messages, time_to_string(language, n_sec))
 
     return chose_language(
         language,

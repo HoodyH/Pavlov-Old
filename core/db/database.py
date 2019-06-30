@@ -22,6 +22,9 @@ class DB(object):
         self.user_level_up = False
         self.user_global_level_up = False
 
+        self.__scope = None
+        self.__iter_collectionsiter = None
+
     def update_data(self, scope, guild_id, user_id):
 
         self.user_level_up = False
@@ -30,6 +33,8 @@ class DB(object):
         self.guild = GuildData(self.client, scope, guild_id)
         self.user = UserData(self.client, scope, guild_id, user_id)
         self.user_global = UserData(self.client, scope, 'user_data_global', user_id)
+
+        self.__iter_collectionsiter = None
 
         return
 
@@ -47,6 +52,27 @@ class DB(object):
     def user_name(self, value):
         self.user.user_name = value
         self.user_global.user_name = value
+
+    @property
+    def language(self):
+        return self.guild.languages[0]
+
+    def iter_guild(self, scope):
+        self.__scope = scope
+        collections = self.client[scope].collection_names()
+        self.__iter_collectionsiter = iter(collections)
+
+    def next_guild(self):
+        guild_id = next(self.__iter_collectionsiter)
+        if guild_id is None:
+            return None
+        try:
+            guild_id = int(guild_id)
+            self.guild.update_guild_data(self.__scope, guild_id)
+        except Exception as e:
+            print(e)
+            return -1
+        return guild_id
 
     def update_bits(self, bits_add):
 

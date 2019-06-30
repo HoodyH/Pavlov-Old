@@ -1,8 +1,7 @@
 from core.src.settings import (
-    ITA,
     STATIC_SPLIT_MODE, STATIC_OVERRIDE_MODE
 )
-from core.src.text_reply.languages_handler import chose_language
+from core.src.languages_handler import chose_language
 
 
 def guild_not_pro(language):
@@ -80,6 +79,17 @@ def arg_not_found_error(language):
 
     def eng(): return 'The argument of this command is wrong or not existent.'
     def ita(): return 'L\'argomento di questo comando è errato o inesistente.'
+
+    return chose_language(
+        language,
+        eng, ita=ita
+    )
+
+
+def arg_void_not_allowed(language):
+
+    def eng(): return 'You cant leave the argument void in this command.'
+    def ita(): return 'L\'argomento in questo comando non può essere vuoto.'
 
     return chose_language(
         language,

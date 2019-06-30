@@ -1,7 +1,7 @@
 from core.src.settings import *
 from core.src.static_modules import db
 from core.src.text_reply.formatting import (
-    sec_to_time_string, my_data_description, my_data_subtitle, weekdays_string
+    time_to_string, my_data_description, my_data_subtitle, weekdays_string
 )
 from core.src.utils.img_draw import DrawGraph
 from datetime import datetime, timedelta, date
@@ -80,13 +80,13 @@ class Data(object):
                 data[0].append(colon_names(tz))
                 data[1].append(0)
                 data[2].append(0)
-                data[3].append(sec_to_time_string(0, self.language, True))
+                data[3].append(time_to_string(self.language, 0, True))
             else:
                 data[0].append(colon_names(tz))
                 i = time_array.index(el)
                 data[1].append(msg_array[i])
                 data[2].append(time_spent_array[i]/2)
-                data[3].append(sec_to_time_string(time_spent_array[i], self.language, True))
+                data[3].append(time_to_string(self.language, time_spent_array[i], True))
                 el = next(t, None)
 
         section = {
@@ -115,7 +115,7 @@ class Data(object):
 
         return section
 
-    def my_data_pro(self):
+    def data_pro(self):
 
         hourly_n_show = 16
         daily_n_show = 7
@@ -210,10 +210,10 @@ class Data(object):
 
         self.bot.send_image(img_bytes, MSG_ON_SAME_CHAT)
 
-    def my_data(self):
+    def data(self):
 
         if self.arg.upper() == 'PRO':
-            self.my_data_pro()
+            self.data_pro()
             return
 
-        self.my_data_pro()
+        self.data_pro()

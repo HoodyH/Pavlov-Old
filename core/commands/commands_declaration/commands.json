@@ -1,6 +1,6 @@
 {
     "help":{
-        "main_command": 0,
+        "management_command": 0,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,
@@ -27,7 +27,6 @@
         "handled_params": {}
     },
     "man":{
-        "main_command": 1,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,
@@ -52,27 +51,27 @@
             }
         },
         "handled_params": {
-            "-d": {
+            "d": {
                 "eng": "Show just the description",
                 "ita": "Mostra solo la descrizione"
             },
-            "-u": {
+            "u": {
                 "eng": "Show an example of use",
                 "ita": "Mostra un esempio di utilizzo"
             },
-            "-m": {
+            "m": {
                 "eng": "Show the manual",
                 "ita": "Mostra il manuale"
             }
         }
     },
-    "module_status":{
-        "main_command": 1,
+    "module.status":{
+        "management_command": 0,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,
         "permissions": 100,
-        "invocation_words": ["module.status", "m.s", "status"],
+        "invocation_words": ["m.s", "status"],
         "description": {
             "eng": "Change the status of a module, mode and en",
             "ita": "Cambia lo stato di un modulo, sia la modalità che l'abilitazione"
@@ -88,23 +87,23 @@
             }
         },
         "handled_params": {
-            "-en": {
+            "en": {
                 "eng": "Using it void it will change che abilitation by toggle, instead with a 0(deactivate), 1(activate)",
                 "ita": "Utilizzato vuoto cambia lo attivazione in modalità toggle, affiancato a 0(disattiva), 1(attiva)"
             },
-            "-mode": {
+            "mode": {
                 "eng": "Using it void it will change che mode by toggle between normal and silent, instead with a 1(silent mode), 2(normal mode), 3(spam mode) 4(aggressive mode)",
                 "ita": "Utilizzato vuoto cambia lo stato in modalità toggle, affiancato a 0(sospensione), 1(modalità sileziosa), 2(modalità normale), 3(modalità spam) 4(modalità agressiva)"
             }
         }
     },
-    "pause_bot":{
-        "main_command": 1,
+    "pause.bot":{
+        "management_command": 0,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,
         "permissions": 100,
-        "invocation_words": ["pause.bot"],
+        "invocation_words": [],
         "description": {
             "eng": "Put the bot in pause",
             "ita": "Mette in pausa il bot"
@@ -125,8 +124,64 @@
         },
         "handled_params": {}
     },
+    "communication":{
+        "management_command": 1,
+        "pro_command": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 1,
+        "permissions": 100,
+        "invocation_words": ["com"],
+        "description": {
+            "eng": "Send a message to every guild",
+            "ita": "Manda un messaggio ad ogni gilda"
+        },
+        "handled_args": {
+            "": {
+                "eng": "Not Allowed",
+                "ita": "Non permesso"
+            },
+            "update_deploy": {
+                "eng": "Communicate the start of the update",
+                "ita": "Comunica l'inizio dell'aggiornamento"
+            },
+            "update_completed": {
+                "eng": "Send Notification of update compleated",
+                "ita": "Notifica il completamento dell'update"
+            },
+            "update_test": {
+                "eng": "Test of the new update before deployment",
+                "ita": "Test il nuovo aggiornamento prima del rilascio"
+            },
+            "update_abort": {
+                "eng": "Abort the current update",
+                "ita": "Riprende il normale funzionamento"
+            },
+            "message": {
+                "eng": "Send a custom message",
+                "ita": "Invia un messaggio personalizzato"
+            }
+        },
+        "handled_params": {
+            "t.start": {
+                "eng": "Time before the start of the action, expressed in min",
+                "ita": "Tempo prima dell'azione espressa in minuti"
+            },
+            "t.duration": {
+                "eng": "Duration of the action, expressed in min",
+                "ita": "Durata dell'azione espressa in minuti"
+            },
+            "note": {
+                "eng": "Add a note text, this note will not be translated, english only",
+                "ita": "Aggiunge una nota che non verrà tradotta, solo inglese"
+            },
+            "note.ita": {
+                "eng": "Add a note text, this note must be in the given language",
+                "ita": "Aggiunge una nota nella lingua specificata"
+            }
+        }
+    },
     "data":{
-        "main_command": 0,
+        "management_command": 0,
         "pro_command": 1,
         "dm_enabled": 1,
         "enabled_by_default": 0,
@@ -155,13 +210,41 @@
             }
         },
         "handled_params": {
-            "-m": {
+            "m": {
                 "eng": "Details of the month",
                 "ita": "Dettagli del mese"
             },
-            "-w": {
+            "w": {
                 "eng": "Details of the week",
                 "ita": "Dettagli della settimana"
+            }
+        }
+    },
+    "random":{
+        "management_command": 0,
+        "pro_command": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 0,
+        "permissions": 0,
+        "invocation_words": [],
+        "description": {
+            "eng": "Print random data based on what is given",
+            "ita": "Stampa random data sulla base dei ciò inserito"
+        },
+        "handled_args": {
+            "": {
+                "eng": "Get a random user",
+                "ita": "Ottieni un un utente random tra tutti quelli della gilda"
+            }
+        },
+        "handled_params": {
+            "filter": {
+                "eng": "Filter some words",
+                "ita": "Filtra alcuni parole"
+            },
+            "set": {
+                "eng": "Set where to choices",
+                "ita": "Set tra cui scegliere"
             }
         }
     }

@@ -7,13 +7,15 @@ ERROR = -1
 # debug
 USE_GLOBAL_FILE_ONLY = True  # deprecated
 
-
 TELEGRAM = 'telegram'
 DISCORD = 'discord'
 
+SUPPORTED_SCOPES = [TELEGRAM]
+
+
 # Languages Handled for messages
-ITA = 'ita'
 ENG = 'eng'
+ITA = 'ita'
 
 
 # Messages type
