@@ -82,7 +82,7 @@ class Communication(object):
         def update_test():
 
             def build_message(language):
-                version = '0.7.12'
+                version = '0.7.16'
                 action = action_build(language, 'test')
                 if self._t_start is not None:
                     t_start = time_to_string(language, self._t_start, time_input='m')

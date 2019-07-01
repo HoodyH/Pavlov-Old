@@ -11,6 +11,7 @@ man - command manual of all active commands
 data - get user stats
 stt - speech to text
 pause_bot - stop messages from the bot
+level - show your level
 """
 
 
@@ -24,7 +25,7 @@ class TelegramBot(object):
         bot = telegram.Bot(token=token)
         print(bot.get_me().first_name)
 
-        self.telegram_command_list = ['/help', '/man', '/data', '/stt', '/pause_bot']
+        self.telegram_command_list = ['/help', '/man', '/data', '/stt', '/pause_bot', '/level']
 
     def voice_handler(self, bot, update):
         message = update.message
