@@ -5,8 +5,10 @@ def time_to_string(language, time, short=False, time_input='s'):
 
     t = int(time)
     if time_input == 'h':
+        m = 0
         h = t
     elif time_input == 'm':
+        s = 0
         h, m = divmod(t, 60)
     else:
         m, s = divmod(t, 60)
