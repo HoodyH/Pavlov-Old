@@ -27,6 +27,7 @@
         "handled_params": {}
     },
     "man":{
+        "management_command": 0,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,

@@ -11,9 +11,7 @@ supported_languages = [
 
 
 class BadassCharacter(object):
-    """
 
-    """
     def __init__(self):
 
         self._load_data()
@@ -50,5 +48,3 @@ class BadassCharacter(object):
         output += sentences_vector[sentence_number].replace('%%%', character.title())
 
         return output
-
-

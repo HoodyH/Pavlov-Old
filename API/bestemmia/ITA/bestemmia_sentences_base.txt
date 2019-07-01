@@ -99,33 +99,33 @@ guardia caccia
 handicappata
 illimitat%%%
 illuminata
-imbalsamata
-impeciata e impiumata
-impiccata
-incendiaria
-inculata da du cavalli
-indiavolata
-inverosimile maiala
-inviperita
+imbalsamat%%%
+impeciat%%%
+impiumat%%%
+impiccat%%%
+incendiari%%%
+inculat%%% da du cavalli
+indiavolat%%%
+inverosimile maial%%%
+inviperit%%%
 istrice
 jessika rabbit
 kamikaze
 koala
-ladra de galline
-lardona
-lebbrosa
-lebbrosa
+ladr%%% de galline
+lardon%%%
+lebbros%%%
 leccaculo
 lesbica
 lessie
 letamaia
 libellula con un tumore per ogni cellula
-licantropo
+licantrop%%%
 limata
 linciata
 lodata per i bocchini
-luccicosa
-lucidata co la spazzola de acciaio
+luccicos%%%
+lucidat%%% co la spazzola de acciaio
 lumaca
 lupa
 lurida vacca
@@ -135,12 +135,11 @@ magnabanane
 maiala
 maiala da corsa
 maiala da riproduzioneù
-maledetta
+maledett%%%
 masochista da competizione
 massetto
 masticato da san pietro
 masturba cavalli
-masturbatrice de cavalli
 mattonato
 mattone
 mazinga
@@ -149,49 +148,42 @@ microcefalo
 mignotta
 milite ignoto
 minestrone
-minorata
-missile a testata nucleare diretto verso il paradiso
+minorat%%%
 mitomane
 modem
 monaco hitleriano
-monco
-morto de fame
+monc%%%
+morto di fame
 mosaico
 moschiettiere
 mostro di lochness
 mummia
 musulmano
 naja
-nana
-nano bocchinaro
-nano cancerogeno
-nano radiottivi
-nano ricchione
+nan%%%
 nascosto nell'utero de la
-naufraga
+naufrago
 negromante
 nerchiosa
 oliva ascolana
 omosesuale
 operata de prostata
-orba
+orb%%%
 orca
 ornitologo
 ornitorinco
 pagliaccio
 pantegana
 papero
-parapleggica
+parapleggic%%%
 parmigiano reggiano
 particolarmente gay
 pastore tedesco spelato
-pastorello zoppo
-pecoraro sardo
+pastorell%%% zoppo
+pecorar%%% sardo
 pecorino
-pederasta
-pedofila
-pedofilo
-pedofilo
+pederast%%%
+pedofil%%%
 pellicola 8mm
 percosso con un martello pneumatinco
 pericolante
@@ -199,13 +191,11 @@ pesce cane
 pesce d'aprile
 pesce ragno
 pestilenziale
-pestilenziale
-pestilenziale
 peto
 pezzente
 piccione viaggiatore
-piede de porco
-pietra focaia
+piede
+pietra
 pigliamosche
 pigmaglione
 pioppo
@@ -216,22 +206,20 @@ pizzaiolo
 poccia cazzi
 poker de santi
 polini for race
-pompinaro da corsa
-porcellino d'india
-porco
-porco da monta
+pompinar%%% da corsa
+porcellin%%% d'india
+porc%%%
 poster
-prataiolo
+prataiol%%%
 professore di anticristianesimo
-pubblico ministero della sanita'
 putrida vacca
 putromizoba (puttana,troja,zoccola e battona)
-puttanaro
+puttanar%%%
 puzzle
 puzzola
-radioattivo
+radioattiv%%%
 ragno
-rapata
+rapat%%%
 ratto de fogna
 razzista
 razzo
@@ -250,11 +238,9 @@ salamandra
 salame
 salcicciotto
 sandokan
-sassaiolo
-satanassa
-satanasso
+sassaiol%%%
+satanass%%%
 satellitare
-sbandieratrice
 sbudellata
 scalzo sui chiodi
 scamorza
@@ -264,17 +250,17 @@ scanzacazzi
 scarica
 scarpa
 scarsa
-scartata come na caramella
-scartavetrata
+scartat%%% come na caramella
+scartavetrat%%%
 scassacazzi
-scatenata
+scatenat%%%
 scimatarra
 scimmione
 scimpanzè
 sciolina
-scomposto
+scompost%%%
 scoreggiona
-scorticata
+scorticat%%%
 scorza
 scrofa in calore
 sditalinatrice di sante
@@ -283,66 +269,57 @@ senza ventricolo
 senzapene
 serfista spelacchiato
 serpente
-serpentessa
 serpentina
 sfornato
 sganassata
-sgozzata da un'albanese
-sgozzato
-siciliano co la lupara
+sgozzat%%%
+sicilian%%% co la lupara
 siluro
-sola (quella de le scarpe)
-somara
-somara da riproduzione
-somaro
-somaro sardo nano da monta
+suola
+somara %%%
 sora nana
 sorca
 sorcone
 spacciatore
 spazzacamino
-spazzino africano
-spigoloso
-spilorcio
+spazzin%%% africano
+spigolos%%%
+spilorci%%%
 spolmonato
 spupazzaprete
-stecchino
-stirata
+stecchin%%%
+stirat%%%
 stradale
-stralunato
-strampalato
-strapazzato
-strapiombo
-stratosferica
-stravecchia
-strezzicato
-striata
-striglito co na spazzola de ferro
-strimpellato dal papa
-strombettato
-stronzo
-strozzato
-strozzino
+stralunat%%%
+strampalat%%%
+strapazzat%%%
+strapiomb%%%
+stratosferic%%%
+stravecchi%%%
+strezzicat%%%
+striat%%%
+striglit%%%
+strimpellat%%% dal papa
+strombettat%%%
+stronz%%%
+strozzat%%%
+strozzin%%%
 strumentale
 strumtruppen
-struzzo
-struzzo da corsa
+struzz%%%
 stuntman
-stuprato da un negro con un cazzo di 35 cm
+stuprat%%% da un negro con un cazzo di 35 cm
 succhiacazzi
 sudicio
-suina
-suina
-suina massima
-suino
+suin%%%
 super sajan di 2 livello
-svenata
+svenat%%%
 sventrapapere
-sventrato
-sverniciata
-sviolinato
-svirgolata
-svizzero
+sventrat%%%
+sverniciat%%%
+sviolinat%%%
+svirgolat%%%
+svizzer%%%
 tacco a spillo de le scarpe de la
 tamarindo
 tampax
@@ -351,22 +328,19 @@ tartufo
 tassista
 tbc (tubercolosa)
 termosifone
-terrona
 teutonica
 tira pompe
 tiramisu'
 tirchia
 tocco de lardo
-topa
-topo d'appartamento
-toporagno
+top%%%
+toporagn%%%
 toro in carica verso la
-vestita de rosso
+vestit%%% de rosso
 torta de mele
 tortellone barilla
 tossicodipendente
 tostapane
-traditore
 tranquillante
 transessule
 trattato con acido
@@ -382,38 +356,35 @@ trivella
 trivellata
 troglodita
 troja da concorso
-trombata
+trombat%%%
 trombetta
 trota
-truciolata
+truciolat%%%
 truciolo
 ttt (tanto te trito)
-tumoroso
+tumoros%%%
 turca
-turistica
+turista
 ufo
 unanime
 usuraia
-vagabondo
-vampiro
+vagabond%%%
+vampir%%%
 vascolare
-vecchia come il mondo
-velenosa
-venezuelano
+vecchi%%% come il mondo
+velenos%%%
+venezuelan%%%
 verme
-verniciata
+verniciat%%%
 vigilantes
-vigile
-vigilessa
-vigliacca
+vigliacc%%%
 vipera
-viscida
+viscid%%%
 vomitevole
 wafer
 x-men
 xxx
 yogurt
-zampognara
-zingara
-zoccola da gara
+zampognar%%%
+zingar%%%
 zuzzurellone
