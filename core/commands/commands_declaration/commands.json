@@ -206,8 +206,8 @@
                 "ita": "Mostra i dati utente della gilda"
             },
             "@username": {
-                "eng": "Show user data of the tagged user",
-                "ita": "Mostra i dati utente dell'utente taggato"
+                "eng": "Show user data of the tagged user, if user don't have privacy mode on",
+                "ita": "Mostra i dati utente dell'utente taggato, se l'utente non ha la privacy mode attiva"
             }
         },
         "handled_params": {
@@ -248,5 +248,32 @@
                 "ita": "Set tra cui scegliere"
             }
         }
+    },
+    "level":{
+        "management_command": 0,
+        "pro_command": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 0,
+        "permissions": 0,
+        "invocation_words": [],
+        "description": {
+            "eng": "Print the actual level",
+            "ita": "Stampa il livello attuale"
+        },
+        "handled_args": {
+            "": {
+                "eng": "Show own level in the guild",
+                "ita": "Mostra il proprio livello nella guild"
+            },
+            "global": {
+                "eng": "Show own global level",
+                "ita": "Mostra il proprio livello globale"
+            },
+            "@username": {
+                "eng": "Show level of the tagged user, if user don't have privacy mode on",
+                "ita": "Mostra il livello dell'utente taggato, se l'utente non ha la privacy mode attiva"
+            }
+        },
+        "handled_params": {}
     }
 }

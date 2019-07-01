@@ -20,6 +20,7 @@ from core.commands.module_status import ModuleStatus
 from core.commands.communication import Communication
 from core.commands.data import Data
 from core.commands.random import Random
+from core.commands.level import Level
 # audio converter
 from core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
@@ -173,6 +174,10 @@ class Starter(object):
             c = Random(self.bot, language_found, command_found, arg, params)
             c.random()
 
+        def level():
+            c = Level(self.bot, language_found, command_found, arg, params)
+            c.level()
+
         commands = {
             'help': bot_help,
             'man': man,
@@ -180,7 +185,8 @@ class Starter(object):
             'module_status': module_status,
             'communication': communication,
             'data': data,
-            'random': random
+            'random': random,
+            'level': level,
         }
 
         commands.get(command_found)()

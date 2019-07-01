@@ -1,53 +1,12 @@
-from core.src.settings import *
+from core.src.settings import (
+    DEFAULT_BACKGROUND_COLOR, DEFAULT_TOP_TITLE_COLOR, DEFAULT_TEXT_COLOR, DEFAULT_TOWER_2_COLOR,
+    DIR_DEFAULT_FONT
+)
 from core.src.utils.internal_formatting import remap_range
-from PIL import Image, ImageDraw, ImageFont
+from PIL import ImageFont
 from io import BytesIO
 from math import ceil
-
-
-class DrawSupport(object):
-
-    @staticmethod
-    def create_image(color_type, width, height, background_color):
-        return Image.new(color_type, (width, height), background_color)
-
-    @staticmethod
-    def create_draw(image):
-        return ImageDraw.Draw(image)
-
-    @staticmethod
-    def draw_text_in_center(draw_obj, x, y, text, fill=None, font=None, anchor=None):
-        """
-        :param draw_obj: object where draw
-        :param x: value of x entry point
-        :param y: value of y entry point
-        :param text: string of the name that you want to print
-        :param fill: fill
-        :param font: font
-        :param anchor: value_printed
-        """
-        w, h = draw_obj.textsize(text, font=font)
-        draw_obj.text([(x - w / 2), (y - h / 2)], text, fill=fill, font=font, anchor=anchor)
-
-    @staticmethod
-    def draw_multiline_text_in_center(draw_obj, x, y, text, fill=None, font=None, anchor=None, align=None):
-        """
-        :param draw_obj: object where draw
-        :param x: value of x entry point
-        :param y: value of y entry point
-        :param text: string of the name that you want to print
-        :param fill: fill
-        :param font: font
-        :param anchor: anchor
-        :param align: align
-        """
-        w, h = draw_obj.textsize(text, font=font)
-        draw_obj.multiline_text([(x - w / 2), (y - h / 2)], text, fill=fill, font=font, anchor=anchor, align=align)
-
-    @staticmethod
-    def draw_rectangle(draw_obj, x, y, x_2, y_2, fill=None):
-        draw_obj.rectangle([(x, y), (x_2, y_2)], fill=fill)
-
+from core.src.img_draw.draw_support import DrawSupport
 
 draw_support = DrawSupport()
 
@@ -58,7 +17,7 @@ class DrawLevel(object):
         return
 
 
-example = {
+example_graph = {
     'background_color': (62, 62, 62),
     'top_title': 'Main sheet title',
     'top_title_color': (230, 230, 230),
@@ -257,8 +216,7 @@ class DrawGraph(object):
 
         self.y_cursor = 0
 
-        dir_helvetica = 'core/src/utils/fonts/helveticaneue-light.ttf'
-        self.font_dir = self.data.get('font', dir_helvetica)
+        self.font_dir = self.data.get('font', DIR_DEFAULT_FONT)
         self.font_top_title = ImageFont.truetype(self.font_dir, int(self.y_resolution * SPAN_TOP_TITLE))
         self.font_section_title = ImageFont.truetype(self.font_dir, int(self.y_resolution * SPAN_SECTION_TITLE / 1.2))
         self.font_subtitle = ImageFont.truetype(self.font_dir, int(self.y_resolution * SPAN_SUBTITLE / 1.2))
@@ -354,7 +312,7 @@ class DrawGraph(object):
         self.y_cursor += (SPAN_GRAPH_BORDER + SPAN_GRAPH) * self.y_resolution
 
         x_names = graph_data.get('x_names', False)
-        y_names = graph_data.get('y_names', False)
+        # y_names = graph_data.get('y_names', False)
 
         towers = []
         n_towers = 0
@@ -482,4 +440,3 @@ class DrawGraph(object):
 
     def save_image(self, file_dir):
         self.image.save(file_dir, format='PNG')
-
