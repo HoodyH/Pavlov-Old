@@ -6,7 +6,6 @@ TRIGGER_LIST_LEN = 6
 BASE_TRIGGERS_ITA = [
         ['dio', 'porco'],
         ['madonna'],
-        ['troia'],
         ['puttana'],
         ['gesù', 'gesu'],
         ['allah', 'halla']

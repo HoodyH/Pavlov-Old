@@ -3,8 +3,8 @@ from core.src.settings import (
 )
 from core.src.command_reader import CommandReader
 from core.src.static_modules import db
-from core.src.text_reply.modules_reply_models import (
-    man_invocation, man_handled_args, man_handled_params, man_command_mask
+from core.src.text_reply.reply_commands.man_reply import (
+    invocation, handled_args, handled_params, command_mask
 )
 from core.src.text_reply.errors import arg_not_found_error
 
@@ -23,12 +23,16 @@ class Man(object):
 
         self.c_reader = CommandReader()
 
-    def _build_title(self, command_name):
-        out = '**{}**\n{}\n{}\n'.format(
+    def _build_title(self, command_function, command_name):
+        out = '**{}**\n{}\n'.format(
             command_name.upper(),
-            self.c_reader.commands.description,
-            man_invocation(self.language, self.c_reader.commands.invocation_words)
+            command_function.description,
         )
+        inv = command_function.invocation_words
+        if inv:
+            out += '{}\n'.format(
+                invocation(self.language, command_function.invocation_words)
+            )
         return out
 
     def _build_args_params_list(self, title_function, dictionary):
@@ -36,7 +40,7 @@ class Man(object):
             out = '\n{}\n'.format(title_function(self.language))
             for key in dictionary.keys():
                 key_description = dictionary.get(key)
-                out += '**{}** --- {}\n'.format(
+                out += '**-{}** -- {}\n'.format(
                     key if key != '' else 'void',
                     key_description
                 )
@@ -48,9 +52,9 @@ class Man(object):
 
         try:
             self.c_reader.commands.read_command(self.language, command_name)
-            out = self._build_title(command_name)
-            out += self._build_args_params_list(man_handled_args, self.c_reader.commands.handled_args)
-            out += self._build_args_params_list(man_handled_params, self.c_reader.commands.handled_params)
+            out = self._build_title(self.c_reader.commands, command_name)
+            out += self._build_args_params_list(handled_args, self.c_reader.commands.handled_args)
+            out += self._build_args_params_list(handled_params, self.c_reader.commands.handled_params)
             return out
 
         except Exception as e:
@@ -61,7 +65,7 @@ class Man(object):
 
         try:
             command_function.read_command(self.language, command_name)
-            out = self._build_title(command_name)
+            out = self._build_title(command_function, command_name)
             return out
 
         except Exception as e:
@@ -72,8 +76,8 @@ class Man(object):
         try:
             command_name = command_function.key
             out = '{}\n{}'.format(
-                self._build_title(command_name),
-                man_command_mask(self.language, db.guild.prefix, command, command_function.sub_call)
+                self._build_title(command_function, command_name),
+                command_mask(self.language, db.guild.prefix, command, command_function.sub_call)
             )
             return out
 

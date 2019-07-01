@@ -99,5 +99,3 @@ class Bestemmia(object):
         # not handled
         else:
             return ""
-
-

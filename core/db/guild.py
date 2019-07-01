@@ -119,6 +119,11 @@ class GuildData(object):
 
         self.msg = self._class_msg.extract_data(user_data.get('msg', self._class_msg.build_data()))
 
+    def update_guild_data(self, scope, guild_id):
+        self.scope = scope
+        self.guild_id = guild_id
+        self.get_guild_data()
+
     # guild_name
     @property
     def guild_name(self):

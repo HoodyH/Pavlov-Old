@@ -86,7 +86,7 @@ class CommandMainReader(BaseCommandReader):
 
     def __init__(self):
         super(CommandMainReader, self).__init__()
-        self._main_command = None
+        self._management_command = None
         self._pro_command = None
         self._dm_enabled = None
         self._enabled_by_default = None
@@ -107,7 +107,7 @@ class CommandMainReader(BaseCommandReader):
         if module is None:
             raise Exception('Command: {} do not exist'.format(module))
         else:
-            self._main_command = module.get('main_command')
+            self._management_command = module.get('main_command')
             self._pro_command = module.get('pro_command')
             self._dm_enabled = module.get('dm_enabled')
             self._enabled_by_default = module.get('enabled_by_default')
@@ -119,8 +119,8 @@ class CommandMainReader(BaseCommandReader):
             self._handled_params = self._read_args_and_params(language, module.get('handled_params'))
 
     @property
-    def main_command(self):
-        return self._main_command
+    def management_command(self):
+        return self._management_command
 
     @property
     def pro_command(self):

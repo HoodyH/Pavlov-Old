@@ -113,7 +113,7 @@ class BotStd(object):
                     reply_markup=reply_markup,
                     timeout=timeout,
                     parse_mode=parse_mode,
-                    ** kwargs
+                    **kwargs
                 )
 
             except Exception as e:
@@ -125,8 +125,10 @@ class BotStd(object):
                 __telegram_send(self._message.chat.id)
             elif destination == MSG_ON_SAME_CHAT:
                 __telegram_send(self._message.chat.id)
-            else:
+            elif destination == MSG_DIRECT:
                 __telegram_send(self._message.user.id)
+            else:
+                __telegram_send(destination)
 
         elif self.scope == DISCORD:
             return
@@ -169,7 +171,7 @@ class BotStd(object):
 
                 self._bot.send_message(
                     chat_id=location,
-                    text=message.replace('**', '*'),
+                    text=message.replace('**', '*') if parse_mode_en is True else message,
                     parse_mode=telegram.ParseMode.MARKDOWN if parse_mode_en is True else None,
                     disable_web_page_preview=disable_web_page_preview,
                     disable_notification=disable_notification,
@@ -187,8 +189,10 @@ class BotStd(object):
                 __telegram_send(self._message.chat.id)
             elif destination == MSG_ON_SAME_CHAT:
                 __telegram_send(self._message.chat.id)
-            else:
+            elif destination == MSG_DIRECT:
                 __telegram_send(self._message.user.id)
+            else:
+                __telegram_send(destination)
 
         elif self.scope == DISCORD:
             return

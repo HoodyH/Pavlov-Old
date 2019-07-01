@@ -1,53 +1,12 @@
-from core.src.settings import *
+from core.src.settings import (
+    DEFAULT_BACKGROUND_COLOR, DEFAULT_TOP_TITLE_COLOR, DEFAULT_TEXT_COLOR, DEFAULT_TOWER_2_COLOR,
+    DIR_DEFAULT_FONT
+)
 from core.src.utils.internal_formatting import remap_range
-from PIL import Image, ImageDraw, ImageFont
+from PIL import ImageFont
 from io import BytesIO
 from math import ceil
-
-
-class DrawSupport(object):
-
-    @staticmethod
-    def create_image(color_type, width, height, background_color):
-        return Image.new(color_type, (width, height), background_color)
-
-    @staticmethod
-    def create_draw(image):
-        return ImageDraw.Draw(image)
-
-    @staticmethod
-    def draw_text_in_center(draw_obj, x, y, text, fill=None, font=None, anchor=None):
-        """
-        :param draw_obj: object where draw
-        :param x: value of x entry point
-        :param y: value of y entry point
-        :param text: string of the name that you want to print
-        :param fill: fill
-        :param font: font
-        :param anchor: value_printed
-        """
-        w, h = draw_obj.textsize(text, font=font)
-        draw_obj.text([(x - w / 2), (y - h / 2)], text, fill=fill, font=font, anchor=anchor)
-
-    @staticmethod
-    def draw_multiline_text_in_center(draw_obj, x, y, text, fill=None, font=None, anchor=None, align=None):
-        """
-        :param draw_obj: object where draw
-        :param x: value of x entry point
-        :param y: value of y entry point
-        :param text: string of the name that you want to print
-        :param fill: fill
-        :param font: font
-        :param anchor: anchor
-        :param align: align
-        """
-        w, h = draw_obj.textsize(text, font=font)
-        draw_obj.multiline_text([(x - w / 2), (y - h / 2)], text, fill=fill, font=font, anchor=anchor, align=align)
-
-    @staticmethod
-    def draw_rectangle(draw_obj, x, y, x_2, y_2, fill=None):
-        draw_obj.rectangle([(x, y), (x_2, y_2)], fill=fill)
-
+from core.src.img_draw.draw_support import DrawSupport
 
 draw_support = DrawSupport()
 
@@ -58,7 +17,7 @@ class DrawLevel(object):
         return
 
 
-example = {
+example_graph = {
     'background_color': (62, 62, 62),
     'top_title': 'Main sheet title',
     'top_title_color': (230, 230, 230),
@@ -122,6 +81,7 @@ example = {
         },
         'description': "multi line text here, to describe the graph"
     },
+    'footer': "this is the end of all"
 }
 
 """
@@ -134,27 +94,29 @@ example = {
     +-----------------------------------------+         |
     |             SPAN_BORDER                 | span    |
     +-----------------------------------------+                
-    |             SPAN_SECTION_TITLE          | span                
-    |                                         | span                
-    +-----------------------------------------+                     
-    |             SPAN_SUBTITLE               | span               
-    +--+-----------------------------------+--+                      
-    |  |          SPAN_GRAPH_BORDER        |  | span    |           
-    |--+-----------------------------------+--|         |           
-    |  |                                   |  | span    |           
-    |  |          SPAN_GRAPH               |  | span    |SPAN_GRAPH_SECTION
-    |  |                                   |  | span    |           
-    |  |                                   |  | span    |           
-    |--+-----------------------------------+--|         |           
-    |  |          SPAN_GRAPH_BORDER        |  | span    |           
-    +--+-----------------------------------+--+                                         
-    |                                         | span                
-    |             SPAN_DESCRIPTION            | span                
-    |                                         | span        
-    |                                         | span                
-    +-----------------------------------------+
-    |             SPAN_BORDER                 | span  
-    +-----------------------------------------+                      
+    |             SPAN_SECTION_TITLE          | span                            |
+    |                                         | span                            |
+    +-----------------------------------------+                                 |
+    |             SPAN_SUBTITLE               | span                            |
+    +--+-----------------------------------+--+                                 |
+    |  |          SPAN_GRAPH_BORDER        |  | span    |                       |
+    |--+-----------------------------------+--|         |                       |
+    |  |                                   |  | span    |                       |
+    |  |          SPAN_GRAPH               |  | span    |SPAN_GRAPH_SECTION     |
+    |  |                                   |  | span    |                       |
+    |  |                                   |  | span    |                       |
+    |--+-----------------------------------+--|         |                       |
+    |  |          SPAN_GRAPH_BORDER        |  | span    |                       |
+    +--+-----------------------------------+--+                                 |              
+    |                                         | span                            |
+    |             SPAN_DESCRIPTION            | span                            |
+    |                                         | span                            |
+    |                                         | span                            |
+    +-----------------------------------------+                                 |
+    |             SPAN_BORDER                 | span                            |
+    +-----------------------------------------+            
+    |             SPAN_BORDER                 | span     at the end of all                        
+    +-----------------------------------------+           
 """
 SPAN_BORDER = 1
 SPAN_TOP_TITLE = 2.5
@@ -162,7 +124,7 @@ SPAN_SECTION_TITLE = 2
 SPAN_SUBTITLE = 1
 SPAN_GRAPH_BORDER = 1
 SPAN_GRAPH = 4
-SPAN_DESCRIPTION = 4
+SPAN_DESCRIPTION = 1  # It will automatically reserve one span per line
 
 SPAN_TOP_TITLE_SECTION = SPAN_BORDER + SPAN_TOP_TITLE + SPAN_BORDER
 SPAN_GRAPH_SECTION = SPAN_GRAPH_BORDER + SPAN_GRAPH + SPAN_GRAPH_BORDER
@@ -203,8 +165,8 @@ class DrawGraph(object):
 
         self.data = data
 
-        self.y_resolution = 50
-        self.width = 1900
+        self.y_resolution = 45
+        self.width = 1800
         self.height = 0
 
         self.top_title = self.data.get('top_title', False)
@@ -235,9 +197,13 @@ class DrawGraph(object):
                         self.height += SPAN_GRAPH_SECTION * self.y_resolution
 
                 # add space for SPAN_GRAPH_TEXT
-                if ds.get('description', False) is not False:
-                    self.height += SPAN_DESCRIPTION * self.y_resolution
+                description = ds.get('description', False)
+                if description is not False:
+                    description_lines = description.count('\n') + 1
+                    self.height += SPAN_DESCRIPTION * description_lines * self.y_resolution
+                    ds['description_lines'] = description_lines
 
+                self.height += SPAN_BORDER * self.y_resolution
                 ds['n_subsections'] = n_subsections
                 self.data_sections.append(ds)
 
@@ -250,8 +216,7 @@ class DrawGraph(object):
 
         self.y_cursor = 0
 
-        dir_helvetica = 'core/src/utils/fonts/helveticaneue-light.ttf'
-        self.font_dir = self.data.get('font', dir_helvetica)
+        self.font_dir = self.data.get('font', DIR_DEFAULT_FONT)
         self.font_top_title = ImageFont.truetype(self.font_dir, int(self.y_resolution * SPAN_TOP_TITLE))
         self.font_section_title = ImageFont.truetype(self.font_dir, int(self.y_resolution * SPAN_SECTION_TITLE / 1.2))
         self.font_subtitle = ImageFont.truetype(self.font_dir, int(self.y_resolution * SPAN_SUBTITLE / 1.2))
@@ -329,9 +294,11 @@ class DrawGraph(object):
     def __draw_graph(self, graph_data):
 
         subtitle = graph_data.get('subtitle', False)
-        subtitle_color = graph_data.get('subtitle_color', self.title_color)
 
         if subtitle is not False:
+
+            subtitle_color = graph_data.get('subtitle_color', self.title_color)
+
             self.y_cursor += SPAN_SUBTITLE / 2 * self.y_resolution
             draw_support.draw_text_in_center(
                 self.draw,
@@ -345,7 +312,7 @@ class DrawGraph(object):
         self.y_cursor += (SPAN_GRAPH_BORDER + SPAN_GRAPH) * self.y_resolution
 
         x_names = graph_data.get('x_names', False)
-        y_names = graph_data.get('y_names', False)
+        # y_names = graph_data.get('y_names', False)
 
         towers = []
         n_towers = 0
@@ -401,9 +368,11 @@ class DrawGraph(object):
     def __draw_section(self, section_data):
 
         graph_title = section_data.get('section_title', False)
-        graph_title_color = section_data.get('section_title_color', self.title_color)
 
         if graph_title is not False:
+
+            graph_title_color = section_data.get('section_title_color', self.title_color)
+
             self.y_cursor += SPAN_SECTION_TITLE / 2 * self.y_resolution
             draw_support.draw_text_in_center(
                 self.draw,
@@ -419,10 +388,13 @@ class DrawGraph(object):
             self.__draw_graph(section_data.get('graph_{}'.format(i + 1)))
 
         description = section_data.get('description', False)
-        description_color = section_data.get('description_color', self.text_color)
 
         if description is not False:
-            self.y_cursor += SPAN_DESCRIPTION / 2 * self.y_resolution
+
+            description_color = section_data.get('description_color', self.text_color)
+            description_lines = section_data.get('description_lines', 1)
+
+            self.y_cursor += description_lines / 2 * self.y_resolution
             draw_support.draw_multiline_text_in_center(
                 self.draw,
                 self.width / 2,
@@ -431,7 +403,10 @@ class DrawGraph(object):
                 font=self.font_description,
                 fill=description_color,
                 align='center')
-            self.y_cursor += SPAN_DESCRIPTION / 2 * self.y_resolution
+            self.y_cursor += description_lines / 2 * self.y_resolution
+
+            # add border at the end of this section
+            self.y_cursor += SPAN_BORDER * self.y_resolution
 
     def draw_graph(self):
 
@@ -465,4 +440,3 @@ class DrawGraph(object):
 
     def save_image(self, file_dir):
         self.image.save(file_dir, format='PNG')
-

@@ -5,7 +5,7 @@ from core.src.settings import (
 )
 from core.src.static_modules import db
 from core.src.internal_log import Log
-from core.src.text_reply.modules_reply_models import (
+from core.src.text_reply.reply_commands.module_status_reply import (
     no_action_taken, mode_updated, activation_status_update, not_a_module
 )
 from core.src.text_reply.errors import parse_error

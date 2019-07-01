@@ -7,13 +7,15 @@ ERROR = -1
 # debug
 USE_GLOBAL_FILE_ONLY = True  # deprecated
 
-
 TELEGRAM = 'telegram'
 DISCORD = 'discord'
 
+SUPPORTED_SCOPES = [TELEGRAM]
+
+
 # Languages Handled for messages
-ITA = 'ita'
 ENG = 'eng'
+ITA = 'ita'
 
 
 # Messages type
@@ -120,3 +122,8 @@ DEFAULT_TEXT_COLOR = LIGHT_GRAY
 DEFAULT_TOWER_1_COLOR = GRAY
 DEFAULT_TOWER_2_COLOR = GRAY_BLUE
 DEFAULT_TOWER_3_COLOR = GRAY_BLUE
+
+DEFAULT_LEVEL_COLOR = LIGHT_GRAY2
+DEFAULT_TITLE_COLOR = LIGHT_GRAY
+
+DIR_DEFAULT_FONT = 'core/src/utils/fonts/helveticaneue-light.ttf'

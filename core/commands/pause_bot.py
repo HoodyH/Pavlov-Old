@@ -3,7 +3,7 @@ from core.src.settings import (
     ENABLED, DISABLED
 )
 from core.src.static_modules import db
-from core.src.text_reply.modules_reply_models import pause_response
+from core.src.text_reply.reply_commands.pause_bot_reply import response
 from core.src.text_reply.errors import parse_error
 
 
@@ -19,12 +19,12 @@ class PauseBot(object):
 
         def enable():
             db.guild.bot_paused = True
-            self.bot.update_output_permission(True)
-            return pause_response(self.language, ENABLED)
+            return response(self.language, ENABLED)
 
         def disable():
             db.guild.bot_paused = False
-            return pause_response(self.language, DISABLED)
+            self.bot.update_output_permission(False)
+            return response(self.language, DISABLED)
 
         en_options = {
             ENABLED: disable,

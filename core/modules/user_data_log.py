@@ -1,7 +1,10 @@
 from core.src.settings import *
 from core.src.static_modules import db
-from core.bot_abstraction import BotStd
 from datetime import datetime
+from core.src.img_draw.draw_levels import DrawLevels
+from core.src.text_reply.reply_modules.level_reply import (
+    user_field, text_description
+)
 import math
 
 
@@ -27,13 +30,16 @@ class UserDataLog(object):
 
     def __send_level_up_message(self, level, destination):
 
-        if self.language == ITA:
-            message = 'Grande {}\nHai raggiunto il livello {}'.format(self.bot.user.username, level)
-        else:
-            message = 'Cool {}\nYou\'ve gain to level {}'.format(self.bot.user.username, level)
+        data = {
+            'level': level,
+            'title': user_field(self.language, self.bot.user.username),
+            'text': text_description(self.language, db.level),
+        }
 
-        ms = BotStd()
-        ms.send_message(message, destination)
+        dl = DrawLevels(data)
+        dl.draw_level()
+
+        self.bot.send_image(dl.get_image(), destination)
 
     def log_data(self):
 
