@@ -48,6 +48,8 @@ class Communication(object):
 
     def communication(self):
 
+        version = '0.7.16'
+
         def void_arg():
             out = arg_void_not_allowed(self.language)
             self.bot.send_message(out, MSG_ON_SAME_CHAT)
@@ -55,16 +57,15 @@ class Communication(object):
         def update_deploy():
 
             def build_message(language):
-                version = '0.7.16'
                 action = action_build(language, 'update')
                 if self._t_start is not None:
                     t_start = time_to_string(language, self._t_start, time_input='m')
                 else:
-                    t_start = time_to_string(language, 5, time_input='m')
+                    t_start = time_to_string(language, 1, time_input='m')
                 if self._t_duration is not None:
                     t_duration = time_to_string(language, self._t_duration, time_input='m')
                 else:
-                    t_duration = time_to_string(language, 20, time_input='m')
+                    t_duration = time_to_string(language, 3, time_input='m')
                 note = note_build(language, self.params)
                 out = '{}\n{}\n\n{}'.format(
                     update_deploy_reply(language, version),
@@ -77,12 +78,18 @@ class Communication(object):
             self.message_sender(build_message)
 
         def update_completed():
-            self.message_sender(update_competed_reply)
+
+            def build_message(language):
+                out = '{}'.format(
+                    update_competed_reply(language, version)
+                )
+                return out
+
+            self.message_sender(build_message)
 
         def update_test():
 
             def build_message(language):
-                version = '0.7.16'
                 action = action_build(language, 'test')
                 if self._t_start is not None:
                     t_start = time_to_string(language, self._t_start, time_input='m')
