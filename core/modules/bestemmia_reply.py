@@ -6,9 +6,10 @@ TRIGGER_LIST_LEN = 6
 BASE_TRIGGERS_ITA = [
         ['dio', 'porco'],
         ['madonna'],
+        ['troiaa'],
         ['puttana'],
         ['gesù', 'gesu'],
-        ['allah', 'halla']
+        ['allah', 'halla'],
     ]
 
 BASE_TRIGGERS_ENG = [
@@ -17,7 +18,7 @@ BASE_TRIGGERS_ENG = [
         ['whore'],
         ['bitch'],
         ['jesus'],
-        ['allah']
+        ['allah'],
     ]
 
 
