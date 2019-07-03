@@ -10,7 +10,7 @@ help - help message
 man - command manual of all active commands
 data - get user stats
 stt - speech to text
-pause_bot - stop messages from the bot
+pause.bot - stop messages from the bot
 level - show your level
 """
 
@@ -57,6 +57,8 @@ class TelegramBot(object):
             p = text.find('@')
             if p is not -1:
                 text = text[:p]
+
+            text = text.replace('_', '.')
 
             self.starter.update(TELEGRAM, bot, message)
             if not self.starter.is_bot_disabled():

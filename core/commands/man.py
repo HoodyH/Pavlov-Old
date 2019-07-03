@@ -40,7 +40,7 @@ class Man(object):
             out = '\n{}\n'.format(title_function(self.language))
             for key in dictionary.keys():
                 key_description = dictionary.get(key)
-                out += '**-{}** -- {}\n'.format(
+                out += '**{}** -- {}\n'.format(
                     key if key != '' else 'void',
                     key_description
                 )
@@ -87,17 +87,22 @@ class Man(object):
 
     def man(self):
 
-        out = ''
-        if self.arg == '':
-            out = self._build_full_man('man')
+        def void_arg():
+            _out = ''
+            if self.arg == '':
+                _out = self._build_full_man('man')
+            return _out
 
-        elif self.arg == 'all':
+        def all_commands():
+            _out = ''
             for key in self.c_reader.commands.commands_keys:
-                out += '{}\n'.format(self._build_base_man(self.c_reader.commands, key))
-            for key in self.c_reader.commands_shortcut.commands_keys:
-                out += '{}\n'.format(self._build_base_man(self.c_reader.commands_shortcut, key))
+                _out += '{}\n'.format(self._build_base_man(self.c_reader.commands, key))
+            for key in self.c_reader.commands_shortcut.commands_shortcut_keys:
+                _out += '{}\n'.format(self._build_base_man(self.c_reader.commands_shortcut, key))
+            return _out
 
-        else:
+        def command_name():
+            _out = ''
             try:
                 l, command_found, t = self.c_reader.get_command(db.guild.languages, self.arg)
             except Exception as e:
@@ -105,13 +110,25 @@ class Man(object):
                 return
 
             if command_found is None:
-                out = arg_not_found_error(self.language)  # use guild main language
-                self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
-                return
+                _out = arg_not_found_error(self.language)  # use guild main language
+                self.bot.send_message(_out, MSG_ON_SAME_CHAT, parse_mode_en=True)
+                return ''
 
             if l is None:
-                out = self._build_full_man(command_found)
+                _out = self._build_full_man(command_found)
             else:
-                out = self._print_found_command(self.c_reader.commands_shortcut, command_found)
+                _out = self._print_found_command(self.c_reader.commands_shortcut, command_found)
+
+        chose = {
+            '': void_arg,
+            'all': all_commands,
+        }
+
+        try:
+            out = chose[self.arg]()
+        except Exception as e:
+            out = command_name()
+            print(e)
+            return
 
         self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)

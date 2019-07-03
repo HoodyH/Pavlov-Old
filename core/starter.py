@@ -4,7 +4,7 @@ from core.src.static_modules import db
 from core.src.file_handler import load_commands
 from core.src.message_reader import extract_command_parameters
 from core.src.command_reader import CommandReader
-from core.src.text_reply.errors import command_error, command_not_implemented, guild_not_pro
+from core.src.text_reply.errors import command_error, guild_not_pro
 from core.src.internal_log import Log
 # listeners
 from core.modules.user_data_log import UserDataLog
@@ -43,6 +43,7 @@ class Starter(object):
     def update(self, scope, real_bot, real_bot_message):
 
         self.bot.update_bot_data(scope, real_bot, real_bot_message)
+
         # update db data
         db.update_data(self.bot.scope, self.bot.guild.id, self.bot.user.id)
 
@@ -60,7 +61,7 @@ class Starter(object):
 
     def _catch_prefix(self):
         """
-        fin and cut away the prefix
+        find and cut away the prefix
         """
         if str.startswith(self.in_text, db.guild.prefix):
             self.in_text = self.in_text[len(db.guild.prefix):]
