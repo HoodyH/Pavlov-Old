@@ -1,7 +1,7 @@
 from core.src.settings import *
 from core.src.static_modules import db
 from datetime import datetime
-from core.src.img_draw.draw_levels import DrawLevels
+from core.src.img_draw.draw_levels import DrawLevelUp
 from core.src.text_reply.reply_modules.level_reply import (
     user_field, text_description
 )
@@ -36,8 +36,8 @@ class UserDataLog(object):
             'text': text_description(self.language, db.level),
         }
 
-        dl = DrawLevels(data)
-        dl.draw_level()
+        dl = DrawLevelUp(data)
+        dl.draw_level_up()
 
         self.bot.send_image(dl.get_image(), destination)
 
@@ -62,7 +62,7 @@ class UserDataLog(object):
         if db.is_user_global_level_up():
             destination = db.user_global_level_up_destination()
             if destination != MSG_DISABLED:
-                self.__send_level_up_message(db.global_level, destination)
+                self.__send_level_up_message(db.level_global, destination)
 
         bits_by_string_len = int(math.ceil(self.text_len * BITS_SAMPLE_VALUE / SAMPLE_STRING_LEN))
         bits_add = bits_by_string_len if bits_by_string_len <= BITS_MAX_VALUE else BITS_MAX_VALUE

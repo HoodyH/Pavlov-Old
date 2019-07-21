@@ -1,7 +1,7 @@
 from core.src.settings import (
     XP_NEXT_LEVEL, MSG_DISABLED, MSG_DIRECT,
     COMMAND, IMAGE, DOCUMENT, VOICE, VIDEO_NOTE, STICKER,
-    SUDO_PREFIX, COMMAND_PREFIX, OVERRIDE_PREFIX)
+    SUDO_PREFIX, OVERRIDE_PREFIX)
 from pymongo import MongoClient
 from .guild import GuildData
 from .user import UserData
@@ -90,10 +90,9 @@ class DB(object):
             xp = getattr(self, obj).xp
             xp_value = xp.xp_value
             level = int(xp.level)
-            level_up_notification = xp.level_up_notification
 
             xp_value += xp_add
-            xp_to_next_level = (level*(level+1)/4)*XP_NEXT_LEVEL
+            xp_to_next_level = self.calculate_xp_upto_level(level)
             if xp_to_next_level <= xp_value:
                 level += 1
                 setattr(self, obj+'_level_up', True)
@@ -103,6 +102,44 @@ class DB(object):
 
             xp.xp_value = xp_value
             xp.level = level
+
+    @property
+    def xp(self):
+        return self.user.xp.xp_value
+
+    @property
+    def xp_global(self):
+        return self.user_global.xp.xp_value
+
+    @property
+    def xp_gained_in_current_level(self):
+        return int(self.xp - self.calculate_xp_upto_level(self.level - 1))
+
+    @property
+    def xp_gained_in_current_level_global(self):
+        return int(self.xp_global - self.calculate_xp_upto_level(self.level_global - 1))
+
+    # the formula to calculate the xp needed to level-up
+    @staticmethod
+    def calculate_xp_upto_level(level):
+        return (level * (level + 1) / 4) * XP_NEXT_LEVEL
+
+    # calculate the xp of the level, how much xp you have to gain to go to the next level
+    def get_max_xp_of_level(self, level):
+        if level is 0:
+            return self.calculate_xp_upto_level(level)
+        else:
+            prev_level = level - 1
+            return self.calculate_xp_upto_level(level) - self.calculate_xp_upto_level(prev_level)
+
+    # the xp that is contained in the given level
+    @property
+    def level_xp(self):
+        return int(self.get_max_xp_of_level(self.level))
+
+    @property
+    def level_xp_global(self):
+        return int(self.get_max_xp_of_level(self.level_global))
 
     def is_user_level_up(self):
         return self.user_level_up
@@ -129,7 +166,7 @@ class DB(object):
             return MSG_DISABLED
 
     @property
-    def global_level(self):
+    def level_global(self):
         return self.user_global.xp.level
 
     def update_msg(self, time_log, time_spent_to_type):
@@ -244,6 +281,3 @@ class DB(object):
             self.user_global.msg.stickers += 1
         else:
             return
-
-
-

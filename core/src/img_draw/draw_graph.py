@@ -251,7 +251,7 @@ class DrawGraph(object):
 
         entry_x = x + tower_dim * x_resolution / 2
         entry_y = y - tower_height - SPAN_GRAPH_BORDER * self.y_resolution / 2
-        draw_support.draw_text_in_center(
+        draw_support.draw_text(
             self.draw, entry_x, entry_y, str(value_printed), fill=self.text_color, font=self.font_text
         )
 
@@ -300,7 +300,7 @@ class DrawGraph(object):
             subtitle_color = graph_data.get('subtitle_color', self.title_color)
 
             self.y_cursor += SPAN_SUBTITLE / 2 * self.y_resolution
-            draw_support.draw_text_in_center(
+            draw_support.draw_text(
                 self.draw,
                 self.width / 2,
                 self.y_cursor,
@@ -374,7 +374,7 @@ class DrawGraph(object):
             graph_title_color = section_data.get('section_title_color', self.title_color)
 
             self.y_cursor += SPAN_SECTION_TITLE / 2 * self.y_resolution
-            draw_support.draw_text_in_center(
+            draw_support.draw_text(
                 self.draw,
                 self.width / 2,
                 self.y_cursor,
@@ -412,7 +412,7 @@ class DrawGraph(object):
 
         if self.top_title is not False:
             self.y_cursor += (SPAN_BORDER + SPAN_TOP_TITLE/2) * self.y_resolution
-            draw_support.draw_text_in_center(
+            draw_support.draw_text(
                 self.draw,
                 self.width / 2,
                 self.y_cursor,
