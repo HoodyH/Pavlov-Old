@@ -1,4 +1,88 @@
 {
+    "Ironman": {
+        "name": "",
+        "enabled": 1,
+        "mode": 0,
+        "cit_author": "Tony Stark",
+        "private": 0,
+        "users_allowed": {
+            "telegram": [],
+            "discord": []
+        },
+        "standard_counter": 1,
+        "standard_triggers": [
+            "ironman"
+        ],
+        "standard_outputs": [
+            "Ti offrir\u00f2 una scelta: preferisci una vita inconsistente o una morte considerevole?",
+            "morto",
+            "Immagina di poter hackerare l'hard drive di un organismo vivente e ricodificare il suo DNA.",
+            "S\u00ec, posso volare.",
+            "Ho scoperto che c'\u00e9 bisogno di me, per compiacere me stesso.",
+            "Pronti, ammirate, fuoco!",
+            "Mi raccomando, niente gesti equivoci... Scherzavo, fa pure."
+        ],
+        "avoid_triggers": [
+            "merda"
+        ],
+        "avoid_outputs": [
+            "Sembra che io sia instabile, egocentrico e scostante con gli altri.",
+            "Sarebbe un personaggio molto noioso se fosse sempre e solo positivo, non sarebbe in sintonia con i tempi.",
+            "Non toccare la mia legna!"
+        ],
+        "power_triggers": [
+            "perla tony"
+        ],
+        "power_outputs": [
+            "Sono il migliore.",
+            "Sembra che io sia instabile, egocentrico e scostante con gli altri.",
+            "Se c'\u00e8 una cosa che ho dimostrato \u00e8 che si deve contare su di me per appagare me stesso.",
+            "Possono togliermi la casa, o tutti i miei giocattoli, ma c'\u00e8 una cosa che nessuno mi toglier\u00e0 mai: io sono Iron Man.",
+            "Piacere di conoscerla, dottor Banner. Il suo lavoro sulle collisioni degli antielettroni \u00e8 incomparabile e mi appassiona vederla perdere il controllo e trasformarsi in un mostro verde rabbioso.",
+            "I limiti sono fatti per essere superati!",
+            "\u00c8 Natale! Siamo pi\u00f9 cattivi!",
+            "\u00c8 meglio essere temuti o rispettati? Io dico: \u00e8 troppo chiedere entrambe le cose?",
+            "Due Vodka Martini, molto secchi, molte olive e molto in fretta, uno con succo di oliva.",
+            "non si sia mai personificata metafora pi\u00f9 grande della Fenice nella storia dell'Uomo!",
+            "Avremo avvisato, ma eravamo troppo occupati a non sapere della vostra esistenza!"
+        ],
+        "power_counter": 0,
+        "avoid_counter": 1
+    },
+    "Federica": {
+        "name": "",
+        "enabled": 1,
+        "mode": 0,
+        "cit_author": "Federica",
+        "private": 0,
+        "users_allowed": {
+            "telegram": [],
+            "discord": []
+        },
+        "standard_counter": 1,
+        "standard_triggers": [
+            "federica",
+            "fede"
+        ],
+        "standard_outputs": [
+            "La mano amica"
+        ],
+        "avoid_triggers": [
+            "merda",
+            "pi\u00f9 grande"
+        ],
+        "avoid_outputs": [
+            "Hey, non insultare la fedele mano di Luca Mauro"
+        ],
+        "power_triggers": [
+            "origine federica"
+        ],
+        "power_outputs": [
+            "\u00c8 la celebre mano amica. Fedele compagna nei momenti di crisi, nel tipico gesto usato da Benito Mussolini per dire a tutti di avvalersene. L'abuso porta alla cecit\u00e0 e a slogature del polso. In certe parti del mondo, Federica \u00e8 nota con il suo secondo nome: Enrica."
+        ],
+        "power_counter": 0,
+        "avoid_counter": 1
+    },
     "Gym": {
         "name": "",
         "enabled": 1,
@@ -632,13 +716,14 @@
             "super maestro"
         ],
         "power_outputs": [
+            "Oggi ho casa libera, chi volesse venire \u00e8 invitato. Stiamo un po' assieme, ci scambiamo un due parole e, perch\u00e8 no, anche quanche risata.",
             "A true master is an eternal student",
             "Mi alleno per sorreggiere il peso dei problemi che le persone a cui voglio bene non possono portare.",
             "Tu sei il classico tipo che per sentirsi soddisfatto della propria vita deve criticare quella degli altri. Avanti, colpiscimi!",
-            "non sar\u00f2 un modello per le persone, ma per un bot s\u00ec"
+            "non sar\u00f2 un modello per le persone, ma per un bot s\u00ec."
         ],
         "cit_author": "Maestro",
-        "power_counter": 0,
+        "power_counter": 4,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,

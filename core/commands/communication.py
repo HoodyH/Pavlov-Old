@@ -48,7 +48,7 @@ class Communication(object):
 
     def communication(self):
 
-        version = '0.7.16'
+        version = '0.8.9'
 
         def void_arg():
             out = arg_void_not_allowed(self.language)
