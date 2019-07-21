@@ -247,12 +247,31 @@ class DrawGraph(object):
 
             x += x_resolution * TOWER_DIM + x_resolution * SPACE_DIM
 
-    def __draw_towers_value_on_top(self, x, y, x_resolution, tower_dim, tower_height, value_printed):
+    def __draw_towers_value_vertical(self, x, y, x_resolution, tower_dim, tower_height_pixels, value_printed):
 
         entry_x = x + tower_dim * x_resolution / 2
-        entry_y = y - tower_height - SPAN_GRAPH_BORDER * self.y_resolution / 2
+        entry_y = y - tower_height_pixels - SPAN_GRAPH_BORDER * self.y_resolution / 2
+
         draw_support.draw_text(
             self.draw, entry_x, entry_y, str(value_printed), fill=self.text_color, font=self.font_text
+        )
+
+    def __draw_towers_value_horizontal(self, x, y, x_resolution, tower_dim, tower_height_pixels, value_printed):
+
+        w, h = draw_support.get_text_dimension(self.draw, str(value_printed), font=self.font_text)
+
+        entry_x = x + tower_dim * x_resolution / 2
+
+        span_text_pixels = SPAN_GRAPH_BORDER * self.y_resolution / 2
+        if tower_height_pixels > (h+span_text_pixels):
+            entry_y = y - tower_height_pixels + span_text_pixels*0.65
+            _fill = self.text_color
+        else:
+            entry_y = y - tower_height_pixels - span_text_pixels
+            _fill = self.text_color
+
+        draw_support.draw_text(
+            self.draw, entry_x, entry_y, str(value_printed), fill=_fill, font=self.font_text
         )
 
     def __draw_towers(self,
@@ -353,10 +372,12 @@ class DrawGraph(object):
             color = towers[i].get('color', DEFAULT_TOWER_2_COLOR)
             printed_position = towers[i].get('printed_position')
 
-            if printed_position == 'inside':
-                draw_value_function = self.__draw_towers_value_on_top
+            if printed_position == 'horizontal':
+                draw_value_function = self.__draw_towers_value_horizontal
+            elif printed_position == 'vertical':
+                draw_value_function = self.__draw_towers_value_vertical
             else:
-                draw_value_function = self.__draw_towers_value_on_top
+                draw_value_function = self.__draw_towers_value_horizontal
 
             value = self.__remap_values(data, max_value)
             self.__draw_towers(

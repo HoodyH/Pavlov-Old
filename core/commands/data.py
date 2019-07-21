@@ -24,6 +24,26 @@ class Data(object):
         self.arg = arg
 
     def __build_data(self, time_array, msg_array, time_spent_array, timezone, max_len, time_scope):
+        """
+
+        :param time_array:
+        :param msg_array:
+        :param time_spent_array:
+        :param timezone:
+        :param max_len:
+        :param time_scope:
+        :return:
+
+        data is composed by
+            0) x_names, the date or the time representation
+            1) data of tower one, this are the messages sent, so the data and value printed are the same
+            2) data of tower two, time spent to send messages in seconds
+            3) value printed on top of the tower two, string of the value spent in format: '1min 20sec'
+
+        now_offset: is used tu calculate all the time offsets
+        condition: to verify if the current offset is stored in the db
+        colon_names: it create the x_names
+        """
 
         data = [[], [], [], []]
 
@@ -59,7 +79,7 @@ class Data(object):
             now = datetime.utcnow()
 
             def now_offset(diff):
-                month = now.month - 1 + diff
+                month = now.month - 1 - diff
                 year = now.year + month // 12
                 month = month % 12 + 1
                 day = min(now.day, monthrange(year, month)[1])
@@ -100,14 +120,14 @@ class Data(object):
                     'tower_1': {
                         'data': data[1],
                         'value_printed': data[1],
-                        'printed_position': 'on_top',
+                        'printed_position': 'horizontal',
                         'tower_dim': 1,
                         'color': DEFAULT_TOWER_1_COLOR
                     },
                     'tower_2': {
                         'data': data[2],
                         'value_printed': data[3],
-                        'printed_position': 'on_top',
+                        'printed_position': 'vertical',
                         'tower_dim': 0.5,
                         'color': DEFAULT_TOWER_2_COLOR
                     },
@@ -187,7 +207,7 @@ class Data(object):
                 )
         }
 
-        if len(log_time_by_day) > 2:
+        if len(log_time_by_day) > 1:
             dictionary_graph['section_2'] = self.__build_data(
                 log_time_by_day,
                 by_day,
@@ -197,7 +217,7 @@ class Data(object):
                 'daily'
             )
 
-        if len(log_time_by_month) > 0:
+        if len(log_time_by_month) > 1:
             dictionary_graph['section_3'] = self.__build_data(
                 log_time_by_month,
                 by_month,
