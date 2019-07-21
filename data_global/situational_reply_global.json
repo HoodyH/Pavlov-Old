@@ -107,7 +107,7 @@
             "telegram": [],
             "discord": []
         },
-        "standard_counter": 3,
+        "standard_counter": 5,
         "standard_triggers": [
             "amazon"
         ],

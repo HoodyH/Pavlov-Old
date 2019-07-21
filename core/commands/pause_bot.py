@@ -19,12 +19,12 @@ class PauseBot(object):
 
         def enable():
             db.guild.bot_paused = True
-            return response(self.language, ENABLED)
+            return response(self.language, DISABLED)
 
         def disable():
             db.guild.bot_paused = False
             self.bot.update_output_permission(False)
-            return response(self.language, DISABLED)
+            return response(self.language, ENABLED)
 
         en_options = {
             ENABLED: disable,
@@ -46,6 +46,3 @@ class PauseBot(object):
                 out = parse_error(self.language, self.arg, "0, 1")
             db.set_data()
             self.bot.send_message(out, MSG_ON_SAME_CHAT)
-
-
-
