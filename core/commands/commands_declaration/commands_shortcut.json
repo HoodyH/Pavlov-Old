@@ -1,6 +1,6 @@
 {
     "speech_to_text":{
-        "dependency": "module_status",
+        "dependency": "module.status",
         "sub_call": "speech_to_text -en",
         "description": {
             "eng": "Activate or Deactivate in toggle mode the speech to text conversion",

@@ -547,4 +547,3 @@ def list_to_file(list_in):
 
 
 list_to_file(DIO_FUNNY)
-

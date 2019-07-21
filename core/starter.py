@@ -182,8 +182,8 @@ class Starter(object):
         commands = {
             'help': bot_help,
             'man': man,
-            'pause_bot': pause_bot,
-            'module_status': module_status,
+            'pause.bot': pause_bot,
+            'module.status': module_status,
             'communication': communication,
             'data': data,
             'random': random,
