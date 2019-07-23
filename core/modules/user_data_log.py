@@ -33,7 +33,7 @@ class UserDataLog(object):
         data = {
             'level': level,
             'title': user_field(self.language, self.bot.user.username),
-            'text': text_description(self.language, db.level),
+            'text': text_description(self.language, level),
         }
 
         dl = DrawLevelUp(data)

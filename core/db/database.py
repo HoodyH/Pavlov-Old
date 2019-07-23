@@ -169,7 +169,13 @@ class DB(object):
     def level_global(self):
         return self.user_global.xp.level
 
+    @property
+    def rank(self):
+        return self.user.get_user_rank()
+
     def update_msg(self, time_log, time_spent_to_type):
+
+        print(self.rank)
 
         for obj in ['user', 'user_global', 'guild']:
             for scope in ['hour', 'day', 'month']:
