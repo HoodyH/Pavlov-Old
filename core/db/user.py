@@ -132,6 +132,30 @@ class UserData(object):
 
         return 'N/D'
 
+    def build_ranking(self, limit=10):
+        collection = self.client[self.scope][self.table]
+        try:
+            cursor = collection.find({"$query": {}, "$orderby": {"xp.xp": -1}})
+        except Exception as e:
+            print(e)
+            return 'N/D'
+
+        rank_counter = 1
+        data = {}
+        for doc in cursor:
+            user_id = doc.get('_id')
+            data[rank_counter] = {
+                'username': doc.get('user_name'),
+                'highlights': True if user_id == self.user_id else False,
+                'rank': rank_counter,
+                'level': doc.get('xp').get('level'),
+                'value': doc.get('xp').get('xp')
+            }
+            if limit == rank_counter:
+                return data
+            rank_counter += 1
+        return data
+
     # user_name
     @property
     def user_name(self):

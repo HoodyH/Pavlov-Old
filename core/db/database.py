@@ -173,9 +173,11 @@ class DB(object):
     def rank(self):
         return self.user.get_user_rank()
 
-    def update_msg(self, time_log, time_spent_to_type):
+    @property
+    def ranking(self, **kwargs):
+        return self.user.build_ranking(kwargs)
 
-        print(self.rank)
+    def update_msg(self, time_log, time_spent_to_type):
 
         for obj in ['user', 'user_global', 'guild']:
             for scope in ['hour', 'day', 'month']:

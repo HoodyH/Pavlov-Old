@@ -21,6 +21,7 @@ from core.commands.communication import Communication
 from core.commands.data import Data
 from core.commands.random import Random
 from core.commands.level import Level
+from core.commands.ranking import Ranking
 # audio converter
 from core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
@@ -179,6 +180,10 @@ class Starter(object):
             c = Level(self.bot, language_found, command_found, arg, params)
             c.level()
 
+        def ranking():
+            c = Ranking(self.bot, language_found, command_found, arg, params)
+            c.ranking()
+
         commands = {
             'help': bot_help,
             'man': man,
@@ -188,6 +193,7 @@ class Starter(object):
             'data': data,
             'random': random,
             'level': level,
+            'ranking': ranking,
         }
 
         commands.get(command_found)()

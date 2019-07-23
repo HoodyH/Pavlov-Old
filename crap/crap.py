@@ -547,3 +547,63 @@ def list_to_file(list_in):
 
 
 list_to_file(DIO_FUNNY)
+
+example_level_rank = {
+    'title': 'Ranking of most Active Users',
+    'rank': {
+        '1': {
+            'username': 'Username',
+            'highlights': True,
+            'level': '10',
+            'level_label': 'LEVEL',
+            'value': '2341',
+            'max': '8000',
+        },
+    },
+    'text': 'Cool keep going like that',
+}
+
+"""                   
+    +-----------------------------------------+  
+    |              SPAN_BORDER                | span  |              
+    +-----------------------------------------+       |                               
+    |              SPAN_TITLE                 | span  |  SPAN_TITLE_SECTION                         
+    |                                         | span  |                                                                    
+    +-----------------------------------------+       | 
+    |              SPAN_BORDER                | span  |                         
+    +-----------------------------------------+            
+    |                                         | span  |                         
+    |              SPAN_RANK                  |       |    
+    |                                         | span  |  SPAN_RANK_SECTION                     
+    +-----------------------------------------+       |
+    |              SPAN_SEPARATOR             | span  |    
+    +-----------------------------------------+  
+    |              SPAN_TEXT                  | span                         
+    +-----------------------------------------+  
+    |              SPAN_BORDER                | span     at the end of all                        
+    +-----------------------------------------+        
+
+"""
+
+SPAN_BORDER = 0.3
+SPAN_TITLE = 1.6
+SPAN_RANK = 0.8
+SPAN_SEPARATOR = 0.6
+
+SPAN_TITLE_SECTION = SPAN_BORDER + SPAN_TITLE + SPAN_BORDER
+SPAN_RANK_SECTION = SPAN_RANK + SPAN_SEPARATOR
+
+"""
+        +-+------+--------------------+---------------------+-+----------+-+            
+        | |      |                    |                     | |          | |                      
+   +--> | | RANK |      USERNAME      |    XP_BAR           | | LEVEL    | |      
+   |    | |      |                    |                     | |          | |                   
+   |    +-+------+--------------------+---------------------+-+----------+-+
+OFFSET
+
+"""
+DIM_OFFSET = 0.5
+DIM_RANK = 2
+DIM_USERNAME = 8
+DIM_XP_BAR = 6
+DIM_LEVEL = 3

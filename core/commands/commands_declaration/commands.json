@@ -275,5 +275,37 @@
             }
         },
         "handled_params": {}
+    },
+    "ranking":{
+        "management_command": 0,
+        "pro_command": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 0,
+        "permissions": 0,
+        "invocation_words": [],
+        "description": {
+            "eng": "Print the ranking",
+            "ita": "Stampa la classifica"
+        },
+        "handled_args": {
+            "": {
+                "eng": "Show the rank of some users above and below you",
+                "ita": "Mostra la classifica degli utenti sopra e sotto a te"
+            },
+            "global": {
+                "eng": "Show the rank of some users above and below you globally",
+                "ita": "Mostra la classifica degli utenti sopra e sotto a te a livello globale"
+            },
+            "@username": {
+                "eng": "Show rank of the tagged user, if user don't have privacy mode on",
+                "ita": "Mostra il rank dell'utente taggato, se l'utente non ha la privacy mode attiva"
+            }
+        },
+        "handled_params": {
+            "-top10": {
+                "eng": "Show the top 10 users",
+                "ita": "Mostra la top 10"
+            }
+        }
     }
 }
