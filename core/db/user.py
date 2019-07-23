@@ -2,6 +2,8 @@ from core.db.modules.class_message import MessagesField
 from core.db.modules.class_xp import XpField
 from core.db.modules.class_bill import BillField
 
+from pprint import pprint
+
 
 class UserData(object):
 
@@ -112,6 +114,23 @@ class UserData(object):
         data = self.__xp_field.build_data()
         self.xp = self.__xp_field.extract_data(user_data.get('xp', data))
         self.bill = self.__bill_field.extract_data(user_data.get('bill', self.__bill_field.build_data()))
+
+    def get_user_rank(self):
+        collection = self.client[self.scope][self.table]
+        try:
+            cursor = collection.find({"$query": {}, "$orderby": {"xp.xp": -1}})
+        except Exception as e:
+            print(e)
+            return 'N/D'
+
+        rank_counter = 1
+        for doc in cursor:
+            user_id = doc.get('_id')
+            if user_id == self.user_id:
+                return rank_counter
+            rank_counter += 1
+
+        return 'N/D'
 
     # user_name
     @property

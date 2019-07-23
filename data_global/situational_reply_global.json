@@ -537,7 +537,7 @@
             "Salve",
             "Appena finiti gli esami mi trovo la tipa"
         ],
-        "power_counter": 2,
+        "power_counter": 3,
         "avoid_counter": 0
     },
     "Simone Not": {
@@ -608,7 +608,7 @@
             "Luca: \"Tanto pengio fondamenti?\"\nClock: \"Abbastanza, ci sono esercizi che sono relativamente semplici ed altri che dovresti chiedere direttamente a turing di risolverteli ma non ho tavole oujia sottomano\""
         ],
         "cit_author": "Clock",
-        "power_counter": 1,
+        "power_counter": 0,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,
@@ -716,11 +716,11 @@
             "super maestro"
         ],
         "power_outputs": [
-            "Oggi ho casa libera, chi volesse venire \u00e8 invitato. Stiamo un po' assieme, ci scambiamo un due parole e, perch\u00e8 no, anche quanche risata.",
             "A true master is an eternal student",
             "Mi alleno per sorreggiere il peso dei problemi che le persone a cui voglio bene non possono portare.",
             "Tu sei il classico tipo che per sentirsi soddisfatto della propria vita deve criticare quella degli altri. Avanti, colpiscimi!",
-            "non sar\u00f2 un modello per le persone, ma per un bot s\u00ec."
+            "non sar\u00f2 un modello per le persone, ma per un bot s\u00ec.",
+            "Oggi ho casa libera, chi volesse venire \u00e8 invitato. Stiamo un po' assieme, ci scambiamo un due parole e, perch\u00e8 no, anche quanche risata."
         ],
         "cit_author": "Maestro",
         "power_counter": 4,

@@ -23,7 +23,7 @@ class Level(object):
             _data = {
                 'username': self.bot.user.username,
                 'data': {
-                    'rank': 'N/D',
+                    'rank': db.rank,
                     'rank_label': 'RANK',
                     'level': db.level,
                     'level_label': 'LEVEL',
@@ -41,7 +41,7 @@ class Level(object):
             _data = {
                 'username': self.bot.user.username + ' (GLB)',
                 'data': {
-                    'rank': 'N/D',
+                    'rank': db.rank,
                     'rank_label': 'RANK',
                     'level': db.level_global,
                     'level_label': 'LEVEL',

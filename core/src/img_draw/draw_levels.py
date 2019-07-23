@@ -301,7 +301,7 @@ class DrawLevelCard(object):
         draw_support.draw_rectangle(self.draw, x_1, y_1, x_max, y_2, fill=self.bar_background_color)
         draw_support.draw_rectangle(self.draw, x_1, y_1, x_2, y_2, fill=self.bar_color)
 
-        text_xp_inside = '{} XP'.format(current_xp)
+        text_xp_inside = ' {} XP'.format(current_xp)
         w, h = draw_support.get_text_dimension(self.draw, text_xp_inside, font=self.font_xp_inside)
         if (x_2 - x_1) > w:
             _origin_x = 'left'
@@ -436,4 +436,3 @@ class DrawLevelCard(object):
 
     def save_image(self, file_dir):
         self.image.save(file_dir, format='PNG')
-
