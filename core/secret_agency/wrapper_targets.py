@@ -28,6 +28,8 @@ class Targets(object):
 
     def is_under_monitoring_user(self, user_id):
 
+        user_id = str(user_id)
+
         for key in self.targets_data.keys():
             if user_id == key:
                 try:
