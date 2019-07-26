@@ -1,3 +1,4 @@
+from core.db.query import (pull_data, push_data)
 from core.db.modules.class_message import MessagesField
 
 
@@ -38,14 +39,14 @@ class GuildData(object):
         self._class_msg = MessagesField()
         self.msg = self._class_msg
 
-        self.get_guild_data()
+        self.get_data()
 
-    def set_guild_data(self):
+    def set_data(self):
 
         if self.guild_id is None:
             self.guild_id = self.me
 
-        guild_data = {
+        data = {
             '_id': self.guild_id,
             'guild_name': self.guild_name,
             'owner_id': self.owner_id,
@@ -71,58 +72,42 @@ class GuildData(object):
             'msg': self._class_msg.build_data(),
         }
 
-        collection = self.client[self.scope][self.table]
-        query = {'_id': self.guild_id}
-        cursor = collection.find(query)
-        user_data_in_db = None
-        for doc in cursor:
-            user_data_in_db = doc
-        if user_data_in_db is not None:
-            guild_data.pop("_id")
-            collection.update_one(query, {'$set': guild_data})
-        else:
-            collection.insert_one(guild_data)
+        push_data(self.client, self.scope, self.table, self.guild_id, data)
 
-    def get_guild_data(self):
+    def get_data(self):
 
         if self.guild_id is None:
             self.guild_id = self.me
 
-        collection = self.client[self.scope][self.table]
-        cursor = collection.find({'_id': self.guild_id})
-        user_data = None
-        for doc in cursor:
-            user_data = doc
-        if user_data is None:
-            return
+        data = pull_data(self.client, self.scope, self.table, self.guild_id)
 
-        self.guild_name = user_data.get('guild_name', self.guild_name)
-        self.owner_id = user_data.get('owner_id', self.owner_id)
-        self.owner_name = user_data.get('owner_name', self.owner_name)
-        self.bot_paused = user_data.get('bot_paused', self.bot_paused)
-        self.bot_disabled = user_data.get('bot_disabled', self.bot_disabled)
-        self.prefix = user_data.get('prefix', self.prefix)
-        self.quiet_prefix = user_data.get('quiet_prefix', self.quiet_prefix)
-        self.sudo_prefix = user_data.get('sudo_prefix', self.sudo_prefix)
-        self.languages = user_data.get('languages', self.languages)
-        self.modules = user_data.get('modules', self.modules)
+        self.guild_name = data.get('guild_name', self.guild_name)
+        self.owner_id = data.get('owner_id', self.owner_id)
+        self.owner_name = data.get('owner_name', self.owner_name)
+        self.bot_paused = data.get('bot_paused', self.bot_paused)
+        self.bot_disabled = data.get('bot_disabled', self.bot_disabled)
+        self.prefix = data.get('prefix', self.prefix)
+        self.quiet_prefix = data.get('quiet_prefix', self.quiet_prefix)
+        self.sudo_prefix = data.get('sudo_prefix', self.sudo_prefix)
+        self.languages = data.get('languages', self.languages)
+        self.modules = data.get('modules', self.modules)
 
-        self.pro_guild = user_data.get('pro_guild', self.pro_guild)
-        self.deep_logging = user_data.get('deep_logging', self.deep_logging)
-        self.level_up_notification = user_data.get('level_up_notification', self.level_up_notification)
-        self.level_up_destination = user_data.get('level_up_destination', self.level_up_destination)
-        self.start_notifications_at_level = user_data.get('start_notifications_at_level', self.start_notifications_at_level)
-        self.bits_min_add = user_data.get('bits_min_add', self.bits_min_add)
-        self.bits_max_add = user_data.get('bits_max_add', self.bits_max_add)
-        self.use_global_bits = user_data.get('use_global_bits', self.use_global_bits)
-        self.member_total = user_data.get('member_total', self.member_total)
+        self.pro_guild = data.get('pro_guild', self.pro_guild)
+        self.deep_logging = data.get('deep_logging', self.deep_logging)
+        self.level_up_notification = data.get('level_up_notification', self.level_up_notification)
+        self.level_up_destination = data.get('level_up_destination', self.level_up_destination)
+        self.start_notifications_at_level = data.get('start_notifications_at_level', self.start_notifications_at_level)
+        self.bits_min_add = data.get('bits_min_add', self.bits_min_add)
+        self.bits_max_add = data.get('bits_max_add', self.bits_max_add)
+        self.use_global_bits = data.get('use_global_bits', self.use_global_bits)
+        self.member_total = data.get('member_total', self.member_total)
 
-        self.msg = self._class_msg.extract_data(user_data.get('msg', self._class_msg.build_data()))
+        self.msg = self._class_msg.extract_data(data.get('msg', self._class_msg.build_data()))
 
     def update_guild_data(self, scope, guild_id):
         self.scope = scope
         self.guild_id = guild_id
-        self.get_guild_data()
+        self.get_data()
 
     # guild_name
     @property
@@ -303,6 +288,3 @@ class GuildData(object):
     @msg.setter
     def msg(self, value):
         self.__msg = value
-
-
-

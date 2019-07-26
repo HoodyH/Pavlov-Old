@@ -39,9 +39,9 @@ class DB(object):
         return
 
     def set_data(self):
-        self.guild.set_guild_data()
-        self.user.set_user_data()
-        self.user_global.set_user_data()
+        self.guild.set_data()
+        self.user.set_data()
+        self.user_global.set_data()
         return
 
     @property

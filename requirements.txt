@@ -8,3 +8,4 @@ SpeechRecognition
 pydub
 aiohttp == 3.5.4
 setuptools == 40.6.3
+discord.py == 1.2.3

@@ -10,8 +10,9 @@ help - help message
 man - command manual of all active commands
 data - get user stats
 stt - speech to text
-pause.bot - stop messages from the bot
+pause_bot - stop messages from the bot
 level - show your level
+ranking - show ranking of the top 10
 """
 
 
@@ -22,10 +23,10 @@ class TelegramBot(object):
         self.token = token
         self.starter = starter
 
-        bot = telegram.Bot(token=token)
-        print(bot.get_me().first_name)
+        self._bot = telegram.Bot(token=token)
+        print(self._bot.get_me().first_name)
 
-        self.telegram_command_list = ['/help', '/man', '/data', '/stt', '/pause_bot', '/level']
+        self.telegram_command_list = ['/help', '/man', '/data', '/stt', '/pause_bot', '/level', '/ranking']
 
     def voice_handler(self, bot, update):
         message = update.message
