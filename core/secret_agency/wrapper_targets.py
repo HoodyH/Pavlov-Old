@@ -1,4 +1,3 @@
-
 class Targets(object):
     def __init__(self, targets_data):
 
@@ -27,6 +26,8 @@ class Targets(object):
             raise Exception('Target not found')
 
     def is_under_monitoring_user(self, user_id):
+
+        user_id = str(user_id)
 
         for key in self.targets_data.keys():
             if user_id == key:

@@ -78,16 +78,18 @@ class MyDiscordAgent(discord.Client):
 
             await self._send_action_message(action)
 
-    async def on_voice_state_update(self, before, after):
-        user_id = before.id
+    async def on_voice_state_update(self, member, before, after):
+
+        user_id = member.id
+
         if self.targets.is_under_monitoring_user(user_id):
 
-            if after.voice.voice_channel is not None:
+            if after.channel is not None:
                 action = '{} è appena entrato nel calale vocale {} nella gilda {}.'
-                action = action.format(after.name, after.voice.voice_channel, after.server)
-            elif before.voice.voice_channel != after.voice.voice_channel:
+                action = action.format(member.name, after.channel, member.guild)
+            elif before.channel != after.channel:
                 action = '{} si è appena disconnesso dal calale vocale {} nella gilda {}.'
-                action = action.format(before.name, before.voice.voice_channel, after.server)
+                action = action.format(member.name, before.channel, member.guild)
             else:
                 action = None
 
