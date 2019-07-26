@@ -17,4 +17,4 @@ source env/bin/activate
 echo Check requirements.txt
 pip3 install -r requirements.txt
 
-deactivate
+deactivate command
