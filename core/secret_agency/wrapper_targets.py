@@ -1,4 +1,3 @@
-
 class Targets(object):
     def __init__(self, targets_data):
 
