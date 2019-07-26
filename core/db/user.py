@@ -82,8 +82,7 @@ class UserData(object):
         self.speak_in_vc = data.get('speak_in_vc', self.speak_in_vc)
 
         self.msg = self.__msg_field.extract_data(data.get('msg', self.__msg_field.build_data()))
-        data = self.__xp_field.build_data()
-        self.xp = self.__xp_field.extract_data(data)
+        self.xp = self.__xp_field.extract_data(data.get('xp', self.__xp_field.build_data()))
         self.bill = self.__bill_field.extract_data(data.get('bill', self.__bill_field.build_data()))
 
     def get_user_rank(self):

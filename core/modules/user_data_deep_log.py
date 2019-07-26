@@ -11,7 +11,7 @@ class UserDataDeepLog(object):
         self.message_type = message_type
         self.prefix_type = prefix_type
 
-    def deep_log_data(self):
+    def log_data(self):
 
         self.database.update_msg(self.datetime_message, self.time_spent)
         self.database.update_messages_by_type(self.message_type, self.prefix_type)

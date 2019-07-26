@@ -174,8 +174,16 @@ class DB(object):
         return self.user.get_user_rank()
 
     @property
+    def rank_global(self):
+        return self.user_global.get_user_rank()
+
+    @property
     def ranking(self, **kwargs):
         return self.user.build_ranking(kwargs)
+
+    @property
+    def ranking_global(self, **kwargs):
+        return self.user_global.build_ranking(kwargs)
 
     def update_msg(self, time_log, time_spent_to_type):
 

@@ -53,7 +53,7 @@ class XpField(object):
     def level_up_notification(self, value):
         self.__level_up_notification = value
 
-    # bits
+    # xp_value
     @property
     def xp_value(self):
         return self.__xp_value

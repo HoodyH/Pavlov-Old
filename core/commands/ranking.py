@@ -19,46 +19,29 @@ class Ranking(object):
 
     def ranking(self):
 
-        def build_ranking_dict(data):
+        def build_ranking_dict(db_data, title):
 
-            max_level_xp = db.calculate_xp_upto_level(data[1]['level'])
-            for key in data.keys():
-                data[key].update({
+            max_level_xp = db.calculate_xp_upto_level(db_data[1]['level'])
+            for key in db_data.keys():
+                db_data[key].update({
                     'level_label': 'LEVEL',
                     'max': int(max_level_xp),
                 })
-            return data
+
+            _data = {
+                'title': title,
+                'title_color': (180, 180, 180),
+                'rank': db_data
+            }
+            return _data
 
         def void_arg():
-
             db_data = db.ranking
-
-            _data = {
-                'title': 'Ranking of most Active Users',
-                'title_color': (180, 180, 180),
-                'rank': build_ranking_dict(db_data),
-                'text': 'beta version'
-            }
-
-            return _data
+            return build_ranking_dict(db_data, 'Ranking of most Active Users')
 
         def global_arg():
-            _data = {
-                'username': self.bot.user.username + ' (GLB)',
-                'data': {
-                    'rank': db.rank,
-                    'rank_label': 'RANK',
-                    'level': db.level_global,
-                    'level_label': 'LEVEL',
-                },
-                'bar': {
-                    'value': db.xp_gained_in_current_level_global,
-                    'max': db.level_xp_global,
-                },
-                'text': text_description_global(self.language, db.level_global),
-            }
-
-            return _data
+            db_data = db.ranking_global
+            return build_ranking_dict(db_data, 'Ranking of most Active Users (Global)')
 
         chose = {
             '': void_arg,

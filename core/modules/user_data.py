@@ -29,6 +29,7 @@ class UserData(object):
             self.text_len,
             self.language
         )
+        user_data_top_level_log.log_data()
 
         if self.deep_logging:
             if self.message_type is TEXT:
@@ -45,6 +46,6 @@ class UserData(object):
                 self.message_type,
                 self.prefix_type
             )
-            user_data_deep_log.deep_log_data()
+            user_data_deep_log.log_data()
 
         self.database.set_data()

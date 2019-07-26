@@ -8,8 +8,7 @@ import math
 
 class UserDataTopLevelLog(object):
 
-    def __init__(
-            self, bot, database, text_len, language):
+    def __init__(self, bot, database, text_len, language):
         self.bot = bot
         self.database = database
         self.text_len = text_len
