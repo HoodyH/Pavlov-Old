@@ -1,8 +1,9 @@
 /env/
 /.idea/
-*.pyc
-/data/telegram/
+/data/
 
+/core/secret_agency/temp.py
 token.*
 *.log
 *.wav
+*.pyc

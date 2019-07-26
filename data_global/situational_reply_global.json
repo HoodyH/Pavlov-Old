@@ -608,7 +608,7 @@
             "Luca: \"Tanto pengio fondamenti?\"\nClock: \"Abbastanza, ci sono esercizi che sono relativamente semplici ed altri che dovresti chiedere direttamente a turing di risolverteli ma non ho tavole oujia sottomano\""
         ],
         "cit_author": "Clock",
-        "power_counter": 0,
+        "power_counter": 1,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,
@@ -975,7 +975,7 @@
         }
     },
     "Greetings_in": {
-        "standard_counter": 1,
+        "standard_counter": 2,
         "scope": "global",
         "standard_triggers": [
             "hello",

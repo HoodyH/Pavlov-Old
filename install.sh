@@ -15,6 +15,6 @@ source env/bin/activate
 
 #Install all libs required
 echo Check requirements.txt
-pip3 install -r requirements
+pip3 install -r requirements.txt
 
-deactivate
+deactivate command

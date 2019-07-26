@@ -69,6 +69,9 @@ class BotStd(object):
         self.message_on_same_chat = None
         self.message_on_guild = None
 
+    def set_bot(self, bot):
+        self._bot = bot
+
     def update_bot_data(self, scope, bot, message):
 
         self._scope = scope
@@ -118,42 +121,11 @@ class BotStd(object):
         else:
             return
 
-    def __telegram_send_photo(self, location, kwargs):
-
-        img_bytes = kwargs.get('img_bytes')
-        caption = kwargs.get('caption')
-        # disable_notification = kwargs.get('disable_notification')
-        # reply_to_message_id = kwargs.get('reply_to_message_id')
-        # reply_markup = kwargs.get('reply_markup')
-        # timeout = kwargs.get('timeout')
-        # parse_mode = kwargs.get('parse_mode')
-
-        try:
-            self._bot.send_chat_action(chat_id=location, action=telegram.ChatAction.UPLOAD_PHOTO)
-            self._bot.send_photo(
-                chat_id=location,
-                photo=img_bytes,
-                caption=caption,
-                # disable_notification=disable_notification,
-                # reply_to_message_id=reply_to_message_id,
-                # reply_markup=reply_markup,
-                # timeout=timeout,
-                # parse_mode=parse_mode,
-                **kwargs
-            )
-
-        except Exception as e:
-            print(e)
-
     def send_image(self,
                    img_bytes,
                    destination,
-                   caption=None,
-                   disable_notification=False,
-                   reply_to_message_id=None,
-                   reply_markup=None,
-                   timeout=20,
-                   parse_mode=None,
+                   *args,
+                   **kwargs
                    ):
 
         if self.output_permission is False:
@@ -166,12 +138,8 @@ class BotStd(object):
                 self._bot.send_photo(
                     chat_id=location,
                     photo=img_bytes,
-                    caption=caption,
-                    # disable_notification=disable_notification,
-                    # reply_to_message_id=reply_to_message_id,
-                    # reply_markup=reply_markup,
-                    # timeout=timeout,
-                    # parse_mode=parse_mode
+                    *args,
+                    **kwargs
                 )
 
             except Exception as e:
@@ -200,11 +168,6 @@ class BotStd(object):
         write_en = kwargs.get('write_en')
         write_time_sec = kwargs.get('write_time_sec')
         parse_mode_en = kwargs.get('parse_mode_en')
-        # disable_web_page_preview = kwargs.get('disable_web_page_preview')
-        # disable_notification = kwargs.get('disable_notification')
-        # reply_to_message_id = kwargs.get('reply_to_message_id')
-        # reply_markup = kwargs.get('reply_markup')
-        # timeout = kwargs.get('timeout')
 
         try:
             if write_en is True:

@@ -1,5 +1,4 @@
 from core.src.settings import *
-from core.bot_abstraction import BotStd
 from core.src.static_modules import db
 from core.src.file_handler import load_commands
 from core.src.message_reader import extract_command_parameters
@@ -7,7 +6,7 @@ from core.src.command_reader import CommandReader
 from core.src.text_reply.errors import command_error, guild_not_pro
 from core.src.internal_log import Log
 # listeners
-from core.modules.user_data_log import UserDataLog
+from core.modules.user_data import UserData
 from core.modules.message_reply import Respond
 from core.modules.bestemmia_reply import BestemmiaReply
 from core.modules.badass_character_reply import BadAssCharacterReply
@@ -21,6 +20,7 @@ from core.commands.communication import Communication
 from core.commands.data import Data
 from core.commands.random import Random
 from core.commands.level import Level
+from core.commands.ranking import Ranking
 # audio converter
 from core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
@@ -30,15 +30,15 @@ class Starter(object):
 
     commands = load_commands()
 
-    def __init__(self):
+    def __init__(self, bot_abstraction):
 
-        self.bot = BotStd()
+        self.bot = bot_abstraction
 
         self.prefix_type = NO_PREFIX
         self.module_enabled = 1
         self.module_mode = 1
 
-        self.in_text = ""
+        self.in_text = ''
 
     def update(self, scope, real_bot, real_bot_message):
 
@@ -179,6 +179,10 @@ class Starter(object):
             c = Level(self.bot, language_found, command_found, arg, params)
             c.level()
 
+        def ranking():
+            c = Ranking(self.bot, language_found, command_found, arg, params)
+            c.ranking()
+
         commands = {
             'help': bot_help,
             'man': man,
@@ -188,6 +192,7 @@ class Starter(object):
             'data': data,
             'random': random,
             'level': level,
+            'ranking': ranking,
         }
 
         commands.get(command_found)()
@@ -226,15 +231,17 @@ class Starter(object):
 
     def _update_statistics(self, message_type, time_spent_extra=0):
 
-        user_data_log = UserDataLog(
+        user_data = UserData(
             self.bot,
+            db,
             db.guild.languages[0],
             self.in_text,
             message_type,
             self.prefix_type,
-            time_spent_extra=time_spent_extra
+            db.user.deep_logging,
+            time_spent_extra=time_spent_extra,
         )
-        user_data_log.log_data()
+        user_data.log_data()
 
     def analyze_image_message(self):
         self._update_statistics(IMAGE, time_spent_extra=5)
@@ -249,8 +256,8 @@ class Starter(object):
 
         raw_file.seek(0)
         ogg_audio = AudioSegment.from_ogg(raw_file)
-        filename = "audio.wav"
-        ogg_audio.export(filename, format="wav")
+        filename = 'audio.wav'
+        ogg_audio.export(filename, format='wav')
 
         self.in_text = speech_to_text(filename, ITA)
 

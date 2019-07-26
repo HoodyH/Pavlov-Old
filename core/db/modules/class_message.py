@@ -24,6 +24,9 @@ class MessagesField(object):
         self.video_note = 0
         self.stickers = 0
 
+        self.swear_words_counter = 0
+        self.swear_words = {}
+
     def extract_data(self, raw_data):
         self.log_time_by_hour = raw_data.get('log_time_by_hour', self.log_time_by_hour)
         self.by_hour = raw_data.get('by_hour', self.by_hour)
@@ -37,7 +40,7 @@ class MessagesField(object):
         self.by_month = raw_data.get('by_month', self.by_month)
         self.time_spent_by_month = raw_data.get('time_spent_by_month', self.time_spent_by_month)
 
-        self.commands = raw_data.get('_commands', self.commands)
+        self.commands = raw_data.get('commands', self.commands)
         self.override = raw_data.get('override', self.override)
         self.sudo = raw_data.get('sudo', self.sudo)
         self.img = raw_data.get('img', self.img)
@@ -46,6 +49,9 @@ class MessagesField(object):
         self.vocals = raw_data.get('vocals', self.vocals)
         self.video_note = raw_data.get('video_note', self.video_note)
         self.stickers = raw_data.get('stickers', self.stickers)
+
+        self.swear_words_counter = raw_data.get('swear_words_counter', self.swear_words_counter)
+        self.swear_words = raw_data.get('swear_words', self.swear_words)
 
         return self
 
@@ -64,7 +70,7 @@ class MessagesField(object):
             'by_month': self.by_month,
             'time_spent_by_month': self.time_spent_by_month,
 
-            '_commands': self.commands,
+            'commands': self.commands,
             'override': self.override,
             'sudo': self.sudo,
             'img': self.img,

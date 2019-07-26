@@ -1,8 +1,7 @@
+from core.db.query import (pull_data, push_data)
 from core.db.modules.class_message import MessagesField
 from core.db.modules.class_xp import XpField
 from core.db.modules.class_bill import BillField
-
-from pprint import pprint
 
 
 class UserData(object):
@@ -22,10 +21,6 @@ class UserData(object):
         self.time_zone = 0
         self.deep_logging = True
 
-        self.swear_words_counter = 0
-        self.swear_words_xp = 0
-        self.swear_words = {}
-        self.toxicity_rank = 0
         self.soft_warnings = 0
         self.hard_warnings = 0
         self.admin_warnings = 0
@@ -43,20 +38,16 @@ class UserData(object):
         self.__bill_field = BillField()
         self.bill = self.__bill_field
 
-        self.get_user_data()
+        self.get_data()
 
-    def set_user_data(self):
+    def set_data(self):
 
-        user_data = {
+        data = {
             '_id': self.user_id,
             'user_name': self.user_name,
             'time_zone': self.time_zone,
             'deep_logging': self.deep_logging,
 
-            'swear_words_counter': self.swear_words_counter,
-            'swear_words_xp': self.swear_words_xp,
-            'swear_words': self.swear_words,
-            'toxicity_rank': self.toxicity_rank,
             'soft_warnings': self.soft_warnings,
             'hard_warnings': self.hard_warnings,
             'admin_warnings': self.admin_warnings,
@@ -71,49 +62,28 @@ class UserData(object):
             'bill': self.__bill_field.build_data(),
         }
 
-        collection = self.client[self.scope][self.table]
-        query = {'_id': self.user_id}
-        cursor = collection.find(query)
-        user_data_in_db = None
-        for doc in cursor:
-            user_data_in_db = doc
-        if user_data_in_db is not None:
-            user_data.pop("_id")
-            collection.update_one(query, {'$set': user_data})
-        else:
-            collection.insert_one(user_data)
+        push_data(self.client, self.scope, self.table, self.user_id, data)
 
-    def get_user_data(self):
+    def get_data(self):
 
-        collection = self.client[self.scope][self.table]
-        cursor = collection.find({'_id': self.user_id})
-        user_data = None
-        for doc in cursor:
-            user_data = doc
-        if user_data is None:
-            return
+        data = pull_data(self.client, self.scope, self.table, self.user_id)
 
-        self.user_name = user_data.get('user_name', self.user_name)
-        self.time_zone = user_data.get('time_zone', self.time_zone)
-        self.deep_logging = user_data.get('deep_logging', self.deep_logging)
+        self.user_name = data.get('user_name', self.user_name)
+        self.time_zone = data.get('time_zone', self.time_zone)
+        self.deep_logging = data.get('deep_logging', self.deep_logging)
 
-        self.swear_words_counter = user_data.get('swear_words_counter', self.swear_words_counter)
-        self.swear_words_xp = user_data.get('swear_words_xp', self.swear_words_xp)
-        self.swear_words = user_data.get('swear_words', self.swear_words)
-        self.toxicity_rank = user_data.get('toxicity_rank', self.toxicity_rank)
-        self.soft_warnings = user_data.get('soft_warnings', self.soft_warnings)
-        self.hard_warnings = user_data.get('hard_warnings', self.hard_warnings)
-        self.admin_warnings = user_data.get('admin_warnings', self.admin_warnings)
+        self.soft_warnings = data.get('soft_warnings', self.soft_warnings)
+        self.hard_warnings = data.get('hard_warnings', self.hard_warnings)
+        self.admin_warnings = data.get('admin_warnings', self.admin_warnings)
 
-        self.gender = user_data.get('gender', self.gender)
-        self.age = user_data.get('age', self.age)
-        self.country = user_data.get('country', self.country)
-        self.speak_in_vc = user_data.get('speak_in_vc', self.speak_in_vc)
+        self.gender = data.get('gender', self.gender)
+        self.age = data.get('age', self.age)
+        self.country = data.get('country', self.country)
+        self.speak_in_vc = data.get('speak_in_vc', self.speak_in_vc)
 
-        self.msg = self.__msg_field.extract_data(user_data.get('msg', self.__msg_field.build_data()))
-        data = self.__xp_field.build_data()
-        self.xp = self.__xp_field.extract_data(user_data.get('xp', data))
-        self.bill = self.__bill_field.extract_data(user_data.get('bill', self.__bill_field.build_data()))
+        self.msg = self.__msg_field.extract_data(data.get('msg', self.__msg_field.build_data()))
+        self.xp = self.__xp_field.extract_data(data.get('xp', self.__xp_field.build_data()))
+        self.bill = self.__bill_field.extract_data(data.get('bill', self.__bill_field.build_data()))
 
     def get_user_rank(self):
         collection = self.client[self.scope][self.table]
@@ -131,6 +101,30 @@ class UserData(object):
             rank_counter += 1
 
         return 'N/D'
+
+    def build_ranking(self, limit=10):
+        collection = self.client[self.scope][self.table]
+        try:
+            cursor = collection.find({"$query": {}, "$orderby": {"xp.xp": -1}})
+        except Exception as e:
+            print(e)
+            return 'N/D'
+
+        rank_counter = 1
+        data = {}
+        for doc in cursor:
+            user_id = doc.get('_id')
+            data[rank_counter] = {
+                'username': doc.get('user_name'),
+                'highlights': True if user_id == self.user_id else False,
+                'rank': rank_counter,
+                'level': doc.get('xp').get('level'),
+                'value': doc.get('xp').get('xp')
+            }
+            if limit == rank_counter:
+                return data
+            rank_counter += 1
+        return data
 
     # user_name
     @property
@@ -158,42 +152,6 @@ class UserData(object):
     @deep_logging.setter
     def deep_logging(self, value):
         self.__deep_logging = value
-
-    # swear_words_counter
-    @property
-    def swear_words_counter(self):
-        return self.__swear_words_counter
-
-    @swear_words_counter.setter
-    def swear_words_counter(self, value):
-        self.__swear_words_counter = value
-
-    # swear_words_xp
-    @property
-    def swear_words_xp(self):
-        return self.__swear_words_xp
-
-    @swear_words_xp.setter
-    def swear_words_xp(self, value):
-        self.__swear_words_xp = value
-
-    # swear_words
-    @property
-    def swear_words(self):
-        return self.__swear_words
-
-    @swear_words.setter
-    def swear_words(self, value):
-        self.__swear_words = value
-
-    # toxicity_rank
-    @property
-    def toxicity_rank(self):
-        return self.__toxicity_rank
-
-    @toxicity_rank.setter
-    def toxicity_rank(self, value):
-        self.__toxicity_rank = value
 
     # soft_warnings
     @property

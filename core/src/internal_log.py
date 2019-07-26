@@ -57,3 +57,23 @@ class Log(object):
         )
         log_data(data)
         print(data)
+
+    @staticmethod
+    def console_login_as(username, user_id):
+        print("+-----------------------------------------")
+        print("| Client successfully connected as:")
+        print("| Username: {}\n| ID: {}".format(username, user_id))
+        print("+-----------------------------------------")
+
+    @staticmethod
+    def console_user_action_log(username, user_id, action):
+        print("+-----------------------------------------")
+        print("| User {}[{}] at {}".format(username, user_id, time_now))
+        print("| He has {}".format(action))
+        print("+-----------------------------------------")
+
+    @staticmethod
+    def console_simple_action_log (action):
+        print("+-----------------------------------------")
+        print("| He has {}".format(action))
+        print("+-----------------------------------------")

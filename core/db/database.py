@@ -39,9 +39,9 @@ class DB(object):
         return
 
     def set_data(self):
-        self.guild.set_guild_data()
-        self.user.set_user_data()
-        self.user_global.set_user_data()
+        self.guild.set_data()
+        self.user.set_data()
+        self.user_global.set_data()
         return
 
     @property
@@ -173,9 +173,19 @@ class DB(object):
     def rank(self):
         return self.user.get_user_rank()
 
-    def update_msg(self, time_log, time_spent_to_type):
+    @property
+    def rank_global(self):
+        return self.user_global.get_user_rank()
 
-        print(self.rank)
+    @property
+    def ranking(self, **kwargs):
+        return self.user.build_ranking(kwargs)
+
+    @property
+    def ranking_global(self, **kwargs):
+        return self.user_global.build_ranking(kwargs)
+
+    def update_msg(self, time_log, time_spent_to_type):
 
         for obj in ['user', 'user_global', 'guild']:
             for scope in ['hour', 'day', 'month']:
