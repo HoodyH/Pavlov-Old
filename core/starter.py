@@ -13,7 +13,7 @@ from core.modules.badass_character_reply import BadAssCharacterReply
 from core.modules.pickup_line_reply import PickupLineReply
 # _commands
 from core.commands.help import Help
-from core.commands.man import Man
+from core.commands.manual import Manual
 from core.commands.pause_bot import PauseBot
 from core.commands.module_status import ModuleStatus
 from core.commands.communication import Communication
@@ -151,9 +151,9 @@ class Starter(object):
             c = Help(self.bot, language_found, command_found, arg, params)
             c.help()
 
-        def man():
-            c = Man(self.bot, language_found, command_found, arg, params)
-            c.man()
+        def manual():
+            c = Manual(self.bot, language_found, command_found, arg, params)
+            c.manual()
 
         def pause_bot():
             c = PauseBot(self.bot, language_found, command_found, arg, params)
@@ -185,7 +185,7 @@ class Starter(object):
 
         commands = {
             'help': bot_help,
-            'man': man,
+            'manual': manual,
             'pause.bot': pause_bot,
             'module.status': module_status,
             'communication': communication,
