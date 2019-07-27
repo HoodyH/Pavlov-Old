@@ -1,5 +1,6 @@
 import os
 import requests
+from io import BytesIO
 
 
 async def download_file_on_disc(url, path, file_name, file_type):
@@ -16,9 +17,12 @@ async def download_file_on_disc(url, path, file_name, file_type):
     r = requests.get(url, headers=headers, stream=True)
     full_file_path = '{}/{}.{}'.format(base_path, file_name, file_type)
 
+    file_bytes = bytearray()
     with open(full_file_path, 'wb') as f:
         for chunk in r.iter_content(chunk_size=1024):
             if chunk:
-                f.write(chunk)
+                file_bytes += chunk
 
-    return full_file_path
+        f.write(file_bytes)
+    buffer_reader = BytesIO(file_bytes)
+    return buffer_reader

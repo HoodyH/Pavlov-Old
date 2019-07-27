@@ -4,8 +4,6 @@ import configparser as cfg
 from core.src.static_modules import (telegram_bot_abstraction)
 from core.secret_agency.agent_manager import Agency
 
-from core.src.settings import TELEGRAM
-
 parser = cfg.ConfigParser()
 parser.read("token.cfg")
 MONGO_DB_CONNECTION_STRING = parser.get("creds", "mongo_connection_string")
@@ -30,7 +28,7 @@ if __name__ == '__main__':
         "\n +--------------------------------------------+"
         "\n |          AbbestiaDC - Bot Manager          |"
         "\n |            (c) 2019 AbbestiaDC             |"
-        "\n +--------------------------------------------+\n"
+        "\n +--------------------------------------------+\n\n"
     )
 
     main()

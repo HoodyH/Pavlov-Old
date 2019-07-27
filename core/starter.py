@@ -1,6 +1,5 @@
 from core.src.settings import *
 from core.src.static_modules import db
-from core.src.file_handler import load_commands
 from core.src.message_reader import extract_command_parameters
 from core.src.command_reader import CommandReader
 from core.src.text_reply.errors import command_error, guild_not_pro
@@ -27,8 +26,6 @@ from pydub import AudioSegment
 
 
 class Starter(object):
-
-    commands = load_commands()
 
     def __init__(self, bot_abstraction):
 

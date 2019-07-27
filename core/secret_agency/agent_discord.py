@@ -1,4 +1,5 @@
 import discord
+from copy import deepcopy
 from core.src.internal_log import Log
 from core.src.static_modules import telegram_bot_abstraction
 from core.src.url_downloader import download_file_on_disc
@@ -23,12 +24,13 @@ class MyDiscordAgent(discord.Client):
         self, element, sending_function, observers=MESSAGE_UPDATE, message_type=MESSAGE_UPDATE,  *args, **kwargs
     ):
         for commissioner in self.target.commissioners:
+            _element = deepcopy(element)
             if commissioner.data_to_collect:
                 for el in commissioner.data_to_collect:
                     if el == observers:
-                        sending_function(element, commissioner.channel_id, *args, **kwargs)
+                        sending_function(_element, commissioner.channel_id, *args, **kwargs)
             else:
-                sending_function(element, commissioner.channel_id, *args, **kwargs)
+                sending_function(_element, commissioner.channel_id, *args, **kwargs)
 
     async def _send_action_message(self, action, *args, **kwargs):
         if action is not None:
@@ -36,12 +38,11 @@ class MyDiscordAgent(discord.Client):
 
     async def _send_img_message(self, url, path, file_name, file_type, *args, **kwargs):
 
-        full_file_path = await download_file_on_disc(url, path, file_name, file_type)
+        buffer_reader = await download_file_on_disc(url, path, file_name, file_type)
 
         caption = 'Undercover agent find this on discord.\n{}'
         caption = caption.format(file_name)
-        with open(full_file_path, 'rb') as f:
-            await self._send_message(f, telegram_bot_abstraction.send_image, caption=caption, *args, **kwargs)
+        await self._send_message(buffer_reader, telegram_bot_abstraction.send_image, caption=caption, *args, **kwargs)
 
     async def on_ready(self):
         await self.change_presence(afk=False)
@@ -50,8 +51,6 @@ class MyDiscordAgent(discord.Client):
     async def on_message(self, message):
 
         if self.target.is_under_monitoring(message.author.id):
-
-            self.print_log.console_user_action_log(message.author, message.author.id, 'sent a message '+message.content)
 
             if message.attachments:
 
@@ -85,15 +84,15 @@ class MyDiscordAgent(discord.Client):
             await self._send_action_message(action, observers=MEMBER_UPDATE)
 
     async def on_voice_state_update(self, member, before, after):
-        if self.target.is_under_monitoring(member.id):
 
+        if self.target.is_under_monitoring(member.id):
             if after.channel is not None:
                 if not self.target.changes_in_last_voice_state_update(after.channel):
                     return
                 action = '{} è appena entrato nel calale vocale {} nella gilda {}.'\
                     .format(member.name, after.channel, member.guild)
             elif before.channel != after.channel:
-                if not self.target.changes_in_last_voice_state_update(before.channel):
+                if not self.target.changes_in_last_voice_state_update(after.channel):
                     return
                 action = '{} si è appena disconnesso dal calale vocale {} nella gilda {}.'\
                     .format(member.name, before.channel, member.guild)
