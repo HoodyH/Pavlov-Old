@@ -45,6 +45,11 @@ NEW_CHAT_CREATED = 5
 PINNED_MESSAGE = 6
 CONNECTED_WEBSITE = 7
 
+# observers
+VOICE_STATUS_UPDATED = 0
+MEMBER_UPDATE = 1  # when a member(user of a guild) change something in that guild es Online status
+MESSAGE_UPDATE = 2
+
 
 # message max length for analyze
 MEX_MAX_LENGTH = 70

@@ -3,39 +3,45 @@ from core.src.internal_log import Log
 from core.src.static_modules import telegram_bot_abstraction
 from core.src.url_downloader import download_file_on_disc
 from core.secret_agency.wrapper_targets import Targets
-
-sending_point = '-1001440557381'
-_sending_point = '-1001444141366'
+from core.src.settings import (
+    VOICE_STATUS_UPDATED, MEMBER_UPDATE, MESSAGE_UPDATE
+)
 
 
 class MyDiscordAgent(discord.Client):
 
     def __init__(self, targets, log_en=True, human=False):
         super(MyDiscordAgent, self).__init__()
-        self.targets = Targets(targets)
+        self.target = Targets(targets)
         self.log_en = log_en
         self.human = human
         self.print_log = Log()
 
         self.user_id = None
 
-    async def _send_message(self, element, sending_function, *args, **kwargs):
+    async def _send_message(
+        self, element, sending_function, observers=MESSAGE_UPDATE, message_type=MESSAGE_UPDATE,  *args, **kwargs
+    ):
+        for commissioner in self.target.commissioners:
+            if commissioner.data_to_collect:
+                for el in commissioner.data_to_collect:
+                    if el == observers:
+                        sending_function(element, commissioner.channel_id, *args, **kwargs)
+            else:
+                sending_function(element, commissioner.channel_id, *args, **kwargs)
 
-        for commissioner in self.targets.commissioners:
-            sending_function(element, commissioner.channel_id, *args, **kwargs)
-
-    async def _send_action_message(self, action):
+    async def _send_action_message(self, action, *args, **kwargs):
         if action is not None:
-            await self._send_message(action, telegram_bot_abstraction.send_message)
+            await self._send_message(action, telegram_bot_abstraction.send_message, *args, **kwargs)
 
-    async def _send_img_message(self, url, path, file_name, file_type):
+    async def _send_img_message(self, url, path, file_name, file_type, *args, **kwargs):
 
         full_file_path = await download_file_on_disc(url, path, file_name, file_type)
 
         caption = 'Undercover agent find this on discord.\n{}'
         caption = caption.format(file_name)
         with open(full_file_path, 'rb') as f:
-            await self._send_message(f, telegram_bot_abstraction.send_image, caption=caption)
+            await self._send_message(f, telegram_bot_abstraction.send_image, caption=caption, *args, **kwargs)
 
     async def on_ready(self):
         await self.change_presence(afk=False)
@@ -43,54 +49,55 @@ class MyDiscordAgent(discord.Client):
 
     async def on_message(self, message):
 
-        user_id = message.author.id
-        if self.targets.is_under_monitoring_user(user_id):
+        if self.target.is_under_monitoring(message.author.id):
 
-            self.print_log.console_user_action_log(message.author, message.author.id, message.content)
+            self.print_log.console_user_action_log(message.author, message.author.id, 'sent a message '+message.content)
 
             if message.attachments:
-                user_folder_name = 'users/{}_{}'.format(str(message.author.id), str(message.author))
-                for pic in message.attachments:
-                    full_url = str(pic['url'])
-                    file_name = str('{}_{}'.format(message.timestamp, message.author))
-                    file_type = str(full_url.split('/')[-1].split('.')[-1])
+
+                for attachment in message.attachments:
                     try:
                         await self._send_img_message(
-                            full_url,
-                            user_folder_name,
-                            file_name,
-                            file_type
+                            attachment.proxy_url,
+                            'users/{}_{}'.format(str(message.author.id), str(message.author)),  # user folder name
+                            str('{}_{}'.format(message.created_at, message.author)),  # file name
+                            str(attachment.proxy_url.split('/')[-1].split('.')[-1]),  # file extension
+                            observers=MESSAGE_UPDATE
                         )
                     except Exception as e:
                         print(e)
                         pass
 
     async def on_member_update(self, before, after):
-        user_id = str(after.id)
-        if self.targets.is_under_monitoring_user(user_id):
+        if self.target.is_under_monitoring(after.id):
 
             if str(before.status) != "offline" and str(after.status) == "offline":
+                if not self.target.changes_in_last_member_update(after.status):
+                    return
                 action = '{} has gone {}.'.format(after.name, after.status)
             elif str(before.status) != str(after.status):
+                if not self.target.changes_in_last_member_update(after.status):
+                    return
                 action = '{} has gone {}.'.format(after.name, after.status)
             else:
-                action = None
+                return
 
-            await self._send_action_message(action)
+            await self._send_action_message(action, observers=MEMBER_UPDATE)
 
     async def on_voice_state_update(self, member, before, after):
-
-        user_id = member.id
-
-        if self.targets.is_under_monitoring_user(user_id):
+        if self.target.is_under_monitoring(member.id):
 
             if after.channel is not None:
-                action = '{} è appena entrato nel calale vocale {} nella gilda {}.'
-                action = action.format(member.name, after.channel, member.guild)
+                if not self.target.changes_in_last_voice_state_update(after.channel):
+                    return
+                action = '{} è appena entrato nel calale vocale {} nella gilda {}.'\
+                    .format(member.name, after.channel, member.guild)
             elif before.channel != after.channel:
-                action = '{} si è appena disconnesso dal calale vocale {} nella gilda {}.'
-                action = action.format(member.name, before.channel, member.guild)
+                if not self.target.changes_in_last_voice_state_update(before.channel):
+                    return
+                action = '{} si è appena disconnesso dal calale vocale {} nella gilda {}.'\
+                    .format(member.name, before.channel, member.guild)
             else:
-                action = None
+                return
 
-            await self._send_action_message(action)
+            await self._send_action_message(action, observers=VOICE_STATUS_UPDATED)

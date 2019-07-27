@@ -9,7 +9,7 @@ from core.src.text_reply.reply_commands.man_reply import (
 from core.src.text_reply.errors import arg_not_found_error
 
 
-class Man(object):
+class Manual(object):
     """
     """
 
@@ -85,12 +85,12 @@ class Man(object):
             print(e)
             return e
 
-    def man(self):
+    def manual(self):
 
         def void_arg():
             _out = ''
             if self.arg == '':
-                _out = self._build_full_man('man')
+                _out = self._build_full_man('manual')
             return _out
 
         def all_commands():
@@ -105,8 +105,8 @@ class Man(object):
             _out = ''
             try:
                 l, command_found, t = self.c_reader.get_command(db.guild.languages, self.arg)
-            except Exception as e:
-                print(e)
+            except Exception as er:
+                print(er)
                 return
 
             if command_found is None:

@@ -3,9 +3,6 @@ from core.src.settings import (
 )
 from core.src.static_modules import db
 from core.src.img_draw.draw_levels import DrawRanking
-from core.src.text_reply.reply_commands.level_reply import (
-    text_description, text_description_global
-)
 
 
 class Ranking(object):
@@ -31,7 +28,8 @@ class Ranking(object):
             _data = {
                 'title': title,
                 'title_color': (180, 180, 180),
-                'rank': db_data
+                'rank': db_data,
+                'text': 'beta2 version'
             }
             return _data
 
