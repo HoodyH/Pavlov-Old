@@ -47,7 +47,7 @@ class GuildData(object):
             self.guild_id = self.me
 
         data = {
-            '_id': self.guild_id,
+            'unique_id': self.guild_id,
             'guild_name': self.guild_name,
             'owner_id': self.owner_id,
             'owner_name': self.owner_name,

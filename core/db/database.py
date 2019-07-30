@@ -30,26 +30,32 @@ class DB(object):
         self.user_level_up = False
         self.user_global_level_up = False
 
-        self.guild = GuildData(self.client, scope, guild_id)
-        self.user = UserData(self.client, scope, guild_id, user_id)
-        self.user_global = UserData(self.client, scope, 'user_data_global', user_id)
+        try:
+            self.guild = GuildData(self.client, scope, guild_id)
+            self.user = UserData(self.client, scope, guild_id, user_id)
+            self.user_global = UserData(self.client, scope, 'user_data_global', user_id)
+        except Exception as e:
+            print('Exception in db update_data: {}'.format(e))
 
         self.__iter_collectionsiter = None
 
         return
 
     def set_data(self):
-        self.guild.set_data()
-        self.user.set_data()
-        self.user_global.set_data()
-        return
+
+        try:
+            self.guild.set_data()
+            self.user.set_data()
+            self.user_global.set_data()
+        except Exception as e:
+            print('Exception in db set_data: {}'.format(e))
 
     @property
-    def user_name(self):
+    def username(self):
         return self.user.user_name
 
-    @user_name.setter
-    def user_name(self, value):
+    @username.setter
+    def username(self, value):
         self.user.user_name = value
         self.user_global.user_name = value
 

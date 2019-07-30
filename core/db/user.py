@@ -43,7 +43,7 @@ class UserData(object):
     def set_data(self):
 
         data = {
-            '_id': self.user_id,
+            'unique_id': self.user_id,
             'user_name': self.user_name,
             'time_zone': self.time_zone,
             'deep_logging': self.deep_logging,
@@ -95,7 +95,7 @@ class UserData(object):
 
         rank_counter = 1
         for doc in cursor:
-            user_id = doc.get('_id')
+            user_id = doc.get('unique_id')
             if user_id == self.user_id:
                 return rank_counter
             rank_counter += 1
@@ -113,7 +113,7 @@ class UserData(object):
         rank_counter = 1
         data = {}
         for doc in cursor:
-            user_id = doc.get('_id')
+            user_id = doc.get('unique_id')
             data[rank_counter] = {
                 'username': doc.get('user_name'),
                 'highlights': True if user_id == self.user_id else False,

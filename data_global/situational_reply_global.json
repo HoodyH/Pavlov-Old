@@ -236,7 +236,7 @@
             "telegram": [],
             "discord": []
         },
-        "standard_counter": 1,
+        "standard_counter": 2,
         "standard_triggers": [
             "volkswagen",
             "wv",
@@ -537,7 +537,7 @@
             "Salve",
             "Appena finiti gli esami mi trovo la tipa"
         ],
-        "power_counter": 3,
+        "power_counter": 4,
         "avoid_counter": 0
     },
     "Simone Not": {
@@ -723,7 +723,7 @@
             "Oggi ho casa libera, chi volesse venire \u00e8 invitato. Stiamo un po' assieme, ci scambiamo un due parole e, perch\u00e8 no, anche quanche risata."
         ],
         "cit_author": "Maestro",
-        "power_counter": 4,
+        "power_counter": 0,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,

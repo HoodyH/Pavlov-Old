@@ -26,7 +26,7 @@ class AgencyData(object):
     def set_data(self):
 
         data = {
-            '_id': self.user_id,
+            'unique_id': self.user_id,
             'on_monitoring': self.on_monitoring,
             'user_name': self.user_name,
             'commissions': self.commissions,
