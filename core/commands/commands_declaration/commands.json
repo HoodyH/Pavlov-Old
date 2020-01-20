@@ -323,6 +323,10 @@
             "": {
                 "eng": "Mostra se ci sono nuovi voti sul sito del poli",
                 "ita": "Mostra se ci sono nuovi voti sul sito del poli"
+            },
+            "all": {
+                "eng": "Mostra tutti i voti nel sito",
+                "ita": "Mostra tutti i voti nel sito"
             }
         },
         "handled_params": {}

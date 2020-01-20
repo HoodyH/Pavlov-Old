@@ -195,7 +195,7 @@ class Starter(object):
             'random': random,
             'level': level,
             'ranking': ranking,
-            'custom.command': custom_command(),
+            'custom.command': custom_command,
         }
 
         commands.get(command_found)()

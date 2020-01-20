@@ -76,7 +76,7 @@ class CustomCommand(object):
 
             out = ''
 
-            file_path = "ppl.json"
+            file_path = "custom_command_data\ppl.json"
             stored_ppl_data = self.load_ppl(file_path)
             new_ppl_data = self.web_scrapper()
             differences = self.check_differences(stored_ppl_data, new_ppl_data)
@@ -91,8 +91,21 @@ class CustomCommand(object):
             self.save_ppl(file_path, new_ppl_data)
             self.bot.send_message(out, MSG_ON_SAME_CHAT)
 
+        def all_scores():
+
+            out = ''
+
+            new_ppl_data = self.web_scrapper()
+            for el in new_ppl_data.keys():
+                name = el
+                score = new_ppl_data.get(el)
+                out += '{} Voto: {}\n'.format(name, score)
+
+            self.bot.send_message(out, MSG_ON_SAME_CHAT)
+
         chose = {
             '': void_arg,
+            'all': all_scores,
         }
 
         chose[self.arg]()
