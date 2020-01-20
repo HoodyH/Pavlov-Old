@@ -307,5 +307,24 @@
                 "ita": "Mostra la top 10"
             }
         }
+    },
+    "custom.command":{
+        "management_command": 0,
+        "pro_command": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 0,
+        "permissions": 0,
+        "invocation_words": ["update", "poli"],
+        "description": {
+            "eng": "Execute the custiom command setted by admin",
+            "ita": "Esegue il comando che è definito dall'admin"
+        },
+        "handled_args": {
+            "": {
+                "eng": "Mostra se ci sono nuovi voti sul sito del poli",
+                "ita": "Mostra se ci sono nuovi voti sul sito del poli"
+            }
+        },
+        "handled_params": {}
     }
 }

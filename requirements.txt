@@ -6,6 +6,7 @@ pymongo
 Pillow
 SpeechRecognition
 pydub
-aiohttp == 3.5.4
-setuptools == 40.6.3
+aiohttp
+setuptools
 discord.py
+bs4

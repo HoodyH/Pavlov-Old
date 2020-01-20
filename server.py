@@ -14,7 +14,7 @@ MAIN_AGENT_TOKEN = parser.get("creds", "telegram_secret_agent")
 def main():
 
     agency = Agency()
-    agency.run([MAIN_AGENT_TOKEN])
+    # agency.run([MAIN_AGENT_TOKEN])
 
     # all the main obj that last for all the time that the bot run must be created on this level
     telegram_starter = Starter(telegram_bot_abstraction)

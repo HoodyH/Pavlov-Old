@@ -20,6 +20,7 @@ from core.commands.data import Data
 from core.commands.random import Random
 from core.commands.level import Level
 from core.commands.ranking import Ranking
+from core.commands.custom_command import CustomCommand
 # audio converter
 from core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
@@ -180,6 +181,10 @@ class Starter(object):
             c = Ranking(self.bot, language_found, command_found, arg, params)
             c.ranking()
 
+        def custom_command():
+            c = CustomCommand(self.bot, language_found, command_found, arg, params)
+            c.custom_command()
+
         commands = {
             'help': bot_help,
             'manual': manual,
@@ -190,6 +195,7 @@ class Starter(object):
             'random': random,
             'level': level,
             'ranking': ranking,
+            'custom.command': custom_command(),
         }
 
         commands.get(command_found)()
