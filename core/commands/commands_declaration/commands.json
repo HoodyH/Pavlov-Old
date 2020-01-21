@@ -362,5 +362,28 @@
                 "ita": "Setta un limite alle foto mostrate, fino a 12, se omesso mostra solo le ultime 2 foto"
             }
         }
+    },
+    "pornhub":{
+        "management_command": 0,
+        "pro_command": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 0,
+        "permissions": 0,
+        "invocation_words": ["porn", "ph", "hot", "pussy"],
+        "description": {
+            "eng": "Search a video on pornhub",
+            "ita": "Cerca un video su pornhub"
+        },
+        "handled_args": {
+            "": {
+                "eng": "Return just popular videos",
+                "ita": "Ritorna video popolari della giornata"
+            },
+            "word": {
+                "eng": "Search a specific video",
+                "ita": "Cerca un video specifico"
+            }
+        },
+        "handled_params": {}
     }
 }

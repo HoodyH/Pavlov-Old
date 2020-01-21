@@ -22,6 +22,7 @@ from core.commands.level import Level
 from core.commands.ranking import Ranking
 from core.commands.custom_command import CustomCommand
 from core.commands.instagram import Instagram
+from core.commands.pornhub import Pornhub
 # audio converter
 from core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
@@ -190,6 +191,10 @@ class Starter(object):
             c = Instagram(self.bot, language_found, command_found, arg, params)
             c.instagram()
 
+        def pornhub():
+            c = Pornhub(self.bot, language_found, command_found, arg, params)
+            c.pornhub()
+
         commands = {
             'help': bot_help,
             'manual': manual,
@@ -202,6 +207,7 @@ class Starter(object):
             'ranking': ranking,
             'custom.command': custom_command,
             'instagram': instagram,
+            'pornhub': pornhub,
         }
 
         try:
