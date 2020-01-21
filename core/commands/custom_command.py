@@ -23,7 +23,7 @@ class CustomCommand(object):
         self._filter = None
         self._set = None
 
-        self.file_path = "custom_command_data/ppl.json"
+        self.file_path = "data_global/ppl.json"
 
         _vars = ['filter', 'set']
         for param in params:
@@ -88,7 +88,7 @@ class CustomCommand(object):
             new_entries = self.check_differences()
 
             if new_entries:
-                out = 'Il poli ha appena caricato voti!'
+                out = '**Il poli ha caricato voti nuovi!**'
                 for el in new_entries.keys():
                     name = el
                     score = new_entries[el].get('score')
@@ -115,13 +115,13 @@ class CustomCommand(object):
             out += 'LISTA ULTIMI 6 VOTI:\n'
             count = 0
             for el in data:
-                out += '{}: {} - uscito il: {}\n'.format(el[0], el[1], str(el[2]))
+                out += '**{}: {}** - uscito il: {}\n'.format(el[0], el[1], str(el[2]))
 
                 count += 1
                 if count >= 6:
                     break
 
-            self.bot.send_message(out, MSG_ON_SAME_CHAT)
+            self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
 
         def all_scores():
 
@@ -133,12 +133,12 @@ class CustomCommand(object):
                 name = el
                 score = stored_ppl_data[el].get('score')
                 timestamp_str = stored_ppl_data[el].get('timestamp')
-                out += '{}: {} - uscito il: {}\n'.format(name, score, timestamp_str)
+                out += '**{}: {}** - uscito il: {}\n'.format(name, score, timestamp_str)
                 if len(out) > 1900:
-                    self.bot.send_message(out, MSG_ON_SAME_CHAT)
+                    self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
                     out = ''
 
-            self.bot.send_message(out, MSG_ON_SAME_CHAT)
+            self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
 
         chose = {
             '': void_arg,
