@@ -198,7 +198,10 @@ class Starter(object):
             'custom.command': custom_command,
         }
 
-        commands.get(command_found)()
+        try:
+            commands.get(command_found)()
+        except Exception as exc:
+            print(exc)
 
     def _natural_response(self):
 
