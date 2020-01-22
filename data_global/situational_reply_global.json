@@ -1242,7 +1242,7 @@
         }
     },
     "Loli": {
-        "standard_counter": 1,
+        "standard_counter": 0,
         "scope": "global",
         "standard_triggers": [
             "loli",
@@ -1483,7 +1483,7 @@
         }
     },
     "Greetings_in": {
-        "standard_counter": 2,
+        "standard_counter": 0,
         "scope": "global",
         "standard_triggers": [
             "hello",

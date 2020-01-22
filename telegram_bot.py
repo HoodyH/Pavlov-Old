@@ -10,7 +10,6 @@ help - help message
 man - command manual of all active commands
 data - get user stats
 stt - speech to text
-pause_bot - stop messages from the bot
 level - show your level
 ranking - show ranking of the top 10
 """

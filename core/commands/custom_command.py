@@ -19,22 +19,17 @@ class CustomCommand(object):
 
         self.arg = arg
 
-        # parameter handed
-        self._filter = None
-        self._set = None
-
+        self.stored_ppl_data = []
         self.file_path = "data_global/ppl.json"
+        self.url = 'http://users.dimi.uniud.it/~alberto.policriti/home/?q=node/42'
+        self.num_max_scores = 6  # Number of scores shown as results
+        self.bot_last_check = None
+        self.check_every_t_min = 10  # time in min between a check and another
+        self.time_between_last_check = 0
 
-        _vars = ['filter', 'set']
-        for param in params:
-            name = '_{}'.format(param[0])
-            setattr(self, name, param[1])
+    def web_scrapper(self):
 
-    @staticmethod
-    def web_scrapper():
-        url = 'http://users.dimi.uniud.it/~alberto.policriti/home/?q=node/42'
-
-        page = requests.get(url)
+        page = requests.get(self.url)
         soup = BeautifulSoup(page.content, 'html.parser')
 
         outer_table = soup.find('tbody')
@@ -50,99 +45,135 @@ class CustomCommand(object):
 
         return scores
 
-    @staticmethod
-    def save_ppl(file_path, data):
-
-        with open(os.path.join(sys.path[0], file_path), "w") as outfile:
-            json.dump(data, outfile)
-
-    @staticmethod
-    def load_ppl(file_path):
-        with open(os.path.join(sys.path[0], file_path), "r") as json_file:
-            data = json.load(json_file)
-        return data
-
     def check_differences(self):
 
-        new_entries = {}
-        stored_ppl_data = self.load_ppl(self.file_path)
-        new_ppl_data = self.web_scrapper()
-        stored_ppl_data_keys = stored_ppl_data.keys()
+        def str_to_datetime(a): return datetime.strptime(a, '%y-%m-%d %H:%M:%S')
+        def datetime_to_str(a): return str(a.strftime("%y-%m-%d %H:%M:%S"))
 
-        for el in new_ppl_data:
-            if el[0] not in stored_ppl_data_keys:
-                new_entries[el[0]] = {
-                    'score': el[1],
-                    'timestamp': str(datetime.now().strftime("%y-%m-%d %H:%M:%S")),
+        with open(os.path.join(sys.path[0], self.file_path), "r") as infile:
+            stored_ppl_json = json.load(infile)
+
+        self.bot_last_check = str_to_datetime(stored_ppl_json.get('bot_last_check'))
+        self.time_between_last_check = (datetime.now() - self.bot_last_check).seconds // 60 % 60
+
+        del stored_ppl_json['bot_last_check']  # remove control value
+
+        stored_ppl_json_keys = stored_ppl_json.keys()
+
+        # load and convert to tuple existing data from json
+        for name in stored_ppl_json_keys:
+            score = stored_ppl_json[name].get('score')
+            timestamp = str_to_datetime(stored_ppl_json[name].get('timestamp'))
+            self.stored_ppl_data.append((name, score, timestamp))
+
+        # if is time, check for new entries and add them
+        new_entries_json = {}
+        new_entries_tuple = []
+
+        if self.time_between_last_check >= self.check_every_t_min:
+            new_ppl_data = self.web_scrapper()
+            self.bot_last_check = datetime.now()
+            self.time_between_last_check = 0
+
+            new_timestamp = datetime_to_str(datetime.now())
+            for name, score in new_ppl_data:
+                if name not in stored_ppl_json_keys:
+                    new_entries_json[name] = {
+                        'score': score,
+                        'timestamp': new_timestamp,
+                    }
+                    new_entries_tuple.append((name, score, datetime.now()))
+
+            self.stored_ppl_data.extend(new_entries_tuple)
+            stored_ppl_json = {
+                    'bot_last_check': datetime_to_str(self.bot_last_check),
+                    **stored_ppl_json,
+                    **new_entries_json,
                 }
-        merged = {**stored_ppl_data, **new_entries}
-        self.save_ppl(self.file_path, merged)
 
-        return new_entries
+            with open(os.path.join(sys.path[0], self.file_path), "w") as outfile:
+                json.dump(stored_ppl_json, outfile, indent=2)
+
+        return new_entries_tuple
+
+    @staticmethod
+    def build_person_string(name, score, timestamp):
+
+        dt = '{}'.format(timestamp.strftime('alle %H:%M il %d %b'))
+        return '**{}: {}** -- {}\n'.format(name, score, dt)
+
+    def void_arg(self):
+
+        self.check_differences()
+
+        self.stored_ppl_data.sort(key=lambda tup: tup[2], reverse=True)
+
+        latest_publication_time = (datetime.now() - self.stored_ppl_data[0][2]).days
+        out = 'L\'ultimo voto è uscito {}'
+        if latest_publication_time is 0:
+            out = out.format('**oggi**.\n')
+        elif latest_publication_time is 1:
+            out = out.format('**ieri**.\n')
+        elif latest_publication_time > 1:
+            out = out.format('**' + str(latest_publication_time) + ' giorni fa**\n')
+
+        if self.time_between_last_check <= 1:
+            out += 'Ultimo controllo un istante fa.\n'
+        else:
+            out += 'Ultimo controllo {} minuti fa, alle {}.\n'.format(
+                self.time_between_last_check,
+                self.bot_last_check.strftime('%H:%M')
+            )
+
+        sorted_ppl_data = self.stored_ppl_data[:self.num_max_scores]
+
+        today_ppl_data = []
+        yesterday_ppl_data = []
+        other_ppl_data = []
+
+        for el in sorted_ppl_data:
+            publication_time = (datetime.now() - el[2]).days
+            if publication_time is 0:
+                today_ppl_data.append(el)
+            elif publication_time is 1:
+                yesterday_ppl_data.append(el)
+            elif publication_time > 1:
+                other_ppl_data.append(el)
+
+        if today_ppl_data:
+            out += '\nVOTI USCITI OGGI:\n'
+            for name, score, timestamp in today_ppl_data:
+                out += self.build_person_string(name, score, timestamp)
+        if yesterday_ppl_data:
+            out += '\nVOTI USCITI IERI:\n'
+            for name, score, timestamp in yesterday_ppl_data:
+                out += self.build_person_string(name, score, timestamp)
+        if other_ppl_data:
+            out += '\nVOTI USCITI DI RECENTE:\n'
+            for name, score, timestamp in other_ppl_data:
+                out += self.build_person_string(name, score, timestamp)
+
+        self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
+
+    def all_scores(self):
+
+        out = ''
+        self.check_differences()
+
+        for name, score, timestamp in self.stored_ppl_data:
+            out += self.build_person_string(name, score, timestamp)
+            if len(out) > 1900:
+                self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
+                out = ''
+
+        out += '\nLISTA COMPLETA VOTI\nIN ORDINE ALFABETICO\n\n'
+        self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
 
     def custom_command(self):
 
-        def void_arg():
-
-            out = ''
-            new_entries = self.check_differences()
-
-            if new_entries:
-                out = '**Il poli ha caricato voti nuovi!**'
-                for el in new_entries.keys():
-                    name = el
-                    score = new_entries[el].get('score')
-                    out += '{}: {}\n'.format(name, score)
-                out = '\n'
-            else:
-                out = 'Il poli non ha aggiunto nulla di nuovo dall\' ultimo aggiornamento... '
-                out += 'ritenta e sarai più fortunato\n\n'
-
-            stored_ppl_data = self.load_ppl(self.file_path)
-
-            data = []
-            for el in stored_ppl_data.keys():
-                name = el
-                score = stored_ppl_data[el].get('score')
-                timestamp = datetime.strptime(stored_ppl_data[el].get('timestamp'), '%y-%m-%d %H:%M:%S')
-                data.append((name, score, timestamp))
-
-            data.sort(key=lambda tup: tup[2], reverse=True)
-
-            latest_publication = (datetime.now() - data[0][2]).days
-            out += 'L\'ultimo voto è uscito {} giorni fa\n\n'.format(latest_publication)
-
-            out += 'LISTA ULTIMI 6 VOTI:\n'
-            count = 0
-            for el in data:
-                out += '**{}: {}** - uscito il: {}\n'.format(el[0], el[1], str(el[2]))
-
-                count += 1
-                if count >= 6:
-                    break
-
-            self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
-
-        def all_scores():
-
-            out = 'LISTA COMPLETA VOTI:\n'
-            self.check_differences()
-            stored_ppl_data = self.load_ppl(self.file_path)
-
-            for el in stored_ppl_data.keys():
-                name = el
-                score = stored_ppl_data[el].get('score')
-                timestamp_str = stored_ppl_data[el].get('timestamp')
-                out += '**{}: {}** - uscito il: {}\n'.format(name, score, timestamp_str)
-                if len(out) > 1900:
-                    self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
-                    out = ''
-
-            self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
-
         chose = {
-            '': void_arg,
-            'all': all_scores,
+            '': self.void_arg,
+            'all': self.all_scores,
         }
 
         chose[self.arg]()
