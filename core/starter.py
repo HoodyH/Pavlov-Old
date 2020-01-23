@@ -23,6 +23,7 @@ from core.commands.ranking import Ranking
 from core.commands.custom_command import CustomCommand
 from core.commands.instagram import Instagram
 from core.commands.pornhub import Pornhub
+from core.commands.university import University
 # audio converter
 from core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
@@ -195,6 +196,10 @@ class Starter(object):
             c = Pornhub(self.bot, language_found, command_found, arg, params)
             c.pornhub()
 
+        def university():
+            c = University(self.bot, language_found, command_found, arg, params)
+            c.university()
+
         commands = {
             'help': bot_help,
             'manual': manual,
@@ -208,12 +213,14 @@ class Starter(object):
             'custom.command': custom_command,
             'instagram': instagram,
             'pornhub': pornhub,
+            'university': university,
         }
 
         try:
             commands.get(command_found)()
         except Exception as exc:
             print(exc)
+            self.bot.send_message("Internal server error during command execution.", MSG_ON_SAME_CHAT)
 
     def _natural_response(self):
 

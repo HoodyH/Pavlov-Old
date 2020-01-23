@@ -385,5 +385,29 @@
             }
         },
         "handled_params": {}
+    },
+    "university":{
+        "management_command": 0,
+        "pro_command": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 0,
+        "permissions": 0,
+        "invocation_words": ["uni"],
+        "description": {
+            "eng": "Get files form Uni Drive",
+            "ita": "Recupera file da la cartelle dell'università condivisa"
+        },
+        "handled_args": {
+            "course_code": {
+                "eng": "Sigla del corso interessato",
+                "ita": "Sigla del corso interessato"
+            }
+        },
+        "handled_params": {
+            "-f": {
+                "eng": "Contenuto della cartella, all'interno di quella materia",
+                "ita": "Contenuto della cartella, all'interno di quella materia"
+            }
+        }
     }
 }

@@ -121,6 +121,46 @@ class BotStd(object):
         else:
             return
 
+    def send_file(self,
+                   file_bytes,
+                   destination,
+                   *args,
+                   **kwargs
+                   ):
+        if self.output_permission is False:
+            print('sender is disabled')
+            return
+
+        def send_photo(location):
+            try:
+                self._bot.send_chat_action(chat_id=location, action=telegram.ChatAction.UPLOAD_DOCUMENT)
+                self._bot.send_document(
+                    chat_id=location,
+                    document=file_bytes,
+                    *args,
+                    **kwargs
+                )
+
+            except Exception as e:
+                print(e)
+
+        if self.scope == TELEGRAM:
+
+            if destination == MSG_ON_DEFAULT_CHAT:
+                send_photo(self.message_on_guild)
+            elif destination == MSG_ON_SAME_CHAT:
+                send_photo(self.message_on_same_chat)
+            elif destination == MSG_DIRECT:
+                send_photo(self._user.id)
+            else:
+                send_photo(destination)
+
+        elif self.scope == DISCORD:
+            return
+
+        else:
+            return
+
     def send_image(self,
                    img_bytes,
                    destination,
