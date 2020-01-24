@@ -27,6 +27,7 @@ from core.commands.university import University
 from core.commands.ticket import Ticket
 from core.commands.hanime_tv import HanimeTv
 from core.commands.youtube import Youtube
+from core.commands.my_anime_list import MyAnimeList
 # audio converter
 from core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
@@ -215,6 +216,10 @@ class Starter(object):
             c = Youtube(self.bot, language_found, command_found, arg, params)
             c.youtube()
 
+        def my_anime_list():
+            c = MyAnimeList(self.bot, language_found, command_found, arg, params)
+            c.my_anime_list()
+
         commands = {
             'help': bot_help,
             'manual': manual,
@@ -232,6 +237,7 @@ class Starter(object):
             'ticket': ticket,
             'hanime.tv': hanime_tv,
             'youtube': youtube,
+            'my.anime.list': my_anime_list,
         }
 
         try:

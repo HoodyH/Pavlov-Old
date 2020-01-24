@@ -4,7 +4,7 @@ from core.src.settings import (
 from core.src.command_reader import CommandReader
 from core.src.static_modules import db
 from core.src.text_reply.reply_commands.man_reply import (
-    invocation, handled_args, handled_params, command_mask
+    invocation, beta, handled_args, handled_params, command_mask
 )
 from core.src.text_reply.errors import arg_not_found_error
 
@@ -28,10 +28,13 @@ class Manual(object):
             command_name.upper(),
             command_function.description,
         )
-        inv = command_function.invocation_words
-        if inv:
+        if command_function.invocation_words:
             out += '{}\n'.format(
                 invocation(self.language, command_function.invocation_words)
+            )
+        if command_function.beta_command:
+            out += '\n{}\n'.format(
+                beta(self.language)
             )
         return out
 

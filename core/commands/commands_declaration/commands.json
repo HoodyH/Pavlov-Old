@@ -529,5 +529,38 @@
                 "ita": "Ottieni uno stack di video dalla ricerca, massimo 19"
             }
         }
+    },
+    "my.anime.list":{
+        "management_command": 0,
+        "beta_command": true,
+        "pro_command": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 0,
+        "permissions": 0,
+        "invocation_words": ["mal"],
+        "description": {
+            "eng": "Search an Anime on MAL",
+            "ita": "Cerca un Anime su MAL"
+        },
+        "handled_args": {
+            "": {
+                "eng": "Not allowed",
+                "ita": "Non consentito"
+            },
+            "query": {
+                "eng": "Search a specific anime, and get deails of the first of the query",
+                "ita": "Cerca un anime specifico, e restituisce i dettagli del primo elemento trovato"
+            }
+        },
+        "handled_params": {
+            "-res": {
+                "eng": "Get the list of result ",
+                "ita": "Ottieni la lista dei risultati dalla query"
+            },
+            "-idx": {
+                "eng": "Get a speific item of the 10 in the query, use -res to see results",
+                "ita": "Restituisce uno specifico oggetto sui 10 della ricerca, usa -res per vedere i risultati"
+            }
+        }
     }
 }

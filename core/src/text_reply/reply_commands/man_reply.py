@@ -14,6 +14,17 @@ def invocation(language, invocation_word):
     )
 
 
+def beta(language):
+
+    def eng(): return '**This is a BETA command**\nExpect some errors or malfunctions from this command.'
+    def ita(): return '**Questo è un comando in BETA**\nAspettati alcuni errori o malfunzionamenti.'
+
+    return chose_language(
+        language,
+        eng, ita=ita
+    )
+
+
 def handled_args(language):
 
     def eng(): return 'Handled Arguments:'
