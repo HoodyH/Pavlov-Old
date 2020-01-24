@@ -13,6 +13,7 @@ class BaseCommandReader(object):
         self._key = None
         self._invocation_words = None
         self._description = None
+        self._examples = None
 
     @staticmethod
     def _read_language(language, module):
@@ -50,6 +51,10 @@ class BaseCommandReader(object):
     def description(self):
         return self._description
 
+    @property
+    def examples(self):
+        return self._examples
+
 
 class CommandShortcutReader(BaseCommandReader):
     def __init__(self):
@@ -78,7 +83,7 @@ class CommandShortcutReader(BaseCommandReader):
         return self._sub_call
 
     @property
-    def commands_shortcut_keys(self):
+    def shortcuts_keys(self):
         return COMMANDS_SHORTCUT.keys()
 
 
@@ -87,6 +92,7 @@ class CommandMainReader(BaseCommandReader):
     def __init__(self):
         super(CommandMainReader, self).__init__()
         self._management_command = None
+        self._beta_command = None
         self._pro_command = None
         self._dm_enabled = None
         self._enabled_by_default = None
@@ -107,7 +113,8 @@ class CommandMainReader(BaseCommandReader):
         if module is None:
             raise Exception('Command: {} do not exist'.format(module))
         else:
-            self._management_command = module.get('main_command')
+            self._management_command = module.get('management_command')
+            self._beta_command = module.get('beta_command')
             self._pro_command = module.get('pro_command')
             self._dm_enabled = module.get('dm_enabled')
             self._enabled_by_default = module.get('enabled_by_default')
@@ -117,10 +124,15 @@ class CommandMainReader(BaseCommandReader):
             self._description = self._read_language(language, module.get('description'))
             self._handled_args = self._read_args_and_params(language, module.get('handled_args'))
             self._handled_params = self._read_args_and_params(language, module.get('handled_params'))
+            self._examples = module.get(language, module.get('examples'))
 
     @property
     def management_command(self):
         return self._management_command
+
+    @property
+    def beta_command(self):
+        return self._beta_command
 
     @property
     def pro_command(self):
@@ -172,7 +184,7 @@ class CommandReader(object):
             language_list,
             text_array[0],
             self._commands_shortcut.read_command,
-            self._commands_shortcut.commands_shortcut_keys
+            self._commands_shortcut.shortcuts_keys
         )
         if (command_found and language_found) is None:
             language_found, command_found = self._commands.find_command(
@@ -190,7 +202,7 @@ class CommandReader(object):
         return language_found, command_found, text_array
 
     @property
-    def commands_shortcut(self):
+    def shortcuts(self):
         return self._commands_shortcut
 
     @property

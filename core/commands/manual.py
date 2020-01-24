@@ -21,7 +21,7 @@ class Manual(object):
         self.command = command
         self.arg = arg
 
-        self.c_reader = CommandReader()
+        self.cr = CommandReader()
 
     def _build_title(self, command_function, command_name):
         out = '**{}**\n{}\n'.format(
@@ -51,10 +51,10 @@ class Manual(object):
     def _build_full_man(self, command_name):
 
         try:
-            self.c_reader.commands.read_command(self.language, command_name)
-            out = self._build_title(self.c_reader.commands, command_name)
-            out += self._build_args_params_list(handled_args, self.c_reader.commands.handled_args)
-            out += self._build_args_params_list(handled_params, self.c_reader.commands.handled_params)
+            self.cr.commands.read_command(self.language, command_name)
+            out = self._build_title(self.cr.commands, command_name)
+            out += self._build_args_params_list(handled_args, self.cr.commands.handled_args)
+            out += self._build_args_params_list(handled_params, self.cr.commands.handled_params)
             return out
 
         except Exception as e:
@@ -65,12 +65,12 @@ class Manual(object):
 
         try:
             command_function.read_command(self.language, command_name)
-            out = self._build_title(command_function, command_name)
-            return out
-
+            if not command_function.permissions > db.user.permissions:
+                return self._build_title(command_function, command_name)
+            else:
+                return ""
         except Exception as e:
             print(e)
-            return e
 
     def _print_found_command(self, command_function, command):
         try:
@@ -88,7 +88,7 @@ class Manual(object):
     def command_name(self):
         _out = ''
         try:
-            l, command_found, t = self.c_reader.get_command(db.guild.languages, self.arg)
+            l, command_found, t = self.cr.get_command(db.guild.languages, self.arg)
         except Exception as er:
             print(er)
             return
@@ -101,7 +101,7 @@ class Manual(object):
         if l is None:
             _out = self._build_full_man(command_found)
         else:
-            _out = self._print_found_command(self.c_reader.commands_shortcut, command_found)
+            _out = self._print_found_command(self.cr.shortcuts, command_found)
 
         return _out
 
@@ -113,10 +113,10 @@ class Manual(object):
 
     def all_commands(self):
         _out = ''
-        for key in self.c_reader.commands.commands_keys:
-            _out += '{}\n'.format(self._build_base_man(self.c_reader.commands, key))
-        for key in self.c_reader.commands_shortcut.commands_shortcut_keys:
-            _out += '{}\n'.format(self._build_base_man(self.c_reader.commands_shortcut, key))
+        for key in self.cr.commands.commands_keys:
+            _out += '{}\n'.format(self._build_base_man(self.cr.commands, key))
+        for key in self.cr.shortcuts.shortcuts_keys:
+            _out += '{}\n'.format(self._build_base_man(self.cr.shortcuts, key))
         return _out
 
     def manual(self):

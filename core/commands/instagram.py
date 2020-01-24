@@ -1,5 +1,6 @@
 import json
 import requests
+from pprint import pprint
 from bs4 import BeautifulSoup
 from core.src.settings import (
     MSG_ON_SAME_CHAT
@@ -40,6 +41,8 @@ class Instagram(object):
 
         self.media_count = None  # number of total post in the profile
         self.img_list = []  # tuple (text, url_image)
+
+        self.file_path = 'data_global/university/file'
 
     @staticmethod
     def compose_url(entry):
@@ -87,14 +90,18 @@ class Instagram(object):
             media = edge_media.get('edges')
             for el in media:
                 node = el.get('node')
-
+                edge_like = node.get('edge_media_preview_like')
+                if edge_like:
+                    likes = edge_like.get('count')
+                else:
+                    likes = None
                 edges_text = node.get('edge_media_to_caption').get('edges')
                 text = ''
                 if edges_text:
                     text = edges_text[0].get('node').get('text')
 
                 img = node.get('thumbnail_resources')[-1].get('src')
-                self.img_list.append((text, img))
+                self.img_list.append((likes, text, img))
 
         except Exception as exc:
             print(exc)
@@ -114,23 +121,28 @@ class Instagram(object):
             if self._n:
                 count = int(self._n)
             else:
-                count = 0
+                count = 2
 
             for el in self.img_list:
                 if count is 0:
                     break
                 count -= 1
-                msg_link = '{}\n{}'.format(
-                    el[0],  # text
-                    el[1],  # img_link
+                msg_post = 'Likes: {}\n\n{}'.format(
+                    el[0],  # likes
+                    el[1],  # text
                 )
-                self.bot.send_message(msg_link, MSG_ON_SAME_CHAT)
+
+                img = requests.get(el[2])
+                open(self.file_path, 'wb').write(img.content)
+                self.bot.send_image(open(self.file_path, 'rb'), MSG_ON_SAME_CHAT, caption=msg_post)
         else:
             msg_link = 'Non posso accedere alle immagini!'
             self.bot.send_message(msg_link, MSG_ON_SAME_CHAT)
 
-        out = 'FOTO PROFILO:\n{}'.format(self.profile_pic_url_hd)
-        self.bot.send_message(out, MSG_ON_SAME_CHAT)
+        msg_profile_pic = 'FOTO PROFILO'
+        img = requests.get(self.profile_pic_url_hd)
+        open(self.file_path, 'wb').write(img.content)
+        self.bot.send_image(open(self.file_path, 'rb'), MSG_ON_SAME_CHAT, caption=msg_profile_pic)
 
         out = '**Nome Completo:** {}\n\n'.format(self.full_name)
         if self.is_private:
@@ -151,3 +163,4 @@ class Instagram(object):
             out += '**Questo profilo è stato creato di recente**'
 
         self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
+        self.bot.send_message(url, MSG_ON_SAME_CHAT)

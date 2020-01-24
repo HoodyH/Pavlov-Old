@@ -1,6 +1,7 @@
 {
     "help":{
         "management_command": 0,
+        "beta_command": false,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,
@@ -28,6 +29,7 @@
     },
     "manual":{
         "management_command": 0,
+        "beta_command": false,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,
@@ -38,10 +40,6 @@
             "ita": "Accedi alle informazioni dettagliate di un comando"
         },
         "handled_args": {
-            "": {
-                "eng": "Show all the active module that you can use",
-                "ita": "Mostra tutti i moduli attivi con cui puoi interagire"
-            },
             "all": {
                 "eng": "Show all the activated and deactivated modules",
                 "ita": "Mostra tutti i moduli, attivi e disattivi"
@@ -68,6 +66,7 @@
     },
     "module.status":{
         "management_command": 0,
+        "beta_command": false,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,
@@ -100,6 +99,7 @@
     },
     "pause.bot":{
         "management_command": 0,
+        "beta_command": false,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,
@@ -127,6 +127,7 @@
     },
     "communication":{
         "management_command": 1,
+        "beta_command": false,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 1,
@@ -183,6 +184,7 @@
     },
     "data":{
         "management_command": 0,
+        "beta_command": false,
         "pro_command": 1,
         "dm_enabled": 1,
         "enabled_by_default": 0,
@@ -223,6 +225,7 @@
     },
     "random":{
         "management_command": 0,
+        "beta_command": false,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 0,
@@ -251,6 +254,7 @@
     },
     "level":{
         "management_command": 0,
+        "beta_command": false,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 0,
@@ -278,6 +282,7 @@
     },
     "ranking":{
         "management_command": 0,
+        "beta_command": false,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 0,
@@ -310,6 +315,7 @@
     },
     "custom.command":{
         "management_command": 0,
+        "beta_command": false,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 0,
@@ -333,6 +339,7 @@
     },
     "instagram":{
         "management_command": 0,
+        "beta_command": false,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 0,
@@ -365,6 +372,7 @@
     },
     "pornhub":{
         "management_command": 0,
+        "beta_command": false,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 0,
@@ -401,6 +409,7 @@
     },
     "university":{
         "management_command": 0,
+        "beta_command": true,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 0,
@@ -429,6 +438,7 @@
     },
     "ticket":{
         "management_command": 0,
+        "beta_command": false,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 0,
@@ -448,14 +458,15 @@
     },
     "hanime.tv":{
         "management_command": 0,
+        "beta_command": true,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 0,
         "permissions": 0,
         "invocation_words": ["hanime", "ht"],
         "description": {
-            "eng": "Search a video on hanime.tv. BETA",
-            "ita": "Cerca un video su hanime.tv BETA"
+            "eng": "Search a video on hanime.tv",
+            "ita": "Cerca un video su hanime.tv"
         },
         "handled_args": {
             "": {
@@ -484,6 +495,7 @@
     },
     "youtube":{
         "management_command": 0,
+        "beta_command": false,
         "pro_command": 0,
         "dm_enabled": 1,
         "enabled_by_default": 0,

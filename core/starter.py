@@ -125,9 +125,9 @@ class Starter(object):
 
         text_array = self.in_text.split()
 
-        c_reader = CommandReader()
+        cr = CommandReader()
         try:
-            language_found, command_found, text_array = c_reader.get_command(db.guild.languages, text_array)
+            language_found, command_found, text_array = cr.get_command(db.guild.languages, text_array)
         except Exception as e:
             print(e)
             return
@@ -142,7 +142,7 @@ class Starter(object):
             return
 
         # control if the guild pro version can use this command
-        if c_reader.commands.pro_command > db.guild.pro_guild:
+        if cr.commands.pro_command > db.guild.pro_guild:
             out = guild_not_pro(language_found)
             self.bot.send_message(out, MSG_ON_SAME_CHAT)
             return

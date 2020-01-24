@@ -125,20 +125,24 @@ class CustomCommand(object):
                 self.bot_last_check.strftime('%H:%M')
             )
 
-        sorted_ppl_data = self.stored_ppl_data[:self.num_max_scores]
-
         today_ppl_data = []
         yesterday_ppl_data = []
         other_ppl_data = []
 
-        for el in sorted_ppl_data:
+        counter = 0
+        for el in self.stored_ppl_data:
             publication_time = (datetime.now() - el[2]).days
             if publication_time is 0:
                 today_ppl_data.append(el)
+                counter += 1
             elif publication_time is 1:
                 yesterday_ppl_data.append(el)
+                counter += 1
             elif publication_time > 1:
                 other_ppl_data.append(el)
+                counter += 1
+                if counter >= self.num_max_scores:
+                    break
 
         if today_ppl_data:
             out += '\nVOTI USCITI OGGI:\n'

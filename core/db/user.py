@@ -17,6 +17,7 @@ class UserData(object):
         self.table = str(guild_id) if guild_id is not None else directs
 
         # user data logging
+        self.permissions = 0
         self.user_name = None
         self.time_zone = 0
         self.deep_logging = True
@@ -47,6 +48,7 @@ class UserData(object):
             'user_name': self.user_name,
             'time_zone': self.time_zone,
             'deep_logging': self.deep_logging,
+            'permissions': self.permissions,
 
             'soft_warnings': self.soft_warnings,
             'hard_warnings': self.hard_warnings,
@@ -71,6 +73,7 @@ class UserData(object):
         self.user_name = data.get('user_name', self.user_name)
         self.time_zone = data.get('time_zone', self.time_zone)
         self.deep_logging = data.get('deep_logging', self.deep_logging)
+        self.permissions = data.get('permissions', self.deep_logging)
 
         self.soft_warnings = data.get('soft_warnings', self.soft_warnings)
         self.hard_warnings = data.get('hard_warnings', self.hard_warnings)
