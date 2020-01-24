@@ -15,6 +15,15 @@ class Pornhub(object):
 
         self.arg = arg
 
+        self._first = None
+        self._idx = None
+        self._n = None
+
+        _vars = ['first', 'idx', 'n']
+        for param in params:
+            name = '_{}'.format(param[0])
+            setattr(self, name, param[1])
+
         self.url_search = 'https://it.pornhub.com/video/search?search={}'
         self.url_video = 'https://it.pornhub.com/view_video.php?viewkey={}'
 
@@ -45,7 +54,34 @@ class Pornhub(object):
 
         url = self.compose_url(self.arg)
         video_list = self.web_scrapper(url)
-        idx = random_between(0, len(video_list)-1)
+        len_vl = len(video_list) - 1
+
+        # Send the first o the query
+        if self._first is not None:
+            self.bot.send_message(video_list[0], MSG_ON_SAME_CHAT)
+            return
+
+        # send in chat a stack of videos
+        if self._n:
+            n = int(self._n)
+            for video in video_list:
+                self.bot.send_message(video, MSG_ON_SAME_CHAT)
+                n -= 1
+                if n is 0:
+                    break
+            return
+
+        # Send a specific video in the query array
+        if self._idx:
+            idx = int(self._idx) - 1
+
+            if idx > len_vl:
+                idx = len_vl
+            if idx < 0:
+                idx = 0
+
+        else:
+            idx = random_between(0, len_vl)
+
         out = video_list[idx]
         self.bot.send_message(out, MSG_ON_SAME_CHAT)
-

@@ -3,6 +3,9 @@ import sys
 import io
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+from core.src.text_reply.reply_commands.university_reply import (
+    void_folder,
+)
 
 from core.src.settings import (
     MSG_ON_SAME_CHAT
@@ -20,9 +23,10 @@ class University:
 
         # parameter handed
         self._f = None
+        self._d = None
         self._exam_mode = None
 
-        _vars = ['el', 'exam_mode']
+        _vars = ['d', 'f', 'exam_mode']
         for param in params:
             name = '_{}'.format(param[0])
             setattr(self, name, param[1])
@@ -78,6 +82,8 @@ class University:
 
     def university(self):
 
+        query_set = self.arg.split('/')
+
         if not self.arg:
             self.__get_file_list([])
             out = 'Devi specificare come argomento un **CORSO** tra i seguenti.\n\n'
@@ -88,25 +94,41 @@ class University:
             return
 
         if self._exam_mode is not None:
-            self.__get_file_list([self.arg])
+            self.__get_file_list([query_set[0]])  # get the couse folder
             self.__get_exam_mode()
             return
 
-        if not self._f:
+        if len(query_set) == 1:
             self.__get_file_list([self.arg])
             dir_names = self.__get_dir_names()
 
             if dir_names:
-                out = 'Devi scegliere una delle seguenti **sottocartelle** di {} a cui accedere.\n\n'.format(self.arg)
+                out = 'Scegli una delle seguenti **sottocartelle** di {}.\n\n'.format(self.arg)
                 out += dir_names
-                out += '\n**.uni {} -f sottocartela**\nPer accedere ai suoi contenuti.\n\n'.format(self.arg)
+                out += '\n**.uni {}/sottocartela**\nPer accedere ai suoi contenuti.\n\n'.format(self.arg)
             else:
-                out = 'La cartella {} non ha contenuti\n'.format(self.arg)
-                out += '\n**.uni**\nPer vedere l\'elenco dei corsi.'.format(self.arg)
+                out = void_folder(self.language, self.arg)
 
             self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
             return
 
-        query_set = [self.arg, self._f]
-        self.__get_file_list(query_set)
-        self.__download_file()
+        if self._d is not None:
+            self.__get_file_list(query_set)
+            self.__download_file()
+            return
+
+        if len(query_set) > 1:
+
+            self.__get_file_list(query_set)
+            dir_names = self.__get_dir_names()
+
+            if dir_names:
+                out = 'Contenuto della directory {}:\n\n'.format(self.arg)
+                out += dir_names
+                out += '\n**.uni {}/sottocartela**\nPer accedere ai suoi contenuti.\n'.format(self.arg)
+                out += '\n**.uni {}** -d\nPer scaricare i file nella cartela corrente.\n'.format(self.arg)
+
+            else:
+                out = void_folder(self.language, self.arg)
+
+            self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
