@@ -24,6 +24,7 @@ from core.commands.custom_command import CustomCommand
 from core.commands.instagram import Instagram
 from core.commands.pornhub import Pornhub
 from core.commands.university import University
+from core.commands.ticket import Ticket
 # audio converter
 from core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
@@ -200,6 +201,10 @@ class Starter(object):
             c = University(self.bot, language_found, command_found, arg, params)
             c.university()
 
+        def ticket():
+            c = Ticket(self.bot, language_found, command_found, arg, params)
+            c.ticket()
+
         commands = {
             'help': bot_help,
             'manual': manual,
@@ -214,6 +219,7 @@ class Starter(object):
             'instagram': instagram,
             'pornhub': pornhub,
             'university': university,
+            'ticket': ticket,
         }
 
         try:
