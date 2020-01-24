@@ -566,8 +566,8 @@
         },
         "standard_counter": 1,
         "standard_triggers": [
-            "federica",
-            "fede"
+            "%%%!%%%federica",
+            "morosa di luca"
         ],
         "standard_outputs": [
             "La mano amica"
@@ -1008,9 +1008,6 @@
         },
         "standard_counter": 1,
         "standard_triggers": [
-            "%%%!%%%fed",
-            "%%%!%%%fedrig",
-            "%%%!%%%matias",
             "mattia fedrigo"
         ],
         "standard_outputs": [
@@ -1025,6 +1022,9 @@
             "Grrr"
         ],
         "power_triggers": [
+            "%%%!%%%fed",
+            "%%%!%%%fedrig",
+            "%%%!%%%matias",
             "perla di mattia",
             "perla di fedrig",
             "mattia perla",
@@ -1042,7 +1042,7 @@
             "Salve",
             "Appena finiti gli esami mi trovo la tipa"
         ],
-        "power_counter": 3,
+        "power_counter": 5,
         "avoid_counter": 0
     },
     "Simone Not": {
@@ -1058,6 +1058,7 @@
         "avoid_counter": 0,
         "standard_counter": 0,
         "standard_triggers": [
+            "%%%!%%%simone",
             "simone not",
             "viva la figa &&& e chi la castiga &&& Not"
         ],
@@ -1083,7 +1084,7 @@
         ]
     },
     "Jacopo Clocchiatti": {
-        "standard_counter": 0,
+        "standard_counter": 1,
         "scope": "global",
         "standard_triggers": [
             "jacopo clocchiatti"
@@ -1099,6 +1100,8 @@
             ""
         ],
         "power_triggers": [
+            "%%%!%%%clock",
+            "%%%!%%%jacopo",
             "perla di clock",
             "clock perla",
             "perla clock",
@@ -1113,7 +1116,7 @@
             "Luca: \"Tanto pengio fondamenti?\"\nClock: \"Abbastanza, ci sono esercizi che sono relativamente semplici ed altri che dovresti chiedere direttamente a turing di risolverteli ma non ho tavole oujia sottomano\""
         ],
         "cit_author": "Clock",
-        "power_counter": 1,
+        "power_counter": 0,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,
@@ -1127,10 +1130,13 @@
         "standard_counter": 0,
         "scope": "global",
         "standard_triggers": [
+            "%%%!%%%alberto",
+            "%%%!%%%albert",
             "alberto nadin"
         ],
         "standard_outputs": [
-            "vi svelo un segeto, ad alberto piace sua sorella"
+            "vi svelo un segeto, ad alberto piace sua sorella",
+            "Compratevi una up!"
         ],
         "avoid_triggers": [
             ""
@@ -1139,6 +1145,9 @@
             ""
         ],
         "power_triggers": [
+            "%%%!%%%alberto",
+            "%%%!%%%albert",
+            "%%%!%%%nadin",
             "perla di alberto",
             "alberto perla",
             "perla alberto",
@@ -1148,10 +1157,10 @@
         ],
         "power_outputs": [
             "PorcaTroia",
-            "Compratevi una polo A METANO"
+            "Compratevi una up A METANO"
         ],
         "cit_author": "Alberto",
-        "power_counter": 1,
+        "power_counter": 0,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,
@@ -1178,6 +1187,7 @@
             ""
         ],
         "power_triggers": [
+            "%%%!%%%luca",
             "perla di luca",
             "luca perla",
             "perla luca",
@@ -1217,6 +1227,7 @@
             ""
         ],
         "power_triggers": [
+            "%%%!%%%maestro",
             "perla di maestro",
             "maestro perla",
             "perla maestro",
@@ -1228,10 +1239,11 @@
             "Tu sei il classico tipo che per sentirsi soddisfatto della propria vita deve criticare quella degli altri. Avanti, colpiscimi!",
             "non sar\u00f2 un modello per le persone, ma per un bot s\u00ec.",
             "Oggi ho casa libera, chi volesse venire \u00e8 invitato. Stiamo un po' assieme, ci scambiamo un due parole e, perch\u00e8 no, anche quanche risata.",
-            "Tienimi giu, tienimi giu, che se no volo via"
+            "Tienimi giu, tienimi giu, che se no volo via",
+            "A: La pillola quando non funziona lo scopri 9 mesi dopo, quindi fa schifo.\n\nM: La vita è peggio."
         ],
         "cit_author": "Maestro",
-        "power_counter": 4,
+        "power_counter": 5,
         "avoid_counter": 0,
         "name": "",
         "enabled": 0,

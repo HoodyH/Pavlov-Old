@@ -369,7 +369,7 @@
         "dm_enabled": 1,
         "enabled_by_default": 0,
         "permissions": 0,
-        "invocation_words": ["porn", "ph", "hot", "pussy"],
+        "invocation_words": ["porn", "ph"],
         "description": {
             "eng": "Search a video on pornhub",
             "ita": "Cerca un video su pornhub"
@@ -445,5 +445,77 @@
             }
         },
         "handled_params": {}
+    },
+    "hanime.tv":{
+        "management_command": 0,
+        "pro_command": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 0,
+        "permissions": 0,
+        "invocation_words": ["hanime", "ht"],
+        "description": {
+            "eng": "Search a video on hanime.tv. BETA",
+            "ita": "Cerca un video su hanime.tv BETA"
+        },
+        "handled_args": {
+            "": {
+                "eng": "Return a popular video of the day",
+                "ita": "Ritorna video popolari della giornata"
+            },
+            "query": {
+                "eng": "Search a specific video, and get a random one from the 42 get in the query",
+                "ita": "Cerca un video specifico, tramite il nome del video. Deve essere un nome esistente. Verrà sostituito presto per tag"
+            }
+        },
+        "handled_params": {
+            "-first": {
+                "eng": "Get the first video from the query, the most relevant one",
+                "ita": "Restituisce il primo video dalla ricerca, potenzialmente quello più rilevante"
+            },
+            "-idx": {
+                "eng": "Get a speific video of the 42 in the query",
+                "ita": "Restituisce uno specifico video sui 42 della ricerca"
+            },
+            "-n": {
+                "eng": "Get a stack of video from the specific query, max 42",
+                "ita": "Ottieni uno stack di video dalla ricerca, massimo 42"
+            }
+        }
+    },
+    "youtube":{
+        "management_command": 0,
+        "pro_command": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 0,
+        "permissions": 0,
+        "invocation_words": ["tubo","yt"],
+        "description": {
+            "eng": "Search a video on youtube",
+            "ita": "Cerca un video su youtube"
+        },
+        "handled_args": {
+            "": {
+                "eng": "Return a random video chosen by a random keyword set",
+                "ita": "Ritorna un video scelto a caso tra una serie di parolechiave cercate"
+            },
+            "query": {
+                "eng": "Search a specific video, and get a random one from the 19 get in the query",
+                "ita": "Cerca un video specifico, e restituisce a caso uno dei 19 video ottenuti dalla ricerca"
+            }
+        },
+        "handled_params": {
+            "-first": {
+                "eng": "Get the first video from the query, the most relevant one",
+                "ita": "Restituisce il primo video dalla ricerca, potenzialmente quello più rilevante"
+            },
+            "-idx": {
+                "eng": "Get a speific video of the 19 in the query",
+                "ita": "Restituisce uno specifico video sui 19 della ricerca"
+            },
+            "-n": {
+                "eng": "Get a stack of video from the specific query, max 19",
+                "ita": "Ottieni uno stack di video dalla ricerca, massimo 19"
+            }
+        }
     }
 }

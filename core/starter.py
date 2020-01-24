@@ -25,6 +25,8 @@ from core.commands.instagram import Instagram
 from core.commands.pornhub import Pornhub
 from core.commands.university import University
 from core.commands.ticket import Ticket
+from core.commands.hanime_tv import HanimeTv
+from core.commands.youtube import Youtube
 # audio converter
 from core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
@@ -205,6 +207,14 @@ class Starter(object):
             c = Ticket(self.bot, language_found, command_found, arg, params)
             c.ticket()
 
+        def hanime_tv():
+            c = HanimeTv(self.bot, language_found, command_found, arg, params)
+            c.hanime_tv()
+
+        def youtube():
+            c = Youtube(self.bot, language_found, command_found, arg, params)
+            c.youtube()
+
         commands = {
             'help': bot_help,
             'manual': manual,
@@ -220,6 +230,8 @@ class Starter(object):
             'pornhub': pornhub,
             'university': university,
             'ticket': ticket,
+            'hanime.tv': hanime_tv,
+            'youtube': youtube,
         }
 
         try:
