@@ -307,3 +307,6 @@ class DB(object):
     def increment_command_interactions(self, command_name, datetime_log):
         self.user.commands.increment_command_interactions(command_name, datetime_log)
         self.user_global.commands.increment_command_interactions(command_name, datetime_log)
+
+    def get_command_interactions(self, command_name):
+        return self.user.commands.get_command_interactions(command_name)

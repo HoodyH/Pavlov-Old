@@ -209,7 +209,6 @@ class CommandField(object):
         for key in attrs.keys():
             data_out[key] = attrs.get(key).build_data()
 
-        print(data_out)
         return data_out
 
     def get_command_interactions(self, command_name):

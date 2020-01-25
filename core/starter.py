@@ -242,9 +242,14 @@ class Starter(object):
             'my.anime.list': my_anime_list,
         }
 
-        Log.command_log(self.bot.scope, self.bot.guild.guild_name, self.bot.user.username, db.guild.prefix, command_found)
-        db.increment_command_interactions(command_found, datetime.utcnow())
         try:
+            Log.command_log(
+                self.bot.scope,
+                self.bot.guild.guild_name,
+                self.bot.user.username, db.guild.prefix,
+                command_found
+            )
+            db.increment_command_interactions(command_found, datetime.utcnow())
             commands.get(command_found)()
         except Exception as exc:
             print(exc)

@@ -2,11 +2,12 @@ import json
 import os
 import sys
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime
 from bs4 import BeautifulSoup
 from core.src.settings import (
     MSG_ON_SAME_CHAT
 )
+from core.src.static_modules import db
 
 
 class CustomCommand(object):
@@ -124,6 +125,8 @@ class CustomCommand(object):
                 self.time_between_last_check,
                 self.bot_last_check.strftime('%H:%M')
             )
+
+        out += '\nHai utilizzato *{}* volte il comando.\n'.format(db.get_command_interactions(self.command))
 
         today_ppl_data = []
         yesterday_ppl_data = []
