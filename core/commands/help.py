@@ -15,4 +15,4 @@ class Help(object):
     def help(self):
 
         out = response(self.language, db.guild.prefix)
-        self.bot.send_message(out, MSG_ON_SAME_CHAT)
+        self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)

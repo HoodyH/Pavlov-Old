@@ -72,7 +72,6 @@ class Starter(object):
         """
         if str.startswith(self.in_text, db.guild.prefix):
             self.in_text = self.in_text[len(db.guild.prefix):]
-            Log.modules_handler_prefix(self.bot.scope, self.bot.guild.id, self.bot.user.id, db.guild.prefix)
             self.prefix_type = COMMAND_PREFIX
 
         elif str.startswith(self.in_text, db.guild.quiet_prefix):

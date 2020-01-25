@@ -23,12 +23,14 @@ class Ticket(object):
             name = '_{}'.format(param[0])
             setattr(self, name, param[1])
 
+        self.support_char = '-328472287'
+
     def ticket(self):
 
         ticket = 'Tiket Opened by: @{}'.format(self.bot.user.username)
 
         out_admin = '{}\n\n{}'.format(ticket, self.arg)
-        self.bot.send_message(out_admin, '338674622')
+        self.bot.send_message(out_admin, self.support_char)
 
         out_user = '{}\n\nGrazie per la segnalazione.'.format(ticket)
         self.bot.send_message(out_user, MSG_ON_SAME_CHAT)

@@ -51,7 +51,7 @@ class Log(object):
         data = '[{}] "{}", <{}, {}> used <{}>'.format(
             time_now(),
             scope.upper(),
-            guild if None else 'Direct',
+            guild,
             user,
             prefix
         )
@@ -63,7 +63,7 @@ class Log(object):
         data = '[{}] "{}", <{}, {}> used <{}{}>'.format(
             time_now(),
             scope.upper(),
-            guild if None else 'Direct',
+            guild,
             user,
             prefix,
             command
