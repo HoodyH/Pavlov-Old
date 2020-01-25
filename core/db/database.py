@@ -23,7 +23,7 @@ class DB(object):
         self.user_global_level_up = False
 
         self.__scope = None
-        self.__iter_collectionsiter = None
+        self.__iter_collections_iter = None
 
     def update_data(self, scope, guild_id, user_id):
 
@@ -37,7 +37,7 @@ class DB(object):
         except Exception as e:
             print('Exception in db update_data: {}'.format(e))
 
-        self.__iter_collectionsiter = None
+        self.__iter_collections_iter = None
 
         return
 
@@ -66,10 +66,10 @@ class DB(object):
     def iter_guild(self, scope):
         self.__scope = scope
         collections = self.client[scope].collection_names()
-        self.__iter_collectionsiter = iter(collections)
+        self.__iter_collections_iter = iter(collections)
 
     def next_guild(self):
-        guild_id = next(self.__iter_collectionsiter)
+        guild_id = next(self.__iter_collections_iter)
         if guild_id is None:
             return None
         try:
@@ -200,13 +200,13 @@ class DB(object):
 
                 if scope == 'hour':
                     time = time_log.replace(minute=0, second=0, microsecond=0)
-                    max_len = 24
+                    max_len = 72
                     log_time_by_scope = msg.log_time_by_hour
                     by_scope = msg.by_hour
                     time_spent_by_scope = msg.time_spent_by_hour
                 elif scope == 'day':
                     time = time_log.replace(hour=0, minute=0, second=0, microsecond=0)
-                    max_len = 31
+                    max_len = 90
                     log_time_by_scope = msg.log_time_by_day
                     by_scope = msg.by_day
                     time_spent_by_scope = msg.time_spent_by_day
@@ -303,3 +303,7 @@ class DB(object):
             self.user_global.msg.stickers += 1
         else:
             return
+
+    def increment_command_interactions(self, command_name, datetime_log):
+        self.user.commands.increment_command_interactions(command_name, datetime_log)
+        self.user_global.commands.increment_command_interactions(command_name, datetime_log)

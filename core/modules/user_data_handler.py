@@ -1,6 +1,6 @@
 from core.src.settings import *
-from core.modules.user_data_top_level_log import UserDataTopLevelLog
-from core.modules.user_data_deep_log import UserDataDeepLog
+from core.modules.user_log.user_data_top_level_log import UserDataTopLevelLog
+from core.modules.user_log.user_data_deep_log import UserDataDeepLog
 import math
 from datetime import datetime
 

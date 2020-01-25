@@ -1,10 +1,14 @@
 import requests
 import json
-from pprint import pprint
 from core.src.settings import (
     MSG_ON_SAME_CHAT
 )
-from core.src.utils.select_handler import random_between
+from core.src.text_reply.reply_commands.my_anime_list_reply import (
+    airing,
+    genres,
+    details,
+    no_arg_error,
+)
 
 
 class MyAnimeList(object):
@@ -18,9 +22,9 @@ class MyAnimeList(object):
 
         self._res = None
         self._idx = None
-        self._info = None
+        self._all = None
 
-        _vars = ['res', 'idx', 'info']
+        _vars = ['res', 'idx', 'all']
         for param in params:
             name = '_{}'.format(param[0])
             setattr(self, name, param[1])
@@ -29,9 +33,15 @@ class MyAnimeList(object):
         self.url_item = 'https://api.jikan.moe/v3/anime/{}'
 
         self.title = None
+        self.title_english = None
         self.image_url = None
+        self.synopsis = None
         self.airing = None
+        self.premiered = None
+        self.broadcast = None
         self.episodes = None
+        self.duration = None
+        self.genres = []
         self.rank = None
         self.trailer_url = None
         self.mal_url = None
@@ -56,17 +66,28 @@ class MyAnimeList(object):
         data = json.loads(page.content)
 
         self.title = data.get('title')
+        self.title_english = data.get('title_english')
         self.image_url = data.get('image_url')
+        self.synopsis = data.get('synopsis')
         self.airing = data.get('airing')
+        self.premiered = data.get('premiered')
+        self.broadcast = data.get('broadcast')
         self.episodes = data.get('episodes')
+        self.duration = data.get('duration')
+
+        data_genres = data.get('genres')
+        for genre in data_genres:
+            self.genres.append(genre.get('name'))
+
         self.rank = data.get('rank')
+        self.score = data.get('score')
         self.trailer_url = data.get('trailer_url')
         self.mal_url = data.get('url')
 
     def my_anime_list(self):
 
         if not self.arg:
-            out = 'Necessaria un parola chiave come argomento per eseguire la ricerca'
+            out = no_arg_error(self.language)
             self.bot.send_message(out, MSG_ON_SAME_CHAT)
             return
 
@@ -88,16 +109,25 @@ class MyAnimeList(object):
 
         self.__get_anime_info(results[idx][1])
 
-        out += '**{}**\n\n'.format(self.title)
+        # Print MAL url and TRAILER
+        if self._all is not None:
+            if self.trailer_url:
+                self.bot.send_message(self.trailer_url, MSG_ON_SAME_CHAT)
+            self.bot.send_message(self.mal_url, MSG_ON_SAME_CHAT)
 
-        if self.airing:
-            out += '**Prossimo ep il**\n'
+        # Build Details Message
+        if self.title == self.title_english:
+            out += '**{}**\n\n'.format(self.title)
         else:
-            out += '**Status:** Completed\n'
+            out += '**{}**\n**{}**\n\n'.format(self.title, self.title_english)
 
-        out += '**Episodes:** {}\n'.format(self.episodes)
-        out += '*Rank:** {}\n'.format(self.rank)
-
+        out += airing(self.language, self.airing, self.broadcast, self.premiered)
+        out += genres(self.language, self.genres)
+        out += details(
+            self.language,
+            self.episodes,
+            self.duration,
+            self.rank,
+            self.score,
+        )
         self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
-        self.bot.send_message(self.trailer_url, MSG_ON_SAME_CHAT)
-        self.bot.send_message(self.mal_url, MSG_ON_SAME_CHAT)

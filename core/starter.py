@@ -5,7 +5,7 @@ from core.src.command_reader import CommandReader
 from core.src.text_reply.errors import command_error, guild_not_pro
 from core.src.internal_log import Log
 # listeners
-from core.modules.user_data import UserData
+from core.modules.user_data_handler import UserData
 from core.modules.message_reply import Respond
 from core.modules.bestemmia_reply import BestemmiaReply
 from core.modules.badass_character_reply import BadAssCharacterReply
@@ -31,6 +31,8 @@ from core.commands.my_anime_list import MyAnimeList
 # audio converter
 from core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
+
+from datetime import datetime
 
 
 class Starter(object):
@@ -240,6 +242,8 @@ class Starter(object):
             'my.anime.list': my_anime_list,
         }
 
+        Log.command_log(self.bot.scope, self.bot.guild.guild_name, self.bot.user.username, db.guild.prefix, command_found)
+        db.increment_command_interactions(command_found, datetime.utcnow())
         try:
             commands.get(command_found)()
         except Exception as exc:
@@ -321,7 +325,7 @@ class Starter(object):
 
         self.in_text = text
         self._catch_prefix()
-        self._update_statistics(TEXT, time_spent_extra=5)
         if self.prefix_type is COMMAND_PREFIX:
             self._run_command()
+        self._update_statistics(TEXT, time_spent_extra=5)
         self._natural_response()

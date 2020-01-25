@@ -2,6 +2,7 @@ from core.db.query import (pull_data, push_data)
 from core.db.modules.class_message import MessagesField
 from core.db.modules.class_xp import XpField
 from core.db.modules.class_bill import BillField
+from core.db.modules.class_command import CommandField
 
 
 class UserData(object):
@@ -17,10 +18,10 @@ class UserData(object):
         self.table = str(guild_id) if guild_id is not None else directs
 
         # user data logging
-        self.permissions = 0
         self.user_name = None
         self.time_zone = 0
         self.deep_logging = True
+        self.permissions = 10
 
         self.soft_warnings = 0
         self.hard_warnings = 0
@@ -38,6 +39,9 @@ class UserData(object):
 
         self.__bill_field = BillField()
         self.bill = self.__bill_field
+
+        self.__command_field = CommandField()
+        self.commands = self.__command_field
 
         self.get_data()
 
@@ -62,6 +66,7 @@ class UserData(object):
             'msg': self.__msg_field.build_data(),
             'xp': self.__xp_field.build_data(),
             'bill': self.__bill_field.build_data(),
+            'commands': self.__command_field.build_data(),
         }
 
         push_data(self.client, self.scope, self.table, self.user_id, data)
@@ -87,6 +92,7 @@ class UserData(object):
         self.msg = self.__msg_field.extract_data(data.get('msg', self.__msg_field.build_data()))
         self.xp = self.__xp_field.extract_data(data.get('xp', self.__xp_field.build_data()))
         self.bill = self.__bill_field.extract_data(data.get('bill', self.__bill_field.build_data()))
+        self.commands = self.__command_field.extract_data(data.get('commands', self.__command_field.build_data()))
 
     def get_user_rank(self):
         collection = self.client[self.scope][self.table]
@@ -245,3 +251,12 @@ class UserData(object):
     @bill.setter
     def bill(self, value):
         self.__bill = value
+
+    # commands
+    @property
+    def commands(self):
+        return self.__commands
+
+    @commands.setter
+    def commands(self, value):
+        self.__commands = value

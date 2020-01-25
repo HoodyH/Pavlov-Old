@@ -46,14 +46,27 @@ class Log(object):
             print(data)
 
     @staticmethod
-    def modules_handler_prefix(scope, guild_id, user_id, prefix):
+    def modules_handler_prefix(scope, guild, user, prefix):
 
-        data = '[{}] "{}", On guid: <{}> user: <{}> has used <{}> prefix'.format(
+        data = '[{}] "{}", <{}, {}> used <{}>'.format(
             time_now(),
             scope.upper(),
-            guild_id,
-            user_id,
+            guild if None else 'Direct',
+            user,
             prefix
+        )
+        log_data(data)
+        print(data)
+
+    @staticmethod
+    def command_log(scope, guild, user, prefix, command):
+        data = '[{}] "{}", <{}, {}> used <{}{}>'.format(
+            time_now(),
+            scope.upper(),
+            guild if None else 'Direct',
+            user,
+            prefix,
+            command
         )
         log_data(data)
         print(data)
