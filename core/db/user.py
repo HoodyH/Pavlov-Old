@@ -2,53 +2,53 @@ from core.db.query import (pull_data, push_data)
 from core.db.modules.class_message import MessagesField
 from core.db.modules.class_xp import XpField
 from core.db.modules.class_bill import BillField
-from core.db.modules.class_command import CommandField
+from core.db.modules.class_command import CommandsField
 
 
 class UserData(object):
 
     def __init__(self, client, scope, guild_id, user_id):
 
-        self.client = client
-        self.scope = scope
-        self.guild_id = guild_id
-        self.user_id = user_id
+        self.__client = client
+        self.__scope = scope
+        self.__guild_id = guild_id
+        self.__user_id = user_id
 
         directs = "bot_directs"
-        self.table = str(guild_id) if guild_id is not None else directs
+        self.__table = str(guild_id) if guild_id is not None else directs
 
         # user data logging
-        self.user_name = None
-        self.time_zone = 0
-        self.deep_logging = True
-        self.permissions = 10
+        self.__user_name = None
+        self.__time_zone = 0
+        self.__deep_logging = True
+        self.__permissions = 10
 
-        self.soft_warnings = 0
-        self.hard_warnings = 0
-        self.admin_warnings = 0
-        self.gender = None
-        self.age = None
-        self.country = None
-        self.speak_in_vc = None
+        self.__soft_warnings = 0
+        self.__hard_warnings = 0
+        self.__admin_warnings = 0
+        self.__gender = None
+        self.__age = None
+        self.__country = None
+        self.__speak_in_vc = None
 
         self.__msg_field = MessagesField()
-        self.msg = self.__msg_field
+        self.__msg = self.__msg_field
 
         self.__xp_field = XpField()
-        self.xp = self.__xp_field
+        self.__xp = self.__xp_field
 
         self.__bill_field = BillField()
-        self.bill = self.__bill_field
+        self.__bill = self.__bill_field
 
-        self.__command_field = CommandField()
-        self.commands = self.__command_field
+        self.__command_field = CommandsField()
+        self.__commands = self.__command_field
 
         self.get_data()
 
     def set_data(self):
 
         data = {
-            'unique_id': self.user_id,
+            'unique_id': self.__user_id,
             'user_name': self.user_name,
             'time_zone': self.time_zone,
             'deep_logging': self.deep_logging,
@@ -69,11 +69,11 @@ class UserData(object):
             'commands': self.__command_field.build_data(),
         }
 
-        push_data(self.client, self.scope, self.table, self.user_id, data)
+        push_data(self.__client, self.__scope, self.__table, self.__user_id, data)
 
     def get_data(self):
 
-        data = pull_data(self.client, self.scope, self.table, self.user_id)
+        data = pull_data(self.__client, self.__scope, self.__table, self.__user_id)
 
         self.user_name = data.get('user_name', self.user_name)
         self.time_zone = data.get('time_zone', self.time_zone)
@@ -95,7 +95,7 @@ class UserData(object):
         self.commands = self.__command_field.extract_data(data.get('commands', self.__command_field.build_data()))
 
     def get_user_rank(self):
-        collection = self.client[self.scope][self.table]
+        collection = self.__client[self.__scope][self.__table]
         try:
             cursor = collection.find({"$query": {}, "$orderby": {"xp.xp": -1}})
         except Exception as e:
@@ -105,14 +105,14 @@ class UserData(object):
         rank_counter = 1
         for doc in cursor:
             user_id = doc.get('unique_id')
-            if user_id == self.user_id:
+            if user_id == self.__user_id:
                 return rank_counter
             rank_counter += 1
 
         return 'N/D'
 
     def build_ranking(self, limit=10):
-        collection = self.client[self.scope][self.table]
+        collection = self.__client[self.__scope][self.__table]
         try:
             cursor = collection.find({"$query": {}, "$orderby": {"xp.xp": -1}})
         except Exception as e:
@@ -125,7 +125,7 @@ class UserData(object):
             user_id = doc.get('unique_id')
             data[rank_counter] = {
                 'username': doc.get('user_name'),
-                'highlights': True if user_id == self.user_id else False,
+                'highlights': True if user_id == self.__user_id else False,
                 'rank': rank_counter,
                 'level': doc.get('xp').get('level'),
                 'value': doc.get('xp').get('xp')
