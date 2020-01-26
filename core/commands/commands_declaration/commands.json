@@ -562,5 +562,46 @@
                 "ita": "Restituisce uno specifico oggetto sui 10 della ricerca, usa -res per vedere i risultati"
             }
         }
+    },
+    "chatrubate":{
+        "management_command": 0,
+        "beta_command": true,
+        "pro_command": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 0,
+        "permissions": 0,
+        "invocation_words": ["cr","cam"],
+        "description": {
+            "eng": "Search a video on it.chatrubate.com",
+            "ita": "Cerca un video su it.chatrubate.com"
+        },
+        "handled_args": {
+            "": {
+                "eng": "Return a random video from the main page",
+                "ita": "Ritorna un video random della main page"
+            },
+            "query": {
+                "eng": "Search a specific girl",
+                "ita": "Cerca una ragazza specifica"
+            }
+        },
+        "handled_params": {
+            "-first": {
+                "eng": "Get the first girl from the page",
+                "ita": "Restituisce la prima ragazza della pagina"
+            },
+            "-idx": {
+                "eng": "Get a speific video of the 86 in the page",
+                "ita": "Restituisce uno ragazza specifica sulle 86 della pagina"
+            },
+            "-n": {
+                "eng": "Get a stack of cams, max 20",
+                "ita": "Ottieni uno stack di cam, massimo 20"
+            },
+            "-girls": {
+                "eng": "Get the list of the most popular 20 girls online",
+                "ita": "Ottieni la lista delle 20 ragazze più popolari online, causa bug devi mettere un argomento random per usare questo parametro"
+            }
+        }
     }
 }
