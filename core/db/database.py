@@ -59,13 +59,16 @@ class DB(object):
             print('Exception in db set_data: {}'.format(e))
 
     def __migrate_data(self):
-
-        guilds_id = [
+        guilds_id_2 = [
             '-1001431524064',
             '-1001437618505',
             '-1001440557381',
             '-1001444141366',
             '-328472287',
+            '-335903830',
+        ]
+
+        guilds_id = [
             '-335903830',
         ]
         for guild_id in guilds_id:
@@ -86,11 +89,11 @@ class DB(object):
         user_migration = User(self.client, guild_id, user_id)
 
         user_migration.user_name = old_data_user.user_name
+        print(user_migration.user_name)
 
         msg = old_data_user.msg
 
         l = len(msg.log_time_by_hour) - 1
-        print(l)
         for idx in range(0, l):
             timestamp = msg.log_time_by_hour[l - idx]
             counter = msg.by_hour[l - idx]
@@ -98,7 +101,6 @@ class DB(object):
             user_migration.guild.msg.msg_log.update_log_by_hour((timestamp, counter, time_spent))
 
         l = len(msg.log_time_by_day) - 1
-        print(l)
         for idx in range(0, l):
             timestamp = msg.log_time_by_day[l - idx]
             counter = msg.by_day[l - idx]
@@ -106,7 +108,6 @@ class DB(object):
             user_migration.guild.msg.msg_log.update_log_by_day((timestamp, counter, time_spent))
 
         l = len(msg.log_time_by_month) - 1
-        print(l)
         for idx in range(0, l):
             timestamp = msg.log_time_by_month[l - idx]
             counter = msg.by_month[l - idx]
@@ -114,6 +115,12 @@ class DB(object):
             user_migration.guild.msg.msg_log.update_log_by_month((timestamp, counter, time_spent))
 
         user_migration.guild.commands = old_data_user.commands
+
+        user_migration.guild.xp.xp_value = old_data_user.xp.xp_value
+        user_migration.guild.xp.level = old_data_user.xp.level
+        user_migration.guild.xp.level_up_notification = old_data_user.xp.level_up_notification
+
+        user_migration.guild.bill.bits = old_data_user.bill.bits
 
         user_migration.set_data()
 

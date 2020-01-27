@@ -1,7 +1,7 @@
 from core.db.submodule.action_counter_log import ActionCounterLog
 
 
-class MessagesField(object):
+class MessagesData(object):
 
     def __init__(self):
 

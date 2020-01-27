@@ -1,8 +1,9 @@
 from core.db.query import (pull_data, push_data)
 from core.db.modules.class_message import MessagesField
 from core.db.modules.class_xp import XpField
-from core.db.modules.class_bill import BillField
-from core.db.modules.commands import CommandsField
+
+from core.db.user_d.modules.bill import BillData
+from core.db.user_d.modules.commands import CommandData
 
 
 class UserData(object):
@@ -37,10 +38,10 @@ class UserData(object):
         self.__xp_field = XpField()
         self.__xp = self.__xp_field
 
-        self.__bill_field = BillField()
+        self.__bill_field = BillData()
         self.__bill = self.__bill_field
 
-        self.__command_field = CommandsField()
+        self.__command_field = CommandData()
         self.__commands = self.__command_field
 
         self.get_data()

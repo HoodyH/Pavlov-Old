@@ -1,7 +1,7 @@
 from core.db.submodule.action_counter_log import ActionCounterLog
 
 
-class CommandsField(object):
+class CommandData(object):
 
     def extract_data(self, raw_data):
 
