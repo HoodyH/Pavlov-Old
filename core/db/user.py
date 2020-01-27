@@ -2,7 +2,7 @@ from core.db.query import (pull_data, push_data)
 from core.db.modules.class_message import MessagesField
 from core.db.modules.class_xp import XpField
 from core.db.modules.class_bill import BillField
-from core.db.modules.class_command import CommandsField
+from core.db.modules.commands import CommandsField
 
 
 class UserData(object):

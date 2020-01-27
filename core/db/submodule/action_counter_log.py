@@ -6,21 +6,21 @@ from core.db.setting import (
 from datetime import timedelta
 
 
-class UsageLog(object):
+class ActionCounterLog(object):
 
     def __init__(self):
         self.__log_by_hour = []
         self.__log_by_day = []
         self.__log_by_month = []
 
-        self.__total_count = 1
+        self.total_count = 1
 
     def extract_data(self, raw_data):
         self.__log_by_hour = raw_data.get('log_by_hour', self.log_by_hour)
         self.__log_by_day = raw_data.get('log_by_day', self.log_by_day)
         self.__log_by_month = raw_data.get('log_by_month', self.log_by_month)
 
-        self.__total_count = raw_data.get('total_count', self.total_count)
+        self.total_count = raw_data.get('total_count', self.total_count)
 
         return self
 
@@ -30,7 +30,7 @@ class UsageLog(object):
             'log_by_day': self.__log_by_day,
             'log_by_month': self.__log_by_month,
 
-            'total_count': self.__total_count,
+            'total_count': self.total_count,
         }
         return data_out
 
@@ -114,10 +114,3 @@ class UsageLog(object):
         else:
             self.__log_by_month[0][1] += counter
             self.__log_by_month[0][2] += time_spent
-
-    @property
-    def total_count(self):
-        return self.__total_count
-
-    def update_total_count(self, value):
-        self.__total_count += value

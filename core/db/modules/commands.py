@@ -1,4 +1,4 @@
-from core.db.interfaces.UsageLog import UsageLog
+from core.db.submodule.action_counter_log import ActionCounterLog
 
 
 class CommandsField(object):
@@ -9,7 +9,7 @@ class CommandsField(object):
             for key in raw_data.keys():
                 setattr(
                     self, key,
-                    UsageLog().extract_data(raw_data.get(key, UsageLog().build_data()))
+                    ActionCounterLog().extract_data(raw_data.get(key, ActionCounterLog().build_data()))
                 )
         except Exception as exc:
             print('New User used Commands, db creation exception (accepted): ' + str(exc))
@@ -26,7 +26,12 @@ class CommandsField(object):
         return data_out
 
     def command(self, command_name):
-        # get the command object by his name
+        """
+        Get the command object by his name
+
+        :param command_name: the name of the command as in the command declaration file
+        :return the command class
+        """
         command_name = command_name.replace('.', '_')
         if command_name.replace('.', '_') in self.__dict__.keys():
             return getattr(self, command_name)
@@ -37,18 +42,18 @@ class CommandsField(object):
             return command_usage_log.total_count
 
     def increment_command_interactions(self, command_name: str, timestamp):
-        command_usage_log = self.command(command_name)
-        if command_usage_log:
+        command = self.command(command_name)
+        if command:
 
             value = (timestamp, 1, 0)
-            command_usage_log.update_log_by_hour(value)
-            command_usage_log.update_log_by_day(value)
-            command_usage_log.update_log_by_month(value)
-            command_usage_log.update_total_count(1)
+            command.update_log_by_hour(value)
+            command.update_log_by_day(value)
+            command.update_log_by_month(value)
+            command.total_count += 1
 
         else:
             setattr(
                 self,
                 command_name,
-                UsageLog()
+                ActionCounterLog()
             )

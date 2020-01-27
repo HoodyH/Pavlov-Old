@@ -479,7 +479,7 @@
         "standard_outputs": [
             "Dimmi...",
             "Dica",
-            "Cosa c'è",
+            "Cosa c'\u00c3\u00a8",
             "Ti serve qualcosa?",
             "Cosa posso fare per te?",
             "Dimmi",
@@ -1495,7 +1495,7 @@
         }
     },
     "Greetings_in": {
-        "standard_counter": 2,
+        "standard_counter": 0,
         "scope": "global",
         "standard_triggers": [
             "hello",

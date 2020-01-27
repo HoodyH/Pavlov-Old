@@ -5,6 +5,7 @@ from core.src.settings import (
 from pymongo import MongoClient
 from .guild import GuildData
 from .user import UserData
+from .user_new import UserDataNew
 
 from datetime import timedelta
 
@@ -18,6 +19,7 @@ class DB(object):
         self.guild = None
         self.user = None
         self.user_global = None
+        self.user_new = UserDataNew
 
         self.user_level_up = False
         self.user_global_level_up = False
@@ -34,6 +36,9 @@ class DB(object):
             self.guild = GuildData(self.client, scope, guild_id)
             self.user = UserData(self.client, scope, guild_id, user_id)
             self.user_global = UserData(self.client, scope, 'user_data_global', user_id)
+
+            self.user_new = UserDataNew(self.client, guild_id, user_id)
+
         except Exception as e:
             print('Exception in db update_data: {}'.format(e))
 
@@ -47,6 +52,9 @@ class DB(object):
             self.guild.set_data()
             self.user.set_data()
             self.user_global.set_data()
+
+            self.user_new.set_data()
+
         except Exception as e:
             print('Exception in db set_data: {}'.format(e))
 
@@ -58,6 +66,7 @@ class DB(object):
     def username(self, value):
         self.user.user_name = value
         self.user_global.user_name = value
+        self.user_new.user_name = value
 
     @property
     def language(self):
