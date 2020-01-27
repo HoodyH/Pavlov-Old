@@ -1,3 +1,6 @@
+from core.db.setting import DATABASE_NAME
+from core.db.query import (pull_data, push_data)
+
 from core.src.settings import (
     XP_NEXT_LEVEL, MSG_DISABLED, MSG_DIRECT,
     COMMAND, IMAGE, DOCUMENT, VOICE, VIDEO_NOTE, STICKER,
@@ -19,7 +22,6 @@ class DB(object):
         self.guild = None
         self.user = None
         self.user_global = None
-        self.user_new = User
 
         self.user_level_up = False
         self.user_global_level_up = False
@@ -37,12 +39,12 @@ class DB(object):
             self.user = UserData(self.client, scope, guild_id, user_id)
             self.user_global = UserData(self.client, scope, 'user_data_global', user_id)
 
-            self.user_new = User(self.client, guild_id, user_id)
-
         except Exception as e:
             print('Exception in db update_data: {}'.format(e))
 
         self.__iter_collections_iter = None
+
+        # self.__migrate_data()
 
         return
 
@@ -53,10 +55,67 @@ class DB(object):
             self.user.set_data()
             self.user_global.set_data()
 
-            self.user_new.set_data()
-
         except Exception as e:
             print('Exception in db set_data: {}'.format(e))
+
+    def __migrate_data(self):
+
+        guilds_id = [
+            '-1001431524064',
+            '-1001437618505',
+            '-1001440557381',
+            '-1001444141366',
+            '-328472287',
+            '-335903830',
+        ]
+        for guild_id in guilds_id:
+            collection = self.client['telegram'][guild_id]
+            try:
+                cursor = collection.find({"$query": {}, "$orderby": {"xp.xp": -1}})
+            except Exception as e:
+                print(e)
+                return
+
+            for doc in cursor:
+                user_id = doc.get('unique_id')
+                self.__user_migrate_data(guild_id, user_id)
+
+    def __user_migrate_data(self, guild_id, user_id):
+
+        old_data_user = UserData(self.client, DATABASE_NAME, guild_id, user_id)
+        user_migration = User(self.client, guild_id, user_id)
+
+        user_migration.user_name = old_data_user.user_name
+
+        msg = old_data_user.msg
+
+        l = len(msg.log_time_by_hour) - 1
+        print(l)
+        for idx in range(0, l):
+            timestamp = msg.log_time_by_hour[l - idx]
+            counter = msg.by_hour[l - idx]
+            time_spent = msg.time_spent_by_hour[l - idx]
+            user_migration.guild.msg.msg_log.update_log_by_hour((timestamp, counter, time_spent))
+
+        l = len(msg.log_time_by_day) - 1
+        print(l)
+        for idx in range(0, l):
+            timestamp = msg.log_time_by_day[l - idx]
+            counter = msg.by_day[l - idx]
+            time_spent = msg.time_spent_by_day[l - idx]
+            user_migration.guild.msg.msg_log.update_log_by_day((timestamp, counter, time_spent))
+
+        l = len(msg.log_time_by_month) - 1
+        print(l)
+        for idx in range(0, l):
+            timestamp = msg.log_time_by_month[l - idx]
+            counter = msg.by_month[l - idx]
+            time_spent = msg.time_spent_by_month[l - idx]
+            user_migration.guild.msg.msg_log.update_log_by_month((timestamp, counter, time_spent))
+
+        user_migration.guild.commands = old_data_user.commands
+
+        user_migration.set_data()
 
     @property
     def username(self):
@@ -66,7 +125,6 @@ class DB(object):
     def username(self, value):
         self.user.user_name = value
         self.user_global.user_name = value
-        self.user_new.user_name = value
 
     @property
     def language(self):

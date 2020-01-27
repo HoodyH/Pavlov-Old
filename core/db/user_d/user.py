@@ -1,3 +1,4 @@
+from core.db.setting import USERS_TABLE_NAME
 from core.db.query import (pull_data, push_data)
 from core.db.user_d.guild_user.guild_user import GuildUser
 
@@ -11,8 +12,6 @@ class User(object):
         self.__guild_id = guild_id
         self.__user_id = user_id
 
-        self.__table = 'users'
-
         # user data logging
         self.user_name = None
         self.emails = []
@@ -21,6 +20,7 @@ class User(object):
         self.age = 20
         self.country = ''
         self.vip_status_code = 101  # code of the vip status for the bot
+        self.last_seen = None
 
         self.deep_logging = True
         self.global_permissions_code = 10
@@ -47,6 +47,7 @@ class User(object):
             'age': self.age,
             'country': self.country,
             'vip_status_code': self.vip_status_code,
+            'last_seen': self.last_seen,
 
             'deep_logging': self.deep_logging,
             'global_permissions_code': self.global_permissions_code,
@@ -56,11 +57,11 @@ class User(object):
             'guilds': guilds,
         }
 
-        push_data(self.__client, self.__scope, self.__table, self.__user_id, data)
+        push_data(self.__client, self.__scope, USERS_TABLE_NAME, self.__user_id, data)
 
     def get_data(self):
 
-        data = pull_data(self.__client, self.__scope, self.__table, self.__user_id)
+        data = pull_data(self.__client, self.__scope, USERS_TABLE_NAME, self.__user_id)
 
         self.user_name = data.get('user_name', self.user_name)
         self.emails = data.get('emails', self.emails)
@@ -68,6 +69,8 @@ class User(object):
         self.gender = data.get('gender', self.gender)
         self.age = data.get('age', self.age)
         self.country = data.get('country', self.country)
+        self.vip_status_code = data.get('vip_status_code', self.vip_status_code)
+        self.last_seen = data.get('last_seen', self.last_seen)
 
         self.deep_logging = data.get('deep_logging', self.deep_logging)
         self.global_permissions_code = data.get('global_permissions_code', self.deep_logging)
