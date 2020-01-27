@@ -1,8 +1,8 @@
 from core.db.query import (pull_data, push_data)
-from core.db.user_d.modules.guild_user_data import GuildUserData
+from core.db.user_d.guild_user.guild_user import GuildUser
 
 
-class UserDataNew(object):
+class User(object):
 
     def __init__(self, client, guild_id, user_id):
 
@@ -28,7 +28,7 @@ class UserDataNew(object):
         self.verification_code = 120028  # auto regenerated, is the code to send as verification.
 
         self.__guilds = []  # the list of the guild where the user is in
-        self.guild = GuildUserData()  # the guild where the user is currently typing
+        self.guild = GuildUser()  # the guild where the user is currently typing
 
         self.get_data()
 
@@ -77,11 +77,11 @@ class UserDataNew(object):
         guilds = data.get('guilds')
         if guilds:
             for guild in guilds:
-                self.__guilds.append(GuildUserData().extract_data(guild))
+                self.__guilds.append(GuildUser().extract_data(guild))
 
-        self.find_guild_by_id(self.__guild_id)
+        self.__find_guild_by_id(self.__guild_id)
 
-    def find_guild_by_id(self, guild_id):
+    def __find_guild_by_id(self, guild_id):
         """
         Find or create the guild by id.
         If is not found it will create a new object with the guild_id given
@@ -92,7 +92,7 @@ class UserDataNew(object):
         if self.__guilds:
             for guild in self.__guilds:
                 if guild.guild_id == guild_id:
-                    self.guild = guild
+                    self.guild: GuildUser = guild
                     return
 
         self.guild.guild_id = guild_id
