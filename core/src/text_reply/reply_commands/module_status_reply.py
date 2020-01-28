@@ -1,4 +1,4 @@
-from core.src.settings import (
+from pvlv.settings import (
     ENABLED, DISABLED
 )
 from core.src.languages_handler import chose_language

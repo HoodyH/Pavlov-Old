@@ -1,4 +1,4 @@
-from core.src.settings import (
+from pvlv.settings import (
     SUPPORTED_SCOPES, MSG_ON_SAME_CHAT
 )
 from core.src.static_modules import db

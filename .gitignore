@@ -5,6 +5,7 @@
 
 /core/secret_agency/temp.py
 token.*
+configs.*
 *.log
 *.wav
 *.pyc

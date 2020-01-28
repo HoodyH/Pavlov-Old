@@ -1,4 +1,4 @@
-from core.src.settings import *
+from pvlv.settings import *
 import speech_recognition as sr
 
 

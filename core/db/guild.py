@@ -72,14 +72,14 @@ class GuildData(object):
             'msg': self._class_msg.build_data(),
         }
 
-        push_data(self.client, self.scope, self.table, self.guild_id, data)
+        push_data(self.scope, self.table, self.guild_id, data)
 
     def get_data(self):
 
         if self.guild_id is None:
             self.guild_id = self.me
 
-        data = pull_data(self.client, self.scope, self.table, self.guild_id)
+        data = pull_data(self.scope, self.table, self.guild_id)
 
         self.guild_name = data.get('guild_name', self.guild_name)
         self.owner_id = data.get('owner_id', self.owner_id)

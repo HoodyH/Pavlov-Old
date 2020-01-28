@@ -5,9 +5,8 @@ from pvlv_database.user.guild_user.guild_user import GuildUser
 
 class User(object):
 
-    def __init__(self, client, guild_id, user_id):
+    def __init__(self, guild_id, user_id):
 
-        self.__client = client
         self.__scope = 'telegram'
         self.__guild_id = guild_id
         self.__user_id = user_id
@@ -57,11 +56,11 @@ class User(object):
             'guilds': guilds,
         }
 
-        push_data(self.__client, self.__scope, USERS_TABLE_NAME, self.__user_id, data)
+        push_data(self.__scope, USERS_TABLE_NAME, self.__user_id, data)
 
     def get_data(self):
 
-        data = pull_data(self.__client, self.__scope, USERS_TABLE_NAME, self.__user_id)
+        data = pull_data(self.__scope, USERS_TABLE_NAME, self.__user_id)
 
         self.user_name = data.get('user_name', self.user_name)
         self.emails = data.get('emails', self.emails)
@@ -100,3 +99,7 @@ class User(object):
 
         self.guild.guild_id = guild_id
         self.__guilds.append(self.guild)
+
+    @property
+    def user_id(self):
+        return self.__user_id

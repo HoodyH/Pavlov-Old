@@ -1,7 +1,7 @@
 from core.src.file_handler import load, save
 from core.src.utils.select_handler import phrase_sequencer
 from core.src.message_reader import find
-from core.src.settings import *
+from pvlv.settings import *
 from core.src.internal_log import Log
 
 

@@ -37,3 +37,37 @@ class XpData(object):
             self.__is_level_up = False
             return True
         return False
+
+    @staticmethod
+    def __xp_to_level(level):
+        return (level * (level + 1) / 4) * 300
+
+    def update_xp_value(self, value: int):
+        """
+        It will add the xp provided to the total count and check if is time to level up
+        After this command check is_level_up to see if there is a level up
+        :param value: xp to add
+        """
+        self.xp_value += value
+        xp_to_next_level = self.__xp_to_level(self.level)
+        if xp_to_next_level <= self.xp_value:
+            self.level += 1
+            self.__is_level_up = True
+
+    def xp_in_level(self):
+        """
+        Total xp in the current level,
+        this is the xp you have to gain in this level to level up.
+        :return: xp value as int
+        """
+        if self.level is 0:
+            return self.__xp_to_level(self.level)
+        else:
+            return self.__xp_to_level(self.level) - self.__xp_to_level(self.level - 1)
+
+    def xp_left(self):
+        """
+        Xp left to level up
+        :return: xp left as int
+        """
+        return self.xp_value - self.__xp_to_level(self.level - 1)

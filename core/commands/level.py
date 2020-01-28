@@ -1,8 +1,8 @@
-from core.src.settings import (
+from pvlv.settings import (
     MSG_ON_SAME_CHAT
 )
 from core.src.static_modules import db
-from core.src.img_draw.draw_levels import DrawLevelCard
+from pvlv_image_builder.draw_levels import DrawLevelCard
 from core.src.text_reply.reply_commands.level_reply import (
     text_description, text_description_global
 )

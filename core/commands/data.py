@@ -1,4 +1,4 @@
-from core.src.settings import (
+from pvlv.settings import (
     MSG_ON_SAME_CHAT,
     DEFAULT_TOWER_1_COLOR, DEFAULT_TOWER_2_COLOR
 )
@@ -6,7 +6,7 @@ from core.src.static_modules import db
 from core.src.text_reply.formatting import (
     time_to_string, my_data_description, my_data_subtitle, weekdays_string
 )
-from core.src.img_draw.draw_graph import DrawGraph
+from pvlv_image_builder.draw_graph import DrawGraph
 from datetime import datetime, timedelta, date
 from calendar import monthrange
 

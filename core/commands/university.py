@@ -1,13 +1,10 @@
-import os
-import sys
-import io
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from core.src.text_reply.reply_commands.university_reply import (
     void_folder,
 )
 
-from core.src.settings import (
+from pvlv.settings import (
     MSG_ON_SAME_CHAT
 )
 

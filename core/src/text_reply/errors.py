@@ -1,4 +1,4 @@
-from core.src.settings import (
+from pvlv.settings import (
     STATIC_SPLIT_MODE, STATIC_OVERRIDE_MODE
 )
 from core.src.languages_handler import chose_language

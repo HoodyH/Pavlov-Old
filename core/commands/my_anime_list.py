@@ -1,6 +1,6 @@
 import requests
 import json
-from core.src.settings import (
+from pvlv.settings import (
     MSG_ON_SAME_CHAT
 )
 from core.src.text_reply.reply_commands.my_anime_list_reply import (

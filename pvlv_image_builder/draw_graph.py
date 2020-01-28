@@ -1,4 +1,4 @@
-from core.src.settings import (
+from pvlv.settings import (
     DEFAULT_BACKGROUND_COLOR, DEFAULT_TOP_TITLE_COLOR, DEFAULT_TEXT_COLOR, DEFAULT_TOWER_2_COLOR,
     DIR_DEFAULT_FONT
 )
@@ -6,7 +6,7 @@ from core.src.utils.internal_formatting import remap_range
 from PIL import ImageFont
 from io import BytesIO
 from math import ceil
-from core.src.img_draw.draw_support import DrawSupport
+from pvlv_image_builder.draw_support import DrawSupport
 
 draw_support = DrawSupport()
 

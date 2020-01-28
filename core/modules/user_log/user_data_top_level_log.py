@@ -1,5 +1,5 @@
-from core.src.settings import *
-from core.src.img_draw.draw_levels import DrawLevelUp
+from pvlv.settings import *
+from pvlv_image_builder.draw_levels import DrawLevelUp
 from core.src.text_reply.reply_modules.level_reply import (
     user_field, text_description
 )

@@ -1,6 +1,6 @@
 from core.db.setting import DATABASE_NAME
 
-from core.src.settings import (
+from pvlv.settings import (
     XP_NEXT_LEVEL, MSG_DISABLED, MSG_DIRECT,
     COMMAND, IMAGE, DOCUMENT, VOICE, VIDEO_NOTE, STICKER,
     SUDO_PREFIX, OVERRIDE_PREFIX)
@@ -43,7 +43,7 @@ class DB(object):
 
         self.__iter_collections_iter = None
 
-        self.__migrate_data()
+        # self.__migrate_data()
 
         return
 

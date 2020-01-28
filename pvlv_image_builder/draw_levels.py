@@ -1,4 +1,4 @@
-from core.src.settings import (
+from pvlv.settings import (
     DEFAULT_BACKGROUND_COLOR, DEFAULT_LEVEL_COLOR, DEFAULT_TEXT_COLOR,
     DIR_DEFAULT_FONT,
     DEFAULT_BACKGROUND_BAR_COLOR, DEFAULT_BAR_COLOR, DEFAULT_XP_INSIDE_DARK_COLOR, DEFAULT_XP_INSIDE_LIGHT_COLOR
@@ -7,7 +7,7 @@ from PIL import ImageFont
 from io import BytesIO
 from math import ceil
 from core.src.utils.internal_formatting import remap_range
-from core.src.img_draw.draw_support import DrawSupport
+from pvlv_image_builder.draw_support import DrawSupport
 draw_support = DrawSupport()
 
 

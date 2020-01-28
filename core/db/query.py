@@ -1,5 +1,11 @@
+from pymongo import MongoClient
 
-def pull_data(client, database, table, id_in_table):
+
+cs = 'mongodb+srv://MainUserBot:AdminDb12@abot-3jqai.mongodb.net/test?retryWrites=true'
+client = MongoClient(cs)
+
+
+def pull_data(database, table, id_in_table):
     collection = client[database][table]
     cursor = collection.find({'unique_id': id_in_table})
     data = None
@@ -11,7 +17,7 @@ def pull_data(client, database, table, id_in_table):
         return data
 
 
-def push_data(client, database, table, id_in_table, data):
+def push_data(database, table, id_in_table, data):
     collection = client[database][table]
     query = {'unique_id': id_in_table}
     cursor = collection.find(query)

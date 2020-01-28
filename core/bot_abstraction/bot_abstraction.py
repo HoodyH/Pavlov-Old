@@ -1,5 +1,5 @@
 import telegram
-from core.src.settings import *
+from pvlv.settings import *
 from time import sleep
 
 

@@ -1,4 +1,4 @@
-from core.src.settings import (
+from pvlv.settings import (
     MSG_ON_SAME_CHAT,
     ENABLED, DISABLED
 )

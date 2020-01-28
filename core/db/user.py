@@ -70,11 +70,11 @@ class UserData(object):
             'commands': self.__command_field.build_data(),
         }
 
-        push_data(self.__client, self.__scope, self.__table, self.__user_id, data)
+        push_data(self.__scope, self.__table, self.__user_id, data)
 
     def get_data(self):
 
-        data = pull_data(self.__client, self.__scope, self.__table, self.__user_id)
+        data = pull_data(self.__scope, self.__table, self.__user_id)
 
         self.user_name = data.get('user_name', self.user_name)
         self.time_zone = data.get('time_zone', self.time_zone)

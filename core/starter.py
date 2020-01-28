@@ -1,4 +1,4 @@
-from core.src.settings import *
+from pvlv.settings import *
 from core.src.static_modules import db
 from core.src.message_reader import extract_command_parameters
 from core.src.command_reader import CommandReader

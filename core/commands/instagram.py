@@ -1,8 +1,7 @@
 import json
 import requests
-from pprint import pprint
 from bs4 import BeautifulSoup
-from core.src.settings import (
+from pvlv.settings import (
     MSG_ON_SAME_CHAT
 )
 

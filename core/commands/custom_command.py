@@ -4,7 +4,7 @@ import sys
 import requests
 from datetime import datetime
 from bs4 import BeautifulSoup
-from core.src.settings import (
+from pvlv.settings import (
     MSG_ON_SAME_CHAT
 )
 from core.src.static_modules import db

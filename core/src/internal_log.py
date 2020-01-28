@@ -1,4 +1,4 @@
-from core.src.settings import *
+from pvlv.settings import *
 from core.src.file_handler import log_data
 from core.src.utils.internal_formatting import time_now, mode_to_name
 

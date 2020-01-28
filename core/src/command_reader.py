@@ -1,4 +1,4 @@
-from core.src.settings import (
+from pvlv.settings import (
     ENG
 )
 from core.src.file_handler import load_commands, load_commands_shortcut

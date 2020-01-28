@@ -1,4 +1,4 @@
-from core.src.settings import (
+from pvlv.settings import (
     DISABLED_MODE, QUIET_MODE, NORMAL_MODE, SPAM_MODE, AGGRESSIVE_MODE, ERROR,
     MSG_ON_SAME_CHAT,
     ENABLED, DISABLED
