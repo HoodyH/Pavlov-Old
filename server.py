@@ -7,11 +7,13 @@ from pvlv.settings import TELEGRAM
 # for audio download
 from io import BytesIO
 
+from pvlv import UserStatsUpdater
+from datetime import datetime
+
 parser = cfg.ConfigParser()
 parser.read("token.cfg")
 MONGO_DB_CONNECTION_STRING = parser.get("creds", "mongo_connection_string")
 TELEGRAM_TOKEN = parser.get("creds", "token")
-MAIN_AGENT_TOKEN = parser.get("creds", "telegram_secret_agent")
 
 """
 COMMANDS FOR TELEGRAM
@@ -26,13 +28,12 @@ ranking - show ranking of the top 10
 
 class TelegramBot(object):
 
-    def __init__(self, token, starter):
+    def __init__(self):
 
-        self.token = token
-        self.starter = starter
+        self.starter = Starter(telegram_bot_abstraction)
 
-        self._bot = telegram.Bot(token=token)
-        print(self._bot.get_me().first_name)
+        bot = telegram.Bot(token=TELEGRAM_TOKEN)
+        print(bot.get_me().first_name)
 
         self.telegram_command_list = ['/help', '/man', '/data', '/stt', '/pause_bot', '/level', '/ranking']
 
@@ -48,9 +49,14 @@ class TelegramBot(object):
         if not self.starter.is_bot_disabled():
             self.starter.analyze_vocal_message(raw_file, duration)
 
-    def text_handler(self, bot, update):
+    def text_handler(self, bot, update: telegram):
         message = update.message
         text = update.message.text
+
+        ma = UserStatsUpdater(message.from_user.id, message.chat.id)
+        ma.message_text(text)
+        ma.time_stamp(message.date)
+        ma.analyze()
 
         self.starter.update(TELEGRAM, bot, message)
         if not self.starter.is_bot_disabled():
@@ -74,7 +80,7 @@ class TelegramBot(object):
                 self.starter.analyze_command_message(text)
 
     def run(self):
-        updater = Updater(self.token)
+        updater = Updater(TELEGRAM_TOKEN)
         dp = updater.dispatcher
 
         for telegram_command in self.telegram_command_list:
@@ -90,8 +96,7 @@ class TelegramBot(object):
 
 def main():
 
-    telegram_starter = Starter(telegram_bot_abstraction)
-    telegram_bot = TelegramBot(TELEGRAM_TOKEN, telegram_starter)
+    telegram_bot = TelegramBot()
     telegram_bot.run()
 
 

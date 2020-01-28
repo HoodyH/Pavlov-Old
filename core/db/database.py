@@ -85,7 +85,7 @@ class DB(object):
     def __user_migrate_data(self, guild_id, user_id):
 
         old_data_user = UserData(self.client, DATABASE_NAME, guild_id, user_id)
-        user_migration = User(self.client, guild_id, user_id)
+        user_migration = User(guild_id, user_id)
 
         user_migration.user_name = old_data_user.user_name
         print(user_migration.user_name)

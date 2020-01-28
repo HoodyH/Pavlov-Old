@@ -2,6 +2,8 @@ from core.db.setting import USERS_TABLE_NAME
 from core.db.query import (pull_data, push_data)
 from pvlv_database.user.guild_user.guild_user import GuildUser
 
+from pprint import pprint
+
 
 class User(object):
 
@@ -36,6 +38,8 @@ class User(object):
         guilds = []
         for guild in self.__guilds:
             guilds.append(guild.build_data())
+
+        pprint(guilds)
 
         data = {
             'unique_id': self.__user_id,
