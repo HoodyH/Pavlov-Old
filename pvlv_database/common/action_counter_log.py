@@ -7,13 +7,18 @@ from datetime import timedelta
 
 
 class ActionCounterLog(object):
-
+    """
+    Store the logs with timestamp. At a predetermined granularity
+    The data retention for efficiency has a maximum data retention
+    It will build a tuple with (timestamp, count, time_spent)
+    The time_spent is an optional field to store the time spent to do that action
+    """
     def __init__(self):
         self.__log_by_hour = []
         self.__log_by_day = []
         self.__log_by_month = []
 
-        self.total_count = 1
+        self.total_count = 1  # global use count with no data retention
 
     def extract_data(self, raw_data):
         self.__log_by_hour = raw_data.get('log_by_hour', self.log_by_hour)
@@ -39,6 +44,10 @@ class ActionCounterLog(object):
         return self.__log_by_hour
 
     def update_log_by_hour(self, value: tuple):
+        """
+        Update the current log array with new data
+        :param value: a tuple timestamp, counter, time_spent (datetime, int, int)
+        """
         timestamp, counter, time_spent = value  # de-tuple the value
 
         # Check if the len has reached the max, then pop the last element
@@ -107,7 +116,7 @@ class ActionCounterLog(object):
 
         # If there are items in the array check the last one
         # if time delta has passed, insert a new item, else sum to the first one
-        db_timestamp = self.__log_by_month[0][0] # get time from first el
+        db_timestamp = self.__log_by_month[0][0]  # get time from first el
 
         if timestamp.month > db_timestamp.month or (timestamp.month == 1 and db_timestamp.month == 12):
             self.__log_by_month.insert(0, (timestamp, counter, time_spent))

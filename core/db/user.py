@@ -2,8 +2,8 @@ from core.db.query import (pull_data, push_data)
 from core.db.modules.class_message import MessagesField
 from core.db.modules.class_xp import XpField
 
-from core.db.user_d.modules.bill import BillData
-from core.db.user_d.modules.commands import CommandData
+from pvlv_database.user.modules.bill import BillData
+from pvlv_database.user.modules.commands import CommandData
 
 
 class UserData(object):

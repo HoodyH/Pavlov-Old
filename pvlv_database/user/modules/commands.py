@@ -1,9 +1,14 @@
-from core.db.submodule.action_counter_log import ActionCounterLog
+from pvlv_database.common.action_counter_log import ActionCounterLog
 
 
 class CommandData(object):
 
     def extract_data(self, raw_data):
+        """
+        The raw data (json) to wrap as class
+        :param raw_data: json object
+        :return: an instance of the class
+        """
 
         try:
             for key in raw_data.keys():
@@ -18,6 +23,10 @@ class CommandData(object):
         return self
 
     def build_data(self):
+        """
+
+        :return: a json object
+        """
         data_out = {}
         attrs = self.__dict__
         for key in attrs.keys():
@@ -37,11 +46,21 @@ class CommandData(object):
             return getattr(self, command_name)
 
     def get_command_interactions(self, command_name):
+        """
+        Get a specific commands total usage
+        :param command_name: the name of the command as in the command declaration file for call command(command_name)
+        :return: usage as int or none if not found
+        """
         command_usage_log = self.command(command_name)
         if command_usage_log:
             return command_usage_log.total_count
 
     def increment_command_interactions(self, command_name: str, timestamp):
+        """
+        Update the command use stats
+        :param command_name:  the name of the command as in the command declaration file for call command(command_name)
+        :param timestamp: The time stamp of the message to log
+        """
         command = self.command(command_name)
         if command:
 

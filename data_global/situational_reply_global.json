@@ -1495,7 +1495,7 @@
         }
     },
     "Greetings_in": {
-        "standard_counter": 0,
+        "standard_counter": 2,
         "scope": "global",
         "standard_triggers": [
             "hello",

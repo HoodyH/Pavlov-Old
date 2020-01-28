@@ -1,5 +1,4 @@
 from core.db.setting import DATABASE_NAME
-from core.db.query import (pull_data, push_data)
 
 from core.src.settings import (
     XP_NEXT_LEVEL, MSG_DISABLED, MSG_DIRECT,
@@ -8,7 +7,7 @@ from core.src.settings import (
 from pymongo import MongoClient
 from .guild import GuildData
 from .user import UserData
-from core.db.user_d.user import User
+from pvlv_database.user.user import User
 
 from datetime import timedelta
 
@@ -44,7 +43,7 @@ class DB(object):
 
         self.__iter_collections_iter = None
 
-        # self.__migrate_data()
+        self.__migrate_data()
 
         return
 
@@ -69,7 +68,7 @@ class DB(object):
         ]
 
         guilds_id = [
-            '-335903830',
+            '-1001444141366',
         ]
         for guild_id in guilds_id:
             collection = self.client['telegram'][guild_id]

@@ -1,6 +1,6 @@
 from core.db.setting import USERS_TABLE_NAME
 from core.db.query import (pull_data, push_data)
-from core.db.user_d.guild_user.guild_user import GuildUser
+from pvlv_database.user.guild_user.guild_user import GuildUser
 
 
 class User(object):
@@ -23,7 +23,7 @@ class User(object):
         self.last_seen = None
 
         self.deep_logging = True
-        self.global_permissions_code = 10
+        self.global_permissions_code = 10  # to use commands with privilege
         self.suspended = False
         self.verification_code = 120028  # auto regenerated, is the code to send as verification.
 
