@@ -2,8 +2,6 @@ from core.db.setting import USERS_TABLE_NAME
 from core.db.query import (pull_data, push_data)
 from pvlv_database.user.guild_user.guild_user import GuildUser
 
-from pprint import pprint
-
 
 class User(object):
 
@@ -14,7 +12,7 @@ class User(object):
         self.__user_id = user_id
 
         # user data logging
-        self.user_name = None
+        self.username = None
         self.emails = []
         self.time_zone = 0
         self.gender = ''
@@ -39,11 +37,9 @@ class User(object):
         for guild in self.__guilds:
             guilds.append(guild.build_data())
 
-        pprint(guilds)
-
         data = {
             'unique_id': self.__user_id,
-            'user_name': self.user_name,
+            'username': self.username,
             'emails': self.emails,
             'time_zone': self.time_zone,
             'gender': self.gender,
@@ -66,7 +62,7 @@ class User(object):
 
         data = pull_data(self.__scope, USERS_TABLE_NAME, self.__user_id)
 
-        self.user_name = data.get('user_name', self.user_name)
+        self.username = data.get('username', self.username)
         self.emails = data.get('emails', self.emails)
         self.time_zone = data.get('time_zone', self.time_zone)
         self.gender = data.get('gender', self.gender)

@@ -22,7 +22,7 @@ from core.commands.level import Level
 from core.commands.ranking import Ranking
 from core.commands.custom_command import CustomCommand
 from core.commands.instagram import Instagram
-from core.commands.pornhub import Pornhub
+# from core.commands.pornhub import Pornhub
 from core.commands.university import University
 from core.commands.ticket import Ticket
 from core.commands.hanime_tv import HanimeTv
@@ -197,11 +197,11 @@ class Starter(object):
         def instagram():
             c = Instagram(self.bot, language_found, command_found, arg, params)
             c.instagram()
-
+        """
         def pornhub():
             c = Pornhub(self.bot, language_found, command_found, arg, params)
             c.pornhub()
-
+        """
         def university():
             c = University(self.bot, language_found, command_found, arg, params)
             c.university()
@@ -238,7 +238,7 @@ class Starter(object):
             'ranking': ranking,
             'custom.command': custom_command,
             'instagram': instagram,
-            'pornhub': pornhub,
+            # 'pornhub': pornhub,
             'university': university,
             'ticket': ticket,
             'hanime.tv': hanime_tv,

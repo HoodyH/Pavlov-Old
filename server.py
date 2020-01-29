@@ -7,7 +7,7 @@ from pvlv.settings import TELEGRAM
 # for audio download
 from io import BytesIO
 
-from pvlv import UserStatsUpdater
+from pvlv import TextHandler
 from datetime import datetime
 
 parser = cfg.ConfigParser()
@@ -49,18 +49,28 @@ class TelegramBot(object):
         if not self.starter.is_bot_disabled():
             self.starter.analyze_vocal_message(raw_file, duration)
 
-    def text_handler(self, bot, update: telegram):
+    def text_handler(self, bot, update):
         message = update.message
         text = update.message.text
 
-        ma = UserStatsUpdater(message.from_user.id, message.chat.id)
-        ma.message_text(text)
-        ma.time_stamp(message.date)
-        ma.analyze()
+        username = update.message.from_user.name
+        chat_name = update.message.chat.title
+        chat_type = update.message.chat.type
+        private = True if chat_type == 'private' else False
 
         self.starter.update(TELEGRAM, bot, message)
         if not self.starter.is_bot_disabled():
             self.starter.analyze_text_message(text)
+
+        th = TextHandler(bot)
+        th.handle(
+            update.message.from_user.id,
+            update.message.from_user.name,
+            update.message.chat.id,
+            username if private else chat_name,
+            update.message.date,
+            update.message.text
+        )
 
     def command_converter(self, bot, update):
 

@@ -50,7 +50,7 @@ class Pornhub(object):
 
         return video_list
 
-    def pornhub(self):
+    def run(self):
 
         url = self.compose_url(self.arg)
         video_list = self.web_scrapper(url)
@@ -58,7 +58,7 @@ class Pornhub(object):
 
         # Send the first o the query
         if self._first is not None:
-            self.bot.send_message(video_list[0], MSG_ON_SAME_CHAT)
+            self.bot.send_message(video_list[0], db.user.user_id)
             return
 
         # send in chat a stack of videos
@@ -84,4 +84,4 @@ class Pornhub(object):
             idx = random_between(0, len_vl)
 
         out = video_list[idx]
-        self.bot.send_message(out, MSG_ON_SAME_CHAT)
+        self.bot.send_message(out)

@@ -61,7 +61,7 @@ def _clean():
 
 
 # command parameter reader
-def _extract_value(input_array, starting_point=0):
+def __extract_value(input_array, starting_point=0):
 
     val = ""
     for j in range(starting_point, len(input_array)):
@@ -96,17 +96,17 @@ def extract_command_parameters(text):
     text_array.pop(0)  # remove the command trigger
 
     if len(text_array) is 1:
-        arg = _extract_value(text_array)
+        arg = __extract_value(text_array)
         return arg, params
 
     for i in range(0, len(text_array)):
         if str.startswith(text_array[i], '-'):
             param_key = text_array[i][1:]
             param = [param_key]
-            param_val = _extract_value(text_array, i + 1)
+            param_val = __extract_value(text_array, i + 1)
             param.append(param_val)
             params.append(param)
         elif i is 0:
-            arg = _extract_value(text_array)
+            arg = __extract_value(text_array)
 
     return arg, params

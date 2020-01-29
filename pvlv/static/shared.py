@@ -1,9 +1,12 @@
-from pvlv_database.database import Database
+from pvlv_commando import Commando
 
 
-global db
+com: Commando
 
 
-def init_database_handler(connection_string):
-    global db
-    db = Database(connection_string)
+def init():
+    global com
+    com = Commando('pvlv/commands/')
+
+
+init()

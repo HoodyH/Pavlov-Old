@@ -54,3 +54,28 @@ class MessagesData(object):
         }
 
         return data_out
+
+    def update_msg_log(self, value: tuple):
+        self.msg_log.update_log_by_hour(value)
+        self.msg_log.update_log_by_day(value)
+        self.msg_log.update_log_by_month(value)
+
+    def update_img_log(self, value: tuple):
+        self.img_log.update_log_by_hour(value)
+        self.img_log.update_log_by_day(value)
+        self.img_log.update_log_by_month(value)
+
+    def update_links_log(self, value: tuple):
+        self.links_log.update_log_by_hour(value)
+        self.links_log.update_log_by_day(value)
+        self.links_log.update_log_by_month(value)
+
+    def update_vocals_log(self, value: tuple):
+        self.vocals_log.update_log_by_hour(value)
+        self.vocals_log.update_log_by_day(value)
+        self.vocals_log.update_log_by_month(value)
+
+    def update_swear_words_log(self, value: tuple):
+        self.swear_words_log.update_log_by_hour(value)
+        self.swear_words_log.update_log_by_day(value)
+        self.swear_words_log.update_log_by_month(value)

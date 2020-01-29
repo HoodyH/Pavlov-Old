@@ -370,43 +370,6 @@
             }
         }
     },
-    "pornhub":{
-        "management_command": 0,
-        "beta_command": false,
-        "pro_command": 0,
-        "dm_enabled": 1,
-        "enabled_by_default": 0,
-        "permissions": 0,
-        "invocation_words": ["porn", "ph"],
-        "description": {
-            "eng": "Search a video on pornhub",
-            "ita": "Cerca un video su pornhub"
-        },
-        "handled_args": {
-            "": {
-                "eng": "Return a popular video of the day",
-                "ita": "Ritorna video popolari della giornata"
-            },
-            "query": {
-                "eng": "Search a specific video, and get a random one from the 20 get in the query",
-                "ita": "Cerca un video specifico, e restituisce a caso uno dei 20 video ottenuti dalla ricerca"
-            }
-        },
-        "handled_params": {
-            "-first": {
-                "eng": "Get the first video from the query, the most relevant one",
-                "ita": "Restituisce il primo video dalla ricerca, potenzialmente quello più rilevante"
-            },
-            "-idx": {
-                "eng": "Get a speific video of the 20 in the query",
-                "ita": "Restituisce uno specifico video sui 20 della ricerca"
-            },
-            "-n": {
-                "eng": "Get a stack of video from the specific query, max 20",
-                "ita": "Ottieni uno stack di video dalla ricerca, massimo 20"
-            }
-        }
-    },
     "university":{
         "management_command": 0,
         "beta_command": true,
