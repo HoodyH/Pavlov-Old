@@ -6,17 +6,19 @@ class CommandDescriptor(BaseCommandReader):
 
     def __init__(self):
         super(CommandDescriptor, self).__init__()
-        self.management_command = None
+
+        self.management_command = None  # can be used only by owner of the bot
+
         self.beta_command = None
-        self.pro_command = None
-        self.dm_enabled = None
-        self.enabled_by_default = None
-        self.permissions = None
+        self.pro_command = None  # payment command, set the level of pro 1, 2, 3, etc.
+        self.dm_enabled = None  # can be used also in dm
+        self.enabled_by_default = None  # this command is active by default
+        self.permissions = None  # permissions to use the command
 
         self.handled_args = None
         self.handled_params = None
 
-    def _read_args_and_params(self, language, dictionary):
+    def read_arg_by_language(self, language, dictionary):
         result = {}
         for key in dictionary.keys():
             result[key] = self.__read_language(language, dictionary.get(key))
@@ -35,8 +37,17 @@ class CommandDescriptor(BaseCommandReader):
         self.permissions = file.get('permissions')
         self.invocation_words = file.get('invocation_words')
 
-        # self.description = self._read_language(language, module.get('description'))
-        # self.handled_args = self._read_args_and_params(language, module.get('handled_args'))
-        # self.handled_params = self._read_args_and_params(language, module.get('handled_params'))
-        # self.examples = module.get(language, module.get('examples'))
+        self.description = file.get('description')
+        self.handled_args = file.get('handled_args')
+        self.handled_params = file.get('handled_params')
+
+        self.examples = file.get('examples')
+
+    @property
+    def handled_args_list(self):
+        return self.handled_args.keys()
+
+    @property
+    def handled_params_list(self):
+        return self.handled_params.keys()
 

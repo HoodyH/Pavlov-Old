@@ -1,8 +1,5 @@
 from pvlv.settings import *
 from core.src.static_modules import db
-from core.src.message_reader import extract_command_parameters
-from core.src.command_reader import CommandReader
-from core.src.text_reply.errors import command_error, guild_not_pro
 from core.src.internal_log import Log
 # listeners
 from core.modules.user_data_handler import UserData
@@ -10,30 +7,9 @@ from core.modules.message_reply import Respond
 from core.modules.bestemmia_reply import BestemmiaReply
 from core.modules.badass_character_reply import BadAssCharacterReply
 from core.modules.pickup_line_reply import PickupLineReply
-# _commands
-from core.commands.help import Help
-from core.commands.manual import Manual
-from core.commands.pause_bot import PauseBot
-from core.commands.module_status import ModuleStatus
-from core.commands.communication import Communication
-from core.commands.data import Data
-from core.commands.random import Random
-from core.commands.level import Level
-from core.commands.ranking import Ranking
-from core.commands.custom_command import CustomCommand
-from core.commands.instagram import Instagram
-# from core.commands.pornhub import Pornhub
-from core.commands.university import University
-from core.commands.ticket import Ticket
-from core.commands.hanime_tv import HanimeTv
-from core.commands.youtube import Youtube
-from core.commands.my_anime_list import MyAnimeList
-from core.commands.chatrubate import Chatrubate
 # audio converter
 from core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
-
-from datetime import datetime
 
 
 class Starter(object):
@@ -114,152 +90,6 @@ class Starter(object):
             return True
         return False
 
-    def _run_command(self):
-        """
-        -read language/languages of the guild.
-        -check if there's a command trigger or send an error.
-        -extract arguments and parameters
-        -run command
-        -return response
-        """
-        __len = len(self.in_text)
-        if len(self.in_text) is 0:  # there was just the prefix
-            return
-
-        text_array = self.in_text.split()
-
-        cr = CommandReader()
-        try:
-            language_found, command_found, text_array = cr.get_command(db.guild.languages, text_array)
-        except Exception as e:
-            print(e)
-            return
-
-        if language_found is None:
-            language_found = db.guild.languages[0]
-
-        # send an error
-        if command_found is None:
-            out = command_error(db.guild.languages[0])  # use guild main language
-            self.bot.send_message(out, MSG_ON_SAME_CHAT)
-            return
-
-        # control if the guild pro version can use this command
-        if cr.commands.pro_command > db.guild.pro_guild:
-            out = guild_not_pro(language_found)
-            self.bot.send_message(out, MSG_ON_SAME_CHAT)
-            return
-
-        # extract arguments and parameters
-        arg, params = extract_command_parameters(text_array)
-
-        # run command
-        def bot_help():
-            c = Help(self.bot, language_found, command_found, arg, params)
-            c.help()
-
-        def manual():
-            c = Manual(self.bot, language_found, command_found, arg, params)
-            c.manual()
-
-        def pause_bot():
-            c = PauseBot(self.bot, language_found, command_found, arg, params)
-            c.pause_bot()
-
-        def module_status():
-            c = ModuleStatus(self.bot, language_found, command_found, arg, params)
-            c.mute()
-
-        def communication():
-            c = Communication(self.bot, language_found, command_found, arg, params)
-            c.communication()
-
-        def data():
-            c = Data(self.bot, language_found, command_found, arg, params)
-            c.data()
-
-        def random():
-            c = Random(self.bot, language_found, command_found, arg, params)
-            c.random()
-
-        def level():
-            c = Level(self.bot, language_found, command_found, arg, params)
-            c.level()
-
-        def ranking():
-            c = Ranking(self.bot, language_found, command_found, arg, params)
-            c.ranking()
-
-        def custom_command():
-            c = CustomCommand(self.bot, language_found, command_found, arg, params)
-            c.custom_command()
-
-        def instagram():
-            c = Instagram(self.bot, language_found, command_found, arg, params)
-            c.instagram()
-        """
-        def pornhub():
-            c = Pornhub(self.bot, language_found, command_found, arg, params)
-            c.pornhub()
-        """
-        def university():
-            c = University(self.bot, language_found, command_found, arg, params)
-            c.university()
-
-        def ticket():
-            c = Ticket(self.bot, language_found, command_found, arg, params)
-            c.ticket()
-
-        def hanime_tv():
-            c = HanimeTv(self.bot, language_found, command_found, arg, params)
-            c.hanime_tv()
-
-        def youtube():
-            c = Youtube(self.bot, language_found, command_found, arg, params)
-            c.youtube()
-
-        def my_anime_list():
-            c = MyAnimeList(self.bot, language_found, command_found, arg, params)
-            c.my_anime_list()
-
-        def chatrubate():
-            c = Chatrubate(self.bot, language_found, command_found, arg, params)
-            c.chatrubate()
-
-        commands = {
-            'help': bot_help,
-            'manual': manual,
-            'pause.bot': pause_bot,
-            'module.status': module_status,
-            'communication': communication,
-            'data': data,
-            'random': random,
-            'level': level,
-            'ranking': ranking,
-            'custom.command': custom_command,
-            'instagram': instagram,
-            # 'pornhub': pornhub,
-            'university': university,
-            'ticket': ticket,
-            'hanime.tv': hanime_tv,
-            'youtube': youtube,
-            'my.anime.list': my_anime_list,
-            'chatrubate': chatrubate,
-        }
-
-        try:
-            Log.command_log(
-                self.bot.scope,
-                self.bot.guild.guild_name,
-                self.bot.user.username, db.guild.prefix,
-                command_found
-            )
-            db.increment_command_interactions(command_found, datetime.utcnow())
-            commands.get(command_found)()
-        except Exception as exc:
-            print(exc)
-            self.bot.send_message("Internal server error during command execution.", MSG_ON_SAME_CHAT)
-
     def _natural_response(self):
 
         # don't analyze long messages
@@ -313,7 +143,6 @@ class Starter(object):
         self.in_text = text
         self.prefix_type = COMMAND_PREFIX
         self._update_statistics(COMMAND)
-        self._run_command()
 
     def analyze_vocal_message(self, raw_file, vocal_duration):
 
@@ -335,7 +164,5 @@ class Starter(object):
 
         self.in_text = text
         self._catch_prefix()
-        if self.prefix_type is COMMAND_PREFIX:
-            self._run_command()
         self._update_statistics(TEXT, time_spent_extra=5)
         self._natural_response()

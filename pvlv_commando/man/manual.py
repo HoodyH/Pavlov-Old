@@ -1,6 +1,3 @@
-from pvlv.settings import (
-    MSG_ON_SAME_CHAT
-)
 from core.src.command_reader import CommandReader
 from core.src.static_modules import db
 from core.src.text_reply.reply_commands.man_reply import (

@@ -84,9 +84,10 @@ class Commando(object):
             command_descriptor, module, class_name = command
             if self.trigger in command_descriptor.invocation_words:
                 self.__command_found = command
-                return True
+                return
 
-        return False
+        self.error = 'Command not found'
+        raise Exception
 
     @property
     def command(self):
@@ -115,7 +116,8 @@ class Commando(object):
             command = command_class(bot, self.language, command_descriptor, self.arg, self.params)
             command.run()
         except Exception as exc:
-            print(exc)
+            self.error = 'Error during command execution'
+            raise exc
 
     def __read_command_structure(self, text):
         """

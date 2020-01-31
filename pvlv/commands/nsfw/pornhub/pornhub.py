@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from pvlv.settings import (
-    MSG_ON_SAME_CHAT
-)
+
 from core.src.utils.select_handler import random_between
 
 
@@ -58,14 +56,14 @@ class Pornhub(object):
 
         # Send the first o the query
         if self._first is not None:
-            self.bot.send_message(video_list[0], db.user.user_id)
+            self.bot.message.reply_text(video_list[0])
             return
 
         # send in chat a stack of videos
         if self._n:
             n = int(self._n)
             for video in video_list:
-                self.bot.send_message(video, MSG_ON_SAME_CHAT)
+                self.bot.message.reply_text(video)
                 n -= 1
                 if n is 0:
                     break
@@ -84,4 +82,4 @@ class Pornhub(object):
             idx = random_between(0, len_vl)
 
         out = video_list[idx]
-        self.bot.send_message(out)
+        self.bot.message.reply_text(out)
