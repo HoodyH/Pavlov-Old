@@ -10,10 +10,14 @@ class BaseCommandReader(object):
         self.description = None
         self.examples = None
 
-    def read_description_by_language(self, language):
-        description = self.description.get(language)
+    @staticmethod
+    def __read_value_by_language(language, dictionary):
+        description = dictionary.get(language)
         if description is None:
-            description = self.description.get('eng')
+            description = dictionary.get('eng')
             if description is None:
                 raise Exception('There is not language descriptions in this command')
         return description
+
+    def read_description_by_language(self, language):
+        return self.__read_value_by_language(language, self.description)

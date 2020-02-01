@@ -35,7 +35,12 @@ class TextHandler(object):
         if text.startswith('.'):
             try:
                 com.find_command(text[1:], 'eng')
-                com.run_command(self.__update)
+
+                if com.is_manual:
+                    self.__update.message.reply_text(com.run_manual())
+                else:
+                    com.run_command(self.__update)
+
             except Exception as exc:
                 print(exc)
                 self.__update.message.reply_text(com.error)

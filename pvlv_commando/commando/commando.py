@@ -2,6 +2,7 @@ import os
 from importlib import import_module
 import logging
 from pvlv_commando.descriptors.command_descriptor import CommandDescriptor
+from pvlv_commando.manual.manual import Manual
 
 logger = logging.getLogger('pvlv_command')
 logger.setLevel(logging.DEBUG)
@@ -67,6 +68,16 @@ class Commando(object):
         self.arg = None
         self.params = {}
 
+        # Import the manual
+        self.__is_manual = False
+
+        self.__manual = CommandDescriptor()
+        self.__manual.package = 'pavlov_internals'
+        self.__manual.name = 'manual'
+        self.__manual.read_command('pvlv_commando/manual/manual.json')
+
+        self.__command_list.append((self.__manual, None, None))
+
     def find_command(self, text: str, language: str):
         """
         Find if there is a command in the text
@@ -84,6 +95,9 @@ class Commando(object):
             command_descriptor, module, class_name = command
             if self.trigger in command_descriptor.invocation_words:
                 self.__command_found = command
+
+                if self.__manual == command_descriptor:
+                    self.__is_manual = True
                 return
 
         self.error = 'Command not found'
@@ -99,18 +113,23 @@ class Commando(object):
         command_descriptor, module, class_name = self.__command_found
         return command_descriptor
 
+    @property
+    def is_manual(self):
+        return self.__is_manual
+
     def run_command(self, bot):
         """
         Execute the command
         :param bot: the bot var, that will be passed to the command. Used to send message and perform actions.
         If you have multiple params to pass to the command use a tuple inside the bot or a dict
         """
+        if self.is_manual:
+            self.__is_manual = False
+            return
+
         command_descriptor, module, class_name = self.__command_found
 
-        command_class = getattr(
-            module,
-            class_name
-        )
+        command_class = getattr(module, class_name)
 
         try:
             command = command_class(bot, self.language, command_descriptor, self.arg, self.params)
@@ -118,6 +137,20 @@ class Commando(object):
         except Exception as exc:
             self.error = 'Error during command execution'
             raise exc
+
+    def run_manual(self, max_chunk_len=1500):
+        """
+        :param max_chunk_len: the max len of the text
+        :return: an array of strings, where each string has the max len of the max_chunk_len
+        """
+        self.error = 'Error during manual execution'
+
+        commands_descriptor = []
+        for cd in self.__command_list:
+            commands_descriptor.append(cd[0])
+
+        manual = Manual(self.language, commands_descriptor, self.arg, self.params)
+        return manual.run()
 
     def __read_command_structure(self, text):
         """

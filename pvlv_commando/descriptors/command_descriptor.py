@@ -21,7 +21,7 @@ class CommandDescriptor(BaseCommandReader):
     def read_arg_by_language(self, language, dictionary):
         result = {}
         for key in dictionary.keys():
-            result[key] = self.__read_language(language, dictionary.get(key))
+            result[key] = self.__read_value_by_language(language, dictionary.get(key))
         return result
 
     def read_command(self, command_descriptor_dir):
