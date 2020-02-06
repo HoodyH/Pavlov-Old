@@ -1,5 +1,7 @@
-from pvlv_database import BaseStatsUpdater
+from pvlv_database import Database, BaseStatsUpdater
+from pvlv_commando import CommandExecutionFail, ManualExecutionFail
 from pvlv import com
+from pvlv.static.configurations import logger
 
 
 class TextHandler(object):
@@ -13,10 +15,13 @@ class TextHandler(object):
      - command reading
      - text interactions
     """
-    def __init__(self, update):
+    def __init__(self, update, bot):
         self.__update = update
+        self.__bot = bot
 
     def handle(self, guild_id, guild_name, user_id, username, timestamp, text: str):
+
+        db = Database(guild_id, user_id)
 
         bsu = BaseStatsUpdater(guild_id, user_id, timestamp)
         bsu.text(text)
@@ -29,18 +34,34 @@ class TextHandler(object):
         
         to do
         - find the command
-        - controll if the command is enabled in that particular chat or guild
-        - controll permissions for the command based on the used
+        - check if the command is enabled in that particular chat or guild
+        - check permissions for the command based on the used
         """
         if text.startswith('.'):
+            logger.info('user: {} in {} sent {}'.format(username, guild_name, text))
             try:
-                com.find_command(text[1:], 'eng')
+                # text without the command invocation word, and the language of the command
+                com.find_command(text[1:], db.guild.languages[0], db.user.guild.permissions)
 
-                if com.is_manual:
-                    self.__update.message.reply_text(com.run_manual())
-                else:
-                    com.run_command(self.__update)
+                """
+                Send to the chat with parse mode enabled 
+                ** mean bold
+                - if your chat doesn't support parse mode use com.run_manual().replace('**', '')
+                - if your chat has a different parse mode use com.run_manual().replace('**', 'your_format')
+                """
+                man = com.run_manual()
+                print(man) if man else None
+
+                com.run_command(self.__update)  # here you have to pass the bot object that will be used
+
+            # Do exception handling as you please
+            except CommandExecutionFail as exc:
+                self.__update.message.reply_text(str(exc))  # the exception to send in chat
+                print(exc.error_report)  # the full report of the exception to send to a log chat or for internal log.
+
+            except ManualExecutionFail as exc:
+                self.__update.message.reply_text(str(exc))  # the exception to send in chat
+                print(exc.error_report)  # the full report of the exception to send to a log chat or for internal log.
 
             except Exception as exc:
-                print(exc)
-                self.__update.message.reply_text(com.error)
+                self.__update.message.reply_text(str(exc))  # the exception to send in chat

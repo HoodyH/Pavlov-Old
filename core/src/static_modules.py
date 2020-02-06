@@ -4,7 +4,6 @@ from API.pickup_line.pickup_line import PickupLine
 
 # Database
 from core.db.database import DB
-from pvlv_database.database import Database
 
 from core.bot_abstraction.bot_abstraction import BotStd
 

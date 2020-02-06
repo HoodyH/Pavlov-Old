@@ -1,5 +1,6 @@
 /env/
 /venv/
+/configs/
 /.idea/
 /data/
 
@@ -13,3 +14,4 @@ configs.*
 /data_global/university/file
 settings.yaml
 credentials.json
+

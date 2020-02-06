@@ -1,14 +1,10 @@
-# python-telegram-bot == 11.1.0, 12.3.0
+pvlv-database==0.0.5
+pvlv-commando==0.0.2
 python-telegram-bot==12.3.0
 nltk
 requests
-dnspython
-pymongo
 Pillow
 SpeechRecognition
 pydub
-aiohttp
-setuptools
-discord.py
 bs4
-pydrive
+pydrive # google drive
