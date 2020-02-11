@@ -1,6 +1,6 @@
-from core.src.static_modules import badass_character
-from core.src.message_reader import find
-from API.badass_character.badass_character import JOHN_WICK, CHUCK_NORRIS
+from old_core.src.static_modules import badass_character
+from old_core.src.message_reader import find
+from old_core.API.badass_character.badass_character import JOHN_WICK, CHUCK_NORRIS
 
 
 class BadAssCharacterReply(object):

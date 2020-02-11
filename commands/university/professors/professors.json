@@ -1,0 +1,24 @@
+{
+    "management_command": 0,
+    "beta_command": false,
+    "pro_command": 0,
+    "dm_enabled": 1,
+    "enabled_by_default": 0,
+    "permissions": 0,
+    "invocation_words": ["poli"],
+    "description": {
+        "eng": "Execute the custiom command setted by admin",
+        "ita": "Esegue il comando che è definito dall'admin"
+    },
+    "handled_args": {
+        "": {
+            "eng": "It will check if there are new scores on the site, ad show up the newest scores",
+            "ita": "Controlla se ci sono nuovi voti sul sito del poli, e mostra i 6 più recenti"
+        },
+        "all": {
+            "eng": "It will show all the scores on policriti site",
+            "ita": "Mostra tutti i voti nel sito"
+        }
+    },
+    "handled_params": {}
+}

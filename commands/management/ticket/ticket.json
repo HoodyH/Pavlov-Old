@@ -1,0 +1,23 @@
+{
+    "management_command": 0,
+    "beta_command": false,
+    "pro_command": 0,
+    "dm_enabled": 1,
+    "enabled_by_default": 0,
+    "permissions": 0,
+    "invocation_words": [
+        "bug",
+        "report"
+    ],
+    "description": {
+        "eng": "Direct way to contact admins",
+        "ita": "Modo diretto per contattare gli amministratori"
+    },
+    "handled_args": {
+        "problem": {
+            "eng": "Specify a problem that must be resolved by admins, or what type help that you need",
+            "ita": "Specifica il bug che hai trovato, oppure che tipo di aiuto che ti serve"
+        }
+    },
+    "handled_params": {}
+}

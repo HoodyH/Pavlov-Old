@@ -1,14 +1,14 @@
 from pvlv.settings import *
-from core.src.static_modules import db
-from core.src.internal_log import Log
+from old_core.src.static_modules import db
+from old_core.src.internal_log import Log
 # listeners
-from core.modules.user_data_handler import UserData
-from core.modules.message_reply import Respond
-from core.modules.bestemmia_reply import BestemmiaReply
-from core.modules.badass_character_reply import BadAssCharacterReply
-from core.modules.pickup_line_reply import PickupLineReply
+from old_core.modules.user_data_handler import UserData
+from old_core.modules.message_reply import Respond
+from old_core.modules.bestemmia_reply import BestemmiaReply
+from old_core.modules.badass_character_reply import BadAssCharacterReply
+from old_core.modules.pickup_line_reply import PickupLineReply
 # audio converter
-from core.src.speech_to_text import speech_to_text
+from old_core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
 
 

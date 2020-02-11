@@ -1,10 +1,11 @@
-pvlv-database==0.0.5
+pvlv-database==0.0.7
 pvlv-commando==0.0.2
-python-telegram-bot==12.3.0
+pvlv-img_builder==0.0.1
+python-telegram-bot==12.4.2
 nltk
 requests
 Pillow
-SpeechRecognition
-pydub
+SpeechRecognition==3.8.1
+pydub==0.23.1
 bs4
 pydrive # google drive

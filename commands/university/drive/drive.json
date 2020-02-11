@@ -1,0 +1,32 @@
+{
+    "management_command": 0,
+    "beta_command": true,
+    "pro_command": 0,
+    "dm_enabled": 1,
+    "enabled_by_default": 0,
+    "permissions": 0,
+    "invocation_words": [
+        "uni",
+        "drive"
+    ],
+    "description": {
+        "eng": "Get files form Uni Drive",
+        "ita": "Recupera file da la cartelle dell'università condivisa"
+    },
+    "handled_args": {
+        "file_path": {
+            "eng": "File path to get inside the files folder (es.: path/to/folder), it print the content",
+            "ita": "File path per raggiungere la cartella desiderata, stampa il contenuto della cartella corrente"
+        }
+    },
+    "handled_params": {
+        "-d": {
+            "eng": "Download the content of the folder",
+            "ita": "Scarica il contenuto della cartella"
+        },
+        "-em": {
+            "eng": "Print the exam mode for the specific Course",
+            "ita": "Stampa la modalità d'esame del corso."
+        }
+    }
+}

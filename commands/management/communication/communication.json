@@ -1,0 +1,59 @@
+{
+  "management_command": 1,
+  "beta_command": false,
+  "pro_command": 0,
+  "dm_enabled": 1,
+  "enabled_by_default": 1,
+  "permissions": 100,
+  "invocation_words": [
+    "com"
+  ],
+  "description": {
+    "eng": "Send a message to every guild",
+    "ita": "Manda un messaggio ad ogni gilda"
+  },
+  "handled_args": {
+    "": {
+      "eng": "Not Allowed",
+      "ita": "Non permesso"
+    },
+    "update_deploy": {
+      "eng": "Communicate the start of the update",
+      "ita": "Comunica l'inizio dell'aggiornamento"
+    },
+    "update_completed": {
+      "eng": "Send Notification of update compleated",
+      "ita": "Notifica il completamento dell'update"
+    },
+    "update_test": {
+      "eng": "Test of the new update before deployment",
+      "ita": "Test il nuovo aggiornamento prima del rilascio"
+    },
+    "update_abort": {
+      "eng": "Abort the current update",
+      "ita": "Riprende il normale funzionamento"
+    },
+    "message": {
+      "eng": "Send a custom message",
+      "ita": "Invia un messaggio personalizzato"
+    }
+  },
+  "handled_params": {
+    "-t.start": {
+      "eng": "Time before the start of the action, expressed in min",
+      "ita": "Tempo prima dell'azione espressa in minuti"
+    },
+    "-t.duration": {
+      "eng": "Duration of the action, expressed in min",
+      "ita": "Durata dell'azione espressa in minuti"
+    },
+    "-note": {
+      "eng": "Add a note text, this note will not be translated, english only",
+      "ita": "Aggiunge una nota che non verrà tradotta, solo inglese"
+    },
+    "-note.ita": {
+      "eng": "Add a note text, this note must be in the given language",
+      "ita": "Aggiunge una nota nella lingua specificata"
+    }
+  }
+}

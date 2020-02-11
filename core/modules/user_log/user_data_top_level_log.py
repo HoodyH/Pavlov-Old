@@ -1,6 +1,6 @@
 from pvlv.settings import *
 from pvlv_image_builder.draw_levels import DrawLevelUp
-from core.src.text_reply.reply_modules.level_reply import (
+from old_core.level_reply import (
     user_field, text_description
 )
 import math

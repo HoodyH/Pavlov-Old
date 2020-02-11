@@ -1,5 +1,5 @@
-from core.src.static_modules import pickup_line
-from core.src.message_reader import find
+from old_core.src.static_modules import pickup_line
+from old_core.src.message_reader import find
 
 
 class PickupLineReply(object):

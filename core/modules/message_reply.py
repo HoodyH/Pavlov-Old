@@ -1,8 +1,8 @@
-from core.src.file_handler import load, save
-from core.src.utils.select_handler import phrase_sequencer
-from core.src.message_reader import find
+from old_core.src.file_handler import load, save
+from old_core.src.utils.select_handler import phrase_sequencer
+from old_core.src.message_reader import find
 from pvlv.settings import *
-from core.src.internal_log import Log
+from old_core.src.internal_log import Log
 
 
 class Respond(object):

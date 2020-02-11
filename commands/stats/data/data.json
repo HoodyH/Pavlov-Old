@@ -1,0 +1,41 @@
+{
+  "management_command": 0,
+  "beta_command": false,
+  "pro_command": 1,
+  "dm_enabled": 1,
+  "enabled_by_default": 0,
+  "permissions": 0,
+  "invocation_words": [],
+  "description": {
+    "eng": "Show data catched by the bot in a nice graph",
+    "ita": "Mosta i dati  raccolti dal bot sottoforma di grafico"
+  },
+  "handled_args": {
+    "": {
+      "eng": "Show own user data",
+      "ita": "Mostra i propri dati utente"
+    },
+    "global": {
+      "eng": "Show own global user data",
+      "ita": "Mostra i propri dati utente globali"
+    },
+    "guild": {
+      "eng": "Show guild user data",
+      "ita": "Mostra i dati utente della gilda"
+    },
+    "@username": {
+      "eng": "Show user data of the tagged user, if user don't have privacy mode on",
+      "ita": "Mostra i dati utente dell'utente taggato, se l'utente non ha la privacy mode attiva"
+    }
+  },
+  "handled_params": {
+    "-m": {
+      "eng": "Details of the month",
+      "ita": "Dettagli del mese"
+    },
+    "-w": {
+      "eng": "Details of the week",
+      "ita": "Dettagli della settimana"
+    }
+  }
+}

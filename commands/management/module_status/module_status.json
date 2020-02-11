@@ -1,0 +1,36 @@
+{
+  "management_command": 0,
+  "beta_command": false,
+  "pro_command": 0,
+  "dm_enabled": 1,
+  "enabled_by_default": 1,
+  "permissions": 100,
+  "invocation_words": [
+    "m.s",
+    "status"
+  ],
+  "description": {
+    "eng": "Change the status of a module, mode and en",
+    "ita": "Cambia lo stato di un modulo, sia la modalità che l'abilitazione"
+  },
+  "handled_args": {
+    "": {
+      "eng": "Not permitted",
+      "ita": "Non permesso"
+    },
+    "module_name": {
+      "eng": "Require a name of a module, to perform actions on it with the parameters",
+      "ita": "Richiede in input un modulo per poter performare azioni su di lui con i parametri"
+    }
+  },
+  "handled_params": {
+    "-en": {
+      "eng": "Using it void it will change che abilitation by toggle, instead with a 0(deactivate), 1(activate)",
+      "ita": "Utilizzato vuoto cambia lo attivazione in modalità toggle, affiancato a 0(disattiva), 1(attiva)"
+    },
+    "-mode": {
+      "eng": "Using it void it will change che mode by toggle between normal and silent, instead with a 1(silent mode), 2(normal mode), 3(spam mode) 4(aggressive mode)",
+      "ita": "Utilizzato vuoto cambia lo stato in modalità toggle, affiancato a 0(sospensione), 1(modalità sileziosa), 2(modalità normale), 3(modalità spam) 4(modalità agressiva)"
+    }
+  }
+}

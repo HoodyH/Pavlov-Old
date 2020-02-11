@@ -1,0 +1,28 @@
+{
+  "management_command": 0,
+  "beta_command": false,
+  "pro_command": 0,
+  "dm_enabled": 1,
+  "enabled_by_default": 1,
+  "permissions": 0,
+  "invocation_words": ["help", "h"],
+  "description": {
+    "eng": "Show what you need to know to use the bot, standard command and known by everyone",
+    "ita": "Mostra solo ciò che ti serve per sapere utilizzare il bot, comando standard e da tutti conosciuto"
+  },
+  "handled_args": {
+    "": {
+      "eng": "Show base informations",
+      "ita": "Mostra tutti i moduli attivi con cui puoi interagire"
+    },
+    "me": {
+      "eng": "Show base informations for personal use",
+      "ita": "Mostra informazione base per l'uso personale"
+    },
+    "guild": {
+      "eng": "Show base informations for guild use",
+      "ita": "Mostra informazione base sul utilizzo nella gilda"
+    }
+  },
+  "handled_params": {}
+}

@@ -1,0 +1,36 @@
+{
+    "management_command": 0,
+    "beta_command": false,
+    "pro_command": 0,
+    "dm_enabled": 1,
+    "enabled_by_default": 0,
+    "permissions": 0,
+    "invocation_words": [
+        "instagram",
+        "insta"
+    ],
+    "description": {
+        "eng": "Instagram scrapper, for images and data",
+        "ita": "Instagram scrapper, per immagini e dati"
+    },
+    "handled_args": {
+        "": {
+            "eng": "Not allowed, you must provide an argument",
+            "ita": "Non permesso, devi inserire un argomento"
+        },
+        "username": {
+            "eng": "Get the last photos and main info from a certain username",
+            "ita": "Ottieni le utime foto e le principali info di un utente"
+        },
+        "url": {
+            "eng": "Get the last photos and main info from a certain prifile url",
+            "ita": "Ottieni le utime foto e le principali info dall'url del profilo"
+        }
+    },
+    "handled_params": {
+        "-n": {
+            "eng": "Set a limit to the shown photos, up to 12, if not provided it will show only the last 2 ones",
+            "ita": "Setta un limite alle foto mostrate, fino a 12, se omesso mostra solo le ultime 2 foto"
+        }
+    }
+}

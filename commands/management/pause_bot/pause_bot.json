@@ -1,0 +1,28 @@
+{
+    "management_command": 0,
+    "beta_command": false,
+    "pro_command": 0,
+    "dm_enabled": 1,
+    "enabled_by_default": 1,
+    "permissions": 100,
+    "invocation_words": ["pause_bot"],
+    "description": {
+        "eng": "Put the bot in pause",
+        "ita": "Mette in pausa il bot"
+    },
+    "handled_args": {
+        "": {
+            "eng": "Toggle the pause based on actual status",
+            "ita": "Funziona da interruttore basato sullo stato precedente"
+        },
+        "0": {
+            "eng": "Put the bot in pause",
+            "ita": "Mette il bot in pause"
+        },
+        "1": {
+            "eng": "Resume the bot",
+            "ita": "Riprende il normale funzionamento"
+        }
+    },
+    "handled_params": {}
+}

@@ -1,0 +1,31 @@
+{
+    "management_command": 0,
+    "beta_command": false,
+    "pro_command": 0,
+    "dm_enabled": 1,
+    "enabled_by_default": 0,
+    "permissions": 0,
+    "invocation_words": [
+        "rand"
+    ],
+    "description": {
+        "eng": "Print random data based on what is given",
+        "ita": "Stampa random data sulla base dei ciò inserito"
+    },
+    "handled_args": {
+        "": {
+            "eng": "Get a random user",
+            "ita": "Ottieni un un utente random tra tutti quelli della gilda"
+        }
+    },
+    "handled_params": {
+        "-filter": {
+            "eng": "Filter some words",
+            "ita": "Filtra alcuni parole"
+        },
+        "-set": {
+            "eng": "Set where to choices",
+            "ita": "Set tra cui scegliere"
+        }
+    }
+}

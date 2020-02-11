@@ -1,0 +1,40 @@
+{
+    "management_command": 0,
+    "beta_command": false,
+    "pro_command": 0,
+    "dm_enabled": 1,
+    "enabled_by_default": 0,
+    "permissions": 0,
+    "invocation_words": [
+        "tubo",
+        "yt"
+    ],
+    "description": {
+        "eng": "Search a video on youtube",
+        "ita": "Cerca un video su youtube"
+    },
+    "handled_args": {
+        "": {
+            "eng": "Return a random video chosen by a random keyword set",
+            "ita": "Ritorna un video scelto a caso tra una serie di parolechiave cercate"
+        },
+        "query": {
+            "eng": "Search a specific video, and get a random one from the 19 get in the query",
+            "ita": "Cerca un video specifico, e restituisce a caso uno dei 19 video ottenuti dalla ricerca"
+        }
+    },
+    "handled_params": {
+        "-first": {
+            "eng": "Get the first video from the query, the most relevant one",
+            "ita": "Restituisce il primo video dalla ricerca, potenzialmente quello più rilevante"
+        },
+        "-idx": {
+            "eng": "Get a speific video of the 19 in the query",
+            "ita": "Restituisce uno specifico video sui 19 della ricerca"
+        },
+        "-n": {
+            "eng": "Get a stack of video from the specific query, max 19",
+            "ita": "Ottieni uno stack di video dalla ricerca, massimo 19"
+        }
+    }
+}

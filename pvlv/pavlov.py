@@ -1,84 +1,46 @@
 import telegram
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, MessageHandler, Filters
 
-from pvlv.static.configurations import TOKEN
-from pvlv import TextHandler
-
-
-# for audio download
-from io import BytesIO
-
-
-"""
-COMMANDS FOR TELEGRAM
-help - help message
-man - command manual of all active commands
-data - get user stats
-stt - speech to text
-level - show your level
-ranking - show ranking of the top 10
-"""
+from static.configurations import TOKEN
+from handlers.text_handler import TextHandler
+from handlers.img_handler import ImgHandler
+from handlers.vocal_handler import VocalHandler
+from debug.execution_time import ExecutionTime
 
 
-class TelegramBot(object):
+class TelegramBot(ExecutionTime):
 
     def __init__(self):
+        super().__init__()
 
         self.bot = telegram.Bot(token=TOKEN)
         print(self.bot.get_me().first_name)
 
-        self.telegram_command_list = ['/help', '/man', '/data', '/stt', '/pause_bot', '/level', '/ranking']
+    def vocal_handler(self, update, context):
+        self.start_time_calculation('vocal_all')
+        th = VocalHandler(update, self.bot)
+        th.handle()
+        self.stop_time_calculation('vocal_all', message='All vocal handler')
 
-    @staticmethod
-    def voice_handler(update, context):
-        message = update.message
-
-        duration = message.voice.duration
-        audio_bytes = BytesIO()
-        # file = bot.getFile(message.voice.file_id)
-        # raw_file = file.download(out=audio_bytes)
+    def img_handler(self, update, context):
+        self.start_time_calculation('img_all')
+        th = ImgHandler(update, self.bot)
+        th.handle()
+        self.stop_time_calculation('img_all', message='All img handler')
 
     def text_handler(self, update, context):
-
-        username = update.message.from_user.name
-        chat_name = update.message.chat.title
-        chat_type = update.message.chat.type
-        private = True if chat_type == 'private' else False
-
+        self.start_time_calculation('text_all')
         th = TextHandler(update, self.bot)
-        th.handle(
-            update.message.from_user.id,
-            update.message.from_user.name,
-            update.message.chat.id,
-            username if private else chat_name,
-            update.message.date,
-            update.message.text
-        )
-
-    @staticmethod
-    def command_converter(update, context):
-
-        message = update.message
-        text = update.message.text
-
-        if str.startswith(text, '/'):
-            text = text[1:]
-            p = text.find('@')
-            if p is not -1:
-                text = text[:p]
-
-            text = text.replace('_', '.')
+        th.handle()
+        self.stop_time_calculation('text_all', message='All text handler')
 
     def run(self):
         updater = Updater(TOKEN, use_context=True)
         dp = updater.dispatcher
 
-        for telegram_command in self.telegram_command_list:
-            telegram_command = telegram_command[1:]
-            dp.add_handler(CommandHandler(telegram_command, self.command_converter))
-
-        dp.add_handler(MessageHandler(Filters.voice, self.voice_handler))
+        dp.add_handler(MessageHandler(Filters.voice, self.vocal_handler))
         dp.add_handler(MessageHandler(Filters.text, self.text_handler))
+        dp.add_handler(MessageHandler(Filters.photo, self.img_handler))
 
         updater.start_polling()
         updater.idle()

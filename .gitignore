@@ -11,7 +11,7 @@ configs.*
 *.wav
 *.pyc
 
-/data_global/university/file
+/core/data_global/university/file
 settings.yaml
 credentials.json
 

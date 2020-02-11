@@ -1,8 +1,0 @@
-# data log retention in DB
-MAX_RETENTION_HOUR = 72
-MAX_RETENTION_DAY = 90
-MAX_RETENTION_MONTH = 120
-
-DATABASE_NAME = 'telegram'
-USERS_TABLE_NAME = 'users'
-GUILDS_DATABASE_NAME = 'guilds'

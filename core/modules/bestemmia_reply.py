@@ -1,5 +1,5 @@
-from core.src.static_modules import bestemmia
-from core.src.message_reader import find
+from old_core.src.static_modules import bestemmia
+from old_core.src.message_reader import find
 
 TRIGGER_LIST_LEN = 6
 
