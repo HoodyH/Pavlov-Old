@@ -5,14 +5,7 @@ from handlers.speech_to_text.speech_to_text import speech_to_text
 
 class VocalHandler(BaseHandler):
     """
-    Middle point to prepare data that have to be saved to the database
-    This is an interface between the platform-wrapper and the pvlv_database
-
-    This Handler will handle the operations on the text.
-    Like:
-     - stats updating
-     - command reading
-     - text interactions
+    It will handle the operations on the text.
     """
     def __init__(self, update, bot):
         super().__init__(update, bot)
@@ -20,8 +13,8 @@ class VocalHandler(BaseHandler):
     def handle(self):
 
         # do fast stuff
-        duration = self.update.message.voice.duration
-        self.bsu.update_vocal(duration)
+        duration = self.update.message.voice.duration  # get the len on the vocal in secs
+        self.bsu.update_vocal(duration)  # update stats
         self.check_level_up()
 
         # run the speech to text on another thread, cause it's time consuming operation
