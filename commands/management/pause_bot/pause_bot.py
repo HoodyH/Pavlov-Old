@@ -1,47 +1,37 @@
+from telegram.update import Update
+from telegram.bot import Bot
+
 from pvlv.settings import (
     ENABLED, DISABLED
 )
 from pvlv_database import Database
-"""from old_core.src.text_reply.reply_commands.pause_bot_reply import response
-from old_core.src.text_reply.errors import parse_error"""
+from .translations.pause_bot_reply import response
 
 
 class PauseBot(object):
 
     def __init__(self, bot, language, command, arg, params, *args, **kwargs):
 
-        self.bot = bot
+        self.update: Update = bot[0]
+        self.bot: Bot = bot[1]
         self.language = language
-        self.arg = arg
 
-    def pause_bot(self):
+        self.db = Database(self.update.message.from_user.id, self.update.message.chat.id)
 
-        def enable():
-            db.guild.bot_paused = True
-            return response(self.language, DISABLED)
+    def __enable(self):
+        self.db.guild.bot_paused = True
+        return response(self.language, DISABLED)
 
-        def disable():
-            db.guild.bot_paused = False
-            self.bot.update_output_permission(False)
-            return response(self.language, ENABLED)
+    def __disable(self):
+        self.db.guild.bot_paused = False
+        return response(self.language, ENABLED)
 
-        en_options = {
-            ENABLED: disable,
-            DISABLED: enable,
-        }
+    def run(self):
 
-        if self.arg == '':
-            if db.guild.bot_paused:
-                out = en_options[ENABLED]()
-            else:
-                out = en_options[DISABLED]()
-            db.set_data()
-            self.bot.send_message(out, MSG_ON_SAME_CHAT)
+        # check the current bot status, and toggle the status
+        if self.db.guild.bot_paused:
+            out = self.__disable()
         else:
-            try:
-                out = en_options[int(self.arg)]()
-            except Exception as e:
-                print(e)
-                out = parse_error(self.language, self.arg, "0, 1")
-            db.set_data()
-            self.bot.send_message(out, MSG_ON_SAME_CHAT)
+            out = self.__enable()
+
+        self.update.message.reply_text(out)

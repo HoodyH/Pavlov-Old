@@ -1,24 +1,15 @@
 from pvlv.settings import (
     ENABLED
 )
-from old_core.src.languages_handler import chose_language
+from pvlv_commando import language_selector
 
 
 def response(language, status):
 
-    def eng():
-        if status is ENABLED:
-            return 'I am awake!'
-        else:
-            return 'Bot has been paused'
+    def eng(): return 'I\'m back motherfuckers!' if status is ENABLED else 'Ok, i\'ll just watch'
+    def ita(): return 'Sono tornato merdeeeh!' if status is ENABLED else 'Ok, mi limiterò ad osservare'
 
-    def ita():
-        if status is ENABLED:
-            return 'Sono sveglio!'
-        else:
-            return 'Il bot in pausa'
-
-    return chose_language(
+    return language_selector(
         language,
         eng, ita=ita
     )

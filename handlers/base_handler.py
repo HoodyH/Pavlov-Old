@@ -47,12 +47,25 @@ class BaseHandler(object):
         self.bsu.username(self.username)
         self.bsu.guild_name(self.guild_name)
 
+    @property
+    def is_bot_disabled(self):
+        """
+        if the guild is disabled,
+        this means that the bot will ignore all the messages from that guild
+        :return: the bot disable status
+        """
+        return self.db.guild.bot_disabled
+
     def check_level_up(self):
         """
         Check if the user has reached the xp to level up.
         If yes, send the level up chard in the same chat.
         The level up card has text, so in must be formatted based on the guild language
         """
+        # check if the bot is paused in that guild
+        if not self.db.guild.bot_paused:
+            return
+
         if self.bsu.is_level_up:
             data = {
                 'level': self.db.user.guild.xp.level,
@@ -61,7 +74,13 @@ class BaseHandler(object):
             }
             d = DrawLevelUpCard(data)
             d.draw_level_up()
-            self.update.message.reply_photo(d.get_image())
+
+            # Have level_up notifications enabled? then send in te chat
+            if self.db.guild.level_up_notification:
+                self.update.message.reply_photo(d.get_image())
+            # else send it directly to the user
+            else:
+                self.bot.send_message(self.user_id, d.get_image())
 
     def check_commands(self, text):
         """
@@ -76,12 +95,12 @@ class BaseHandler(object):
         """
 
         if text.startswith('.'):
-
-            logger.info('user: {} in {} sent {}'.format(
-                self.update.message.from_user.name,
-                self.update.message.chat.title,
-                text
-            ))
+            log_message = 'user: <{}> in <{}> sent: <{}>'.format(
+                    self.update.message.from_user.name,
+                    self.update.message.chat.title,
+                    text,
+            )
+            logger.info(log_message)
 
             try:
                 # text without the command invocation word, and the language of the command
@@ -93,18 +112,19 @@ class BaseHandler(object):
                     # format fot respect the mark down code
                     self.update.message.reply_text(man.replace('**', '*'), parse_mode=ParseMode.MARKDOWN)
 
-                com.run_command(self.update)  # here you have to pass the bot object that will be used
+                # here you have to pass the bot object and the update obj that will be used
+                com.run_command((self.update, self.bot))
 
             # Do exception handling as you please
             except CommandExecutionFail as exc:
                 self.update.message.reply_text(str(exc))  # the exception to send in chat
                 logger.error(exc.error_report)
-                self.bot.send_message(LOGGING_CHAT, exc.error_report)
+                self.bot.send_message(LOGGING_CHAT, '{}\n\n{}'.format(log_message, exc.error_report))
 
             except ManualExecutionFail as exc:
                 self.update.message.reply_text(str(exc))  # the exception to send in chat
                 logger.error(exc.error_report)
-                self.bot.send_message(LOGGING_CHAT, exc.error_report)
+                self.bot.send_message(LOGGING_CHAT, '{}\n\n{}'.format(log_message, exc.error_report))
 
             except Exception as exc:
                 self.update.message.reply_text(str(exc))  # the exception to send in chat

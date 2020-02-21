@@ -1,0 +1,19 @@
+Questo è **Pavlov** un multi-purpose bot, mantenuto da @AbbestiaDC.
+
+**REQUISITI**
+Richiede l'admin in quanto deve leggere i messaggi per eseguire i comandi.
+Logga alcuni dati come numero di messaggi mandati e numero di comandi chiamati.
+**Non salva alcun tipo di messaggio.**
+
+**UTILIZZO DEL BOT**
+Cominciamo con una semplice introduzione.
+C\'è un manuale, come nel terminale di linux, in questo bot. Usa il comando **{}man** per vedere come utilizzarlo.
+Tutti i comandi utilizzabili vengono mostrati con **{p}man all** e per i dettagli di utilizzo di uno specifico comando usa **{p}man command_name**.
+Esistono anche invocazioni alternative del comando, sono tutte utilizzabili con il comando manuale, praticamente tutto quello che funziona come comando può essere usato in **{p}man command**.
+Questo è tutto quello che serve sapere per cominciare. Per qualsiasi problema contatta gli admin
+
+**CONTATTA GLI ADMINS**
+Aiuta a migliorare il bot segnalando i bugs.
+Usa il commando **{p}ticket 'con il problema qui'** per mandare un messaggio nel support group.
+E se sei un programmatore e vuoi creare nuovi comandi sei libero di contribuire, ogni comando può essere fatto in un file a parte per essere poi aggiunto al bot.
+Se vuoi avere il **default-command-file** manda un ticket ora.

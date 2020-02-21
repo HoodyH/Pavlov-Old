@@ -4,24 +4,16 @@
     "pro_command": 0,
     "dm_enabled": 1,
     "enabled_by_default": 1,
-    "permissions": 100,
+    "permissions": 0,
     "invocation_words": ["pause_bot"],
     "description": {
-        "eng": "Put the bot in pause",
-        "ita": "Mette in pausa il bot"
+        "eng": "Put the bot in pause, it will keep updated the stats but you can't interact with him",
+        "ita": "Mette in pausa il bot, continua a tenere aggiornate le stats ma non puoi interagire con lui"
     },
     "handled_args": {
         "": {
-            "eng": "Toggle the pause based on actual status",
-            "ita": "Funziona da interruttore basato sullo stato precedente"
-        },
-        "0": {
-            "eng": "Put the bot in pause",
-            "ita": "Mette il bot in pause"
-        },
-        "1": {
-            "eng": "Resume the bot",
-            "ita": "Riprende il normale funzionamento"
+            "eng": "Toggle the status, the bot will keep updated the stats but you can't interact with him",
+            "ita": "Inverte lo stato corrente, il bot continuerà a tenere aggiornate le stats ma non è più possibile interagire con lui"
         }
     },
     "handled_params": {}

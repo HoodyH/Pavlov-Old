@@ -17,7 +17,9 @@ class VocalHandler(BaseHandler):
         self.bsu.update_vocal(duration)  # update stats
         self.check_level_up()
 
-        # run the speech to text on another thread, cause it's time consuming operation
-        file = self.bot.getFile(self.update.message.voice.file_id)
-        t = Thread(target=speech_to_text, args=(self.bot, file, self.guild_id, self.db.guild.languages[0]))
-        t.start()
+        # if the bot is paused don't do stt conversions.
+        if not self.db.guild.bot_paused:
+            # run the speech to text on another thread, cause it's time consuming operation
+            file = self.bot.getFile(self.update.message.voice.file_id)
+            t = Thread(target=speech_to_text, args=(self.bot, file, self.guild_id, self.db.guild.languages[0]))
+            t.start()

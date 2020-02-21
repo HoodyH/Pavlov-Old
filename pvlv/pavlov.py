@@ -19,19 +19,22 @@ class TelegramBot(ExecutionTime):
     def vocal_handler(self, update, context):
         self.start_time_calculation('vocal_all')
         th = VocalHandler(update, self.bot)
-        th.handle()
+        if not th.is_bot_disabled:
+            th.handle()
         self.stop_time_calculation('vocal_all', message='All vocal handler')
 
     def img_handler(self, update, context):
         self.start_time_calculation('img_all')
         th = ImgHandler(update, self.bot)
-        th.handle()
+        if not th.is_bot_disabled:
+            th.handle()
         self.stop_time_calculation('img_all', message='All img handler')
 
     def text_handler(self, update, context):
         self.start_time_calculation('text_all')
         th = TextHandler(update, self.bot)
-        th.handle()
+        if not th.is_bot_disabled:
+            th.handle()
         self.stop_time_calculation('text_all', message='All text handler')
 
     def run(self):
