@@ -29,6 +29,7 @@ from core.commands.hanime_tv import HanimeTv
 from core.commands.youtube import Youtube
 from core.commands.my_anime_list import MyAnimeList
 from core.commands.chatrubate import Chatrubate
+from core.commands.coronavirus import Coronavirus
 # audio converter
 from core.src.speech_to_text import speech_to_text
 from pydub import AudioSegment
@@ -226,6 +227,10 @@ class Starter(object):
             c = Chatrubate(self.bot, language_found, command_found, arg, params)
             c.chatrubate()
 
+        def coronavirus():
+            c = Coronavirus(self.bot, language_found, command_found, arg, params)
+            c.run()
+
         commands = {
             'help': bot_help,
             'manual': manual,
@@ -245,6 +250,7 @@ class Starter(object):
             'youtube': youtube,
             'my.anime.list': my_anime_list,
             'chatrubate': chatrubate,
+            'coronavirus': coronavirus,
         }
 
         try:

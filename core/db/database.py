@@ -43,7 +43,7 @@ class DB(object):
 
         self.__iter_collections_iter = None
 
-        self.__migrate_data()
+        # self.__migrate_data()
 
         return
 

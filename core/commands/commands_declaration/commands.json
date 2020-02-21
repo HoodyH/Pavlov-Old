@@ -603,5 +603,25 @@
                 "ita": "Ottieni la lista delle 20 ragazze più popolari online, causa bug devi mettere un argomento random per usare questo parametro"
             }
         }
+    },
+    "coronavirus":{
+        "management_command": 0,
+        "beta_command": true,
+        "pro_command": 0,
+        "dm_enabled": 1,
+        "enabled_by_default": 0,
+        "permissions": 0,
+        "invocation_words": ["conv","corona"],
+        "description": {
+            "eng": "Get coronavirus updates",
+            "ita": "Ottineni le ultime sul coronavirus"
+        },
+        "handled_args": {
+            "": {
+                "eng": "Get coronavirus updates",
+                "ita": "Ottineni le ultime sul coronavirus"
+            }
+        },
+        "handled_params": {}
     }
 }
