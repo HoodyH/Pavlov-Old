@@ -613,15 +613,24 @@
         "permissions": 0,
         "invocation_words": ["conv","corona"],
         "description": {
-            "eng": "Get coronavirus updates",
-            "ita": "Ottineni le ultime sul coronavirus"
+            "eng": "Coronavirus updates",
+            "ita": "Informazioni sulla diffusione del coronavirus"
         },
         "handled_args": {
             "": {
-                "eng": "Get coronavirus updates",
-                "ita": "Ottineni le ultime sul coronavirus"
+                "eng": "Get Coronavirus updates and main countries updates",
+                "ita": "Ottineni le ultime sul coronavirus e sui principali continenti"
+            },
+            "country_name": {
+                "eng": "Get coronavirus updates of the specific country",
+                "ita": "Ottineni le ultime sul coronavirus del paese specificato"
             }
         },
-        "handled_params": {}
+        "handled_params": {
+            "-sort": {
+                "eng": "Get the list of all countries infected, order by **'c': confirmed**, **'r': recovered**, **'d': deaths**; example **.conv -sort d**",
+                "ita": "Ottineni la lista di tutti i paesi contagiati, ordinati per **'c': infetti**, **'r': guariti**, **'d': morti**; esempio **.conv -sort d**"
+            }
+        }
     }
 }
