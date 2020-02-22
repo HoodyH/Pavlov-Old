@@ -1,13 +1,10 @@
 import json
-import os
-import sys
 import requests
 from datetime import datetime
-from bs4 import BeautifulSoup
 from core.src.settings import (
     MSG_ON_SAME_CHAT
 )
-from core.src.static_modules import db
+from pprint import pprint
 
 
 class Coronavirus(object):
@@ -95,15 +92,20 @@ class Coronavirus(object):
             out = '**{}**\n\n'.format(country)
             d = self.country_data.get(country)
             if d:
+                pprint(d)
                 confirmed = d.get('confirmed')
                 recovered = d.get('recovered')
                 deaths = d.get('deaths')
 
                 out += 'Confermati: {}\n'.format(confirmed)
-                out += 'Morti: {}\n'.format(recovered)
-                out += 'Guariti: {}\n'.format(deaths)
+                out += 'Morti: {}\n'.format(deaths)
+                out += 'Guariti: {}\n'.format(recovered)
 
-                deathly_percentage = deaths / recovered * 100 if deaths is not 0 else 0
+                if recovered is 0 and deaths is not 0:
+                    deathly_percentage = 100
+                else:
+                    deathly_percentage = deaths / recovered * 100 if deaths is not 0 else 0
+
                 out += 'La mortalità attuale è del {}%'.format(str(deathly_percentage)[:5])
 
                 self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
