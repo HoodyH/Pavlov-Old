@@ -89,26 +89,30 @@ class Coronavirus(object):
         # countries to stamp data
         my_country = ['Mainland China', 'Italy', 'Japan', 'South Korea']
         for country in my_country:
-            out = '**{}**\n\n'.format(country)
-            d = self.country_data.get(country)
-            if d:
-                pprint(d)
-                confirmed = d.get('confirmed')
-                recovered = d.get('recovered')
-                deaths = d.get('deaths')
+            try:
+                out = '**{}**\n\n'.format(country)
+                d = self.country_data.get(country)
+                if d:
+                    pprint(d)
+                    confirmed = d.get('confirmed')
+                    recovered = d.get('recovered')
+                    deaths = d.get('deaths')
 
-                out += 'Confermati: {}\n'.format(confirmed)
-                out += 'Morti: {}\n'.format(deaths)
-                out += 'Guariti: {}\n'.format(recovered)
+                    out += 'Confermati: {}\n'.format(confirmed)
+                    out += 'Morti: {}\n'.format(deaths)
+                    out += 'Guariti: {}\n'.format(recovered)
 
-                if recovered is 0 and deaths is not 0:
-                    deathly_percentage = 100
-                else:
-                    deathly_percentage = deaths / recovered * 100 if deaths is not 0 else 0
+                    if recovered is 0 and deaths is not 0:
+                        deathly_percentage = 100
+                    else:
+                        deathly_percentage = deaths / recovered * 100 if deaths is not 0 else 0
 
-                out += 'La mortalità attuale è del {}%'.format(str(deathly_percentage)[:5])
+                    out += 'La mortalità attuale è del {}%'.format(str(deathly_percentage)[:5])
 
-                self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
+                    self.bot.send_message(out, MSG_ON_SAME_CHAT, parse_mode_en=True)
+            except Exception as e:
+                print(e)
+                continue
 
     def run(self):
 
