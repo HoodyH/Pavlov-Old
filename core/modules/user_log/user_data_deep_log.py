@@ -13,6 +13,6 @@ class UserDataDeepLog(object):
 
     def log_data(self):
 
-        self.database.username = self.bot.user.username
+        self.database.username = self.bot.user.username if self.bot.user.username else 'Anonymous'
         self.database.update_msg(self.datetime_message, self.time_spent)
         self.database.update_messages_by_type(self.message_type, self.prefix_type)
