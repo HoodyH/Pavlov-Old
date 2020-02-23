@@ -1,4 +1,5 @@
 import requests
+from pprint import pprint
 from bs4 import BeautifulSoup
 from core.src.settings import (
     MSG_ON_SAME_CHAT
@@ -41,7 +42,7 @@ class Pornhub(object):
         soup = BeautifulSoup(page.content, 'html.parser')
         body = soup.body
         video_search_result = body.find(id='videoSearchResult')
-        video_boxes = video_search_result.find_all('li', class_='js-pop videoblock videoBox')
+        video_boxes = video_search_result.find_all_next('li', class_='pcVideoListItem js-pop videoblock videoBox')
 
         video_list = []
         for el in video_boxes:
