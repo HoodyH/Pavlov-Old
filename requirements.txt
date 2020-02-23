@@ -12,3 +12,4 @@ discord.py
 bs4
 pydrive
 matplotlib
+pvlv_database
