@@ -11,3 +11,4 @@ setuptools
 discord.py
 bs4
 pydrive
+matplotlib
