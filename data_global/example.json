@@ -1,0 +1,37 @@
+{
+  "name_of_base_interaction": {
+    "cit_author": "Nome dell'autore",
+    "standard_triggers": [
+      "triggerword",
+      "anothertriggerword"
+    ],
+    "standard_outputs": [
+      "a sentence",
+      "another sentence",
+      "another another sentence",
+    ]
+  },
+
+  "name_of_enhanced_interaction": {
+
+    "cit_author": "Nome dell'autore",
+    "standard_triggers": [
+      ""
+    ],
+    "standard_outputs": [
+      ""
+    ],
+    "avoid_triggers": [
+      ""
+    ],
+    "avoid_outputs": [
+      ""
+    ],
+    "power_triggers": [
+      ""
+    ],
+    "power_outputs": [
+      ""
+    ]
+  }
+}
