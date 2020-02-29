@@ -81,7 +81,7 @@ class Coronavirus(object):
         page = BeautifulSoup(res.content, 'html.parser')
 
         row_counter = 0
-        for row in page.find(id='table3').find_all_next('tr'):
+        for row in page.find(id='main_table_countries').find_all_next('tr'):
             row_data = []
             elements = row.find_all('td')
             for el in elements:

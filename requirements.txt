@@ -12,4 +12,4 @@ discord.py
 bs4
 pydrive
 matplotlib
-pvlv_database
+pvlv_database==0.0.9
