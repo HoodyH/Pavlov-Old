@@ -335,7 +335,7 @@ class Starter(object):
             self.bot.send_message(t, MSG_ON_SAME_CHAT, write_en=True)
 
         self._update_statistics(VOICE, time_spent_extra=vocal_duration*2)
-        self._natural_response()
+        # self._natural_response()
 
     def analyze_text_message(self, text):
 
@@ -344,4 +344,4 @@ class Starter(object):
         if self.prefix_type is COMMAND_PREFIX:
             self._run_command()
         self._update_statistics(TEXT, time_spent_extra=5)
-        self._natural_response()
+        # self._natural_response()
