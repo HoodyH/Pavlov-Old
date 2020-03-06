@@ -69,6 +69,8 @@ class BotStd(object):
         self.message_on_same_chat = None
         self.message_on_guild = None
 
+        self.stopped = True
+
     def set_bot(self, bot):
         self._bot = bot
 
@@ -127,7 +129,7 @@ class BotStd(object):
                    *args,
                    **kwargs
                    ):
-        if self.output_permission is False:
+        if not self.output_permission or self.stopped:
             print('sender is disabled')
             return
 
@@ -168,7 +170,7 @@ class BotStd(object):
                    **kwargs
                    ):
 
-        if self.output_permission is False:
+        if not self.output_permission or self.stopped:
             print('sender is disabled')
             return
 
@@ -248,7 +250,7 @@ class BotStd(object):
                      timeout=None
                      ):
 
-        if self.output_permission is False:
+        if not self.output_permission or self.stopped:
             print('sender is disabled')
             return
 
